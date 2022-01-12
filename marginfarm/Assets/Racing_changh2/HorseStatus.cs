@@ -18,8 +18,8 @@ public class HorseStatus : MonoBehaviour
         }
     }
     public Dictionary<string,bool> horseLocation = new Dictionary<string, bool>();
-    Status horseStatus;
-
+    public Status status;
+    float resultSpeed , timeChecker;
     bool isHalf; // 레일의 절반을 뛰었는지 판단
     // 회전에 필요한 변수 및  오브젝트
     float rotateTime ,radius;
@@ -37,10 +37,12 @@ public class HorseStatus : MonoBehaviour
         AddLocation();
         firstAxis = new Vector3(15f,0f,rPoint1);
         secondAxis = new Vector3(15f,0f,rPoint2);
-        horseStatus = new Status(2.0f,1.0f,1.0f,1.0f,1.0f);
+        status = new Status(42.0f,60.0f,40.0f,50.0f,8.0f);
+        ApplyConsis();
         isHalf = false;
         isRotate = false;
-        
+        resultSpeed = 0f;
+        timeChecker = 0f;
     }
 
     // Update is called once per frame
@@ -53,7 +55,7 @@ public class HorseStatus : MonoBehaviour
     void Run()
     {
         Vector3 currentPosition = transform.position;
-
+        CalculateSpeed();
         if(currentPosition.z >= rPoint1  && !isRotate && horseLocation["First"] ) // 커브길 시작
         {
             horseLocation["First"] = false;
@@ -82,37 +84,36 @@ public class HorseStatus : MonoBehaviour
             if( isDiagonal )
             {
                 transform.position = Vector3.MoveTowards(currentPosition , 
-                                            new Vector3(dRandom,currentPosition.y,rPoint1 ),4f*horseStatus.speed* Time.deltaTime);
+                                            new Vector3(dRandom,currentPosition.y,rPoint1 ),4.5f* resultSpeed * Time.deltaTime);
             }
             else if( currentPosition.z >= dPoint1 && !isDiagonal)
             {
                 isDiagonal = true;
                 dRandom = Random.Range(34f ,(float)currentPosition.x);
-                Debug.Log(dRandom);
             }
             else{
                 transform.position = Vector3.MoveTowards(currentPosition , 
-                                            new Vector3(currentPosition.x,currentPosition.y,rPoint1),5f*horseStatus.speed* Time.deltaTime);
+                                            new Vector3(currentPosition.x,currentPosition.y,rPoint1),5f* resultSpeed * Time.deltaTime);
                 rotateTime=0;
             }
+            
         }
         else if(currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1  && horseLocation["Third"] )
         {
             if( isDiagonal )
             {
                 transform.position = Vector3.MoveTowards(currentPosition , 
-                                            new Vector3(dRandom,currentPosition.y,rPoint2 ),4f*horseStatus.speed* Time.deltaTime);
+                                            new Vector3(dRandom,currentPosition.y,rPoint2 ),4.5f*resultSpeed* Time.deltaTime);
             }
             else if( currentPosition.z <= dPoint2 && !isDiagonal)
             {
-                Debug.Log("dsd");
                 isDiagonal = true;
-                dRandom = Random.Range((float)currentPosition.x , -4f);
+                dRandom = -1f* Random.Range(4f, -1f* (float)currentPosition.x );
             }
             else
             {
                 transform.position = Vector3.MoveTowards(currentPosition , 
-                                            new Vector3(currentPosition.x,currentPosition.y,rPoint2),5f*horseStatus.speed* Time.deltaTime); 
+                                            new Vector3(currentPosition.x,currentPosition.y,rPoint2),5f*resultSpeed* Time.deltaTime); 
                 rotateTime=0;
                 isHalf = true;
             }
@@ -120,10 +121,107 @@ public class HorseStatus : MonoBehaviour
         else if(horseLocation["Final"])
         {
             transform.position = Vector3.MoveTowards(currentPosition , 
-                                        endPosition,5f*horseStatus.speed* Time.deltaTime); 
+                                        endPosition,5f*resultSpeed* Time.deltaTime); 
         }
+        Debug.Log(resultSpeed);
     }
+    void ApplyConsis()
+    {
+        float consisValue=0f;
+        switch((int)status.consis / 20 )
+        {
+                case 0 : consisValue = Random.Range (0.7f , 1.1f );
+                break;
 
+                case 1 : consisValue =Random.Range (0.75f , 1.1f );
+                break;
+
+                case 2 : consisValue =Random.Range (0.8f , 1.1f );
+                break;
+
+                case 3 : consisValue =Random.Range (0.85f , 1.1f );
+                break;
+
+                case 4 : consisValue =Random.Range (0.9f , 1.15f );
+                break;
+                case 5 : consisValue =Random.Range (0.95f , 1.15f );
+                break;
+        }
+        status.accel *= consisValue;
+        status.agility *= consisValue;
+        status.hp *= consisValue;
+        status.speed *= consisValue;
+
+    }
+    void CalculateSpeed()
+    {
+        // status.accel;
+        // status.agility;
+        // status.consis;
+        // status.hp;
+        // status.speed;
+        timeChecker += 10f * Time.deltaTime;
+        if(horseLocation["First"])
+        {
+            resultSpeed = status.speed + (status.accel/100) * timeChecker;
+        }
+        else if(horseLocation["Second"])
+        {
+            resultSpeed = status.speed + (status.accel/100) * timeChecker;
+            switch((int)status.agility / 20 )
+            {
+                case 0 : resultSpeed = resultSpeed * ( 0.5f * (status.agility / 20f ));
+                break;
+
+                case 1 : resultSpeed = resultSpeed * ( 0.625f * (status.agility / 20f ));
+                break;
+
+                case 2 : resultSpeed = resultSpeed * ( 0.75f * (status.agility / 20f ));
+                break;
+
+                case 3 : resultSpeed = resultSpeed * ( 0.875f * (status.agility / 20f ));
+                break;
+
+                case 5 : 
+                case 4 : resultSpeed = resultSpeed * ( 1f * (status.agility / 20f ));
+                break;
+            }
+        }
+        else if(horseLocation["Third"])
+        {
+            if(( (100-status.hp)/100f * timeChecker ) <= status.speed/2f )
+                resultSpeed = status.speed - ( (100-status.hp)/100f * timeChecker );
+            else if ( ( (100-status.hp)/100f * timeChecker ) > status.speed/2f )
+                resultSpeed = status.speed / 2f ;
+        }
+        else if(horseLocation["Fourth"])
+        {
+            if(( (100-status.hp)/100f * timeChecker ) <= status.speed/2f )
+                resultSpeed = status.speed - ( (100-status.hp)/100f * timeChecker );
+            else if ( ( (100-status.hp)/100f * timeChecker ) > status.speed/2f )
+                resultSpeed = status.speed / 2f ;
+
+            switch((int)status.hp/ 20 )
+            {
+                case 0 : resultSpeed = resultSpeed * ( 0.5f * (status.agility / 15f ));
+                break;
+
+                case 1 : resultSpeed = resultSpeed * ( 0.625f * (status.agility / 15f ));
+                break;
+
+                case 2 : resultSpeed = resultSpeed * ( 0.75f * (status.agility / 15f ));
+                break;
+
+                case 3 : resultSpeed = resultSpeed * ( 0.875f * (status.agility / 15f ));
+                break;
+
+                case 5 : 
+                case 4 : resultSpeed = resultSpeed * ( 1f * (status.agility / 15f ));
+                break;
+            }
+        }
+        resultSpeed = ((resultSpeed)/10f) + 1f;
+    }
     void DecisionMake()
     {
 
@@ -134,7 +232,7 @@ public class HorseStatus : MonoBehaviour
 
         if(horseLocation["Second"])
         {
-            rotateTime += horseStatus.speed* Time.deltaTime * 0.2f ;
+            rotateTime += resultSpeed * Time.deltaTime * 0.1f ;
             float x = radius * Mathf.Cos(rotateTime);
             float z = radius * Mathf.Sin(-rotateTime);
             transform.position = new Vector3( firstAxis.x +x,startPosition.y, ( firstAxis.z -z));
@@ -143,11 +241,12 @@ public class HorseStatus : MonoBehaviour
                isRotate = false;
                horseLocation["Second"] = false;
                horseLocation["Third"] = true;
+               timeChecker = 0f;
             }
         }
         else if(horseLocation["Fourth"])
         {
-            rotateTime += horseStatus.speed* Time.deltaTime * 0.2f ;
+            rotateTime += resultSpeed * Time.deltaTime * 0.1f ;
             float x = radius * Mathf.Cos(-rotateTime);
             float z = radius * Mathf.Sin(-rotateTime);
             transform.position = new Vector3( (secondAxis.x -x),startPosition.y, ( secondAxis.z +z));
@@ -156,8 +255,8 @@ public class HorseStatus : MonoBehaviour
                isRotate = false;
                horseLocation["Fourth"] = false;
                horseLocation["Final"] = true;
+               timeChecker = 0f;
                endPosition = new Vector3(currentPosition.x,currentPosition.y, Random.Range(6.0f,25.0f));
-               Debug.Log(endPosition.z);
             }
         }
 
