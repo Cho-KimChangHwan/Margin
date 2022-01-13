@@ -29,11 +29,13 @@ public class HorseStatus : MonoBehaviour
     float dRandom;
     Vector3 firstAxis,secondAxis;
     Vector3 startPosition,endPosition;
+    Vector3 lookDirection;
     // 회전 / 대각선의 z좌표
     float rPoint1 = 30f , rPoint2 = -15f;
     float dPoint1 = 19.75f , dPoint2 = -4.75f;
     void Start()
     {
+        gameObject.layer = 10;
         AddLocation();
         firstAxis = new Vector3(15f,0f,rPoint1);
         secondAxis = new Vector3(15f,0f,rPoint2);
@@ -81,7 +83,7 @@ public class HorseStatus : MonoBehaviour
         }
         else if(currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1 && horseLocation["First"]) // 직선 코스
         {
-            if( isDiagonal )
+            if( isDiagonal ) // 대각선 주행 
             {
                 transform.position = Vector3.MoveTowards(currentPosition , 
                                             new Vector3(dRandom,currentPosition.y,rPoint1 ),4.5f* resultSpeed * Time.deltaTime);
@@ -96,14 +98,15 @@ public class HorseStatus : MonoBehaviour
                                             new Vector3(currentPosition.x,currentPosition.y,rPoint1),5f* resultSpeed * Time.deltaTime);
                 rotateTime=0;
             }
-            
+            lookDirection = transform.position -currentPosition;
+            transform.rotation = Quaternion.LookRotation(lookDirection);
         }
         else if(currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1  && horseLocation["Third"] )
         {
             if( isDiagonal )
             {
                 transform.position = Vector3.MoveTowards(currentPosition , 
-                                            new Vector3(dRandom,currentPosition.y,rPoint2 ),4.5f*resultSpeed* Time.deltaTime);
+                                            new Vector3(dRandom,currentPosition.y,rPoint2 ),4.5f*resultSpeed* Time.deltaTime);          
             }
             else if( currentPosition.z <= dPoint2 && !isDiagonal)
             {
@@ -117,6 +120,8 @@ public class HorseStatus : MonoBehaviour
                 rotateTime=0;
                 isHalf = true;
             }
+            lookDirection = (transform.position -currentPosition);
+            transform.rotation = Quaternion.LookRotation(lookDirection);   
         }
         else if(horseLocation["Final"])
         {
@@ -259,7 +264,8 @@ public class HorseStatus : MonoBehaviour
                endPosition = new Vector3(currentPosition.x,currentPosition.y, Random.Range(6.0f,25.0f));
             }
         }
-
+        lookDirection = (transform.position -currentPosition);
+        transform.rotation = Quaternion.LookRotation(lookDirection);   
     }
 
     void AddLocation(){
