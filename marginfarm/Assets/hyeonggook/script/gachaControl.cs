@@ -14,6 +14,7 @@ public class gachaControl : MonoBehaviour
     public SkinnedMeshRenderer horse1;
     public SkinnedMeshRenderer horse2;
     public SkinnedMeshRenderer horse3;
+    public SkinnedMeshRenderer horse_s;
 
     public Texture[] h_Texture = new Texture[11];
 
@@ -24,6 +25,7 @@ public class gachaControl : MonoBehaviour
     public Text gauge;
 
     public int[,] horse_spec_t = new int[5, 3];
+    public int[] horse_style = new int[3];
 
     public float x, y, z;
 
@@ -35,7 +37,6 @@ public class gachaControl : MonoBehaviour
     public bool cardback2_c;
     public int timer2;
     public GameObject card2;
-
     public GameObject cardback3;
     public bool cardback3_c;
     public int timer3;
@@ -59,6 +60,30 @@ public class gachaControl : MonoBehaviour
 
         classnum = 1;
     }
+     
+    public void horse_b1_click()
+    {
+        //세번째 창 값 설정
+        horse_s = GameObject.Find("horse_card4").GetComponent<SkinnedMeshRenderer>();
+        horse_s.material.SetTexture("_MainTex", h_Texture[horse_style[0]]);
+
+        for (int n = 1; n < 6; n++)
+        {
+            bar = GameObject.Find("gauge" + n.ToString()).GetComponent<Image>();
+            bar.fillAmount = horse_spec_t[n - 1, 0] / 100f;
+            gauge = GameObject.Find("gauge_t" + n.ToString()).GetComponent<Text>();
+            gauge.text = horse_spec_t[n - 1, 0].ToString() + "/ 100";
+        }
+
+        //창 변경
+        GameObject first = GameObject.Find("first");
+        GameObject second = GameObject.Find("second");
+        GameObject third = GameObject.Find("third");
+        iTween.MoveTo(first, iTween.Hash("y", 1840, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(second, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(third, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
+    
 
     public void go_click()
     {
@@ -70,10 +95,13 @@ public class gachaControl : MonoBehaviour
         {
             int i = Random.Range(0, 11);
             horse1.material.SetTexture("_MainTex", h_Texture[i]);
+            horse_style[0] = i;
             i = Random.Range(0, 11);
             horse2.material.SetTexture("_MainTex", h_Texture[i]);
+            horse_style[1] = i;
             i = Random.Range(0, 11);
             horse3.material.SetTexture("_MainTex", h_Texture[i]);
+            horse_style[2] = i;
 
             int temp;
 
@@ -128,6 +156,7 @@ public class gachaControl : MonoBehaviour
         }
 
     }
+
     public void CardFlip1()
     {
         StartCoroutine(CalculateFlip1());
