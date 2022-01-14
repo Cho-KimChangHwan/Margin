@@ -137,7 +137,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130749174}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &130749176
 Camera:
   m_ObjectHideFlags: 0
@@ -375,13 +375,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239477947}
-  m_LocalRotation: {x: -0.054376066, y: 0.9332264, z: 0.01275915, w: -0.35492107}
-  m_LocalPosition: {x: 45.21, y: 3.63, z: -0.41}
+  m_LocalRotation: {x: -0, y: -0.6068595, z: -0, w: 0.79480916}
+  m_LocalPosition: {x: 45.7, y: 2.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0.84700006, y: -138.40201, z: -6.3480005}
+  m_LocalEulerAnglesHint: {x: 0, y: -74.726006, z: 0}
 --- !u!114 &239477953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSpeed: 5
-  player: {fileID: 0}
 --- !u!1 &255238385 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 188350, guid: 2de13b80144c92544bf537a38b116375,
@@ -1158,6 +1157,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d727e8c5f2c4fa783a8f6b392750ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resultSpeed: 0
+  timeChecker: 0
+  isHalf: 0
+  rotateTime: 0
+  radius: 0
+  isRotate: 0
+  rotateX: 0
+  rotateZ: 0
+  dRandom: 0
+  firstAxis: {x: 0, y: 0, z: 0}
+  secondAxis: {x: 0, y: 0, z: 0}
+  currentPosition: {x: 0, y: 0, z: 0}
+  lookDirection: {x: 0, y: 0, z: 0}
+  changeRotation: {x: 0, y: 0, z: 0}
+  rPoint1: 30
+  rPoint2: -15
+  dPoint1: 19.75
+  dPoint2: -4.75
 --- !u!1001 &426086018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3096,6 +3113,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d727e8c5f2c4fa783a8f6b392750ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resultSpeed: 0
+  timeChecker: 0
+  isHalf: 0
+  rotateTime: 0
+  radius: 0
+  isRotate: 0
+  rotateX: 0
+  rotateZ: 0
+  dRandom: 0
+  firstAxis: {x: 0, y: 0, z: 0}
+  secondAxis: {x: 0, y: 0, z: 0}
+  currentPosition: {x: 0, y: 0, z: 0}
+  lookDirection: {x: 0, y: 0, z: 0}
+  changeRotation: {x: 0, y: 0, z: 0}
+  rPoint1: 30
+  rPoint2: -15
+  dPoint1: 19.75
+  dPoint2: -4.75
 --- !u!1 &1498530790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1135819022133726, guid: 38ac7b218eed1da4eb6a51f307e7b98b,
@@ -3114,6 +3149,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d727e8c5f2c4fa783a8f6b392750ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resultSpeed: 0
+  timeChecker: 0
+  isHalf: 0
+  rotateTime: 0
+  radius: 0
+  isRotate: 0
+  rotateX: 0
+  rotateZ: 0
+  dRandom: 0
+  firstAxis: {x: 0, y: 0, z: 0}
+  secondAxis: {x: 0, y: 0, z: 0}
+  currentPosition: {x: 0, y: 0, z: 0}
+  lookDirection: {x: 0, y: 0, z: 0}
+  changeRotation: {x: 0, y: 0, z: 0}
+  rPoint1: 30
+  rPoint2: -15
+  dPoint1: 19.75
+  dPoint2: -4.75
 --- !u!4 &1498530793 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4885270602845880, guid: 38ac7b218eed1da4eb6a51f307e7b98b,
@@ -3760,6 +3813,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d727e8c5f2c4fa783a8f6b392750ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resultSpeed: 0
+  timeChecker: 0
+  isHalf: 0
+  rotateTime: 0
+  radius: 0
+  isRotate: 0
+  rotateX: 0
+  rotateZ: 0
+  dRandom: 0
+  firstAxis: {x: 0, y: 0, z: 0}
+  secondAxis: {x: 0, y: 0, z: 0}
+  currentPosition: {x: 0, y: 0, z: 0}
+  lookDirection: {x: 0, y: 0, z: 0}
+  changeRotation: {x: 0, y: 0, z: 0}
+  rPoint1: 30
+  rPoint2: -15
+  dPoint1: 19.75
+  dPoint2: -4.75
 --- !u!1 &1668255525
 GameObject:
   m_ObjectHideFlags: 0

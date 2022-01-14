@@ -20,17 +20,18 @@ public class HorseStatus : MonoBehaviour
     public Dictionary<string,bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
     public float resultSpeed , timeChecker;
-    bool isHalf; // 레일의 절반을 뛰었는지 판단
+    public bool isHalf; // 레일의 절반을 뛰었는지 판단
     // 회전에 필요한 변수 및  오브젝트
-    float rotateTime ,radius;
-    bool isRotate;
+    public float rotateTime ,radius;
+    public bool isRotate;
+    public float rotateX,rotateZ;
     // 대각선에 필요한 변수
     bool isDiagonal;
     public float dRandom;
-    Vector3 firstAxis,secondAxis;
+    public Vector3 firstAxis,secondAxis;
     Vector3 startPosition,endPosition;
     public Vector3 currentPosition ;
-    public Vector3 lookDirection;
+    public Vector3 lookDirection ,changeRotation ;
     // 회전 / 대각선의 z좌표
     public float rPoint1 = 30f , rPoint2 = -15f;
     public float dPoint1 = 19.75f , dPoint2 = -4.75f;
@@ -239,12 +240,13 @@ public class HorseStatus : MonoBehaviour
         if(horseLocation["Second"])
         {
             rotateTime += resultSpeed * Time.deltaTime * 0.1f ;
-            float x = radius * Mathf.Cos(rotateTime);
-            float z = radius * Mathf.Sin(-rotateTime);
-            transform.position = new Vector3( firstAxis.x +x,startPosition.y, ( firstAxis.z -z));
+            rotateX = radius * Mathf.Cos(rotateTime);
+            rotateZ = radius * Mathf.Sin(-rotateTime);
+            transform.position = new Vector3( firstAxis.x +rotateX,startPosition.y, ( firstAxis.z -rotateZ));
             if(transform.position.z <= rPoint1 && !isHalf )
             {
                isRotate = false;
+               isHalf = true;
                horseLocation["Second"] = false;
                horseLocation["Third"] = true;
                timeChecker = 0f;
@@ -254,12 +256,13 @@ public class HorseStatus : MonoBehaviour
         else if(horseLocation["Fourth"])
         {
             rotateTime += resultSpeed * Time.deltaTime * 0.1f ;
-            float x = radius * Mathf.Cos(-rotateTime);
-            float z = radius * Mathf.Sin(-rotateTime);
-            transform.position = new Vector3( (secondAxis.x -x),startPosition.y, ( secondAxis.z +z));
+            rotateX = radius * Mathf.Cos(-rotateTime);
+            rotateZ = radius * Mathf.Sin(-rotateTime);
+            transform.position = new Vector3( (secondAxis.x -rotateX),startPosition.y, ( secondAxis.z +rotateZ));
             if(transform.position.z >= rPoint2 && isHalf )
             {
                isRotate = false;
+               isHalf = false;
                horseLocation["Fourth"] = false;
                horseLocation["Final"] = true;
                timeChecker = 0f;
@@ -267,8 +270,10 @@ public class HorseStatus : MonoBehaviour
                lookDirection = new Vector3(0f,0f,0f);
             }
         }
+        Vector3 currentRotation = transform.eulerAngles;
         lookDirection = (transform.position -currentPosition);
         transform.rotation = Quaternion.LookRotation(lookDirection);   
+        changeRotation = - currentRotation  + transform.eulerAngles;
     }
 
     void AddLocation(){
