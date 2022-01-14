@@ -29,7 +29,7 @@ public class HorseStatus : MonoBehaviour
     bool isDiagonal;
     public float dRandom;
     public Vector3 firstAxis,secondAxis;
-    Vector3 startPosition,endPosition;
+    Vector3 startPosition,finalPosition;
     public Vector3 currentPosition ;
     public Vector3 lookDirection ,changeRotation ;
     // 회전 / 대각선의 z좌표
@@ -38,16 +38,23 @@ public class HorseStatus : MonoBehaviour
     void Start()
     {
         gameObject.layer = 10;
-        AddLocation();
+        InputLocation();
+        InputStatus();
+        ApplyConsis();
+    }
+    void InputVariable()
+    {
         firstAxis = new Vector3(15f,0f,rPoint1);
         secondAxis = new Vector3(15f,0f,rPoint2);
         lookDirection = new Vector3(0f,0f,0f);
-        status = new Status(42.0f,60.0f,40.0f,50.0f,8.0f);
-        ApplyConsis();
         isHalf = false;
         isRotate = false;
         resultSpeed = 0f;
         timeChecker = 0f;
+    }
+    void InputStatus()
+    {
+        status = new Status(42.0f,60.0f,40.0f,50.0f,8.0f);
     }
 
     // Update is called once per frame
@@ -101,8 +108,7 @@ public class HorseStatus : MonoBehaviour
                                             new Vector3(currentPosition.x,currentPosition.y,rPoint1),5f* resultSpeed * Time.deltaTime);
                 rotateTime=0;
             }
-            lookDirection = transform.position - currentPosition;
-            transform.rotation = Quaternion.LookRotation(lookDirection);
+            ApplyRotate();
         }
         else if(currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1  && horseLocation["Third"] )
         {
@@ -123,14 +129,18 @@ public class HorseStatus : MonoBehaviour
                 rotateTime=0;
                 isHalf = true;
             }
-            lookDirection = (transform.position -currentPosition);
-            transform.rotation = Quaternion.LookRotation(lookDirection);   
+            ApplyRotate(); 
         }
         else if(horseLocation["Final"])
         {
             transform.position = Vector3.MoveTowards(currentPosition , 
                                         endPosition,5f*resultSpeed* Time.deltaTime); 
         }
+    }
+    void ApplyRotate()
+    {
+        lookDirection = (transform.position -currentPosition);
+        transform.rotation = Quaternion.LookRotation(lookDirection);  
     }
     void ApplyConsis()
     {
@@ -229,10 +239,6 @@ public class HorseStatus : MonoBehaviour
         }
         resultSpeed = ((resultSpeed)/10f) + 1f;
     }
-    void DecisionMake()
-    {
-
-    }
     void Rotate()
     {
         Vector3 currentPosition = transform.position;
@@ -266,17 +272,18 @@ public class HorseStatus : MonoBehaviour
                horseLocation["Fourth"] = false;
                horseLocation["Final"] = true;
                timeChecker = 0f;
-               endPosition = new Vector3(currentPosition.x,currentPosition.y, Random.Range(6.0f,25.0f));
+               finalPosition = new Vector3(currentPosition.x,currentPosition.y, Random.Range(6.0f,25.0f));
                lookDirection = new Vector3(0f,0f,0f);
             }
         }
         Vector3 currentRotation = transform.eulerAngles;
-        lookDirection = (transform.position -currentPosition);
-        transform.rotation = Quaternion.LookRotation(lookDirection);   
+        // lookDirection = (transform.position -currentPosition);
+        // transform.rotation = Quaternion.LookRotation(lookDirection);   
+        ApplyRotate(); 
         changeRotation = - currentRotation  + transform.eulerAngles;
     }
 
-    void AddLocation(){
+    void InputLocation(){
         horseLocation.Add("First",true);
         horseLocation.Add("Second",false);
         horseLocation.Add("Third",false);
