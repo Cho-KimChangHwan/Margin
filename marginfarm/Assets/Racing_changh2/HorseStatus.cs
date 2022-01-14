@@ -19,26 +19,28 @@ public class HorseStatus : MonoBehaviour
     }
     public Dictionary<string,bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
-    float resultSpeed , timeChecker;
+    public float resultSpeed , timeChecker;
     bool isHalf; // 레일의 절반을 뛰었는지 판단
     // 회전에 필요한 변수 및  오브젝트
     float rotateTime ,radius;
     bool isRotate;
     // 대각선에 필요한 변수
     bool isDiagonal;
-    float dRandom;
+    public float dRandom;
     Vector3 firstAxis,secondAxis;
     Vector3 startPosition,endPosition;
-    Vector3 lookDirection;
+    public Vector3 currentPosition ;
+    public Vector3 lookDirection;
     // 회전 / 대각선의 z좌표
-    float rPoint1 = 30f , rPoint2 = -15f;
-    float dPoint1 = 19.75f , dPoint2 = -4.75f;
+    public float rPoint1 = 30f , rPoint2 = -15f;
+    public float dPoint1 = 19.75f , dPoint2 = -4.75f;
     void Start()
     {
         gameObject.layer = 10;
         AddLocation();
         firstAxis = new Vector3(15f,0f,rPoint1);
         secondAxis = new Vector3(15f,0f,rPoint2);
+        lookDirection = new Vector3(0f,0f,0f);
         status = new Status(42.0f,60.0f,40.0f,50.0f,8.0f);
         ApplyConsis();
         isHalf = false;
@@ -56,7 +58,7 @@ public class HorseStatus : MonoBehaviour
 
     void Run()
     {
-        Vector3 currentPosition = transform.position;
+        currentPosition = transform.position;
         CalculateSpeed();
         if(currentPosition.z >= rPoint1  && !isRotate && horseLocation["First"] ) // 커브길 시작
         {
@@ -98,7 +100,7 @@ public class HorseStatus : MonoBehaviour
                                             new Vector3(currentPosition.x,currentPosition.y,rPoint1),5f* resultSpeed * Time.deltaTime);
                 rotateTime=0;
             }
-            lookDirection = transform.position -currentPosition;
+            lookDirection = transform.position - currentPosition;
             transform.rotation = Quaternion.LookRotation(lookDirection);
         }
         else if(currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1  && horseLocation["Third"] )
@@ -128,7 +130,6 @@ public class HorseStatus : MonoBehaviour
             transform.position = Vector3.MoveTowards(currentPosition , 
                                         endPosition,5f*resultSpeed* Time.deltaTime); 
         }
-        Debug.Log(resultSpeed);
     }
     void ApplyConsis()
     {
@@ -247,6 +248,7 @@ public class HorseStatus : MonoBehaviour
                horseLocation["Second"] = false;
                horseLocation["Third"] = true;
                timeChecker = 0f;
+               lookDirection = new Vector3(0f,0f,0f);
             }
         }
         else if(horseLocation["Fourth"])
@@ -262,6 +264,7 @@ public class HorseStatus : MonoBehaviour
                horseLocation["Final"] = true;
                timeChecker = 0f;
                endPosition = new Vector3(currentPosition.x,currentPosition.y, Random.Range(6.0f,25.0f));
+               lookDirection = new Vector3(0f,0f,0f);
             }
         }
         lookDirection = (transform.position -currentPosition);
