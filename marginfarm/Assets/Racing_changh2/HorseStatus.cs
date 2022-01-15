@@ -38,6 +38,7 @@ public class HorseStatus : MonoBehaviour
     void Start()
     {
         gameObject.layer = 10;
+        InputVariable();
         InputLocation();
         InputStatus();
         ApplyConsis();
@@ -134,14 +135,10 @@ public class HorseStatus : MonoBehaviour
         else if(horseLocation["Final"])
         {
             transform.position = Vector3.MoveTowards(currentPosition , 
-                                        endPosition,5f*resultSpeed* Time.deltaTime); 
+                                        finalPosition,5f*resultSpeed* Time.deltaTime); 
         }
     }
-    void ApplyRotate()
-    {
-        lookDirection = (transform.position -currentPosition);
-        transform.rotation = Quaternion.LookRotation(lookDirection);  
-    }
+
     void ApplyConsis()
     {
         float consisValue=0f;
@@ -245,6 +242,7 @@ public class HorseStatus : MonoBehaviour
 
         if(horseLocation["Second"])
         {
+            Debug.Log("ㄴㅁ");
             rotateTime += resultSpeed * Time.deltaTime * 0.1f ;
             rotateX = radius * Mathf.Cos(rotateTime);
             rotateZ = radius * Mathf.Sin(-rotateTime);
@@ -282,7 +280,12 @@ public class HorseStatus : MonoBehaviour
         ApplyRotate(); 
         changeRotation = - currentRotation  + transform.eulerAngles;
     }
-
+    void ApplyRotate()
+    {
+        lookDirection = (transform.position -currentPosition);
+        transform.rotation = Quaternion.Lerp( transform.rotation , Quaternion.LookRotation(lookDirection) ,5f*Time.deltaTime);
+        //transform.rotation = Quaternion.LookRotation(lookDirection);  
+    }
     void InputLocation(){
         horseLocation.Add("First",true);
         horseLocation.Add("Second",false);

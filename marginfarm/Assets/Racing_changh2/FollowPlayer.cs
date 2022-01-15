@@ -12,7 +12,8 @@ public class FollowPlayer : MonoBehaviour
     GameObject realPlayer;
     HorseStatus horsestatus;
     Vector3 cameraDirection;
-
+    Vector3 lookDirection;
+    Vector3 currentPosition;
     void Start()
     {
         miniplayer = GameObject.Find("MiniPlayer1");
@@ -21,6 +22,7 @@ public class FollowPlayer : MonoBehaviour
         distanceV = -realPlayer.transform.position + transform.position;
         distanceV2 = distanceV - new Vector3(2f*distanceV.x,0f,0f);
         distance = Vector3.Distance( transform.position , realPlayer.transform.position);
+        cameraDirection = transform.eulerAngles;
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class FollowPlayer : MonoBehaviour
     {
         if( !horsestatus.isRotate )
         { 
+            currentPosition = transform.position; 
             if(!horsestatus.isHalf)
             {
                 transform.position = distanceV + Vector3.MoveTowards( horsestatus.currentPosition, 
@@ -41,6 +44,10 @@ public class FollowPlayer : MonoBehaviour
                 transform.position =  distanceV2 + Vector3.MoveTowards( horsestatus.currentPosition, 
                                                 new Vector3(horsestatus.currentPosition.x,horsestatus.currentPosition.y,horsestatus.rPoint2 ),4.5f*horsestatus.resultSpeed* Time.deltaTime); 
             }
+            // lookDirection = (transform.position -currentPosition);
+            // lookDirection.z=0f;
+            // transform.rotation = Quaternion.Lerp( transform.rotation , Quaternion.LookRotation(lookDirection) ,3f*Time.deltaTime);
+
         }
         else if (horsestatus.isRotate)
         {
@@ -56,13 +63,8 @@ public class FollowPlayer : MonoBehaviour
                 horsestatus.rotateZ = (distance+horsestatus.radius) * Mathf.Sin(-horsestatus.rotateTime);
                 transform.position = new Vector3( horsestatus.secondAxis.x - horsestatus.rotateX,transform.position.y, ( horsestatus.secondAxis.z +horsestatus.rotateZ));
             }
-            transform.Rotate(horsestatus.changeRotation.x,horsestatus.changeRotation.y,horsestatus.changeRotation.z);
+            //transform.Rotate(horsestatus.changeRotation.x,horsestatus.changeRotation.y,horsestatus.changeRotation.z);
         }
-        
-        //transform.rotation = Quaternion.LookRotation(realPlayer.GetComponent<HorseStatus>().lookDirection);
-        // Vector3 dir = player.transform.position - this.transform.position;
-        // Vector3 moveVector = new Vector3(dir.x * 5 * Time.deltaTime, dir.y * 5 * Time.deltaTime, 0.0f);
-        // this.transform.Translate(moveVector);
-        
+        transform.rotation = Quaternion.LookRotation(realPlayer.transform.position -transform.position);
     }
 }
