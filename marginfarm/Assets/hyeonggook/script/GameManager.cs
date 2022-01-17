@@ -13,9 +13,9 @@ public struct HorseInfo
     public int agility;
     public int consis;
     public int items;
-    public bool alive;
+    
 
-    public HorseInfo (string name, int key, int level, int speed, int accel, int hp, int agility, int consis, int items, bool alive)
+    public HorseInfo (string name, int key, int level, int speed, int accel, int hp, int agility, int consis, int items)
     {
         this.name = name;
         this.key = key;
@@ -26,7 +26,6 @@ public struct HorseInfo
         this.agility = agility;
         this.consis = consis;
         this.items = items;
-        this.alive = alive;
     }
    
 }
@@ -35,19 +34,23 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int many;
-    public int captain;
+    public int many;  // 유저의 말 수
+    public string Id;  // 유저 ID
+    public int captain;  
     public int select;
+    public bool gameStart;  // 게임스타드 유무파악
+
+    public int money;
     public bool spec_check;
 
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
-        new HorseInfo ("조준영", 2, 1, 15, 7, 70, 20, 50, 0, true),
-        new HorseInfo ("김형국", 0, 4, 16, 8, 80, 25, 51, 0, true),
-        new HorseInfo ("서창희", 0, 7, 17, 9, 90, 30, 52, 0, true),
-        new HorseInfo ("정지환", 0, 10, 18, 10, 100, 35, 53, 0, true),
-        new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0, false),
-        new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0, false),
+        new HorseInfo ("조준영", 2, 1, 15, 7, 70, 20, 50, 0),
+        new HorseInfo ("김형국", 0, 4, 16, 8, 80, 25, 51, 0),
+        new HorseInfo ("서창희", 0, 7, 17, 9, 90, 30, 52, 0),
+        new HorseInfo ("정지환", 0, 10, 18, 10, 100, 35, 53, 0),
+        new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0),
+        new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0),
     };
 
     void Awake()
