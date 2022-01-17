@@ -18,6 +18,7 @@ public class ListSetting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(GameManager.instance.many);
         check = GameManager.instance.many;
 
         for (con = 1; con <= 6; con++)

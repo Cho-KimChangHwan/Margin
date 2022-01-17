@@ -5,6 +5,7 @@ using UnityEngine;
 using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
+using UnityEngine.SceneManagement;
 
 public class getDataFromFB : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class getDataFromFB : MonoBehaviour
         {
             getData();
             GameManager.instance.gameStart = false;
+            SceneManager.LoadScene("mainmap");
         }
     }
     void getData()
@@ -34,8 +36,21 @@ public class getDataFromFB : MonoBehaviour
             {
                 DataSnapshot snapshot = task.Result;
                 //get first data
-                GameManager.instance.UserHorse[0].level = Convert.ToInt32(snapshot.Child("HorseInfo").Child("level").Value);
-                Debug.Log(GameManager.instance.UserHorse[0].level);
+                for (int i = 0; i < snapshot.Child(i.ToString()).ChildrenCount; i++)
+                {
+                    GameManager.instance.UserHorse[i].name = snapshot.Child(i.ToString()).Child("name").Value.ToString();
+                    GameManager.instance.UserHorse[i].key = Convert.ToInt32(snapshot.Child(i.ToString()).Child("key").Value);
+                    GameManager.instance.UserHorse[i].level = Convert.ToInt32(snapshot.Child(i.ToString()).Child("level").Value);
+                    GameManager.instance.UserHorse[i].speed = Convert.ToInt32(snapshot.Child(i.ToString()).Child("speed").Value);
+                    GameManager.instance.UserHorse[i].accel = Convert.ToInt32(snapshot.Child(i.ToString()).Child("accel").Value);
+                    GameManager.instance.UserHorse[i].hp = Convert.ToInt32(snapshot.Child(i.ToString()).Child("hp").Value);
+                    GameManager.instance.UserHorse[i].agility = Convert.ToInt32(snapshot.Child(i.ToString()).Child("agility").Value);
+                    GameManager.instance.UserHorse[i].consis = Convert.ToInt32(snapshot.Child(i.ToString()).Child("consis").Value);
+                    GameManager.instance.UserHorse[i].items = Convert.ToInt32(snapshot.Child(i.ToString()).Child("items").Value);
+                }
+                GameManager.instance.money = Convert.ToInt32(snapshot.Child("money").Value);
+                GameManager.instance.captain = Convert.ToInt32(snapshot.Child("captain").Value);
+                GameManager.instance.many = Convert.ToInt32(snapshot.Child("many").Value);
             });
     }
 }

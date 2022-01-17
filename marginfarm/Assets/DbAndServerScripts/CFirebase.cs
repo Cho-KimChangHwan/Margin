@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
@@ -66,12 +65,10 @@ public class CFirebase : MonoBehaviour
 
                     if (findId  == false) //create account
                     {
-                        Debug.Log("NoId!!Creating...");
-                        m_Reference.Child("users").Child(getId).Child("password").SetValueAsync(getPassword);
+                        firstStartWite();
                         GameManager.instance.gameStart = true;
                         GameManager.instance.Id = getId;
-                        SceneManager.LoadScene("mainmap");
-                        //firstStartWite();
+                       
                     }
                     else if(findPas.ToString() != getPassword) //pass error
                     {                       
@@ -79,10 +76,8 @@ public class CFirebase : MonoBehaviour
                     }
                     else //login success
                     {
-                        Debug.Log("Correct!!GameStart");
                         GameManager.instance.gameStart = true;
                         GameManager.instance.Id = getId;
-                        SceneManager.LoadScene("mainmap");
                     }
                 }
             });
@@ -90,15 +85,9 @@ public class CFirebase : MonoBehaviour
 
     public void firstStartWite()
     {
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("name").SetValueAsync("basicHorse");
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("key").SetValueAsync("2");
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("level").SetValueAsync("1");
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("speed").SetValueAsync("15");
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("accel").SetValueAsync("7");
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("hp").SetValueAsync("70");
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("agility").SetValueAsync("20");
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("consis").SetValueAsync("50");
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("item").SetValueAsync("0");
-        m_Reference.Child("users").Child(getId).Child("HorseInfo").Child("alive").SetValueAsync("true");
+        m_Reference.Child("users").Child(getId).Child("password").SetValueAsync(getPassword);
+        m_Reference.Child("users").Child(getId).Child("money").SetValueAsync(GameManager.instance.money);
+        m_Reference.Child("users").Child(getId).Child("captain").SetValueAsync(GameManager.instance.captain);
+        m_Reference.Child("users").Child(getId).Child("many").SetValueAsync(GameManager.instance.many);
     }
 }

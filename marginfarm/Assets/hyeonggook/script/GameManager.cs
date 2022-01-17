@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         spec_check = false;
         captain = 0;
         select = 0;
+        money = 3000;
 
         /*
         for (int i = 0; i > 6; i++)

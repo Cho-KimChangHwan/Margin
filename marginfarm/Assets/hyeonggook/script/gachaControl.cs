@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Firebase;
+using Firebase.Database;
+using Firebase.Extensions;
 
 public class gachaControl : MonoBehaviour
 {
+    DatabaseReference m_Reference;
 
     public GameObject first;
     public GameObject second;
@@ -50,6 +54,12 @@ public class gachaControl : MonoBehaviour
     public int[] agility_t = new int[3];
     public int[] consis_t = new int[3];
     */
+
+    void Start()
+    {
+        m_Reference = FirebaseDatabase.DefaultInstance.RootReference;
+    }
+
     public void gacha_b1_click()
     {
         GameObject first = GameObject.Find("first");
@@ -208,6 +218,19 @@ public class gachaControl : MonoBehaviour
         }
 
     }
+    public void horseWrite()
+    {
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("name").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].name);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("key").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].key);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("level").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].level);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("speed").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].speed);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("accel").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].accel);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("hp").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].hp);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("agility").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].agility);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("consis").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].consis);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("item").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].items);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("many").SetValueAsync(GameManager.instance.many);
+    }
 
     public void save_click()
     {
@@ -224,6 +247,8 @@ public class gachaControl : MonoBehaviour
         GameManager.instance.UserHorse[GameManager.instance.many].consis = horse_spec_t[4, selectnum];
 
         GameManager.instance.many++;
+
+        horseWrite();
 
         SceneManager.LoadScene("farm");
     }
