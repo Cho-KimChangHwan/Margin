@@ -45,17 +45,17 @@ public class GameManager : MonoBehaviour
 
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
-        new HorseInfo ("조준영", 2, 1, 15, 7, 70, 20, 50, 0),
-        new HorseInfo ("김형국", 0, 4, 16, 8, 80, 25, 51, 0),
-        new HorseInfo ("서창희", 0, 7, 17, 9, 90, 30, 52, 0),
-        new HorseInfo ("정지환", 0, 10, 18, 10, 100, 35, 53, 0),
+        new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0),
+        new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0),
+        new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0),
+        new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0),
         new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0),
         new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 0),
     };
 
     void Awake()
     {
-        many = 4;
+        many = 0;
         spec_check = false;
         captain = 0;
         select = 0;

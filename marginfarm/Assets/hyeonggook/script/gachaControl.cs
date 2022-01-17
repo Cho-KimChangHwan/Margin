@@ -10,6 +10,7 @@ public class gachaControl : MonoBehaviour
     public GameObject first;
     public GameObject second;
     public GameObject third;
+    public InputField newname;
 
     public SkinnedMeshRenderer horse1;
     public SkinnedMeshRenderer horse2;
@@ -75,6 +76,8 @@ public class gachaControl : MonoBehaviour
             gauge.text = horse_spec_t[n - 1, 0].ToString() + "/ 100";
         }
 
+        selectnum = 0;
+
         //창 변경
         GameObject first = GameObject.Find("first");
         GameObject second = GameObject.Find("second");
@@ -83,7 +86,56 @@ public class gachaControl : MonoBehaviour
         iTween.MoveTo(second, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
         iTween.MoveTo(third, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
     }
-    
+
+    public void horse_b2_click()
+    {
+        //세번째 창 값 설정
+        horse_s = GameObject.Find("horse_card4").GetComponent<SkinnedMeshRenderer>();
+        horse_s.material.SetTexture("_MainTex", h_Texture[horse_style[1]]);
+
+        for (int n = 1; n < 6; n++)
+        {
+            bar = GameObject.Find("gauge" + n.ToString()).GetComponent<Image>();
+            bar.fillAmount = horse_spec_t[n - 1, 1] / 100f;
+            gauge = GameObject.Find("gauge_t" + n.ToString()).GetComponent<Text>();
+            gauge.text = horse_spec_t[n - 1, 1].ToString() + "/ 100";
+        }
+
+        selectnum = 1;
+
+        //창 변경
+        GameObject first = GameObject.Find("first");
+        GameObject second = GameObject.Find("second");
+        GameObject third = GameObject.Find("third");
+        iTween.MoveTo(first, iTween.Hash("y", 1840, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(second, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(third, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
+
+    public void horse_b3_click()
+    {
+        //세번째 창 값 설정
+        horse_s = GameObject.Find("horse_card4").GetComponent<SkinnedMeshRenderer>();
+        horse_s.material.SetTexture("_MainTex", h_Texture[horse_style[2]]);
+
+        for (int n = 1; n < 6; n++)
+        {
+            bar = GameObject.Find("gauge" + n.ToString()).GetComponent<Image>();
+            bar.fillAmount = horse_spec_t[n - 1, 2] / 100f;
+            gauge = GameObject.Find("gauge_t" + n.ToString()).GetComponent<Text>();
+            gauge.text = horse_spec_t[n - 1, 2].ToString() + "/ 100";
+        }
+
+        selectnum = 2;
+
+        //창 변경
+        GameObject first = GameObject.Find("first");
+        GameObject second = GameObject.Find("second");
+        GameObject third = GameObject.Find("third");
+        iTween.MoveTo(first, iTween.Hash("y", 1840, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(second, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(third, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
 
     public void go_click()
     {
@@ -157,6 +209,29 @@ public class gachaControl : MonoBehaviour
 
     }
 
+    public void save_click()
+    {
+        newname = GameObject.Find("name_input").GetComponent<InputField>();
+       
+        GameManager.instance.UserHorse[GameManager.instance.many].name = newname.text;
+
+        GameManager.instance.UserHorse[GameManager.instance.many].key = horse_style[selectnum];
+
+        GameManager.instance.UserHorse[GameManager.instance.many].speed = horse_spec_t[0, selectnum];
+        GameManager.instance.UserHorse[GameManager.instance.many].accel = horse_spec_t[1, selectnum];
+        GameManager.instance.UserHorse[GameManager.instance.many].hp = horse_spec_t[2, selectnum];
+        GameManager.instance.UserHorse[GameManager.instance.many].agility = horse_spec_t[3, selectnum];
+        GameManager.instance.UserHorse[GameManager.instance.many].consis = horse_spec_t[4, selectnum];
+
+        GameManager.instance.many++;
+
+        SceneManager.LoadScene("farm");
+    }
+
+    public void home_click ()
+    {
+        SceneManager.LoadScene("farm");
+    }
     public void CardFlip1()
     {
         StartCoroutine(CalculateFlip1());

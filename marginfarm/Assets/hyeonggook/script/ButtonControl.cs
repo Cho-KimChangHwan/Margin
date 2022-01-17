@@ -205,4 +205,9 @@ public class ButtonControl : MonoBehaviour
     {
         SceneManager.LoadScene("mainmap");
     }
+
+    public void gotoshop()
+    {
+        SceneManager.LoadScene("gacha");
+    }
 }
