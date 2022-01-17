@@ -6,6 +6,9 @@ public class MiniMapPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
     GameObject realPlayer;
+    void Awake() {
+        gameObject.tag = "Mini";
+    }
     void Start()
     {
         realPlayer = transform.parent.gameObject;

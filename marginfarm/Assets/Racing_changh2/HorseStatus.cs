@@ -242,7 +242,6 @@ public class HorseStatus : MonoBehaviour
 
         if(horseLocation["Second"])
         {
-            Debug.Log("ㄴㅁ");
             rotateTime += resultSpeed * Time.deltaTime * 0.1f ;
             rotateX = radius * Mathf.Cos(rotateTime);
             rotateZ = radius * Mathf.Sin(-rotateTime);
