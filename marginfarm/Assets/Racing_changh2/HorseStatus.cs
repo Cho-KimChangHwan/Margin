@@ -35,8 +35,10 @@ public class HorseStatus : MonoBehaviour
     // 회전 / 대각선의 z좌표
     public float rPoint1 = 30f , rPoint2 = -15f;
     public float dPoint1 = 19.75f , dPoint2 = -4.75f;
+    public Animator animator;
     void Start()
     {
+        animator = GetComponent<Animator>();
         gameObject.layer = 10;
         InputVariable();
         InputLocation();
@@ -109,6 +111,7 @@ public class HorseStatus : MonoBehaviour
                                             new Vector3(currentPosition.x,currentPosition.y,rPoint1),5f* resultSpeed * Time.deltaTime);
                 rotateTime=0;
             }
+            animator.Play("Horse_Canter");
             ApplyRotate();
         }
         else if(currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1  && horseLocation["Third"] )
@@ -130,12 +133,22 @@ public class HorseStatus : MonoBehaviour
                 rotateTime=0;
                 isHalf = true;
             }
+            animator.Play("Horse_Canter");
             ApplyRotate(); 
         }
         else if(horseLocation["Final"])
         {
             transform.position = Vector3.MoveTowards(currentPosition , 
                                         finalPosition,5f*resultSpeed* Time.deltaTime); 
+            animator.Play("Horse_Trot");
+            if(transform.position == finalPosition )
+            {
+                horseLocation["Final"] = false;
+            }
+        }
+        else
+        {
+            animator.Play("Horse_Paw2");
         }
     }
 
@@ -277,11 +290,12 @@ public class HorseStatus : MonoBehaviour
         // lookDirection = (transform.position -currentPosition);
         // transform.rotation = Quaternion.LookRotation(lookDirection);   
         ApplyRotate(); 
+        animator.Play("Horse_Gallop");
         changeRotation = - currentRotation  + transform.eulerAngles;
     }
     void ApplyRotate()
     {
-        lookDirection = (transform.position -currentPosition);
+        lookDirection = -(transform.position -currentPosition);
         transform.rotation = Quaternion.Lerp( transform.rotation , Quaternion.LookRotation(lookDirection) ,5f*Time.deltaTime);
         //transform.rotation = Quaternion.LookRotation(lookDirection);  
     }

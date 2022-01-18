@@ -13,6 +13,7 @@ public class MiniMapPlayer : MonoBehaviour
     {
         realPlayer = transform.parent.gameObject;
         gameObject.layer = 9;
+        realPlayer.layer = 10;
     }
 
     // Update is called once per frame
