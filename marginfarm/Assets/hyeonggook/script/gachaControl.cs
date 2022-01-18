@@ -21,7 +21,7 @@ public class gachaControl : MonoBehaviour
     public SkinnedMeshRenderer horse3;
     public SkinnedMeshRenderer horse_s;
 
-    public Texture[] h_Texture = new Texture[11];
+    public Texture[] h_Texture = new Texture[8];
 
     public int classnum;
     public int selectnum;
@@ -155,13 +155,13 @@ public class gachaControl : MonoBehaviour
 
         if(classnum == 1)
         {
-            int i = Random.Range(0, 11);
+            int i = Random.Range(0, 8);
             horse1.material.SetTexture("_MainTex", h_Texture[i]);
             horse_style[0] = i;
-            i = Random.Range(0, 11);
+            i = Random.Range(0, 8);
             horse2.material.SetTexture("_MainTex", h_Texture[i]);
             horse_style[1] = i;
-            i = Random.Range(0, 11);
+            i = Random.Range(0, 8);
             horse3.material.SetTexture("_MainTex", h_Texture[i]);
             horse_style[2] = i;
 

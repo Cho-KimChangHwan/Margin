@@ -16,12 +16,20 @@ public class ButtonControl : MonoBehaviour
     public int i;
     public int[] userdata = new int[5];
 
+    public GameObject picture;
+    public Transform camera_po;
     public void specview_close()
     {
         if (GameManager.instance.spec_check == true)
         {
             GameObject spec = GameObject.Find("spec");
             iTween.MoveTo(spec, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+
+            GameObject picture = GameObject.Find("Main Camera");
+            camera_po = GameObject.Find("c_main").GetComponent<Transform>();
+            iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(20.22f, 116.198f, 2.54f), "delay", 0.1f, "time", 2f));
+            iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
+
             GameManager.instance.spec_check = false;
         }
     }
@@ -38,6 +46,11 @@ public class ButtonControl : MonoBehaviour
         userdata[2] = GameManager.instance.UserHorse[data].hp;
         userdata[3] = GameManager.instance.UserHorse[data].agility;
         userdata[4] = GameManager.instance.UserHorse[data].consis;
+
+        GameObject picture = GameObject.Find("Main Camera");
+        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
+        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
+        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
 
         if (GameManager.instance.spec_check == false)
         {
@@ -68,6 +81,11 @@ public class ButtonControl : MonoBehaviour
         userdata[3] = GameManager.instance.UserHorse[data].agility;
         userdata[4] = GameManager.instance.UserHorse[data].consis;
 
+        GameObject picture = GameObject.Find("Main Camera");
+        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
+        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
+        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
+
         if (GameManager.instance.spec_check == false)
         {
             GameObject spec = GameObject.Find("spec");
@@ -97,6 +115,11 @@ public class ButtonControl : MonoBehaviour
         userdata[3] = GameManager.instance.UserHorse[data].agility;
         userdata[4] = GameManager.instance.UserHorse[data].consis;
 
+        GameObject picture = GameObject.Find("Main Camera");
+        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
+        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
+        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
+
         if (GameManager.instance.spec_check == false)
         {
             GameObject spec = GameObject.Find("spec");
@@ -125,6 +148,11 @@ public class ButtonControl : MonoBehaviour
         userdata[2] = GameManager.instance.UserHorse[data].hp;
         userdata[3] = GameManager.instance.UserHorse[data].agility;
         userdata[4] = GameManager.instance.UserHorse[data].consis;
+
+        GameObject picture = GameObject.Find("Main Camera");
+        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
+        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
+        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
 
         if (GameManager.instance.spec_check == false)
         {
@@ -156,6 +184,11 @@ public class ButtonControl : MonoBehaviour
         userdata[3] = GameManager.instance.UserHorse[data].agility;
         userdata[4] = GameManager.instance.UserHorse[data].consis;
 
+        GameObject picture = GameObject.Find("Main Camera");
+        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
+        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
+        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
+
         if (GameManager.instance.spec_check == false)
         {
             GameObject spec = GameObject.Find("spec");
@@ -185,6 +218,11 @@ public class ButtonControl : MonoBehaviour
         userdata[2] = GameManager.instance.UserHorse[data].hp;
         userdata[3] = GameManager.instance.UserHorse[data].agility;
         userdata[4] = GameManager.instance.UserHorse[data].consis;
+
+        GameObject picture = GameObject.Find("Main Camera");
+        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
+        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
+        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
 
         if (GameManager.instance.spec_check == false)
         {

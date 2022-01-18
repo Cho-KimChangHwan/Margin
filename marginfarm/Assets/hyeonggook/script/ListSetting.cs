@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class ListSetting : MonoBehaviour
 {
+    public GameObject horse;
+    public SkinnedMeshRenderer horseSkin;
+
+    public Texture[] h_Texture = new Texture[8];
 
     public Button button;
     public GameObject x1;
@@ -18,6 +22,24 @@ public class ListSetting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        GameManager.instance.spec_check = false;
+
+        for (int i = 1; i <= GameManager.instance.many; i++)
+        {
+            GameObject horse = GameObject.Find("horse_o" + i.ToString());
+            horse.SetActive(true);
+
+            horseSkin = GameObject.Find("horse_s" + i.ToString()).GetComponent<SkinnedMeshRenderer>();
+            horseSkin.material.SetTexture("_MainTex", h_Texture[GameManager.instance.UserHorse[i - 1].key]);
+        }
+
+        for (int i = 6; i > GameManager.instance.many; i--)
+        {
+            GameObject horse = GameObject.Find("horse_o" + i.ToString());
+            horse.SetActive(false);
+        }
+
         Debug.Log(GameManager.instance.many);
         check = GameManager.instance.many;
 
