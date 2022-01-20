@@ -57,7 +57,7 @@ public class HorseStatus : MonoBehaviour
     }
     void InputStatus()
     {
-        status = new Status(42.0f,60.0f,40.0f,50.0f,8.0f);
+        status = new Status(10.0f,60.0f,40.0f,50.0f,8.0f);
     }
 
     // Update is called once per frame
@@ -111,8 +111,8 @@ public class HorseStatus : MonoBehaviour
                                             new Vector3(currentPosition.x,currentPosition.y,rPoint1),5f* resultSpeed * Time.deltaTime);
                 rotateTime=0;
             }
-            animator.Play("Horse_Canter");
             ApplyRotate();
+            animator.Play("Horse_Gallop");
         }
         else if(currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1  && horseLocation["Third"] )
         {
@@ -133,8 +133,8 @@ public class HorseStatus : MonoBehaviour
                 rotateTime=0;
                 isHalf = true;
             }
-            animator.Play("Horse_Canter");
             ApplyRotate(); 
+            animator.Play("Horse_Gallop");
         }
         else if(horseLocation["Final"])
         {
@@ -290,14 +290,14 @@ public class HorseStatus : MonoBehaviour
         // lookDirection = (transform.position -currentPosition);
         // transform.rotation = Quaternion.LookRotation(lookDirection);   
         ApplyRotate(); 
-        animator.Play("Horse_Gallop");
+        animator.Play("Horse_Canter");
         changeRotation = - currentRotation  + transform.eulerAngles;
     }
     void ApplyRotate()
     {
         lookDirection = -(transform.position -currentPosition);
         transform.rotation = Quaternion.Lerp( transform.rotation , Quaternion.LookRotation(lookDirection) ,5f*Time.deltaTime);
-        //transform.rotation = Quaternion.LookRotation(lookDirection);  
+        //\\transform.rotation = Quaternion.LookRotation(lookDirection);  
     }
     void InputLocation(){
         horseLocation.Add("First",true);
