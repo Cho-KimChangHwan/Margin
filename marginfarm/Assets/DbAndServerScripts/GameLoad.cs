@@ -32,6 +32,7 @@ public class GameLoad : MonoBehaviour
     {
         if (e.Data == "GameStart")
         {
+            Debug.Log(e.Data);
             GameManager.instance.racingStart = true;
             SceneManager.LoadScene("RacingScene");
         }
