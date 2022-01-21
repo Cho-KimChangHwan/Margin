@@ -5,7 +5,7 @@ using UnityEngine;
 public class HorseStatus : MonoBehaviour
 {
     // Start is called before the first frame update
-     public struct Status
+     public struct Status //서버서버
     {
         public float speed , accel , hp , agility , consis;
         public Status(float s,float a,float h,float ag,float c)
@@ -17,24 +17,24 @@ public class HorseStatus : MonoBehaviour
             this.consis = c;
         }
     }
-    public Dictionary<string,bool> horseLocation = new Dictionary<string, bool>();
-    public Status status;
+    public Dictionary<string,bool> horseLocation = new Dictionary<string, bool>(); //서버서버 
+    public Status status; //서버서버
     public float resultSpeed , timeChecker;
-    public bool isHalf; // 레일의 절반을 뛰었는지 판단
+    public bool isHalf; // 레일의 절반을 뛰었는지 판단 //서버서버
     // 회전에 필요한 변수 및  오브젝트
-    public float rotateTime ,radius;
-    public bool isRotate;
-    public float rotateX,rotateZ;
+    public float rotateTime ,radius; //서버서버
+    public bool isRotate; //서버서버
+    public float rotateX,rotateZ; 
     // 대각선에 필요한 변수
-    bool isDiagonal;
-    public float dRandom;
-    public Vector3 firstAxis,secondAxis;
-    Vector3 startPosition,finalPosition;
-    public Vector3 currentPosition ;
+    bool isDiagonal; //서버서버
+    public float dRandom; //서버서버
+    public Vector3 firstAxis,secondAxis; //서버서버
+    Vector3 startPosition,finalPosition; //서버서버
+    public Vector3 currentPosition; //서버서버
     public Vector3 lookDirection ,changeRotation ;
     // 회전 / 대각선의 z좌표
-    public float rPoint1 = 30f , rPoint2 = -15f;
-    public float dPoint1 = 19.75f , dPoint2 = -4.75f;
+    public float rPoint1 = 30f , rPoint2 = -15f;   //서버서버
+    public float dPoint1 = 19.75f , dPoint2 = -4.75f; //서버서버
     public Animator animator;
     void Start()
     {
@@ -55,7 +55,7 @@ public class HorseStatus : MonoBehaviour
         resultSpeed = 0f;
         timeChecker = 0f;
     }
-    void InputStatus()
+    void InputStatus() //서버서버
     {
         status = new Status(10.0f,60.0f,40.0f,50.0f,8.0f);
     }
@@ -67,7 +67,7 @@ public class HorseStatus : MonoBehaviour
         Run();
     }
 
-    void Run()
+    void Run() //서버서버
     {
         currentPosition = transform.position;
         CalculateSpeed();
@@ -152,7 +152,7 @@ public class HorseStatus : MonoBehaviour
         }
     }
 
-    void ApplyConsis()
+    void ApplyConsis() //서버서버
     {
         float consisValue=0f;
         switch((int)status.consis / 20 )
@@ -180,7 +180,7 @@ public class HorseStatus : MonoBehaviour
         status.speed *= consisValue;
 
     }
-    void CalculateSpeed()
+    void CalculateSpeed() //서버서버
     {
         // status.accel;
         // status.agility;
@@ -249,7 +249,7 @@ public class HorseStatus : MonoBehaviour
         }
         resultSpeed = ((resultSpeed)/10f) + 1f;
     }
-    void Rotate()
+    void Rotate() //서버서버
     {
         Vector3 currentPosition = transform.position;
 
@@ -299,7 +299,8 @@ public class HorseStatus : MonoBehaviour
         transform.rotation = Quaternion.Lerp( transform.rotation , Quaternion.LookRotation(lookDirection) ,5f*Time.deltaTime);
         //\\transform.rotation = Quaternion.LookRotation(lookDirection);  
     }
-    void InputLocation(){
+    void InputLocation()
+    { //서버서버
         horseLocation.Add("First",true);
         horseLocation.Add("Second",false);
         horseLocation.Add("Third",false);
