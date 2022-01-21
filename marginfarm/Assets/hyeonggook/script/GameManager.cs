@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public int captain;  
     public int select;
     public bool gameStart;  // 게임스타드 유무파악
+    public bool racingStart;
 
     public int money;
     public bool spec_check;

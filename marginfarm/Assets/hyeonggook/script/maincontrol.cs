@@ -26,4 +26,8 @@ public class maincontrol : MonoBehaviour
     {
         SceneManager.LoadScene("farm");
     }
+    public void gotoRace()
+    {
+        SceneManager.LoadScene("GameLoadingScene");
+    }
 }
