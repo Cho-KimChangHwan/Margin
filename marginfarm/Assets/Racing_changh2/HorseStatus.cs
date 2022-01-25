@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using WebSocketSharp;
+// using WebSocketSharp;
 
 public class HorseStatus : MonoBehaviour
 {
-    private WebSocket m_WebSocket;
+    // private WebSocket m_WebSocket;
     // Start is called before the first frame update
     public struct Status
     {
@@ -40,9 +40,9 @@ public class HorseStatus : MonoBehaviour
     public Animator animator;
     void Start()
     {
-        m_WebSocket = new WebSocket("ws://172.30.1.51:3333");
-        m_WebSocket.Connect();
-        m_WebSocket.OnMessage += ws_OnMessage;
+        // m_WebSocket = new WebSocket("ws://172.30.1.51:3333");
+        // m_WebSocket.Connect();
+        // m_WebSocket.OnMessage += ws_OnMessage;
 
         animator = GetComponent<Animator>();
         gameObject.layer = 10;
@@ -51,10 +51,10 @@ public class HorseStatus : MonoBehaviour
         InputStatus();
         ApplyConsis();
     }
-    public void ws_OnMessage(object sender, MessageEventArgs e)
-    {
+    // public void ws_OnMessage(object sender, MessageEventArgs e)
+    // {
 
-    }
+    // }
 
     void InputVariable()
     {
