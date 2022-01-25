@@ -38,6 +38,9 @@ public class HorseStatus : MonoBehaviour
     public float rPoint1 = 30f, rPoint2 = -15f;
     public float dPoint1 = 19.75f, dPoint2 = -4.75f;
     public Animator animator;
+    GameObject leadHorse ;
+    HorseStatus leadStatus ;
+    bool isCollide=false;
     void Start()
     {
         // m_WebSocket = new WebSocket("ws://172.30.1.51:3333");
@@ -275,7 +278,10 @@ public class HorseStatus : MonoBehaviour
                     break;
             }
         }
-        resultSpeed = ((resultSpeed) / 10f) + 1f;
+        if(isCollide)
+            resultSpeed = 0.7f * ((resultSpeed) / 10f) + 1f;
+        else
+            resultSpeed = ((resultSpeed) / 10f) + 1f;
     }
     void Rotate()
     {
@@ -334,5 +340,100 @@ public class HorseStatus : MonoBehaviour
         horseLocation.Add("Third", false);
         horseLocation.Add("Fourth", false);
         horseLocation.Add("Final", false);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+       // 이 컴포넌트가 부착된 게임 오브젝트의 콜라이더와 충돌한 게임 오브젝트 가져오기
+
+        leadHorse = collision.gameObject;
+
+        // 특정 컴포넌트 가져오기
+
+        leadStatus = collision.gameObject.GetComponent<HorseStatus>();
+
+        // 콜라이더 가져오기
+
+        var collider = collision.collider;
+
+        Debug.Log("충돌 시작!");
+        Debug.Log(leadHorse.name);
+        if(horseLocation["First"])
+        {
+            if( currentPosition.z <= leadStatus.currentPosition.z )
+            {
+                Debug.Log("첫번째");
+            }
+        }
+        else if(horseLocation["Second"])
+        {
+            if( currentPosition.x >= leadStatus.currentPosition.x )
+            {
+                Debug.Log("두번째");
+            }
+        }
+        else if(horseLocation["Third"])
+        {
+            if( currentPosition.z >= leadStatus.currentPosition.z )
+            {
+                Debug.Log("세번째");
+            }
+        }
+        else if(horseLocation["Fourth"])
+        {
+            if( currentPosition.x <= leadStatus.currentPosition.x )
+            {
+                Debug.Log("네번째");
+            }
+        }
+    }
+
+ 
+
+    // Collider 컴포넌트의 is Trigger가 false인 상태로 충돌중일 때
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(horseLocation["First"])
+        {
+            if( currentPosition.z <= leadStatus.currentPosition.z )
+            {
+                
+                isCollide = true;
+            }
+        }
+        else if(horseLocation["Second"])
+        {
+            if( currentPosition.x >= leadStatus.currentPosition.x )
+            {
+                isCollide = true;
+            }
+        }
+        else if(horseLocation["Third"])
+        {
+            if( currentPosition.z >= leadStatus.currentPosition.z )
+            {
+                isCollide = true;
+            }
+        }
+        else if(horseLocation["Fourth"])
+        {
+            if( currentPosition.x <= leadStatus.currentPosition.x )
+            {
+                isCollide = true;
+            }
+        }
+    }
+
+ 
+
+    // Collider 컴포넌트의 is Trigger가 false인 상태로 충돌이 끝났을 때
+
+    private void OnCollisionExit(Collision collision)
+    {
+        isCollide = false;
+        Debug.Log("충돌 끝!");
+
     }
 }
