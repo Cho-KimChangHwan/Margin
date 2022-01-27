@@ -33,9 +33,9 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         Debug.Log("Enter Room");
-        CreateTank();
+        CreateChar();
     }
-    void CreateTank()
+    void CreateChar()
     {
         float pos = Random.Range(120.0f, 180.0f);
         PhotonNetwork.Instantiate("charac", new Vector3(pos, 9.4f, 77.0f), Quaternion.identity, 0);
