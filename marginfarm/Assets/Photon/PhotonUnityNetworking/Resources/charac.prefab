@@ -1209,6 +1209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charId: {fileID: 0}
+  randd: 0
 --- !u!1 &4292107797708230622
 GameObject:
   m_ObjectHideFlags: 0
