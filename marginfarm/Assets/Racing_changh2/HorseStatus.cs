@@ -19,6 +19,7 @@ public class HorseStatus : MonoBehaviour
             this.consis = c;
         }
     }
+    public float s,a,h,ag,c;
     public Dictionary<string, bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
     public float resultSpeed, timeChecker;
@@ -71,7 +72,8 @@ public class HorseStatus : MonoBehaviour
     }
     void InputStatus()
     {
-        status = new Status(10.0f, 60.0f, 40.0f, 50.0f, 8.0f);
+        status = new Status(s,a,h,ag,c);
+        //status = new Status(10.0f, 60.0f, 40.0f, 50.0f, 8.0f);
     }
 
     // Update is called once per frame
@@ -223,20 +225,20 @@ public class HorseStatus : MonoBehaviour
                     break;
 
                 case 1:
-                    resultSpeed = resultSpeed * (0.625f * (status.agility / 20f));
+                    resultSpeed = resultSpeed * (0.3f * (status.agility / 20f));
                     break;
 
                 case 2:
-                    resultSpeed = resultSpeed * (0.75f * (status.agility / 20f));
+                    resultSpeed = resultSpeed * (0.233f * (status.agility / 20f));
                     break;
 
                 case 3:
-                    resultSpeed = resultSpeed * (0.875f * (status.agility / 20f));
+                    resultSpeed = resultSpeed * (0.2f * (status.agility / 20f));
                     break;
 
                 case 5:
                 case 4:
-                    resultSpeed = resultSpeed * (1f * (status.agility / 20f));
+                    resultSpeed = resultSpeed * (0.19f * (status.agility / 20f));
                     break;
             }
         }
@@ -257,24 +259,24 @@ public class HorseStatus : MonoBehaviour
             switch ((int)status.hp / 20)
             {
                 case 0:
-                    resultSpeed = resultSpeed * (0.5f * (status.agility / 15f));
+                    resultSpeed = resultSpeed * (0.5f * (status.agility / 20f));
                     break;
 
                 case 1:
-                    resultSpeed = resultSpeed * (0.625f * (status.agility / 15f));
+                    resultSpeed = resultSpeed * (0.3f * (status.agility / 20f));
                     break;
 
                 case 2:
-                    resultSpeed = resultSpeed * (0.75f * (status.agility / 15f));
+                    resultSpeed = resultSpeed * (0.233f * (status.agility / 20f));
                     break;
 
                 case 3:
-                    resultSpeed = resultSpeed * (0.875f * (status.agility / 15f));
+                    resultSpeed = resultSpeed * (0.2f * (status.agility / 20f));
                     break;
 
                 case 5:
                 case 4:
-                    resultSpeed = resultSpeed * (1f * (status.agility / 15f));
+                    resultSpeed = resultSpeed * (0.19f * (status.agility / 20f));
                     break;
             }
         }
@@ -289,7 +291,7 @@ public class HorseStatus : MonoBehaviour
 
         if (horseLocation["Second"])
         {
-            rotateTime += resultSpeed * Time.deltaTime * 0.1f;
+            rotateTime += resultSpeed * Time.deltaTime * 0.3f;
             rotateX = radius * Mathf.Cos(rotateTime);
             rotateZ = radius * Mathf.Sin(-rotateTime);
             transform.position = new Vector3(firstAxis.x + rotateX, startPosition.y, (firstAxis.z - rotateZ));
@@ -305,7 +307,7 @@ public class HorseStatus : MonoBehaviour
         }
         else if (horseLocation["Fourth"])
         {
-            rotateTime += resultSpeed * Time.deltaTime * 0.1f;
+            rotateTime += resultSpeed * Time.deltaTime * 0.3f;
             rotateX = radius * Mathf.Cos(-rotateTime);
             rotateZ = radius * Mathf.Sin(-rotateTime);
             transform.position = new Vector3((secondAxis.x - rotateX), startPosition.y, (secondAxis.z + rotateZ));
@@ -421,6 +423,14 @@ public class HorseStatus : MonoBehaviour
         {
             if( currentPosition.x <= leadStatus.currentPosition.x )
             {
+                isCollide = true;
+            }
+        }
+        if(horseLocation["Final"])
+        {
+            if( currentPosition.z <= leadStatus.currentPosition.z )
+            {
+                
                 isCollide = true;
             }
         }
