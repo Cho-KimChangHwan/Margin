@@ -39,6 +39,7 @@ public class HorseStatus : MonoBehaviour
     public float rPoint1 = 30f, rPoint2 = -15f;
     public float dPoint1 = 19.75f, dPoint2 = -4.75f;
     public Animator animator;
+    public CountDown count;
     GameObject leadHorse ;
     HorseStatus leadStatus ;
     bool isCollide=false;
@@ -49,6 +50,7 @@ public class HorseStatus : MonoBehaviour
         // m_WebSocket.OnMessage += ws_OnMessage;
 
         animator = GetComponent<Animator>();
+        count = GameObject.Find("Canvas").GetComponent<CountDown>();
         gameObject.layer = 10;
         InputVariable();
         InputLocation();
@@ -79,8 +81,9 @@ public class HorseStatus : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if( count.isStart )
+            Run();
 
-        Run();
     }
 
     void Run()
