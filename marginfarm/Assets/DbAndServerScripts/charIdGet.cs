@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
-public class charIdGet : MonoBehaviour
+public class charIdGet : MonoBehaviourPunCallbacks
 {
     public TextMesh charId;
     public int randd;
