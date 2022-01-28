@@ -11,6 +11,29 @@ public class ButtonControl : MonoBehaviour
     public Image bar;
     public Text gauge;
     public Text name_t;
+    public Image item_i;
+
+    public RawImage[] horse_render = new RawImage[6];
+
+    public Image[] back_item_card = new Image[10];
+    public Image[] hat_item_card = new Image[10];
+    public Image[] glasses_item_card = new Image[10];
+    public Image[] shoes_item_card = new Image[10];
+
+    public GameObject[] back_item = new GameObject[10];
+    public GameObject[] hat_item = new GameObject[10];
+    public GameObject[] glasses_item = new GameObject[10];
+    public GameObject[] shoes_item = new GameObject[10];
+
+    public Image slot_back;
+    public Image slot_hat;
+    public Image slot_glasses;
+    public Image slot_shoes;
+
+    public RawImage horse_image;
+    public Button item_b;
+
+    public int item_temp;
 
     public int data;
     public int i;
@@ -18,7 +41,7 @@ public class ButtonControl : MonoBehaviour
 
     public GameObject picture;
     public Transform camera_po;
-    public void specview_close()
+    public void specview_close()  //스펙뷰 닫으면 카메라 원위치 이동시키고 창 닫기
     {
         if (GameManager.instance.spec_check == true)
         {
@@ -239,6 +262,85 @@ public class ButtonControl : MonoBehaviour
             gauge.text = userdata[i - 1].ToString() + "/ 100";
         }
     }
+
+    public void inven_itemlist_make(int sel_num)
+    {
+        horse_image = GameObject.Find("horse_image").GetComponent<RawImage>();
+        horse_image = horse_render[sel_num];
+
+        for (int i = 1; i <= GameManager.instance.itemMany; i++)
+        {
+            item_i = GameObject.Find("item" + i.ToString() + "_i").GetComponent<Image>();
+            item_b = GameObject.Find("Item" + i.ToString()).GetComponent<Button>();
+            item_b.interactable = true;
+
+            if (GameManager.instance.UserItem[i-1].key < 10) 
+            {
+                item_i = hat_item_card[GameManager.instance.UserItem[i - 1].key];
+            } 
+            else if (GameManager.instance.UserItem[i - 1].key < 100)
+            {
+                item_i = glasses_item_card[(GameManager.instance.UserItem[i - 1].key) / 10];
+            }
+            else if (GameManager.instance.UserItem[i - 1].key < 1000)
+            {
+                item_i = back_item_card[(GameManager.instance.UserItem[i - 1].key) / 100];
+            }
+            else if (GameManager.instance.UserItem[i - 1].key < 10000)
+            {
+               
+            }
+        }
+        for (int i = 12; i > GameManager.instance.itemMany; i--)
+        {
+            item_b = GameObject.Find("Item" + i.ToString()).GetComponent<Button>();
+            item_b.interactable = false;
+        }
+
+        slot_back = GameObject.Find("slot_back_i").GetComponent<Image>();
+        slot_hat = GameObject.Find("slot_hat_i").GetComponent<Image>();
+        slot_glasses = GameObject.Find("slot_glasses_i").GetComponent<Image>();
+        slot_shoes = GameObject.Find("slot_shoes_i").GetComponent<Image>();
+
+        item_temp = GameManager.instance.UserHorse[sel_num].items;
+        
+        if(item_temp %10 != 1)
+        {
+            slot_shoes = shoes_item_card[item_temp % 10];
+        }
+        item_temp = item_temp / 10;
+        if (item_temp % 10 != 1)
+        {
+            slot_back = back_item_card[item_temp % 10];
+        }
+        item_temp = item_temp / 10;
+        if (item_temp % 10 != 1)
+        {
+            slot_glasses = glasses_item_card[item_temp % 10];
+        }
+        item_temp = item_temp / 10;
+        if (item_temp != 1)
+        {
+            slot_hat = hat_item_card[item_temp];
+        }
+    }
+    public void click_slot_back()
+    {
+
+    }
+    public void click_slot_hat()
+    {
+
+    }
+    public void click_slot_glasses()
+    {
+
+    }
+    public void click_slot_shoes()
+    {
+
+    }
+
     public void gotohome()
     {
         SceneManager.LoadScene("mainmap");
