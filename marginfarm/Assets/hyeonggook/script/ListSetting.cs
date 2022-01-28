@@ -10,6 +10,7 @@ public class ListSetting : MonoBehaviour
 
     public Texture[] h_Texture = new Texture[8];
 
+
     public Button button;
     public GameObject x1;
     public GameObject x2;
@@ -24,8 +25,9 @@ public class ListSetting : MonoBehaviour
     {
 
         GameManager.instance.spec_check = false;
+        GameManager.instance.inven_check = false;
 
-        for (int i = 1; i <= GameManager.instance.many; i++)
+        for (int i = 1; i <= GameManager.instance.many; i++) //말 그려주기 가지고 있는 말대로 피부 결정
         {
             GameObject horse = GameObject.Find("horse_o" + i.ToString());
             horse.SetActive(true);
@@ -34,16 +36,15 @@ public class ListSetting : MonoBehaviour
             horseSkin.material.SetTexture("_MainTex", h_Texture[GameManager.instance.UserHorse[i - 1].key]);
         }
 
-        for (int i = 6; i > GameManager.instance.many; i--)
+        for (int i = 6; i > GameManager.instance.many; i--) //없는말의경우 비활성화
         {
             GameObject horse = GameObject.Find("horse_o" + i.ToString());
             horse.SetActive(false);
         }
 
-        Debug.Log(GameManager.instance.many);
         check = GameManager.instance.many;
 
-        for (con = 1; con <= 6; con++)
+        for (con = 1; con <= 6; con++)  //아래 말 선택버튼 세팅
         {
             button = GameObject.Find("horse" + con.ToString()).GetComponent<Button>();
             GameObject x1 = GameObject.Find("onex" + con.ToString());
@@ -51,7 +52,7 @@ public class ListSetting : MonoBehaviour
             h_name = GameObject.Find("h_text" + con.ToString()).GetComponent<Text>();
             GameObject h_image = GameObject.Find("h_image" + con.ToString());
 
-            if (check >= con)
+            if (check >= con)  //레벨에 따른 버튼 색 지정
             {
                 button.interactable = true;
 
