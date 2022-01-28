@@ -250,6 +250,8 @@ public class gachaControl : MonoBehaviour
 
         horseWrite();
 
+
+
         SceneManager.LoadScene("farm");
     }
 

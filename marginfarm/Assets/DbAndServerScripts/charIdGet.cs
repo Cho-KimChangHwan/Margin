@@ -8,18 +8,16 @@ using UnityEngine.SceneManagement;
 
 public class charIdGet : MonoBehaviourPunCallbacks
 {
-    public TextMesh charId;
-    public int randd;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        charId = GetComponent<TextMesh>();
-        randd = Random.Range(1, 5);
+        PhotonNetwork.IsMessageQueueRunning = true;
+        CreateChar();
     }
 
-    // Update is called once per frame
-    void Update()
+    void CreateChar()
     {
-        charId.text = randd.ToString();
+        float pos = Random.Range(120.0f, 180.0f);
+        PhotonNetwork.Instantiate("myHorse", new Vector3(pos, 9.4f, 77.0f), Quaternion.identity, 0);
     }
 }
