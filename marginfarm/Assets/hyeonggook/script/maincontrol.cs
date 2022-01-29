@@ -9,9 +9,18 @@ public class maincontrol : MonoBehaviour
     public GameObject title_m;
     public GameObject start_m;
     public GameObject gotoset;
+    public static bool isFirst = true;
 
+    public void Start()
+    {
+        if( !isFirst )
+        {
+            touchmain();
+        }
+    }
     public void touchmain()
     {
+        isFirst = false;
         GameObject maincamera = GameObject.Find("Main Camera");
         GameObject title_m = GameObject.Find("title_m");
         GameObject start_m = GameObject.Find("start_m");
@@ -21,6 +30,7 @@ public class maincontrol : MonoBehaviour
         iTween.MoveTo(title_m, iTween.Hash("position", new Vector3(-1056f, 900f, 0), "delay", 0.1f, "time", 2f));
         iTween.MoveTo(start_m, iTween.Hash("position", new Vector3(1285f, -725f, 0), "delay", 0.1f, "time", 2f));
         iTween.MoveTo(gotoset, iTween.Hash("y", 350, "delay", 3f, "time", 0.1f));
+
     }
     public void gotofarm()
     {
