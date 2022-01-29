@@ -7,20 +7,20 @@ using System;
 public class CountDown : MonoBehaviour
 {
     // Start is called before the first frame update
-    int timer;
-    int startTimer ;
+    float timer;
+    float startTimer ;
     Text count;
     public bool isStart = false;
     void Start()
     {
         isStart = false;
-        timer = 0;
-        startTimer = 0;
+        timer = 0f;
+        startTimer = 0f;
         count = GameObject.Find("Count").GetComponent<Text>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(timer == 0)
         {
@@ -28,17 +28,18 @@ public class CountDown : MonoBehaviour
         }
 
 
-        if ( timer < 180 )
+        if ( timer < 3f )
         {
-            timer ++;
-            if (timer <= 60 && timer > 0)
+            timer += Time.deltaTime;
+            Debug.Log(timer);
+            if (timer <= 1f && timer > 0f)
                 count.text = "3";
-            else if (timer <= 120 && timer > 0)
+            else if (timer <= 2f && timer > 0f)
                 count.text = "2";
-            else if (timer <= 180 && timer > 0)
+            else if (timer <= 3f && timer > 0f)
                 count.text = "1";
         }
-        else if ( timer >= 180 ){
+        else if ( timer >= 3f ){
             count.text = "Start !";
             isStart = true;
             Time.timeScale = 1.0f;
@@ -46,8 +47,8 @@ public class CountDown : MonoBehaviour
 
         if ( isStart )
         {
-            startTimer ++;
-            if ( startTimer >= 60 )
+            startTimer += Time.deltaTime;
+            if ( startTimer >= 1f )
             {
                 count.text = "";
             }

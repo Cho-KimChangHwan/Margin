@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 // using WebSocketSharp;
 
 public class HorseStatus : MonoBehaviour
@@ -40,9 +41,11 @@ public class HorseStatus : MonoBehaviour
     public float dPoint1 = 19.75f, dPoint2 = -4.75f;
     public Animator animator;
     public CountDown count;
+    Text record ;
     GameObject leadHorse ;
     HorseStatus leadStatus ;
     bool isCollide=false;
+    public float myRecord;
     void Start()
     {
         // m_WebSocket = new WebSocket("ws://172.30.1.51:3333");
@@ -51,6 +54,7 @@ public class HorseStatus : MonoBehaviour
 
         animator = GetComponent<Animator>();
         count = GameObject.Find("Canvas").GetComponent<CountDown>();
+        record = GameObject.Find("Record").GetComponent<Text>();
         gameObject.layer = 10;
         InputVariable();
         InputLocation();
@@ -81,11 +85,27 @@ public class HorseStatus : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if( count.isStart )
+        if( count.isStart ){
+            countRecord();
             Run();
+        }
+        else{
+            myRecord = 0f;
+        }
 
     }
-
+    void countRecord()
+    {
+        if(horseLocation["Final"])
+        {
+            record.text = "Record : " + myRecord.ToString("F3") ;
+        }
+        else
+        {
+            myRecord += Time.deltaTime;
+            record.text = "Record : " + myRecord.ToString("F3") ;
+        }
+    }
     void Run()
     {
         currentPosition = transform.position;
@@ -160,15 +180,13 @@ public class HorseStatus : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(currentPosition,
                                         finalPosition, 5f * resultSpeed * Time.deltaTime);
-            animator.Play("Horse_Trot");
             if (transform.position == finalPosition)
             {
-                horseLocation["Final"] = false;
+                animator.Play("Horse_Paw2");
             }
-        }
-        else
-        {
-            animator.Play("Horse_Paw2");
+            else{
+                animator.Play("Horse_Trot");
+            }
         }
     }
 
