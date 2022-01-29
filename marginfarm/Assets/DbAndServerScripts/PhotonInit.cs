@@ -10,8 +10,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
 {
     public string version = "v1.0";
     public Text show;
-    int maxPlayer = 1;
-    // Start is called before the first frame update
+
     void Awake()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -40,14 +39,16 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log("Enter Room");
         show.text = "게임 대기 중...";
-        StartCoroutine(this.LoadRacing());
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 2) //3명일 때
+        {
+            StartCoroutine(this.LoadRacing());
+        }
     }
     IEnumerator LoadRacing()
     {
-        //씬을 이동하는 동안 포톤 클라우드 서버로부터 네트워크 메시지 수신 중단
-        PhotonNetwork.IsMessageQueueRunning = false;
-        //백그라운드로 씬 로딩
-        AsyncOperation ao = Application.LoadLevelAsync("JunServerTest");
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.IsMessageQueueRunning = false;  //씬을 이동하는 동안 포톤 클라우드 서버로부터 네트워크 메시지 수신 중단  
+        AsyncOperation ao = Application.LoadLevelAsync("JunServerTest"); //백그라운드로 씬 로딩
         yield return ao;
     }
 }
