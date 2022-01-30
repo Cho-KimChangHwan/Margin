@@ -10,7 +10,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
 {
     public string version = "v1.0";
     public Text show;
-
+    bool isGameStart = false;
     void Awake()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -18,6 +18,16 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     void Start()
     {
         show = GameObject.Find("loadingText").GetComponent<Text>();   
+    }
+    private void Update()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 1 && isGameStart == false) //3명일 때
+        {
+            Debug.Log("ininininininin");
+            StartCoroutine(this.LoadRacing());
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            isGameStart = true;
+        }
     }
     public override void OnConnectedToMaster() //포톤 클라우드에 접속이 잘되면 호출되는 콜백함수
     {
@@ -39,14 +49,11 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log("Enter Room");
         show.text = "게임 대기 중...";
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1) //3명일 때
-        {
-            StartCoroutine(this.LoadRacing());
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-        }
+    
     }
     IEnumerator LoadRacing()
     {
+        
         PhotonNetwork.IsMessageQueueRunning = false;  //씬을 이동하는 동안 포톤 클라우드 서버로부터 네트워크 메시지 수신 중단  
         AsyncOperation ao = Application.LoadLevelAsync("RacingScene"); //백그라운드로 씬 로딩
         yield return ao;
