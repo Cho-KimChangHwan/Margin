@@ -54,7 +54,7 @@ public class HorseStatus : MonoBehaviour
 
         animator = GetComponent<Animator>();
         count = GameObject.Find("Canvas").GetComponent<CountDown>();
-        record = GameObject.Find("Record").GetComponent<Text>();
+        //record = GameObject.Find("Record").GetComponent<Text>();
         gameObject.layer = 10;
         InputVariable();
         InputLocation();
@@ -84,7 +84,7 @@ public class HorseStatus : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {
+    {/*
         if( count.isStart ){
             countRecord();
             Run();
@@ -92,6 +92,8 @@ public class HorseStatus : MonoBehaviour
         else{
             myRecord = 0f;
         }
+        */
+        Run();
 
     }
     void countRecord()
