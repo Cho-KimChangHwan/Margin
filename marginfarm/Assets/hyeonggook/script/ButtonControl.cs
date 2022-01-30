@@ -32,8 +32,7 @@ public class ButtonControl : MonoBehaviour
     public Text gauge;
     public Text name_t;
     public Image item_i;
-    public GameObject temp;
-
+  
     public Texture[] horse_render = new Texture[6];
 
     public Sprite[] back_item_card = new Sprite[10];
@@ -346,10 +345,10 @@ public class ButtonControl : MonoBehaviour
             item_b = GameObject.Find("item" + i.ToString()).GetComponent<Button>();
             item_b.interactable = true;
 
-            if (GameManager.instance.UserItem[i-1].key < 10) 
+            if (GameManager.instance.UserItem[i - 1].key < 10)
             {
                 item_i.sprite = hat_item_card[GameManager.instance.UserItem[i - 1].key];
-            } 
+            }
             else if (GameManager.instance.UserItem[i - 1].key < 100)
             {
                 item_i.sprite = glasses_item_card[(GameManager.instance.UserItem[i - 1].key) / 10];
@@ -376,7 +375,7 @@ public class ButtonControl : MonoBehaviour
         slot_glasses = GameObject.Find("slot_glasses_i").GetComponent<Image>();
         slot_shoes = GameObject.Find("slot_shoes_i").GetComponent<Image>();
 
-        if(GameManager.instance.WearingItem[(sel_num * 4)].item_key != 0)
+        if (GameManager.instance.WearingItem[(sel_num * 4)].item_key != 0)
         {
             slot_hat.sprite = hat_item_card[GameManager.instance.WearingItem[(sel_num * 4)].item_key];
         }
@@ -384,7 +383,7 @@ public class ButtonControl : MonoBehaviour
         {
             slot_hat.sprite = hat_item_card[0];
         }
-        
+
         if (GameManager.instance.WearingItem[(sel_num * 4) + 1].item_key != 0)
         {
             slot_glasses.sprite = glasses_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 1].item_key / 10];
@@ -513,7 +512,7 @@ public class ButtonControl : MonoBehaviour
 
         select_num = button_num;
 
-        if(spec_open_check == true)
+        if (spec_open_check == true)
         {
             select_x.SetActive(false);
             spec_open_check = false;
@@ -525,7 +524,7 @@ public class ButtonControl : MonoBehaviour
         {
             change_t = GameObject.Find("change_t").GetComponent<Text>();
             change_t.text = "해제";
-            
+
 
             if (button_num == 0)
             {
@@ -597,14 +596,15 @@ public class ButtonControl : MonoBehaviour
         }
         else  //장착
         {
+            int horse_ss = horse_s_n + 1;
+
             if (GameManager.instance.UserItem[select_num].key < 10)
             {
-                int horse_ss = horse_s_n + 1;
                 GameObject under = GameObject.Find("hat_h" + horse_ss.ToString());
-                GameObject temp = Instantiate(hat_item[GameManager.instance.UserItem[select_num].key], under.transform.position, Quaternion.identity);
+                GameObject temp = Instantiate(hat_item[GameManager.instance.UserItem[select_num].key], under.transform.position, Quaternion.Euler(new Vector3(8.433001f, -120.109f, 91.00101f)));
                 temp.transform.parent = under.transform;
-                
-                if(GameManager.instance.WearingItem[(horse_s_n * 4)].item_key == 0)
+
+                if (GameManager.instance.WearingItem[(horse_s_n * 4)].item_key == 0)
                 {
                     GameManager.instance.WearingItem[(horse_s_n * 4)].item_key = GameManager.instance.UserItem[select_num].key;
                     GameManager.instance.WearingItem[(horse_s_n * 4)].speed = GameManager.instance.UserItem[select_num].speed;
@@ -624,7 +624,7 @@ public class ButtonControl : MonoBehaviour
                         GameManager.instance.UserItem[i].consis = GameManager.instance.UserItem[i + 1].consis;
                     }
 
-                    if(select_num == 11)
+                    if (select_num == 11)
                     {
                         GameManager.instance.UserItem[select_num - 1].key = -1;
                         GameManager.instance.UserItem[select_num - 1].speed = -1;
@@ -637,25 +637,139 @@ public class ButtonControl : MonoBehaviour
                     GameManager.instance.itemMany = GameManager.instance.itemMany - 1;
 
                     inven_itemlist_make(horse_s_n);
-                    Debug.Log(1);
                 }
             }
             else if (GameManager.instance.UserItem[select_num].key < 100)
             {
-                item_s.sprite = glasses_item_card[(GameManager.instance.UserItem[select_num].key) / 10];
+                GameObject under = GameObject.Find("glasses_h" + horse_ss.ToString());
+                GameObject temp = Instantiate(glasses_item[GameManager.instance.UserItem[select_num].key / 10], under.transform.position, Quaternion.Euler(new Vector3(0.162f, -138.079f, 89.01701f)));
+                temp.transform.parent = under.transform;
+
+                if (GameManager.instance.WearingItem[(horse_s_n * 4) + 1].item_key == 0)
+                {
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 1].item_key = GameManager.instance.UserItem[select_num].key;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 1].speed = GameManager.instance.UserItem[select_num].speed;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 1].accel = GameManager.instance.UserItem[select_num].accel;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 1].hp = GameManager.instance.UserItem[select_num].hp;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 1].agility = GameManager.instance.UserItem[select_num].agility;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 1].consis = GameManager.instance.UserItem[select_num].consis;
+
+                    //정렬
+                    for (int i = select_num; i < GameManager.instance.itemMany; i++)
+                    {
+                        GameManager.instance.UserItem[i].key = GameManager.instance.UserItem[i + 1].key;
+                        GameManager.instance.UserItem[i].speed = GameManager.instance.UserItem[i + 1].speed;
+                        GameManager.instance.UserItem[i].accel = GameManager.instance.UserItem[i + 1].accel;
+                        GameManager.instance.UserItem[i].hp = GameManager.instance.UserItem[i + 1].hp;
+                        GameManager.instance.UserItem[i].agility = GameManager.instance.UserItem[i + 1].agility;
+                        GameManager.instance.UserItem[i].consis = GameManager.instance.UserItem[i + 1].consis;
+                    }
+
+                    if (select_num == 11)
+                    {
+                        GameManager.instance.UserItem[select_num - 1].key = -1;
+                        GameManager.instance.UserItem[select_num - 1].speed = -1;
+                        GameManager.instance.UserItem[select_num - 1].accel = -1;
+                        GameManager.instance.UserItem[select_num - 1].hp = -1;
+                        GameManager.instance.UserItem[select_num - 1].agility = -1;
+                        GameManager.instance.UserItem[select_num - 1].consis = -1;
+                    }
+
+                    GameManager.instance.itemMany = GameManager.instance.itemMany - 1;
+
+                    inven_itemlist_make(horse_s_n);
+                }
             }
             else if (GameManager.instance.UserItem[select_num].key < 1000)
             {
-                item_s.sprite = back_item_card[(GameManager.instance.UserItem[select_num].key) / 100];
+                GameObject under = GameObject.Find("back_h" + horse_ss.ToString());
+                GameObject temp = Instantiate(back_item[GameManager.instance.UserItem[select_num].key / 100], under.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
+                temp.transform.parent = under.transform;
+
+
+                if (GameManager.instance.WearingItem[(horse_s_n * 4) + 2].item_key == 0)
+                {
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 2].item_key = GameManager.instance.UserItem[select_num].key;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 2].speed = GameManager.instance.UserItem[select_num].speed;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 2].accel = GameManager.instance.UserItem[select_num].accel;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 2].hp = GameManager.instance.UserItem[select_num].hp;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 2].agility = GameManager.instance.UserItem[select_num].agility;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 2].consis = GameManager.instance.UserItem[select_num].consis;
+
+                    //정렬
+                    for (int i = select_num; i < GameManager.instance.itemMany; i++)
+                    {
+                        GameManager.instance.UserItem[i].key = GameManager.instance.UserItem[i + 1].key;
+                        GameManager.instance.UserItem[i].speed = GameManager.instance.UserItem[i + 1].speed;
+                        GameManager.instance.UserItem[i].accel = GameManager.instance.UserItem[i + 1].accel;
+                        GameManager.instance.UserItem[i].hp = GameManager.instance.UserItem[i + 1].hp;
+                        GameManager.instance.UserItem[i].agility = GameManager.instance.UserItem[i + 1].agility;
+                        GameManager.instance.UserItem[i].consis = GameManager.instance.UserItem[i + 1].consis;
+                    }
+
+                    if (select_num == 11)
+                    {
+                        GameManager.instance.UserItem[select_num - 1].key = -1;
+                        GameManager.instance.UserItem[select_num - 1].speed = -1;
+                        GameManager.instance.UserItem[select_num - 1].accel = -1;
+                        GameManager.instance.UserItem[select_num - 1].hp = -1;
+                        GameManager.instance.UserItem[select_num - 1].agility = -1;
+                        GameManager.instance.UserItem[select_num - 1].consis = -1;
+                    }
+
+                    GameManager.instance.itemMany = GameManager.instance.itemMany - 1;
+
+                    inven_itemlist_make(horse_s_n);
+                }
             }
             else if (GameManager.instance.UserItem[select_num].key < 10000)
             {
-                item_s.sprite = shoes_item_card[(GameManager.instance.UserItem[select_num].key) / 1000];
+                GameObject under = GameObject.Find("shoes_h" + horse_ss.ToString());
+                GameObject temp = Instantiate(hat_item[GameManager.instance.UserItem[select_num].key / 1000], new Vector3(0, 0, 0), Quaternion.identity);
+                temp.transform.parent = under.transform;
+
+
+                if (GameManager.instance.WearingItem[(horse_s_n * 4) + 3].item_key == 0)
+                {
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 3].item_key = GameManager.instance.UserItem[select_num].key;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 3].speed = GameManager.instance.UserItem[select_num].speed;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 3].accel = GameManager.instance.UserItem[select_num].accel;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 3].hp = GameManager.instance.UserItem[select_num].hp;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 3].agility = GameManager.instance.UserItem[select_num].agility;
+                    GameManager.instance.WearingItem[(horse_s_n * 4) + 3].consis = GameManager.instance.UserItem[select_num].consis;
+
+                    //정렬
+                    for (int i = select_num; i < GameManager.instance.itemMany; i++)
+                    {
+                        GameManager.instance.UserItem[i].key = GameManager.instance.UserItem[i + 1].key;
+                        GameManager.instance.UserItem[i].speed = GameManager.instance.UserItem[i + 1].speed;
+                        GameManager.instance.UserItem[i].accel = GameManager.instance.UserItem[i + 1].accel;
+                        GameManager.instance.UserItem[i].hp = GameManager.instance.UserItem[i + 1].hp;
+                        GameManager.instance.UserItem[i].agility = GameManager.instance.UserItem[i + 1].agility;
+                        GameManager.instance.UserItem[i].consis = GameManager.instance.UserItem[i + 1].consis;
+                    }
+
+                    if (select_num == 11)
+                    {
+                        GameManager.instance.UserItem[select_num - 1].key = -1;
+                        GameManager.instance.UserItem[select_num - 1].speed = -1;
+                        GameManager.instance.UserItem[select_num - 1].accel = -1;
+                        GameManager.instance.UserItem[select_num - 1].hp = -1;
+                        GameManager.instance.UserItem[select_num - 1].agility = -1;
+                        GameManager.instance.UserItem[select_num - 1].consis = -1;
+                    }
+
+                    GameManager.instance.itemMany = GameManager.instance.itemMany - 1;
+
+                    inven_itemlist_make(horse_s_n);
+                }
             }
         }
+            
         //GameObject select_x = GameObject.Find("select_x");
         //select_x.SetActive(true);
         //spec_open_check = true;
+        
     }
 
     public void gotohome()
@@ -665,6 +779,7 @@ public class ButtonControl : MonoBehaviour
 
     public void gotoshop()
     {
-        SceneManager.LoadScene("gacha");
+       SceneManager.LoadScene("gacha");
     }
+    
 }
