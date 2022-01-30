@@ -56,7 +56,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
 
         animator = GetComponent<Animator>();
         count = GameObject.Find("Canvas").GetComponent<CountDown>();
-        //record = GameObject.Find("Record").GetComponent<Text>();
+        record = GameObject.Find("Record").GetComponent<Text>();
         gameObject.layer = 10;
         InputVariable();
         InputLocation();
