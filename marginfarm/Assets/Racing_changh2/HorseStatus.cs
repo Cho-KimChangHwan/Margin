@@ -89,8 +89,10 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
         if( count.isStart ){
             countRecord();
+            Debug.Log("앙앙");
             if (photonView.IsMine)
             {
+                Debug.Log("앙앙옹옹");
                 Run();
             }
         }
