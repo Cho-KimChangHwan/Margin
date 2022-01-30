@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 // using WebSocketSharp;
 
 public class HorseStatus : MonoBehaviourPunCallbacks
@@ -48,20 +49,38 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     HorseStatus leadStatus ;
     bool isCollide=false;
     public float myRecord;
+
+    void Awake()
+    {
+        if (photonView.IsMine)
+        {
+            s = GameManager.instance.UserHorse[GameManager.instance.captain].speed;
+            a = GameManager.instance.UserHorse[GameManager.instance.captain].accel;
+            h = GameManager.instance.UserHorse[GameManager.instance.captain].hp;
+            ag = GameManager.instance.UserHorse[GameManager.instance.captain].agility;
+            c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
+        }
+    }
     void Start()
     {
         // m_WebSocket = new WebSocket("ws://172.30.1.51:3333");
         // m_WebSocket.Connect();
         // m_WebSocket.OnMessage += ws_OnMessage;
 
-        animator = GetComponent<Animator>();
-        count = GameObject.Find("Canvas").GetComponent<CountDown>();
-        record = GameObject.Find("Record").GetComponent<Text>();
-        gameObject.layer = 10;
-        InputVariable();
-        InputLocation();
-        InputStatus();
-        ApplyConsis();
+        if (SceneManager.GetActiveScene().name == "RacingScene")
+        {
+            animator = GetComponent<Animator>();
+            count = GameObject.Find("Canvas").GetComponent<CountDown>();
+            record = GameObject.Find("Record").GetComponent<Text>();
+            gameObject.layer = 10;
+            if (photonView.IsMine)
+            {
+                InputVariable();
+                InputLocation();
+                InputStatus();
+                ApplyConsis();
+            }
+        }
     }
     // public void ws_OnMessage(object sender, MessageEventArgs e)
     // {
@@ -87,15 +106,20 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void FixedUpdate()
     {
-        if( count.isStart ){
-            countRecord();
-            if (photonView.IsMine)
+        if (SceneManager.GetActiveScene().name == "RacingScene")
+        {
+            if (count.isStart)
             {
-                Run();
+                countRecord();
+                if (photonView.IsMine)
+                {
+                    Run();
+                }
             }
-        }
-        else{
-            myRecord = 0f;
+            else
+            {
+                myRecord = 0f;
+            }
         }
     }
     void countRecord()
@@ -226,7 +250,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         status.agility *= consisValue;
         status.hp *= consisValue;
         status.speed *= consisValue;
-
+        Debug.Log(status.speed);
     }
     void CalculateSpeed()
     {
