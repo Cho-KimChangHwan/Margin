@@ -1724,8 +1724,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2849322402179359370}
   - component: {fileID: 2849322402186284294}
+  - component: {fileID: 1222741173}
+  - component: {fileID: 1222741174}
   m_Layer: 0
-  m_Name: Horse_Black_High
+  m_Name: Horse_Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1740,7 +1742,7 @@ Transform:
   m_GameObject: {fileID: 2849322402179006314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.587746, y: -1.025947, z: 7.914503}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children:
   - {fileID: 2849322402179359372}
   - {fileID: 2849322402179359374}
@@ -1767,6 +1769,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &1222741173
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2849322402179006314}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1222741174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2849322402179006314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ab96d74484b554aaeb383ef97efd28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2849322402179006316
 GameObject:
   m_ObjectHideFlags: 0
