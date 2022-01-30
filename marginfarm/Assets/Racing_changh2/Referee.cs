@@ -135,9 +135,12 @@ public class Referee : MonoBehaviour
         }
 
         //ranking.text = "1 : " + First[0]+"\n" +"\n" +"2 : " + First[1] +"\n" +"\n" + "3 : " + First[2] +"\n" +"\n" + "4 : " + First[3] +"\n";
-
-        ranking.text = "1 : " + horseRanking[0];
-            //"\n" +"\n" +"2 : " + horseRanking[1] +"\n" +"\n" + "3 : " + horseRanking[2] +"\n" +"\n" + "4 : " + horseRanking[3] +"\n";
+        string R = "";
+        for (int i = 0;  i < H - 1; i++)
+        {
+            R += (i + 1).ToString() + " : " + horseRanking[i] + "\n";
+        }
+        ranking.text = R;
     }
     void InputInfo()
     {

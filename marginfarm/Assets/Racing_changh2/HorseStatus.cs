@@ -86,20 +86,17 @@ public class HorseStatus : MonoBehaviourPunCallbacks
 
     // Update is called once per frame
     void FixedUpdate()
-    {/*
+    {
         if( count.isStart ){
             countRecord();
-            Run();
+            if (photonView.IsMine)
+            {
+                Run();
+            }
         }
         else{
             myRecord = 0f;
         }
-        */
-        if (photonView.IsMine)
-        {
-            Run();
-        }
-
     }
     void countRecord()
     {
