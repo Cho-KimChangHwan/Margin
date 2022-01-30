@@ -384,7 +384,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
 
         var collider = collision.collider;
 
-        Debug.Log(leadHorse.name);
     }
 
  
