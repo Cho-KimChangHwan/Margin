@@ -23,7 +23,6 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1 && isGameStart == false) //3명일 때
         {
-            Debug.Log("ininininininin");
             StartCoroutine(this.LoadRacing());
             PhotonNetwork.CurrentRoom.IsOpen = false;
             isGameStart = true;
@@ -53,7 +52,6 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     }
     IEnumerator LoadRacing()
     {
-        
         PhotonNetwork.IsMessageQueueRunning = false;  //씬을 이동하는 동안 포톤 클라우드 서버로부터 네트워크 메시지 수신 중단  
         AsyncOperation ao = Application.LoadLevelAsync("RacingScene"); //백그라운드로 씬 로딩
         yield return ao;
