@@ -95,7 +95,10 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             myRecord = 0f;
         }
         */
-        Run();
+        if (photonView.IsMine)
+        {
+            Run();
+        }
 
     }
     void countRecord()
