@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 // using WebSocketSharp;
 
-public class HorseStatus : MonoBehaviour
+public class HorseStatus : MonoBehaviourPunCallbacks
 {
     // private WebSocket m_WebSocket;
     // Start is called before the first frame update
