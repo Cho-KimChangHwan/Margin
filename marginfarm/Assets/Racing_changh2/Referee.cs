@@ -30,9 +30,9 @@ public class Referee : MonoBehaviour
         List<int> First = new List<int>(); 
         List<int> Second = new List<int>(); 
         List<int> Third = new List<int>(); 
-        List<int> Fourth = new List<int>();    
+        List<int> Fourth = new List<int>();
 
-
+        Debug.Log(minis.Length);
         for(int index =0;index < minis.Length;index++)
         {
             for(int j = 0 ; j < Final.Count; j++)
@@ -133,14 +133,16 @@ public class Referee : MonoBehaviour
             First[max] = tmp;
           
         }
-
         //ranking.text = "1 : " + First[0]+"\n" +"\n" +"2 : " + First[1] +"\n" +"\n" + "3 : " + First[2] +"\n" +"\n" + "4 : " + First[3] +"\n";
-        string R = "";
+        string R = "";/*
         for (int i = 0;  i < H - 1; i++)
         {
             R += (i + 1).ToString() + " : " + horseRanking[i] + "\n";
-        }
-        ranking.text = R;
+        }*/
+
+        //ranking.text = R;
+
+        ranking.text = "1 : " + horseRanking[0] + "\n"+"2 : " + horseRanking[1] + "\n";
     }
     void InputInfo()
     {

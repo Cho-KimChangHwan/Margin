@@ -27,7 +27,6 @@ public class CountDown : MonoBehaviour
             //Time.timeScale = 0.0f;
         }
 
-        Debug.Log("섹스");
         if ( timer < 3f )
         {
             timer += Time.deltaTime;
@@ -43,7 +42,6 @@ public class CountDown : MonoBehaviour
             count.text = "Start !";
             isStart = true;
             Time.timeScale = 1.0f;
-            Debug.Log(isStart);
         }
 
         if ( isStart )

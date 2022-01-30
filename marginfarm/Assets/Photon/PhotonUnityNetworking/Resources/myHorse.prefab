@@ -1238,11 +1238,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d727e8c5f2c4fa783a8f6b392750ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  s: 2
-  a: 2
-  h: 2
-  ag: 2
-  c: 2
+  s: 90
+  a: 90
+  h: 90
+  ag: 90
+  c: 90
   resultSpeed: 0
   timeChecker: 0
   isHalf: 0

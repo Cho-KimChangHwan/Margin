@@ -89,10 +89,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
         if( count.isStart ){
             countRecord();
-            Debug.Log("앙앙");
             if (photonView.IsMine)
             {
-                Debug.Log("앙앙옹옹");
                 Run();
             }
         }
@@ -386,36 +384,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
 
         var collider = collision.collider;
 
-        Debug.Log("충돌 시작!");
         Debug.Log(leadHorse.name);
-        if(horseLocation["First"])
-        {
-            if( currentPosition.z <= leadStatus.currentPosition.z )
-            {
-                Debug.Log("첫번째");
-            }
-        }
-        else if(horseLocation["Second"])
-        {
-            if( currentPosition.x >= leadStatus.currentPosition.x )
-            {
-                Debug.Log("두번째");
-            }
-        }
-        else if(horseLocation["Third"])
-        {
-            if( currentPosition.z >= leadStatus.currentPosition.z )
-            {
-                Debug.Log("세번째");
-            }
-        }
-        else if(horseLocation["Fourth"])
-        {
-            if( currentPosition.x <= leadStatus.currentPosition.x )
-            {
-                Debug.Log("네번째");
-            }
-        }
     }
 
  
@@ -470,7 +439,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     private void OnCollisionExit(Collision collision)
     {
         isCollide = false;
-        Debug.Log("충돌 끝!");
 
     }
 }
