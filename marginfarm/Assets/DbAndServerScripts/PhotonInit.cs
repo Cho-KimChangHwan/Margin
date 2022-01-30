@@ -39,7 +39,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log("Enter Room");
         show.text = "게임 대기 중...";
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 1) //3명일 때
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 1) //3명일 때
         {
             StartCoroutine(this.LoadRacing());
         }
