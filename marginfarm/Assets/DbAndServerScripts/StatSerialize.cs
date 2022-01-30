@@ -6,7 +6,7 @@ using Photon.Realtime;
 
 public class StatSerialize : MonoBehaviourPunCallbacks
 {
-    string fuckfuckfuck = "fuckFuck";
+    string fuckfuckfuck = "";
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         

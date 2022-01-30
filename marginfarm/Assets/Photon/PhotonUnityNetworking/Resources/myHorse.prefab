@@ -1152,6 +1152,7 @@ GameObject:
   - component: {fileID: 5399241767724322519}
   - component: {fileID: 2566151768855618029}
   - component: {fileID: 114149061915678430}
+  - component: {fileID: 114523070197912426}
   m_Layer: 10
   m_Name: myHorse
   m_TagString: Untagged
@@ -1232,16 +1233,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4917444039759186016}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6d727e8c5f2c4fa783a8f6b392750ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  s: 1
-  a: 1
-  h: 1
-  ag: 1
-  c: 1
+  s: 50
+  a: 50
+  h: 50
+  ag: 50
+  c: 50
   resultSpeed: 0
   timeChecker: 0
   isHalf: 0
@@ -1302,6 +1303,22 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &114523070197912426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4917444039759186016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
 --- !u!1 &4990029060013663300
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ public class CountDown : MonoBehaviour
         if ( timer < 3f )
         {
             timer += Time.deltaTime;
-            Debug.Log(timer);
+            //Debug.Log(timer);
             if (timer <= 1f && timer > 0f)
                 count.text = "3";
             else if (timer <= 2f && timer > 0f)
