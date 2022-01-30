@@ -62,7 +62,7 @@ public class Referee : MonoBehaviour
             }
         }
         int H=0;
-        for(int i =Final.Count; i >0; i--)
+        for(int i =Final.Count-1; i >0; i--)
             horseRanking[H++] = Final[i];
        
         for(int i =0; i <Fourth.Count; i++)
@@ -133,10 +133,11 @@ public class Referee : MonoBehaviour
             First[max] = tmp;
           
         }
-    
+
         //ranking.text = "1 : " + First[0]+"\n" +"\n" +"2 : " + First[1] +"\n" +"\n" + "3 : " + First[2] +"\n" +"\n" + "4 : " + First[3] +"\n";
 
-         ranking.text = "1 : " + horseRanking[0]+"\n" +"\n" +"2 : " + horseRanking[1] +"\n" +"\n" + "3 : " + horseRanking[2] +"\n" +"\n" + "4 : " + horseRanking[3] +"\n";
+        ranking.text = "1 : " + horseRanking[0];
+            //"\n" +"\n" +"2 : " + horseRanking[1] +"\n" +"\n" + "3 : " + horseRanking[2] +"\n" +"\n" + "4 : " + horseRanking[3] +"\n";
     }
     void InputInfo()
     {

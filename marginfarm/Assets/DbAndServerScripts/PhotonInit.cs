@@ -39,7 +39,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log("Enter Room");
         show.text = "게임 대기 중...";
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 2) //3명일 때
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 1) //3명일 때
         {
             StartCoroutine(this.LoadRacing());
         }
@@ -48,7 +48,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.IsMessageQueueRunning = false;  //씬을 이동하는 동안 포톤 클라우드 서버로부터 네트워크 메시지 수신 중단  
-        AsyncOperation ao = Application.LoadLevelAsync("JunServerTest"); //백그라운드로 씬 로딩
+        AsyncOperation ao = Application.LoadLevelAsync("RacingScene"); //백그라운드로 씬 로딩
         yield return ao;
     }
 }

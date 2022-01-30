@@ -18,12 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/gacha.unity
     guid: 15abf3fdef28741449160cccd2affe3d
   - enabled: 1
-    path: Assets/Scenes/RacingScene.unity
-    guid: e5eb81b6eb1ef4326b660957956b6e26
-  - enabled: 1
     path: Assets/Scenes/raceWaitScene.unity
     guid: 46168851df4aa6644b4acee7caddb662
   - enabled: 1
-    path: Assets/Scenes/JunServerTest.unity
-    guid: 11730e5c971e8574ba6d0e18b6a708b2
+    path: Assets/Scenes/RacingScene.unity
+    guid: e5eb81b6eb1ef4326b660957956b6e26
   m_configObjects: {}
