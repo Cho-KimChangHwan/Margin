@@ -38,6 +38,6 @@ public class maincontrol : MonoBehaviour
     }
     public void gotoRace()
     {
-        SceneManager.LoadScene("RacingScene");
+        SceneManager.LoadScene("raceWaitScene");
     }
 }
