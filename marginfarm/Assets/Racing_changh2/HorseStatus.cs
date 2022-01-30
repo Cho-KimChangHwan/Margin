@@ -159,10 +159,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 rotateTime = 0;
             }
             ApplyRotate();
-            if (photonView.IsMine)
-            {
-                animator.Play("Horse_Gallop");
-            }
+            animator.Play("Horse_Gallop");
         }
         else if (currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1 && horseLocation["Third"])
         {
@@ -184,10 +181,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 isHalf = true;
             }
             ApplyRotate();
-            if (photonView.IsMine)
-            {
-                animator.Play("Horse_Gallop");
-            }
+            animator.Play("Horse_Gallop");
         }
         else if (horseLocation["Final"])
         {
@@ -195,16 +189,10 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                                         finalPosition, 5f * resultSpeed * Time.deltaTime);
             if (transform.position == finalPosition)
             {
-                if (photonView.IsMine)
-                {
-                    animator.Play("Horse_Paw2");
-                }
+                animator.Play("Horse_Paw2");
             }
             else{
-                if (photonView.IsMine)
-                {
-                    animator.Play("Horse_Trot");
-                }
+                animator.Play("Horse_Trot");
             }
         }
     }
@@ -366,10 +354,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         // lookDirection = (transform.position -currentPosition);
         // transform.rotation = Quaternion.LookRotation(lookDirection);   
         ApplyRotate();
-        if (photonView.IsMine)
-        {
-            animator.Play("Horse_Canter");
-        }
+        animator.Play("Horse_Canter");
         changeRotation = -currentRotation + transform.eulerAngles;
     }
     void ApplyRotate()
