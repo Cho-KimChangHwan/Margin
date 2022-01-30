@@ -1262,7 +1262,7 @@ GameObject:
   - component: {fileID: 8118359461050825624}
   - component: {fileID: 114025663073831466}
   m_Layer: 0
-  m_Name: Horse_White 1
+  m_Name: Horse_White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1275,7 +1275,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5805285161965712451}
-  m_LocalRotation: {x: 0.005516809, y: 0.19220442, z: 0.0133091, w: 0.9812492}
+  m_LocalRotation: {x: 0.005514762, y: 0.19220562, z: 0.013307207, w: 0.981249}
   m_LocalPosition: {x: 113.84, y: 43.04, z: 183.58}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children:
