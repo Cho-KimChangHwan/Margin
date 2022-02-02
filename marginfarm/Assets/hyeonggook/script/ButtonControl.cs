@@ -571,14 +571,17 @@ public class ButtonControl : MonoBehaviour
     public void click_change_button()
     {
         horse_s_n = GameManager.instance.select;
+        int horse_ss = horse_s_n + 1;
 
         if (slot_check)  //해제
         {
             if (select_num == 0)  //모자해제
             {
-                GameObject under = GameObject.Find("hat_h" + horse_s_n.ToString());
-                GameObject temp = Instantiate(hat_item[(GameManager.instance.WearingItem[(GameManager.instance.select * 4)].item_key)], under.transform.position, Quaternion.identity);
-                temp.transform.parent = under.transform;
+                GameObject under = GameObject.Find("hat_h" + horse_ss.ToString());
+                GameObject temp = under.transform.GetChild(0).gameObject;
+                Destroy(temp);
+
+
 
             }
             else if (select_num == 1)  //안경해제
@@ -596,12 +599,11 @@ public class ButtonControl : MonoBehaviour
         }
         else  //장착
         {
-            int horse_ss = horse_s_n + 1;
-
+      
             if (GameManager.instance.UserItem[select_num].key < 10)
             {
                 GameObject under = GameObject.Find("hat_h" + horse_ss.ToString());
-                GameObject temp = Instantiate(hat_item[GameManager.instance.UserItem[select_num].key], under.transform.position, Quaternion.Euler(new Vector3(8.433001f, -120.109f, 91.00101f)));
+                GameObject temp = Instantiate(hat_item[GameManager.instance.UserItem[select_num].key], under.transform.position, Quaternion.Euler(new Vector3(38f, -97f, -6f)));
                 temp.transform.parent = under.transform;
 
                 if (GameManager.instance.WearingItem[(horse_s_n * 4)].item_key == 0)
@@ -614,7 +616,7 @@ public class ButtonControl : MonoBehaviour
                     GameManager.instance.WearingItem[(horse_s_n * 4)].consis = GameManager.instance.UserItem[select_num].consis;
 
                     //정렬
-                    for (int i = select_num; i < GameManager.instance.itemMany; i++)
+                    for (int i = select_num; i < GameManager.instance.itemMany; i++)                       //12번째 아이템일 경우
                     {
                         GameManager.instance.UserItem[i].key = GameManager.instance.UserItem[i + 1].key;
                         GameManager.instance.UserItem[i].speed = GameManager.instance.UserItem[i + 1].speed;
@@ -642,7 +644,7 @@ public class ButtonControl : MonoBehaviour
             else if (GameManager.instance.UserItem[select_num].key < 100)
             {
                 GameObject under = GameObject.Find("glasses_h" + horse_ss.ToString());
-                GameObject temp = Instantiate(glasses_item[GameManager.instance.UserItem[select_num].key / 10], under.transform.position, Quaternion.Euler(new Vector3(0.162f, -138.079f, 89.01701f)));
+                GameObject temp = Instantiate(glasses_item[GameManager.instance.UserItem[select_num].key / 10], under.transform.position, Quaternion.Euler(new Vector3(20f, -87f, -1f)));
                 temp.transform.parent = under.transform;
 
                 if (GameManager.instance.WearingItem[(horse_s_n * 4) + 1].item_key == 0)
@@ -725,7 +727,7 @@ public class ButtonControl : MonoBehaviour
             else if (GameManager.instance.UserItem[select_num].key < 10000)
             {
                 GameObject under = GameObject.Find("shoes_h" + horse_ss.ToString());
-                GameObject temp = Instantiate(hat_item[GameManager.instance.UserItem[select_num].key / 1000], new Vector3(0, 0, 0), Quaternion.identity);
+                GameObject temp = Instantiate(hat_item[GameManager.instance.UserItem[select_num].key / 1000], under.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
                 temp.transform.parent = under.transform;
 
 
@@ -765,11 +767,8 @@ public class ButtonControl : MonoBehaviour
                 }
             }
         }
-            
-        //GameObject select_x = GameObject.Find("select_x");
-        //select_x.SetActive(true);
-        //spec_open_check = true;
-        
+        GameObject.Find("inven").transform.Find("select_x").gameObject.SetActive(true);
+        spec_open_check = true;
     }
 
     public void gotohome()
