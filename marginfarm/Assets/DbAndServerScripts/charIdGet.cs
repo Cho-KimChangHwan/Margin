@@ -6,7 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
-public class charIdGet : MonoBehaviourPunCallbacks
+public class charIdGet : MonoBehaviourPunCallbacks, IPunObservable
 {
     // Start is called before the first frame update
     void Awake()
@@ -36,6 +36,7 @@ public class charIdGet : MonoBehaviourPunCallbacks
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        Debug.Log("씨발씨발씨발씨발씨발씨발씨발씨발");
         if (stream.IsWriting)
         {
             stream.SendNext(GameManager.instance.mytern.ToString() + GameManager.instance.UserHorse[GameManager.instance.captain].key.ToString());
