@@ -10,6 +10,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     public string version = "v1.0";
     public Text show;
     bool isGameStart = false;
+    bool getReady = false;
     void Awake()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -20,7 +21,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1 && isGameStart == false) //3명일 때
+        if (getReady == true && PhotonNetwork.CurrentRoom.PlayerCount > 1 && isGameStart == false) //3명일 때
         {
             StartCoroutine(this.LoadRacing());
             PhotonNetwork.CurrentRoom.IsOpen = false;
@@ -49,6 +50,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         Debug.Log("Enter Room");
         show.text = "게임 대기 중...";
         GameManager.instance.mytern = PhotonNetwork.CurrentRoom.PlayerCount;
+        getReady = true;
     }
     IEnumerator LoadRacing()
     {
