@@ -113,10 +113,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             }
             else
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    Debug.Log("말번호:" + GameManager.instance.lineKey[i]);
-                }
                 myRecord = 0f;
             }
         }
