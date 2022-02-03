@@ -36,15 +36,14 @@ public class charIdGet : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        Debug.Log("씨발씨발씨발씨발씨발씨발씨발씨발");
         if (stream.IsWriting)
         {
             stream.SendNext(GameManager.instance.mytern.ToString() + GameManager.instance.UserHorse[GameManager.instance.captain].key.ToString());
         }
-        else if (stream.IsReading)
+        else
         {
             GameManager.instance.lineKey[GameManager.instance.mytern - 1] = stream.ReceiveNext().ToString();
-            Debug.Log(stream.ReceiveNext().ToString());
+            Debug.Log("말번호:" + GameManager.instance.lineKey[GameManager.instance.mytern - 1]);
         }
     }
 }
