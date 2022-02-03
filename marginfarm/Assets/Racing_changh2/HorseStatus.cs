@@ -51,6 +51,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     bool isCollide=false;
     public float myRecord;
 
+    Renderer myRender;
     void Awake()
     {
         if (photonView.IsMine)

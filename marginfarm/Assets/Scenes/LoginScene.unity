@@ -1486,12 +1486,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   many: 0
+  itemMany: 0
   Id: 
   captain: 0
   select: 0
   gameStart: 0
+  racingStart: 0
   money: 0
   spec_check: 0
+  inven_check: 0
+  horse_items: 000000000000000000000000000000000000000000000000
 --- !u!4 &2137417716
 Transform:
   m_ObjectHideFlags: 0

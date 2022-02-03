@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
     public bool spec_check;
     public bool inven_check;
 
+    public int mytern;
+
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
         new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 1111),

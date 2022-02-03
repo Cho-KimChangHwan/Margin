@@ -1242,6 +1242,7 @@ MonoBehaviour:
   h: 90
   ag: 90
   c: 3
+  n: 
   resultSpeed: 0
   timeChecker: 0
   isHalf: 0

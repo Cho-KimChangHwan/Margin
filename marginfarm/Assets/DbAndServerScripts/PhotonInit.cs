@@ -48,7 +48,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log("Enter Room");
         show.text = "게임 대기 중...";
-    
+        GameManager.instance.mytern = PhotonNetwork.CurrentRoom.PlayerCount;
     }
     IEnumerator LoadRacing()
     {

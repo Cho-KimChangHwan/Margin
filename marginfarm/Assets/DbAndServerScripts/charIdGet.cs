@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class charIdGet : MonoBehaviourPunCallbacks
 {
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,7 +17,7 @@ public class charIdGet : MonoBehaviourPunCallbacks
 
     void CreateChar()
     {
-        switch(PhotonNetwork.CurrentRoom.PlayerCount)
+        switch(GameManager.instance.mytern)
         {
             case 1:
                 PhotonNetwork.Instantiate("myHorse", new Vector3(34.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
