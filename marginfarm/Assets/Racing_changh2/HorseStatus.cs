@@ -82,9 +82,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 ApplyConsis();
             }
         }
-        Debug.Log( status.name);
         gameObject.name = status.name;
-        Debug.Log(gameObject.name );
     }
     void InputVariable()
     {
@@ -115,6 +113,10 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             }
             else
             {
+                for (int i = 0; i < 4; i++)
+                {
+                    Debug.Log("말번호:" + GameManager.instance.lineKey[i]);
+                }
                 myRecord = 0f;
             }
         }
@@ -260,7 +262,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         status.agility *= consisValue;
         status.hp *= consisValue;
         status.speed *= consisValue;
-        Debug.Log(status.speed);
     }
     void CalculateSpeed()
     {

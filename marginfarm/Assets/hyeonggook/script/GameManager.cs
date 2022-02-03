@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     public int mytern;
 
     public Texture[] hMats = new Texture[8];
-    public string[] lineKey = new string[4];
+    public int[] lineKey = new int[4];
 
     public HorseInfo[] UserHorse = new HorseInfo[]
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using System;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -13,6 +13,7 @@ public class charIdGet : MonoBehaviourPunCallbacks, IPunObservable
     {
         PhotonNetwork.IsMessageQueueRunning = true;
         CreateChar();
+        GameManager.instance.lineKey[GameManager.instance.mytern - 1] = GameManager.instance.UserHorse[GameManager.instance.captain].key;
     }
 
     void CreateChar()
@@ -42,8 +43,8 @@ public class charIdGet : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            GameManager.instance.lineKey[GameManager.instance.mytern - 1] = stream.ReceiveNext().ToString();
-            Debug.Log("말번호:" + GameManager.instance.lineKey[GameManager.instance.mytern - 1]);
+            string gotMes = stream.ReceiveNext().ToString();
+            GameManager.instance.lineKey[Convert.ToInt32(gotMes.Substring(0, 1)) - 1] = Convert.ToInt32(gotMes.Substring(1, 2));           
         }
     }
 }
