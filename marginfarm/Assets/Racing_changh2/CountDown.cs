@@ -53,10 +53,6 @@ public class CountDown : MonoBehaviour
             {
                 count.text = "";
             }
-            for (int i = 0; i < 4; i++)
-            {
-                Debug.Log($"말번호{i + 1}: {GameManager.instance.lineKey[i]}");
-            }
         }
     }
 }
