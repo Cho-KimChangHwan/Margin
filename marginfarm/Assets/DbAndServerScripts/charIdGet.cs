@@ -23,14 +23,14 @@ public class charIdGet : MonoBehaviourPunCallbacks
         {
             case 1:
                 PhotonNetwork.Instantiate("myHorse", new Vector3(34.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
-                thisHorse = GameObject.Find("myHorse");
+                thisHorse = GameObject.Find("myHorse(Clone)");
                 horseSkin = thisHorse.GetComponentInChildren<SkinnedMeshRenderer>();
                 horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[0]]);
                 photonView.RPC("matSet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1, GameManager.instance.UserHorse[GameManager.instance.captain].key);
                 break;
             case 2:
                 PhotonNetwork.Instantiate("myHorse", new Vector3(35.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
-                thisHorse = GameObject.Find("myHorse");
+                thisHorse = GameObject.Find("myHorse(Clone)");
                 horseSkin = thisHorse.GetComponentInChildren<SkinnedMeshRenderer>();
                 horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[1]]);
                 photonView.RPC("matSet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1, GameManager.instance.UserHorse[GameManager.instance.captain].key);
