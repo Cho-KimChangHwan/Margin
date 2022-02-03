@@ -52,6 +52,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     public float myRecord;
 
     public SkinnedMeshRenderer horseSkin;
+
     void Awake()
     {
         if (photonView.IsMine)
@@ -403,7 +404,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         horseSkin = GetComponentInChildren<SkinnedMeshRenderer>();
         horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[matKey]);
     }
-        void ApplyRotate()
+
+    void ApplyRotate()
     {
         lookDirection = -(transform.position - currentPosition);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDirection), 5f * Time.deltaTime);
