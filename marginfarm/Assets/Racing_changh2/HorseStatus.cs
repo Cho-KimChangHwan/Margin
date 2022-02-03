@@ -86,20 +86,20 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
             if (GameManager.instance.mytern - 1 == 0)
             {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
             }
             else if(GameManager.instance.mytern - 1 == 1)
             {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
+                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
             }
-            else if (GameManager.instance.mytern - 1 == 2)
-            {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
-            }
-            else if (GameManager.instance.mytern - 1 == 3)
-            {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[3]);
-            }
+            //else if (GameManager.instance.mytern - 1 == 2)
+            //{
+            //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[3]);
+            //}
+            //else if (GameManager.instance.mytern - 1 == 3)
+            //{
+            //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+            //}
         }
     }
     [PunRPC]
