@@ -24,6 +24,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     
     public float s,a,h,ag,c;
+    public string cid;
     public string n;
     public Dictionary<string, bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
@@ -61,8 +62,9 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             h = GameManager.instance.UserHorse[GameManager.instance.captain].hp;
             ag = GameManager.instance.UserHorse[GameManager.instance.captain].agility;
             c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
-            photonView.RPC("rpcName", RpcTarget.AllBuffered, GameManager.instance.Id);
+            cid = GameManager.instance.Id;               
         }
+        photonView.RPC("rpcName", RpcTarget.AllBuffered, cid);
     }
     void Start()
     {
