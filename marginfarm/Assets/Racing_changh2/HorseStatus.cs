@@ -11,8 +11,10 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     public struct Status
     {
         public float speed, accel, hp, agility, consis;
-        public Status(float s, float a, float h, float ag, float c)
+        public string name;
+        public Status(string n,float s, float a, float h, float ag, float c)
         {
+            this.name = n;
             this.speed = s;
             this.accel = a;
             this.hp = h;
@@ -20,7 +22,9 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             this.consis = c;
         }
     }
+    
     public float s,a,h,ag,c;
+    public string n;
     public Dictionary<string, bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
     public float resultSpeed, timeChecker;
@@ -51,6 +55,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
+            n = GameManager.instance.UserHorse[GameManager.instance.captain].name;
             s = GameManager.instance.UserHorse[GameManager.instance.captain].speed;
             a = GameManager.instance.UserHorse[GameManager.instance.captain].accel;
             h = GameManager.instance.UserHorse[GameManager.instance.captain].hp;
@@ -74,6 +79,9 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 ApplyConsis();
             }
         }
+        Debug.Log( status.name);
+        gameObject.name = status.name;
+        Debug.Log(gameObject.name );
     }
     void InputVariable()
     {
@@ -87,7 +95,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     void InputStatus()
     {
-        status = new Status(s,a,h,ag,c);
+        status = new Status(n,s,a,h,ag,c);
         //status = new Status(10.0f, 60.0f, 40.0f, 50.0f, 8.0f);
     }
 
