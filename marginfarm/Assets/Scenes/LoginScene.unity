@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1551,6 +1551,55 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 50b93b57e1197984ca879097eeb17725, type: 3}
   - {fileID: 2800000, guid: 2b46fd2954c254f4b9540622b49c24d6, type: 3}
   - {fileID: 2800000, guid: 0b6608fa67c3f7b4bba9b32222421d21, type: 3}
+  lineKey:
+  - 
+  - 
+  - 
+  - 
+  back_item:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 7455351002414369877, guid: af6d2f99249e1434d84ebe95d7cbcef4, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  hat_item:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 2314684268039623587, guid: eb1f6173815a9c247af27dcd4e4de623, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  glasses_item:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 3581888275051724182, guid: 99d48a5906f6dde4b99b09fa51ce8fb4, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  shoes_item:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   horse_items: 000000000000000000000000000000000000000000000000
 --- !u!4 &2137417716
 Transform:

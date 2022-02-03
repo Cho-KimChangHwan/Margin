@@ -10,6 +10,7 @@ public class horseani : MonoBehaviour
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
+        anim.SetBool("inven", false);
     }
 
     // Update is called once per frame
