@@ -6,16 +6,14 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
-public class charIdGet : MonoBehaviourPunCallbacks//, IPunObservable
+public class charIdGet : MonoBehaviourPunCallbacks
 {
     public object gotMes;
     // Start is called before the first frame update
     void Awake()
     {
         PhotonNetwork.IsMessageQueueRunning = true;
-        CreateChar();
-        //GameManager.instance.lineKey[GameManager.instance.mytern - 1] = GameManager.instance.UserHorse[GameManager.instance.captain].key;
-
+        CreateChar();      
     }
     void CreateChar()
     {
@@ -41,16 +39,5 @@ public class charIdGet : MonoBehaviourPunCallbacks//, IPunObservable
     {
         GameManager.instance.lineKey[myline] = matKey;
     }
-    /*public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(GameManager.instance.mytern.ToString() + GameManager.instance.UserHorse[GameManager.instance.captain].key.ToString());
-        }
-        else
-        {
-            gotMes = stream.ReceiveNext();
-            GameManager.instance.lineKey[Convert.ToInt32(gotMes.ToString().Substring(0, 1)) - 1] = Convert.ToInt32(gotMes.ToString().Substring(1));
-        }
-    }*/
+
 }
