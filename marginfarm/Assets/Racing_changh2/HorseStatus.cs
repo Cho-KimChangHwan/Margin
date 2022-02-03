@@ -82,31 +82,31 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 InputStatus();
                 ApplyConsis();
             }
-            photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
+            photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1, GameManager.instance.UserHorse[GameManager.instance.captain].key);
         }
     }
     [PunRPC]
-    void otMatSet(int myT)
+    void otMatSet(int myT, int myKey)
     {
         if (myT == 0)
         {
             horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[0]]);
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
         }
         else if(myT == 1)
         {
             horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[1]]);
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
         }
         else if (myT == 2)
         {
             horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[2]]);
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
         }
         else if (myT == 3)
         {
             horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[3]]);
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
         }
     }
     void InputVariable()
