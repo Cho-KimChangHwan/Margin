@@ -55,7 +55,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     public float myRecord;
 
     public SkinnedMeshRenderer horseSkin;
-    public int mKey;
     void Awake()
     {
         if (photonView.IsMine)
@@ -65,8 +64,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             a = GameManager.instance.UserHorse[GameManager.instance.captain].accel;
             h = GameManager.instance.UserHorse[GameManager.instance.captain].hp;
             ag = GameManager.instance.UserHorse[GameManager.instance.captain].agility;
-            c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
-            mKey = GameManager.instance.UserHorse[GameManager.instance.captain].key;
+            c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;           
         }
     }
     void Start()
@@ -84,13 +82,16 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 InputStatus();
                 ApplyConsis();               
             }
-            photonView.RPC("otMatSet", RpcTarget.AllBuffered, mKey);
+            photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.UserHorse[GameManager.instance.captain].key);
         }
     }
     [PunRPC]
     void otMatSet(int myKey)
     {
-        horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        if (photonView.IsMine)
+        {
+            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        }
         horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
     }
     void InputVariable()
