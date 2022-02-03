@@ -25,6 +25,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     
     public float s,a,h,ag,c;
     public int hApp;
+    public int tern;
+
     public string n;
     public Dictionary<string, bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
@@ -63,7 +65,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             h = GameManager.instance.UserHorse[GameManager.instance.captain].hp;
             ag = GameManager.instance.UserHorse[GameManager.instance.captain].agility;
             c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
-            hApp = GameManager.instance.UserHorse[GameManager.instance.captain].key;               
+            tern = GameManager.instance.mytern;               
         }
     }
     void Start()
@@ -80,25 +82,15 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 InputLocation();
                 InputStatus();
                 ApplyConsis();
-                
-                matSet(hApp);
             }
-            photonView.RPC("otMatSet", RpcTarget.AllBuffered, hApp);
+            photonView.RPC("otMatSet", RpcTarget.AllBuffered);
         }
     }
-    //[PunRPC]
-    void matSet(int matKey)
-    {
-        horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-        Debug.Log(matKey);
-        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[matKey]);
-    }
     [PunRPC]
-    void otMatSet(int matKey)
+    void otMatSet()
     {
         horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-        Debug.Log(matKey);
-        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[matKey]);
+        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[tern - 1]]);
     }
     void InputVariable()
     {
