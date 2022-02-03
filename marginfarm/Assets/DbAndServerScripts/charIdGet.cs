@@ -43,8 +43,12 @@ public class charIdGet : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            string gotMes = stream.ReceiveNext().ToString();
-            GameManager.instance.lineKey[Convert.ToInt32(gotMes.Substring(0, 1)) - 1] = Convert.ToInt32(gotMes.Substring(1, 2));           
+            string gotMes = stream.ReceiveNext().ToString();          
+            GameManager.instance.lineKey[Convert.ToInt32(gotMes.Substring(0, 1)) - 1] = Convert.ToInt32(gotMes.Substring(1));
+            for (int i = 0; i < 4; i++)
+            {
+                Debug.Log($"말번호{i + 1}: {GameManager.instance.lineKey[i]}");
+            }
         }
     }
 }

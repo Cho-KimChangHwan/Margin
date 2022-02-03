@@ -38,10 +38,6 @@ public class CountDown : MonoBehaviour
             else if (timer <= 3f && timer > 0f)
             {
                 count.text = "1";
-                for (int i = 0; i < 4; i++)
-                {
-                    Debug.Log("말번호:" + GameManager.instance.lineKey[i]);
-                }
             }
         }
         else if ( timer >= 3f ){
