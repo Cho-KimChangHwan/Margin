@@ -22,18 +22,10 @@ public class charIdGet : MonoBehaviourPunCallbacks
         switch (GameManager.instance.mytern)
         {
             case 1:
-                PhotonNetwork.Instantiate("myHorse", new Vector3(34.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
-                thisHorse = GameObject.Find("myHorse(Clone)");
-                horseSkin = thisHorse.GetComponentInChildren<SkinnedMeshRenderer>();
-                horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[0]]);
-                thisHorse.name = "changed";
+                PhotonNetwork.Instantiate("myHorse", new Vector3(34.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);                
                 break;
             case 2:
                 PhotonNetwork.Instantiate("myHorse", new Vector3(35.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
-                thisHorse = GameObject.Find("myHorse(Clone)");
-                horseSkin = thisHorse.GetComponentInChildren<SkinnedMeshRenderer>();
-                horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[1]]);
-                thisHorse.name = "changed";
                 break;
             case 3:
                 PhotonNetwork.Instantiate("myHorse", new Vector3(37.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
@@ -46,6 +38,13 @@ public class charIdGet : MonoBehaviourPunCallbacks
     }
     void Start()
     {
+        for (int i = 0; i < 4; i++)
+        {
+            thisHorse = GameObject.Find("myHorse(Clone)");
+            horseSkin = thisHorse.GetComponentInChildren<SkinnedMeshRenderer>();
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[0]]);
+            thisHorse.name = "changed";
+        }
     }
     [PunRPC]
     void matSet(int myline, int matKey)
