@@ -64,8 +64,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             a = GameManager.instance.UserHorse[GameManager.instance.captain].accel;
             h = GameManager.instance.UserHorse[GameManager.instance.captain].hp;
             ag = GameManager.instance.UserHorse[GameManager.instance.captain].agility;
-            c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
-            tern = GameManager.instance.mytern;               
+            c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;           
         }
     }
     void Start()
@@ -89,8 +88,26 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     [PunRPC]
     void otMatSet()
     {
-        horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[tern - 1]]);
+        if (GameManager.instance.mytern - 1 == 0)
+        {
+            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[0]]);
+        }
+        else if(GameManager.instance.mytern - 1 == 1)
+        {
+            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[1]]);
+        }
+        else if (GameManager.instance.mytern - 1 == 2)
+        {
+            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[2]]);
+        }
+        else if (GameManager.instance.mytern - 1 == 3)
+        {
+            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[3]]);
+        }
     }
     void InputVariable()
     {
