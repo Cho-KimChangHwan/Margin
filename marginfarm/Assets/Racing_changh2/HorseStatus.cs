@@ -90,7 +90,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     [PunRPC]
     void otMatSet(int myKey)
     {          
-        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
+        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.UserHorse[GameManager.instance.captain].key]);
     }
     void InputVariable()
     {
