@@ -18,23 +18,26 @@ public class charIdGet : MonoBehaviourPunCallbacks
 
     void CreateChar()
     {
-        if (photonView.IsMine)
+        switch(PhotonNetwork.CurrentRoom.PlayerCount)
         {
-            switch (PhotonNetwork.CurrentRoom.PlayerCount)
-            {
-                case 1:
+            case 1:
+                if (photonView.IsMine)
+                {
                     PhotonNetwork.Instantiate("myHorse", new Vector3(34.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
-                    break;
-                case 2:
+                }
+                break;
+            case 2:
+                if (photonView.IsMine)
+                {
                     PhotonNetwork.Instantiate("myHorse", new Vector3(35.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
-                    break;
-                case 3:
-                    PhotonNetwork.Instantiate("myHorse", new Vector3(37.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
-                    break;
-                case 4:
-                    PhotonNetwork.Instantiate("myHorse", new Vector3(38.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
-                    break;
-            }
+                }
+                break;
+            case 3:
+                PhotonNetwork.Instantiate("myHorse", new Vector3(37.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
+                break;
+            case 4:
+                PhotonNetwork.Instantiate("myHorse", new Vector3(38.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
+                break;
         }
     }
 }
