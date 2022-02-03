@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class charIdGet : MonoBehaviourPunCallbacks
 {
-    PhotonStream stream;
     // Start is called before the first frame update
     void Awake()
     {
@@ -32,6 +31,19 @@ public class charIdGet : MonoBehaviourPunCallbacks
             case 4:
                 PhotonNetwork.Instantiate("myHorse", new Vector3(38.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
                 break;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(GameManager.instance.mytern.ToString() + GameManager.instance.UserHorse[GameManager.instance.captain].key.ToString());
+        }
+        else if (stream.IsReading)
+        {
+            GameManager.instance.lineKey[GameManager.instance.mytern - 1] = stream.ReceiveNext().ToString();
+            Debug.Log(stream.ReceiveNext().ToString());
         }
     }
 }

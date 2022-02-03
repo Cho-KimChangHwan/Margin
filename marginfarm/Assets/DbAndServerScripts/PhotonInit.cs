@@ -11,8 +11,6 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     public Text show;
     bool isGameStart = false;
     bool getReady = false;
-    PhotonStream stream;
-    int prevNum = 0;
     void Awake()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -20,18 +18,9 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     void Start()
     {
         show = GameObject.Find("loadingText").GetComponent<Text>();
-        prevNum = PhotonNetwork.CurrentRoom.PlayerCount;
-        stream.SendNext(GameManager.instance.mytern.ToString() + GameManager.instance.UserHorse[GameManager.instance.captain].key.ToString());
     }
     private void Update()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > prevNum) 
-        {
-            stream.SendNext(GameManager.instance.mytern.ToString() + GameManager.instance.UserHorse[GameManager.instance.captain].key.ToString());
-            GameManager.instance.lineKey[GameManager.instance.mytern - 1] = stream.ReceiveNext().ToString();
-            Debug.Log(stream.ReceiveNext().ToString());
-            prevNum += 1;
-        }
         if (getReady == true && PhotonNetwork.CurrentRoom.PlayerCount > 1 && isGameStart == false) //3명일 때
         {
             StartCoroutine(this.LoadRacing());
