@@ -83,7 +83,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 
                 matSet(hApp);
             }
-            photonView.RPC("matSet", RpcTarget.AllBuffered, hApp);
+            photonView.RPC("otMatSet", RpcTarget.AllBuffered, hApp);
         }
     }
     //[PunRPC]
