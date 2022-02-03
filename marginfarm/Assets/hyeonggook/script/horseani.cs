@@ -4,30 +4,27 @@ using UnityEngine;
 
 public class horseani : MonoBehaviour
 {
-    List<string> animArray;
-    Animation anim;
-    int index = 0;
+    Animator anim;
     int randomNum;
 
     void Start()
     {
-        anim = gameObject.GetComponent<Animation>();
-        animArray = new List<string>();
-
-        foreach (AnimationState state in anim)
-        {
-            animArray[index] = state.name;
-            index++;
-        };
-
-        randomNum = Random.Range(0, index);
-        anim.Play(animArray[randomNum]);
+        anim = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        randomNum = Random.Range(0, index);
-        anim.Play(animArray[randomNum]);
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        {
+
+        }
+        else
+        {
+            randomNum = Random.Range(0, 7);
+        }
+
+        anim.SetInteger("state", randomNum);
+            
     }
 }
