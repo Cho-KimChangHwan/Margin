@@ -1251,6 +1251,8 @@ MonoBehaviour:
   h: 90
   ag: 90
   c: 3
+  hApp: 0
+  tern: 0
   n: 
   resultSpeed: 0
   timeChecker: 0

@@ -80,7 +80,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 InputVariable();
                 InputLocation();
                 InputStatus();
-                ApplyConsis();
+                ApplyConsis();               
             }
             photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.UserHorse[GameManager.instance.captain].key);
         }
@@ -88,8 +88,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     [PunRPC]
     void otMatSet(int myKey)
     {
-            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
+        horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
     }
     void InputVariable()
     {

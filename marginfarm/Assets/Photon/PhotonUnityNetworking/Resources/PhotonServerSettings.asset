@@ -41,6 +41,9 @@ MonoBehaviour:
   - RespawnSpaceship
   - rpcAni
   - rpcRend
+  - matSet
+  - rpcName
+  - otMatSet
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
