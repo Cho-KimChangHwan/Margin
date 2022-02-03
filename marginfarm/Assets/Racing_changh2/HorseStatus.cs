@@ -75,19 +75,16 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             count = GameObject.Find("Canvas").GetComponent<CountDown>();
             record = GameObject.Find("Record").GetComponent<Text>();
             gameObject.layer = 10;
+
+            photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.UserHorse[GameManager.instance.captain].key);
+
             if (photonView.IsMine)
             {
                 InputVariable();
                 InputLocation();
                 InputStatus();
-                ApplyConsis();               
-            }
-            if (photonView.IsMine == false)
-            {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.UserHorse[GameManager.instance.captain].key);                
-            }
-            else
-            {
+                ApplyConsis();
+
                 horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
                 horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.UserHorse[GameManager.instance.captain].key]);
             }
