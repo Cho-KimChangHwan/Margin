@@ -64,7 +64,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
             cid = GameManager.instance.Id;               
         }
-        photonView.RPC("rpcName", RpcTarget.AllBuffered, cid);
     }
     void Start()
     {
@@ -394,11 +393,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         if (animator != null)
             animator.Play(strAni);
     }
-    [PunRPC]
-    void rpcName(string myHName)
-    {
-        gameObject.name = myHName;
-    }
+
     void ApplyRotate()
     {
         lookDirection = -(transform.position - currentPosition);
