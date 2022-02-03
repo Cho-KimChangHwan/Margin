@@ -1264,6 +1264,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   count: {fileID: 0}
   myRecord: 0
+  horseSkin: {fileID: 0}
 --- !u!114 &2566151768855618029
 MonoBehaviour:
   m_ObjectHideFlags: 0

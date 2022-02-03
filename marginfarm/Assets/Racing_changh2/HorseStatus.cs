@@ -51,7 +51,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     bool isCollide=false;
     public float myRecord;
 
-    Renderer myRender;
+    public SkinnedMeshRenderer horseSkin;
     void Awake()
     {
         if (photonView.IsMine)
@@ -63,6 +63,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             ag = GameManager.instance.UserHorse[GameManager.instance.captain].agility;
             c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
         }
+        photonView.RPC("rpcRend", RpcTarget.AllBuffered);
     }
     void Start()
     {
@@ -396,7 +397,13 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         if (animator != null)
             animator.Play(strAni);
     }
-    void ApplyRotate()
+    [PunRPC]
+    void rpcRend()
+    {
+        horseSkin = GetComponentInChildren<SkinnedMeshRenderer>();
+        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.UserHorse[GameManager.instance.captain].key]);
+    }
+        void ApplyRotate()
     {
         lookDirection = -(transform.position - currentPosition);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDirection), 5f * Time.deltaTime);

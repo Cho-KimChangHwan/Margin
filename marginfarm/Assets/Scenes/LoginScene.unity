@@ -1464,8 +1464,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2137417716}
-  - component: {fileID: 2137417715}
   - component: {fileID: 2137417717}
+  - component: {fileID: 2137417715}
   m_Layer: 0
   m_Name: GMng
   m_TagString: Untagged
@@ -1495,6 +1495,16 @@ MonoBehaviour:
   money: 0
   spec_check: 0
   inven_check: 0
+  mytern: 0
+  hMats:
+  - {fileID: 2800000, guid: 28462d5649c48b748b1239a32f680c44, type: 3}
+  - {fileID: 2800000, guid: dc64045ee35c1044c8e64b471c314eb1, type: 3}
+  - {fileID: 2800000, guid: a02d05ea44786924c88ea4bf60e57bfc, type: 3}
+  - {fileID: 2800000, guid: 21820c7034686334595d7cdd5cdc6388, type: 3}
+  - {fileID: 2800000, guid: 7cb8a6d0de89d3e4ba04651ec4d44c8a, type: 3}
+  - {fileID: 2800000, guid: 50b93b57e1197984ca879097eeb17725, type: 3}
+  - {fileID: 2800000, guid: 2b46fd2954c254f4b9540622b49c24d6, type: 3}
+  - {fileID: 2800000, guid: 0b6608fa67c3f7b4bba9b32222421d21, type: 3}
   horse_items: 000000000000000000000000000000000000000000000000
 --- !u!4 &2137417716
 Transform:

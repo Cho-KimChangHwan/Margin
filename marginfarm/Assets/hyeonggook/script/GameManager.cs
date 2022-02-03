@@ -91,6 +91,8 @@ public class GameManager : MonoBehaviour
 
     public int mytern;
 
+    public Texture[] hMats = new Texture[8];
+
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
         new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 1111),
@@ -157,7 +159,6 @@ public class GameManager : MonoBehaviour
         money = 3000;
         itemMany = 3;
         horse_items[0] = 2222;
-
         /*
         for (int i = 0; i > 6; i++)
         {
