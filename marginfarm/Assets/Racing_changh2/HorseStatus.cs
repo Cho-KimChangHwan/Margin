@@ -54,6 +54,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     public SkinnedMeshRenderer horseSkin;
     void Awake()
     {
+        horseSkin = GetComponentInChildren<SkinnedMeshRenderer>();
         if (photonView.IsMine)
         {
             n = GameManager.instance.UserHorse[GameManager.instance.captain].name;
@@ -62,8 +63,9 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             h = GameManager.instance.UserHorse[GameManager.instance.captain].hp;
             ag = GameManager.instance.UserHorse[GameManager.instance.captain].agility;
             c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
+            
+            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.UserHorse[GameManager.instance.captain].key]);
         }
-        photonView.RPC("rpcRend", RpcTarget.AllBuffered);
     }
     void Start()
     {
@@ -397,13 +399,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         if (animator != null)
             animator.Play(strAni);
     }
-    [PunRPC]
-    void rpcRend()
-    {
-        horseSkin = GetComponentInChildren<SkinnedMeshRenderer>();
-        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.UserHorse[GameManager.instance.captain].key]);
-        Debug.Log("inin");
-    }
+
         void ApplyRotate()
     {
         lookDirection = -(transform.position - currentPosition);
