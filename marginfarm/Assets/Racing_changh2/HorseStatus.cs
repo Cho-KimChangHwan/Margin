@@ -402,6 +402,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
         horseSkin = GetComponentInChildren<SkinnedMeshRenderer>();
         horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.UserHorse[GameManager.instance.captain].key]);
+        Debug.Log("inin");
     }
         void ApplyRotate()
     {
