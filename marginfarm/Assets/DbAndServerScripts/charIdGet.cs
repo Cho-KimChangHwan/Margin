@@ -34,12 +34,12 @@ public class charIdGet : MonoBehaviourPunCallbacks//, IPunObservable
                 PhotonNetwork.Instantiate("myHorse", new Vector3(38.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
                 break;
         }
-        photonView.RPC("matSet", RpcTarget.AllBuffered, GameManager.instance.UserHorse[GameManager.instance.captain].key);
+        photonView.RPC("matSet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1, GameManager.instance.UserHorse[GameManager.instance.captain].key);
     }
     [PunRPC]
-    void matSet(int matKey)
+    void matSet(int myline, int matKey)
     {
-        GameManager.instance.lineKey[GameManager.instance.mytern - 1] = matKey;
+        GameManager.instance.lineKey[myline] = matKey;
     }
     /*public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
