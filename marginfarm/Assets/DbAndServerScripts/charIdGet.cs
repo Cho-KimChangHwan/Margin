@@ -38,13 +38,14 @@ public class charIdGet : MonoBehaviourPunCallbacks
     }
     void Start()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            thisHorse = GameObject.Find("myHorse(Clone)");
-            horseSkin = thisHorse.GetComponentInChildren<SkinnedMeshRenderer>();
-            horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[0]]);
-            thisHorse.name = "changed";
-        }
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    thisHorse = GameObject.Find("myHorse(Clone)");
+        //    horseSkin = thisHorse.GetComponentInChildren<SkinnedMeshRenderer>();
+        //    horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[i]]);
+        //    thisHorse.name = "changed";
+        //    Debug.Log(i + 1);
+        //}
     }
     [PunRPC]
     void matSet(int myline, int matKey)

@@ -24,7 +24,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     
     public float s,a,h,ag,c;
-    public string cid;
+    public int hApp;
     public string n;
     public Dictionary<string, bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
@@ -52,6 +52,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     bool isCollide=false;
     public float myRecord;
 
+    public SkinnedMeshRenderer horseSkin;
     void Awake()
     {
         if (photonView.IsMine)
@@ -62,11 +63,11 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             h = GameManager.instance.UserHorse[GameManager.instance.captain].hp;
             ag = GameManager.instance.UserHorse[GameManager.instance.captain].agility;
             c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
-            cid = GameManager.instance.Id;               
+            hApp = GameManager.instance.UserHorse[GameManager.instance.captain].key;               
         }
     }
     void Start()
-    {
+    {      
         if (SceneManager.GetActiveScene().name == "RacingScene")
         {
             animator = GetComponent<Animator>();
@@ -80,9 +81,16 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 InputStatus();
                 ApplyConsis();
             }
+            photonView.RPC("matSet", RpcTarget.AllBuffered, hApp);
         }
     }
-    void InputVariable()
+    [PunRPC]
+    void matSet(int matKey)
+    {
+        horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[matKey]);
+    }
+        void InputVariable()
     {
         firstAxis = new Vector3(15f, 0f, rPoint1);
         secondAxis = new Vector3(15f, 0f, rPoint2);
