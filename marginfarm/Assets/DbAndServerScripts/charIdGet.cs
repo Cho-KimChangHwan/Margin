@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class charIdGet : MonoBehaviourPunCallbacks
 {
     public object gotMes;
+    public SkinnedMeshRenderer horseSkin;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,6 +22,8 @@ public class charIdGet : MonoBehaviourPunCallbacks
         {
             case 1:
                 PhotonNetwork.Instantiate("myHorse", new Vector3(34.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
+                //horseSkin = GetComponentInChildren<SkinnedMeshRenderer>();
+                //horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[matKey]);
                 break;
             case 2:
                 PhotonNetwork.Instantiate("myHorse", new Vector3(35.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0); 
@@ -33,6 +36,10 @@ public class charIdGet : MonoBehaviourPunCallbacks
                 break;
         }
         photonView.RPC("matSet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1, GameManager.instance.UserHorse[GameManager.instance.captain].key);
+    }
+    void Start()
+    {
+        
     }
     [PunRPC]
     void matSet(int myline, int matKey)
