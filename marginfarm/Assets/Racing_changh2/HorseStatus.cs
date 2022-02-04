@@ -100,6 +100,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             //{
             //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
             //}
+            gameObject.name = status.name;
         }
     }
     [PunRPC]
