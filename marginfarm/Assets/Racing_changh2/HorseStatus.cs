@@ -86,12 +86,13 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
             if (GameManager.instance.mytern - 1 == 0)
             {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1],Color.black);
+                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
+                photonView.RPC("miniSet",RpcTarget.AllBuffered, Color.red);
             }
             else if(GameManager.instance.mytern - 1 == 1)
             {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0],Color.blue);
-         //       photonView.RPC("miniSet",RpcTarget.AllBuffered, Color.blue);
+                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+                photonView.RPC("miniSet",RpcTarget.AllBuffered, Color.blue);
             }
             //else if (GameManager.instance.mytern - 1 == 2)
             //{
@@ -104,16 +105,15 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             //gameObject.name = status.name;
         }
     }
-    // [PunRPC]
-    // void miniSet(Color miniColor)
-    // {   
-    //     transform.GetChild(3).gameObject.GetComponent<Renderer>().material.color = miniColor;
-    // }
     [PunRPC]
-    void otMatSet(int myKey,Color miniColor)
+    void miniSet(Color miniColor)
+    {   
+        transform.GetChild(3).gameObject.GetComponent<Renderer>().material.color = miniColor;
+    }
+    [PunRPC]
+    void otMatSet(int myKey)
     {   
         horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
-        transform.GetChild(3).gameObject.GetComponent<Renderer>().material.color = miniColor;
     }
     void InputVariable()
     {
