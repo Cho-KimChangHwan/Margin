@@ -87,12 +87,12 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             if (GameManager.instance.mytern - 1 == 0)
             {
                 photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
-                transform.GetChild(3).gameObject.GetComponent<Renderer>().material.color = Color.red;
+                photonView.RPC("miniSet",RpcTarget.AllBuffered, Color.red);
             }
             else if(GameManager.instance.mytern - 1 == 1)
             {
                 photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
-                transform.GetChild(3).gameObject.GetComponent<Renderer>().material.color = Color.blue;
+                photonView.RPC("miniSet",RpcTarget.AllBuffered, Color.blue);
             }
             //else if (GameManager.instance.mytern - 1 == 2)
             //{
@@ -105,7 +105,11 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             //gameObject.name = status.name;
         }
     }
-    
+    [PunRPC]
+    void miniSet(Color miniColor)
+    {   
+        transform.GetChild(3).gameObject.GetComponent<Renderer>().material.color = miniColor;
+    }
     [PunRPC]
     void otMatSet(int myKey)
     {   
