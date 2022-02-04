@@ -17,6 +17,7 @@ public class Referee : MonoBehaviour
     {
         ranking = GameObject.Find("Ranking").GetComponent<Text>();
         minis = GameObject.FindGameObjectsWithTag("Mini");
+        Debug.Log(minis.Length + "미니개수");
         horses = new GameObject[minis.Length];
         for(int i=0;i<minis.Length;i++)
             horses[i] = minis[i].transform.parent.gameObject;
