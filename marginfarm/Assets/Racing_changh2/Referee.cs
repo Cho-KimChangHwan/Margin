@@ -152,7 +152,7 @@ public class Referee : MonoBehaviourPunCallbacks ,IPunObservable
             }
             // ranking.text = "1 : " + First[0]+"\n" +"\n" +"2 : " + First[1] +"\n" +"\n" + "3 : " + First[2] +"\n" +"\n" + "4 : " + First[3] +"\n";
             string R = "";
-            for (int i = horseRanking.Count;  i >=0 ; i--)
+            for (int i = horseRanking.Count-1;  i >=0 ; i--)
             {
                 R += (i + 1).ToString() + " : Player" + (int.Parse(horseRanking[i])+1).ToString();
             }
