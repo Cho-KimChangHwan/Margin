@@ -46,7 +46,7 @@ public class Referee : MonoBehaviourPunCallbacks
     void FixedUpdate()
     {
         myLocation = horseStatus.myLocation;
-        if(photonView.IsMine)
+        //if(photonView.IsMine)
         {
 
             photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition );
