@@ -7,7 +7,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
 
-public class Referee : MonoBehaviourPunCallbacks 
+public class Referee : MonoBehaviourPunCallbacks , IPunObservable
 {
     // Start is called before the first frame update
      // 4구간 나누고 , 4구간 안ㅔ서 좌표로 ㅏㅍ단 , 각으로 판단
@@ -48,7 +48,7 @@ public class Referee : MonoBehaviourPunCallbacks
         //if(photonView.IsMine)
         {
 
-            photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition );
+            //photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition );
 
 
             Debug.Log(myLocation);
@@ -168,11 +168,24 @@ public class Referee : MonoBehaviourPunCallbacks
         Debug.Log("0번 " + GameManager.instance.horsesLocation[0]);
         Debug.Log(GameManager.instance.horsesLocation[1]);
     }
-    [PunRPC]
-    void HorsesSet(string myLocation,Vector3 currentPosition )
-    {   
-        
-        GameManager.instance.horsesLocation[GameManager.instance.mytern-1] = myLocation;
-        GameManager.instance.horsesPosition[GameManager.instance.mytern-1] = currentPosition;
+    public void OnPhotonSerializeView(PhotonStream stream,PhotonMessageInfo info) {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(GameManager.instance.mytern-1);
+            stream.SendNext(myLocation);
+            stream.SendNext(horseStatus.currentPosition);
+        }
+        else{
+            int index = (int)stream.ReceiveNext();
+            GameManager.instance.horsesLocation[index] = (string)stream.ReceiveNext();
+            GameManager.instance.horsesPosition[index] = (Vector3) stream.ReceiveNext();
+        }
     }
+    // [PunRPC]
+    // void HorsesSet(string myLocation,Vector3 currentPosition )
+    // {   
+        
+    //     GameManager.instance.horsesLocation[GameManager.instance.mytern-1] = myLocation;
+    //     GameManager.instance.horsesPosition[GameManager.instance.mytern-1] = currentPosition;
+    // }
 }
