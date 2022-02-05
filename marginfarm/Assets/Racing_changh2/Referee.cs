@@ -51,13 +51,12 @@ public class Referee : MonoBehaviourPunCallbacks
             photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition );
 
 
-            Debug.Log("ㅍㅗ토ㅇ뷰");
+            Debug.Log(myLocation);
             List<int> First = new List<int>(); 
             List<int> Second = new List<int>(); 
             List<int> Third = new List<int>(); 
             List<int> Fourth = new List<int>();
 
-            //Debug.Log(minis.Length);
             for(int playerNum =0;playerNum < GameManager.instance.horsesLocation.Length;playerNum++)
             {
                 if(Final.Contains(playerNum.ToString()))
@@ -82,18 +81,20 @@ public class Referee : MonoBehaviourPunCallbacks
                 {
                     Final.Add(playerNum.ToString());
                 }
+                
             }
-            int H=0;
             for(int i =0; i < Final.Count ; i++)
             {
+                Debug.Log("파이널"+Final.Count);
                 if(horseRanking.Contains(Final[i]))
                     continue;
 
                 horseRanking.Add(Final[i]);
             }
         
-            for(int i =0; i <Fourth.Count; i++)
+            for(int i =0; i <Fourth.Count-1; i++)
             {
+                Debug.Log("ㅍㅅ"+Fourth.Count);
                 int max = i;
                 for( int j = i+1; j<Fourth.Count;j++)
                 {
@@ -107,8 +108,9 @@ public class Referee : MonoBehaviourPunCallbacks
                 Fourth[max] = tmp;
         
             }
-            for(int i =0; i <Third.Count; i++)
+            for(int i =0; i <Third.Count-1; i++)
             {
+                Debug.Log("ㅆㄷ"+Third.Count);
                 int min = i;
                 for( int j = i+1; j<Third.Count;j++)
                 {
@@ -122,8 +124,9 @@ public class Referee : MonoBehaviourPunCallbacks
                 Third[min] = tmp;
                 
             }
-            for(int i =0; i <Second.Count; i++)
+            for(int i =0; i <Second.Count-1; i++)
             {
+                Debug.Log("ㅅㅋㄷ"+Second.Count);
                 int min = i;
                 for( int j = i+1; j<Second.Count;j++)
                 {
@@ -137,8 +140,9 @@ public class Referee : MonoBehaviourPunCallbacks
                 Second[min] = tmp;
                 
             }
-            for(int i =0; i <First.Count; i++)
+            for(int i =0; i <First.Count-1; i++)
             {
+                Debug.Log("ㅍㅅㅌ"+First.Count);
                 int max = i;
                 for( int j = i+1; j<First.Count;j++)
                 {
