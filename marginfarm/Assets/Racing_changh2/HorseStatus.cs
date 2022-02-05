@@ -75,7 +75,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             count = GameObject.Find("Canvas").GetComponent<CountDown>();
             record = GameObject.Find("Record").GetComponent<Text>();
             gameObject.layer = 10;
-
+            Debug.Log(GameManager.instance.mytern - 1);
             if (photonView.IsMine)
             {
                 InputVariable();
@@ -87,28 +87,30 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             if (GameManager.instance.mytern - 1 == 0)
             {
                 photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
-                photonView.RPC("miniSet",RpcTarget.AllBuffered, Color.red);
+                photonView.RPC("miniSet",RpcTarget.AllBuffered, new Vector3(0f,0f,1f));
             }
             else if(GameManager.instance.mytern - 1 == 1)
             {
                 photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
-                photonView.RPC("miniSet",RpcTarget.AllBuffered, Color.blue);
+                photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(0f,0f,0f));
             }
             //else if (GameManager.instance.mytern - 1 == 2)
             //{
             //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[3]);
+           //       photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(0f,1f,0f));
             //}
             //else if (GameManager.instance.mytern - 1 == 3)
             //{
             //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+            //    photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(1f,0f,0f));
             //}
             //gameObject.name = status.name;
         }
     }
     [PunRPC]
-    void miniSet(Color miniColor)
+    void miniSet(Vector3 miniColor)
     {   
-        transform.GetChild(3).gameObject.GetComponent<Renderer>().material.color = miniColor;
+        transform.GetChild(3).GetComponent<Renderer>().material.color = new Color(miniColor.x ,miniColor.y ,miniColor.z);
     }
     [PunRPC]
     void otMatSet(int myKey)
