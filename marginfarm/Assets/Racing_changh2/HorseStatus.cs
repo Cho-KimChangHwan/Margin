@@ -75,7 +75,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             count = GameObject.Find("Canvas").GetComponent<CountDown>();
             record = GameObject.Find("Record").GetComponent<Text>();
             gameObject.layer = 10;
-            Debug.Log(GameManager.instance.mytern - 1);
             if (photonView.IsMine)
             {
                 InputVariable();

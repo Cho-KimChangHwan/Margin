@@ -8,7 +8,6 @@ public class Referee : MonoBehaviour
      // 4구간 나누고 , 4구간 안ㅔ서 좌표로 ㅏㅍ단 , 각으로 판단
     // Start is called before the first frame update
     GameObject[] horses ;
-    GameObject[] minis;
     Text ranking;
     List<string> Final = new List<string>(); 
     Dictionary<int,string> horseRanking = new Dictionary<int,string>();
@@ -16,11 +15,8 @@ public class Referee : MonoBehaviour
     void Start()
     {
         ranking = GameObject.Find("Ranking").GetComponent<Text>();
-        minis = GameObject.FindGameObjectsWithTag("Mini");
-        Debug.Log(minis.Length + "미니개수");
-        horses = new GameObject[minis.Length];
-        for(int i=0;i<minis.Length;i++)
-            horses[i] = minis[i].transform.parent.gameObject;
+        horses = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log(horses.Length + "gt개수");
         InputInfo();
     }
 
@@ -34,7 +30,7 @@ public class Referee : MonoBehaviour
         List<int> Fourth = new List<int>();
 
         //Debug.Log(minis.Length);
-        for(int index =0;index < minis.Length;index++)
+        for(int index =0;index < horses.Length;index++)
         {
             for(int j = 0 ; j < Final.Count; j++)
             {
@@ -147,7 +143,7 @@ public class Referee : MonoBehaviour
     }
     void InputInfo()
     {
-        for(int i=0;i<minis.Length;i++)
+        for(int i=0;i<horses.Length;i++)
             horseRanking.Add(i,horses[i].name.ToString() );
     }
 }
