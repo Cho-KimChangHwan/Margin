@@ -30,26 +30,29 @@ public class Referee : MonoBehaviourPunCallbacks ,IPunObservable
         horses = new GameObject[2];
         Debug.Log(GameManager.instance.mytern + "gt개수");
     }
-    public void OnPhotonSerializeView(PhotonStream stream , PhotonMessageInfo info) {
-        if(stream.IsWriting)
-        {
-            stream.SendNext(horsesLocation);
-            stream.SendNext(horsesPosition);
-        }
-        else{
-            horsesLocation = (string[])stream.ReceiveNext();
-            horsesPosition = (Vector3[])stream.ReceiveNext();
-        }
-    }
+    // public void OnPhotonSerializeView(PhotonStream stream , PhotonMessageInfo info) {
+    //     if(stream.IsWriting)
+    //     {
+    //         stream.SendNext(horsesLocation);
+    //         stream.SendNext(horsesPosition);
+    //     }
+    //     else{
+    //         horsesLocation = (string[])stream.ReceiveNext();
+    //         horsesPosition = (Vector3[])stream.ReceiveNext();
+    //     }
+    // }
     // Update is called once per frame
+    
     void FixedUpdate()
     {
         myLocation = horseStatus.myLocation;
-        horsesLocation[GameManager.instance.mytern-1] = myLocation;
-        horsesPosition[GameManager.instance.mytern-1] = horseStatus.currentPosition;
         if(photonView.IsMine)
         {
 
+            photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition );
+
+
+            Debug.Log("ㅍㅗ토ㅇ뷰");
             List<int> First = new List<int>(); 
             List<int> Second = new List<int>(); 
             List<int> Third = new List<int>(); 
@@ -162,5 +165,11 @@ public class Referee : MonoBehaviourPunCallbacks ,IPunObservable
             // ranking.text = "1 : " + horseRanking[0] ;
             horseRanking.Clear();
         }
+    }
+    [PunRPC]
+    void HorsesSet(string myLocation,Vector3 currentPosition )
+    {   
+        horsesLocation[GameManager.instance.mytern-1] = myLocation;
+        horsesPosition[GameManager.instance.mytern-1] = currentPosition;
     }
 }
