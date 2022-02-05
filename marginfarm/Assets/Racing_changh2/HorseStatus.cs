@@ -26,7 +26,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     public float s,a,h,ag,c;
     public int hApp;
     public int tern;
-
+    public string myLocation = "First";
     public string n;
     public Dictionary<string, bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
@@ -169,6 +169,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         {
             horseLocation["First"] = false;
             horseLocation["Second"] = true;
+            myLocation = "Second";
             isRotate = true;
             isDiagonal = false;
             radius = Vector3.Distance(currentPosition, firstAxis);
@@ -178,6 +179,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         {
             horseLocation["Third"] = false;
             horseLocation["Fourth"] = true;
+            myLocation = "Fourth";
             isRotate = true;
             isDiagonal = false;
             radius = Vector3.Distance(currentPosition, secondAxis);
@@ -211,6 +213,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 ApplyRotate();
             }
             //animator.Play("Horse_Gallop");
+            myLocation = "First";
             photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Gallop");
         }
         else if (currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1 && horseLocation["Third"])
@@ -237,6 +240,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 ApplyRotate();
             }
             //animator.Play("Horse_Gallop");
+            myLocation = "Third";
             photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Gallop");
         }
         else if (horseLocation["Final"])
@@ -255,6 +259,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 //animator.Play("Horse_Trot");
                 photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Trot");
             }
+            myLocation = "Final";
         }
     }
 

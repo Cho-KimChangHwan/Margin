@@ -41,7 +41,6 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         Debug.Log("No Room!!");
         show.text = "방이 없습니다 방을 생성하는 중...";
         PhotonNetwork.CreateRoom("MyRoom", new RoomOptions { MaxPlayers = 4 }); //방을 만들어줌 (최대 4명) 
-
     }
 
     public override void OnJoinedRoom()
