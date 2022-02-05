@@ -98,7 +98,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] hat_item = new GameObject[10];
     public GameObject[] glasses_item = new GameObject[10];
     public GameObject[] shoes_item = new GameObject[10];
-
+    public string horsesLocation = new string[2];
+    public Vector3 horsesPosition = new Vector3[2];
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
         new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 1111),

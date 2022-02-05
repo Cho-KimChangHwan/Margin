@@ -15,8 +15,7 @@ public class Referee : MonoBehaviourPunCallbacks
     GameObject[] horses ;
     HorseStatus horseStatus;
     Text ranking;
-    public string[] horsesLocation = new string[2];
-    public Vector3[] horsesPosition = new Vector3[2];
+ 
     public string myLocation = "First";
     List<string> Final = new List<string>(); 
     List<string> horseRanking = new List<string>();
@@ -59,27 +58,27 @@ public class Referee : MonoBehaviourPunCallbacks
             List<int> Fourth = new List<int>();
 
             //Debug.Log(minis.Length);
-            for(int playerNum =0;playerNum < horsesLocation.Length;playerNum++)
+            for(int playerNum =0;playerNum < GameManager.instance.horsesLocation.Length;playerNum++)
             {
                 if(Final.Contains(playerNum.ToString()))
                         continue;
-                if(horsesLocation[playerNum] == "First")
+                if(GameManager.instance.horsesLocation[playerNum] == "First")
                 {
                     First.Add(playerNum);
                 }
-                else if(horsesLocation[playerNum] == "Second")
+                else if(GameManager.instance.horsesLocation[playerNum] == "Second")
                 {
                     Second.Add(playerNum);
                 }
-                else if(horsesLocation[playerNum] == "Third")
+                else if(GameManager.instance.horsesLocation[playerNum] == "Third")
                 {
                     Third.Add(playerNum);
                 }
-                else if(horsesLocation[playerNum] == "Fourth")
+                else if(GameManager.instance.horsesLocation[playerNum] == "Fourth")
                 {
                     Fourth.Add(playerNum);
                 }
-                else if(horsesLocation[playerNum] == "Final")
+                else if(GameManager.instance.horsesLocation[playerNum] == "Final")
                 {
                     Final.Add(playerNum.ToString());
                 }
@@ -98,7 +97,7 @@ public class Referee : MonoBehaviourPunCallbacks
                 int max = i;
                 for( int j = i+1; j<Fourth.Count;j++)
                 {
-                    if( horsesPosition[Fourth[max]].x <= horsesPosition[Fourth[j]].x)
+                    if( GameManager.instance.horsesPosition[Fourth[max]].x <= GameManager.instance.horsesPosition[Fourth[j]].x)
                         max = j;
                 }
                 horseRanking.Add(Fourth[max].ToString());
@@ -113,7 +112,7 @@ public class Referee : MonoBehaviourPunCallbacks
                 int min = i;
                 for( int j = i+1; j<Third.Count;j++)
                 {
-                    if( horsesPosition[Third[min]].z >= horsesPosition[Third[j]].z)
+                    if( GameManager.instance.horsesPosition[Third[min]].z >= GameManager.instance.horsesPosition[Third[j]].z)
                         min = j;
                 }
                 horseRanking.Add(Third[min].ToString());
@@ -128,7 +127,7 @@ public class Referee : MonoBehaviourPunCallbacks
                 int min = i;
                 for( int j = i+1; j<Second.Count;j++)
                 {
-                    if( horsesPosition[Second[min]].x >= horsesPosition[Second[j]].x)
+                    if( GameManager.instance.horsesPosition[Second[min]].x >= GameManager.instance.horsesPosition[Second[j]].x)
                         min = j;
                 }
                 horseRanking.Add(Second[min].ToString());
@@ -143,7 +142,7 @@ public class Referee : MonoBehaviourPunCallbacks
                 int max = i;
                 for( int j = i+1; j<First.Count;j++)
                 {
-                    if( horsesPosition[First[max]].z <= horsesPosition[First[j]].z)
+                    if( GameManager.instance.horsesPosition[First[max]].z <= GameManager.instance.horsesPosition[First[j]].z)
                         max = j;
                 }
                 horseRanking.Add(First[max].ToString());
@@ -169,7 +168,8 @@ public class Referee : MonoBehaviourPunCallbacks
     [PunRPC]
     void HorsesSet(string myLocation,Vector3 currentPosition )
     {   
-        horsesLocation[GameManager.instance.mytern-1] = myLocation;
-        horsesPosition[GameManager.instance.mytern-1] = currentPosition;
+        
+        GameManager.instance.horsesLocation[GameManager.instance.mytern-1] = myLocation;
+        GameManager.instance.horsesPosition[GameManager.instance.mytern-1] = currentPosition;
     }
 }
