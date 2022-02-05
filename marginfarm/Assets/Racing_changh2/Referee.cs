@@ -85,16 +85,14 @@ public class Referee : MonoBehaviourPunCallbacks
             }
             for(int i =0; i < Final.Count ; i++)
             {
-                Debug.Log("파이널"+Final.Count);
                 if(horseRanking.Contains(Final[i]))
                     continue;
 
                 horseRanking.Add(Final[i]);
             }
-        
-            for(int i =0; i <Fourth.Count-1; i++)
+            Debug.Log("여기5");
+            for(int i =0; i <Fourth.Count; i++)
             {
-                Debug.Log("ㅍㅅ"+Fourth.Count);
                 int max = i;
                 for( int j = i+1; j<Fourth.Count;j++)
                 {
@@ -108,9 +106,9 @@ public class Referee : MonoBehaviourPunCallbacks
                 Fourth[max] = tmp;
         
             }
-            for(int i =0; i <Third.Count-1; i++)
+            Debug.Log("여기4");
+            for(int i =0; i <Third.Count; i++)
             {
-                Debug.Log("ㅆㄷ"+Third.Count);
                 int min = i;
                 for( int j = i+1; j<Third.Count;j++)
                 {
@@ -124,9 +122,9 @@ public class Referee : MonoBehaviourPunCallbacks
                 Third[min] = tmp;
                 
             }
-            for(int i =0; i <Second.Count-1; i++)
+            Debug.Log("여기3");
+            for(int i =0; i <Second.Count; i++)
             {
-                Debug.Log("ㅅㅋㄷ"+Second.Count);
                 int min = i;
                 for( int j = i+1; j<Second.Count;j++)
                 {
@@ -140,9 +138,9 @@ public class Referee : MonoBehaviourPunCallbacks
                 Second[min] = tmp;
                 
             }
-            for(int i =0; i <First.Count-1; i++)
+            Debug.Log("여기2");
+            for(int i =0; i <First.Count; i++)
             {
-                Debug.Log("ㅍㅅㅌ"+First.Count);
                 int max = i;
                 for( int j = i+1; j<First.Count;j++)
                 {
@@ -156,18 +154,19 @@ public class Referee : MonoBehaviourPunCallbacks
                 First[max] = tmp;
         
             }
-            // ranking.text = "1 : " + First[0]+"\n" +"\n" +"2 : " + First[1] +"\n" +"\n" + "3 : " + First[2] +"\n" +"\n" + "4 : " + First[3] +"\n";
+            Debug.Log("여기1");
             string R = "";
             for (int i = horseRanking.Count-1;  i >=0 ; i--)
             {
                 R += (i + 1).ToString() + " : Player" + (int.Parse(horseRanking[i])+1).ToString();
             }
-
+            Debug.Log("여기");
             ranking.text = R;
 
-            // ranking.text = "1 : " + horseRanking[0] ;
             horseRanking.Clear();
         }
+        Debug.Log("0번 " + GameManager.instance.horsesLocation[0]);
+        Debug.Log(GameManager.instance.horsesLocation[1]);
     }
     [PunRPC]
     void HorsesSet(string myLocation,Vector3 currentPosition )
