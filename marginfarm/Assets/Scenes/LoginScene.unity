@@ -1551,11 +1551,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 50b93b57e1197984ca879097eeb17725, type: 3}
   - {fileID: 2800000, guid: 2b46fd2954c254f4b9540622b49c24d6, type: 3}
   - {fileID: 2800000, guid: 0b6608fa67c3f7b4bba9b32222421d21, type: 3}
-  lineKey:
-  - 
-  - 
-  - 
-  - 
+  lineKey: 00000000000000000000000000000000
   back_item:
   - {fileID: 0}
   - {fileID: 0}
@@ -1600,6 +1596,56 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  back_item_card:
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 55ca90399e87a8d4fbb59641aaff2695, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  hat_item_card:
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 4187ba7c57c06aa4f886593668c5edf6, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  glasses_item_card:
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 0fb600e3ed66a874db5e18b8b96f33c7, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  shoes_item_card:
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  horsesLocation:
+  - 
+  - 
+  horsesPosition:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   horse_items: 000000000000000000000000000000000000000000000000
 --- !u!4 &2137417716
 Transform:

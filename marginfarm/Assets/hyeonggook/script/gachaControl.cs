@@ -11,10 +11,13 @@ public class gachaControl : MonoBehaviour
 {
     DatabaseReference m_Reference;
 
+    public GameObject zero;
     public GameObject first;
     public GameObject second;
     public GameObject third;
     public InputField newname;
+    public GameObject item_first;
+    public GameObject item_second;
 
     public SkinnedMeshRenderer horse1;
     public SkinnedMeshRenderer horse2;
@@ -28,9 +31,11 @@ public class gachaControl : MonoBehaviour
 
     public Image bar;
     public Text gauge;
+    public Image obj_card_i;
 
     public int[,] horse_spec_t = new int[5, 3];
     public int[] horse_style = new int[3];
+    public int[] item_spec = new int[5];
 
     public float x, y, z;
 
@@ -46,7 +51,17 @@ public class gachaControl : MonoBehaviour
     public bool cardback3_c;
     public int timer3;
     public GameObject card3;
+    public int itemselect;
 
+    public GameObject obj_card;
+    public GameObject spec_card;
+    public GameObject cardback_o;
+    public GameObject cardback_s;
+    public bool cardback_ob;
+    public bool cardback_sb;
+    public int timero;
+    public int timers;
+    public Button go_item;
     /*
     public int[] speed_t = new int[3]; 0번인덱스
     public int[] accel_t = new int[3]; 1번인덱스
@@ -60,14 +75,104 @@ public class gachaControl : MonoBehaviour
         m_Reference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
+    public void horse_gacha()
+    {
+        if(GameManager.instance.many == 6)
+        {
+            senderror("농장이 꽉찼습니다.");
+        }
+        else
+        {
+            GameObject zero = GameObject.Find("zero");
+            GameObject first = GameObject.Find("first");
+
+            iTween.MoveTo(zero, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+            iTween.MoveTo(first, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+        }
+    }
+    public void item_gacha()
+    {
+        if (GameManager.instance.itemMany == 12)
+        {
+            senderror("아이템 보관함이 꽉찼습니다.");
+        }
+        else
+        {
+            GameObject zero = GameObject.Find("zero");
+            GameObject item_first = GameObject.Find("item_first");
+
+            iTween.MoveTo(zero, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+            iTween.MoveTo(item_first, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+        }
+    }
+    public void horse_back()
+    {
+        GameObject zero = GameObject.Find("zero");
+        GameObject first = GameObject.Find("first");
+
+        iTween.MoveTo(zero, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(first, iTween.Hash("y", -380, "delay", 0.1f, "time", 0.5f));
+    }
+
+    public void item_back()
+    {
+        GameObject zero = GameObject.Find("zero");
+        GameObject item_first = GameObject.Find("item_first");
+
+        iTween.MoveTo(zero, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(item_first, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
+    public void hat_click()
+    {
+        itemselect = 1;
+
+        GameObject item_second = GameObject.Find("item_second");
+        GameObject item_first = GameObject.Find("item_first");
+
+        iTween.MoveTo(item_first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
+
+    public void glasses_click()
+    {
+        itemselect = 2;
+
+        GameObject item_second = GameObject.Find("item_second");
+        GameObject item_first = GameObject.Find("item_first");
+
+        iTween.MoveTo(item_first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
+
+    public void back_click()
+    {
+        itemselect = 3;
+
+        GameObject item_second = GameObject.Find("item_second");
+        GameObject item_first = GameObject.Find("item_first");
+
+        iTween.MoveTo(item_first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
+    public void shoes_click()
+    {
+        itemselect = 4;
+
+        GameObject item_second = GameObject.Find("item_second");
+        GameObject item_first = GameObject.Find("item_first");
+
+        iTween.MoveTo(item_first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
+
     public void gacha_b1_click()
     {
         GameObject first = GameObject.Find("first");
         GameObject second = GameObject.Find("second");
-        GameObject third = GameObject.Find("third");
+      
         iTween.MoveTo(first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
         iTween.MoveTo(second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
-        iTween.MoveTo(third, iTween.Hash("y", -380, "delay", 0.1f, "time", 0.5f));
+      
 
         classnum = 1;
     }
@@ -89,10 +194,10 @@ public class gachaControl : MonoBehaviour
         selectnum = 0;
 
         //창 변경
-        GameObject first = GameObject.Find("first");
+        
         GameObject second = GameObject.Find("second");
         GameObject third = GameObject.Find("third");
-        iTween.MoveTo(first, iTween.Hash("y", 1840, "delay", 0.1f, "time", 0.5f));
+     
         iTween.MoveTo(second, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
         iTween.MoveTo(third, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
     }
@@ -114,10 +219,9 @@ public class gachaControl : MonoBehaviour
         selectnum = 1;
 
         //창 변경
-        GameObject first = GameObject.Find("first");
         GameObject second = GameObject.Find("second");
         GameObject third = GameObject.Find("third");
-        iTween.MoveTo(first, iTween.Hash("y", 1840, "delay", 0.1f, "time", 0.5f));
+     
         iTween.MoveTo(second, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
         iTween.MoveTo(third, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
     }
@@ -139,10 +243,10 @@ public class gachaControl : MonoBehaviour
         selectnum = 2;
 
         //창 변경
-        GameObject first = GameObject.Find("first");
+
         GameObject second = GameObject.Find("second");
         GameObject third = GameObject.Find("third");
-        iTween.MoveTo(first, iTween.Hash("y", 1840, "delay", 0.1f, "time", 0.5f));
+    
         iTween.MoveTo(second, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
         iTween.MoveTo(third, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
     }
@@ -218,6 +322,177 @@ public class gachaControl : MonoBehaviour
         }
 
     }
+    public void goitem_click()
+    {
+        obj_card_i = GameObject.Find("obj_card_i").GetComponent<Image>();
+
+        if (itemselect == 1)
+        {
+            //int i = Random.Range(1, 10);
+            int i = 2;
+            obj_card_i.sprite = GameManager.instance.hat_item_card[i];
+
+            // 아이템 스펙 값 설정
+            int temp;
+
+            temp = Random.Range(0, 31);
+            item_spec[0] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[1] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[2] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[3] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[4] = temp;
+
+            for (int n = 1; n < 6; n++)
+            {
+                bar = GameObject.Find("i_gauge" + n.ToString()).GetComponent<Image>();
+                bar.fillAmount = item_spec[n - 1] / 100f;
+                gauge = GameObject.Find("i_gauge_t" + n.ToString()).GetComponent<Text>();
+                gauge.text = item_spec[n - 1].ToString() + " / 100";
+            }
+
+            CardFlip_obj();
+            CardFlip_spec();
+
+            int k = GameManager.instance.itemMany;
+            GameManager.instance.UserItem[k].key = i;
+            GameManager.instance.UserItem[k].speed = item_spec[0];
+            GameManager.instance.UserItem[k].accel = item_spec[1];
+            GameManager.instance.UserItem[k].hp = item_spec[2];
+            GameManager.instance.UserItem[k].agility = item_spec[3];
+            GameManager.instance.UserItem[k].consis = item_spec[4];
+            GameManager.instance.itemMany++;
+
+        }
+        else if (itemselect == 2)
+        {
+            //int i = Random.Range(1, 10);
+            int i = 2;
+            obj_card_i.sprite = GameManager.instance.glasses_item_card[i];
+
+            // 아이템 스펙 값 설정
+            int temp;
+
+            temp = Random.Range(0, 31);
+            item_spec[0] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[1] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[2] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[3] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[4] = temp;
+
+            for (int n = 1; n < 6; n++)
+            {
+                bar = GameObject.Find("i_gauge" + n.ToString()).GetComponent<Image>();
+                bar.fillAmount = item_spec[n - 1] / 100f;
+                gauge = GameObject.Find("i_gauge_t" + n.ToString()).GetComponent<Text>();
+                gauge.text = item_spec[n - 1].ToString() + " / 100";
+            }
+
+            CardFlip_obj();
+            CardFlip_spec();
+
+            int k = GameManager.instance.itemMany;
+            GameManager.instance.UserItem[k].key = i * 10;
+            GameManager.instance.UserItem[k].speed = item_spec[0];
+            GameManager.instance.UserItem[k].accel = item_spec[1];
+            GameManager.instance.UserItem[k].hp = item_spec[2];
+            GameManager.instance.UserItem[k].agility = item_spec[3];
+            GameManager.instance.UserItem[k].consis = item_spec[4];
+            GameManager.instance.itemMany++;
+        }
+        else if (itemselect == 3)
+        {
+            //int i = Random.Range(1, 10);
+            int i = 2;
+            obj_card_i.sprite = GameManager.instance.back_item_card[i];
+
+            // 아이템 스펙 값 설정
+            int temp;
+
+            temp = Random.Range(0, 31);
+            item_spec[0] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[1] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[2] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[3] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[4] = temp;
+
+            for (int n = 1; n < 6; n++)
+            {
+                bar = GameObject.Find("i_gauge" + n.ToString()).GetComponent<Image>();
+                bar.fillAmount = item_spec[n - 1] / 100f;
+                gauge = GameObject.Find("i_gauge_t" + n.ToString()).GetComponent<Text>();
+                gauge.text = item_spec[n - 1].ToString() + " / 100";
+            }
+
+            CardFlip_obj();
+            CardFlip_spec();
+
+            int k = GameManager.instance.itemMany;
+            GameManager.instance.UserItem[k].key = i * 100;
+            GameManager.instance.UserItem[k].speed = item_spec[0];
+            GameManager.instance.UserItem[k].accel = item_spec[1];
+            GameManager.instance.UserItem[k].hp = item_spec[2];
+            GameManager.instance.UserItem[k].agility = item_spec[3];
+            GameManager.instance.UserItem[k].consis = item_spec[4];
+            GameManager.instance.itemMany++;
+        }
+        else if (itemselect == 4)
+        {
+            //int i = Random.Range(1, 10);
+            int i = 2;
+            obj_card_i.sprite = GameManager.instance.shoes_item_card[i];
+
+            // 아이템 스펙 값 설정
+            int temp;
+
+            temp = Random.Range(0, 31);
+            item_spec[0] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[1] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[2] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[3] = temp;
+            temp = Random.Range(0, 31);
+            item_spec[4] = temp;
+
+            for (int n = 1; n < 6; n++)
+            {
+                bar = GameObject.Find("i_gauge" + n.ToString()).GetComponent<Image>();
+                bar.fillAmount = item_spec[n - 1] / 100f;
+                gauge = GameObject.Find("i_gauge_t" + n.ToString()).GetComponent<Text>();
+                gauge.text = item_spec[n - 1].ToString() + " / 100";
+            }
+
+            CardFlip_obj();
+            CardFlip_spec();
+
+            int k = GameManager.instance.itemMany;
+            GameManager.instance.UserItem[k].key = i * 1000;
+            GameManager.instance.UserItem[k].speed = item_spec[0];
+            GameManager.instance.UserItem[k].accel = item_spec[1];
+            GameManager.instance.UserItem[k].hp = item_spec[2];
+            GameManager.instance.UserItem[k].agility = item_spec[3];
+            GameManager.instance.UserItem[k].consis = item_spec[4];
+            GameManager.instance.itemMany++;
+        }
+
+        GameObject.Find("item_second").transform.Find("go_item_b").gameObject.SetActive(true);
+        go_item = GameObject.Find("go_item").GetComponent<Button>();
+        go_item.interactable = false;
+
+    }
     public void horseWrite()
     {
         m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("name").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].name);
@@ -235,24 +510,29 @@ public class gachaControl : MonoBehaviour
     public void save_click()
     {
         newname = GameObject.Find("name_input").GetComponent<InputField>();
-       
-        GameManager.instance.UserHorse[GameManager.instance.many].name = newname.text;
+        if (newname.text == "")
+        {
+            senderror("말 이름을 입력해주세요.");
+        }
+        else
+        {
+            GameManager.instance.UserHorse[GameManager.instance.many].name = newname.text;
 
-        GameManager.instance.UserHorse[GameManager.instance.many].key = horse_style[selectnum];
+            GameManager.instance.UserHorse[GameManager.instance.many].key = horse_style[selectnum];
 
-        GameManager.instance.UserHorse[GameManager.instance.many].speed = horse_spec_t[0, selectnum];
-        GameManager.instance.UserHorse[GameManager.instance.many].accel = horse_spec_t[1, selectnum];
-        GameManager.instance.UserHorse[GameManager.instance.many].hp = horse_spec_t[2, selectnum];
-        GameManager.instance.UserHorse[GameManager.instance.many].agility = horse_spec_t[3, selectnum];
-        GameManager.instance.UserHorse[GameManager.instance.many].consis = horse_spec_t[4, selectnum];
+            GameManager.instance.UserHorse[GameManager.instance.many].speed = horse_spec_t[0, selectnum];
+            GameManager.instance.UserHorse[GameManager.instance.many].accel = horse_spec_t[1, selectnum];
+            GameManager.instance.UserHorse[GameManager.instance.many].hp = horse_spec_t[2, selectnum];
+            GameManager.instance.UserHorse[GameManager.instance.many].agility = horse_spec_t[3, selectnum];
+            GameManager.instance.UserHorse[GameManager.instance.many].consis = horse_spec_t[4, selectnum];
 
-        GameManager.instance.many++;
+            GameManager.instance.many++;
 
-        horseWrite();
+            horseWrite();
 
-
-
-        SceneManager.LoadScene("farm");
+            SceneManager.LoadScene("farm");
+        }
+      
     }
 
     public void home_click ()
@@ -332,6 +612,16 @@ public class gachaControl : MonoBehaviour
         StartCoroutine(CalculateFlip3());
     }
 
+    public void senderror(string message)
+    {
+        GameObject error_p = GameObject.Find("error");
+        Text error_m = GameObject.Find("error_m").GetComponent<Text>();
+
+        error_m.text = message;
+        iTween.MoveTo(error_p, iTween.Hash("y", 680, "delay", 0, "time", 0.5f));
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 1.5f, "time", 0.5f));
+    }
+
     IEnumerator CalculateFlip3()
     {
         GameObject card3 = GameObject.Find("card3");
@@ -360,6 +650,76 @@ public class gachaControl : MonoBehaviour
 
         }
         timer3 = 0;
+    }
+
+    public void CardFlip_obj()
+    {
+        StartCoroutine(CalculateFlip_obj());
+    }
+
+    IEnumerator CalculateFlip_obj()
+    {
+        GameObject obj_card = GameObject.Find("obj_card");
+        cardback_ob = true;
+
+        for (int a = 0; a < 180; a = a + 2)
+        {
+            yield return new WaitForSeconds(0.01f);
+            obj_card.transform.Rotate(new Vector3(x, y, z));
+            timero++;
+            timero++;
+
+            if (timero == 90 || timero == -90)
+            {
+                if (cardback_ob == true)
+                {
+                    cardback_o.SetActive(false);
+                    cardback_ob = false;
+                }
+                else
+                {
+                    cardback_o.SetActive(true);
+                    cardback_ob = true;
+                }
+            }
+
+        }
+        timero = 0;
+    }
+
+    public void CardFlip_spec()
+    {
+        StartCoroutine(CalculateFlip_spec());
+    }
+
+    IEnumerator CalculateFlip_spec()
+    {
+        GameObject spec_card = GameObject.Find("spec_card");
+        cardback_sb = true;
+
+        for (int a = 0; a < 180; a = a + 2)
+        {
+            yield return new WaitForSeconds(0.01f);
+            spec_card.transform.Rotate(new Vector3(x, y, z));
+            timers++;
+            timers++;
+
+            if (timero == 90 || timero == -90)
+            {
+                if (cardback_sb == true)
+                {
+                    cardback_s.SetActive(false);
+                    cardback_sb = false;
+                }
+                else
+                {
+                    cardback_s.SetActive(true);
+                    cardback_sb = true;
+                }
+            }
+
+        }
+        timers = 0;
     }
 
 }

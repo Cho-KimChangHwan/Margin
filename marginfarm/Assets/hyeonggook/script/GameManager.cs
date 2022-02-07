@@ -52,7 +52,6 @@ public struct ItemInfo
 }
 public struct WearingItem
 {
-    public int horse_num;
     public int item_key;
     public int speed;
     public int accel;
@@ -61,9 +60,8 @@ public struct WearingItem
     public int consis;
 
 
-    public WearingItem(int horse_num, int item_key, int speed, int accel, int hp, int agility, int consis)
+    public WearingItem(int item_key, int speed, int accel, int hp, int agility, int consis)
     {
-        this.horse_num = horse_num;
         this.item_key = item_key;
         this.speed = speed;
         this.accel = accel;
@@ -98,6 +96,12 @@ public class GameManager : MonoBehaviour
     public GameObject[] hat_item = new GameObject[10];
     public GameObject[] glasses_item = new GameObject[10];
     public GameObject[] shoes_item = new GameObject[10];
+
+    public Sprite[] back_item_card = new Sprite[10];
+    public Sprite[] hat_item_card = new Sprite[10];
+    public Sprite[] glasses_item_card = new Sprite[10];
+    public Sprite[] shoes_item_card = new Sprite[10];
+
     public string[] horsesLocation = new string[2];
     public Vector3[] horsesPosition = new Vector3[2];
     public HorseInfo[] UserHorse = new HorseInfo[]
@@ -114,47 +118,47 @@ public class GameManager : MonoBehaviour
 
     public ItemInfo[] UserItem = new ItemInfo[]
     {
-        new ItemInfo (2, 0, 0, 0, 0, 0),
-        new ItemInfo (20, 0, 0, 0, 0, 0),
-        new ItemInfo (200, 0, 0, 0, 0, 0),
-        new ItemInfo (200, 0, 0, 0, 0, 0),
-        new ItemInfo (2, 0, 0, 0, 0, 0),
-        new ItemInfo (20, 0, 0, 0, 0, 0),
-        new ItemInfo (2, 0, 0, 0, 0, 0),
-        new ItemInfo (200, 0, 0, 0, 0, 0),
-        new ItemInfo (20, 0, 0, 0, 0, 0),
-        new ItemInfo (200, 0, 0, 0, 0, 0),
-        new ItemInfo (2, 0, 0, 0, 0, 0),
-        new ItemInfo (20, 0, 0, 0, 0, 0)
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0),
+        new ItemInfo (0, 0, 0, 0, 0, 0)
 
     };
 
     public WearingItem[] WearingItem = new WearingItem[]
 {
-        new WearingItem (0, 2, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0, 0),
-        new WearingItem (1, 0, 0, 0, 0, 0, 0),
-        new WearingItem (1, 0, 0, 0, 0, 0, 0),
-        new WearingItem (1, 0, 0, 0, 0, 0, 0),
-        new WearingItem (1, 0, 0, 0, 0, 0, 0),
-        new WearingItem (2, 0, 0, 0, 0, 0, 0),
-        new WearingItem (2, 0, 0, 0, 0, 0, 0),
-        new WearingItem (2, 0, 0, 0, 0, 0, 0),
-        new WearingItem (2, 0, 0, 0, 0, 0, 0),
-        new WearingItem (3, 0, 0, 0, 0, 0, 0),
-        new WearingItem (3, 0, 0, 0, 0, 0, 0),
-        new WearingItem (3, 0, 0, 0, 0, 0, 0),
-        new WearingItem (3, 0, 0, 0, 0, 0, 0),
-        new WearingItem (4, 0, 0, 0, 0, 0, 0),
-        new WearingItem (4, 0, 0, 0, 0, 0, 0),
-        new WearingItem (4, 0, 0, 0, 0, 0, 0),
-        new WearingItem (4, 0, 0, 0, 0, 0, 0),
-        new WearingItem (5, 0, 0, 0, 0, 0, 0),
-        new WearingItem (5, 0, 0, 0, 0, 0, 0),
-        new WearingItem (5, 0, 0, 0, 0, 0, 0),
-        new WearingItem (5, 0, 0, 0, 0, 0, 0)
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0),
+        new WearingItem (0, 0, 0, 0, 0, 0)
 };
 
     void Awake()
@@ -165,8 +169,7 @@ public class GameManager : MonoBehaviour
         captain = 0;
         select = -1;
         money = 3000;
-        itemMany = 12;
-        horse_items[0] = 2222;
+        itemMany = 0;
 
         instance = this;
     }

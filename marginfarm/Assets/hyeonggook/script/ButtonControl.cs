@@ -39,11 +39,6 @@ public class ButtonControl : MonoBehaviour
 
     public Texture[] horse_render = new Texture[6];
 
-    public Sprite[] back_item_card = new Sprite[10];
-    public Sprite[] hat_item_card = new Sprite[10];
-    public Sprite[] glasses_item_card = new Sprite[10];
-    public Sprite[] shoes_item_card = new Sprite[10];
-
     public Image slot_back;
     public Image slot_hat;
     public Image slot_glasses;
@@ -502,29 +497,29 @@ public class ButtonControl : MonoBehaviour
             item_i = GameObject.Find("item" + i.ToString() + "_i").GetComponent<Image>();
             item_b = GameObject.Find("item" + i.ToString()).GetComponent<Button>();
             item_b.interactable = true;
-
+            
             if (GameManager.instance.UserItem[i - 1].key < 10)
             {
-                item_i.sprite = hat_item_card[GameManager.instance.UserItem[i - 1].key];
+                item_i.sprite = GameManager.instance.hat_item_card[GameManager.instance.UserItem[i - 1].key];
             }
             else if (GameManager.instance.UserItem[i - 1].key < 100)
             {
-                item_i.sprite = glasses_item_card[(GameManager.instance.UserItem[i - 1].key) / 10];
+                item_i.sprite = GameManager.instance.glasses_item_card[(GameManager.instance.UserItem[i - 1].key) / 10];
             }
             else if (GameManager.instance.UserItem[i - 1].key < 1000)
             {
-                item_i.sprite = back_item_card[(GameManager.instance.UserItem[i - 1].key) / 100];
+                item_i.sprite = GameManager.instance.back_item_card[(GameManager.instance.UserItem[i - 1].key) / 100];
             }
             else if (GameManager.instance.UserItem[i - 1].key < 10000)
             {
-                item_i.sprite = shoes_item_card[(GameManager.instance.UserItem[i - 1].key) / 1000];
+                item_i.sprite = GameManager.instance.shoes_item_card[(GameManager.instance.UserItem[i - 1].key) / 1000];
             }
         }
         for (int i = 12; i > GameManager.instance.itemMany; i--)
         {
             item_b = GameObject.Find("item" + i.ToString()).GetComponent<Button>();
             item_i = GameObject.Find("item" + i.ToString() + "_i").GetComponent<Image>();
-            item_i.sprite = hat_item_card[1];
+            item_i.sprite = GameManager.instance.hat_item_card[1];
             item_b.interactable = false;
         }
 
@@ -535,38 +530,38 @@ public class ButtonControl : MonoBehaviour
 
         if (GameManager.instance.WearingItem[(sel_num * 4)].item_key != 0)
         {
-            slot_hat.sprite = hat_item_card[GameManager.instance.WearingItem[(sel_num * 4)].item_key];
+            slot_hat.sprite = GameManager.instance.hat_item_card[GameManager.instance.WearingItem[(sel_num * 4)].item_key];
         }
         else
         {
-            slot_hat.sprite = hat_item_card[0];
+            slot_hat.sprite = GameManager.instance.hat_item_card[0];
         }
 
         if (GameManager.instance.WearingItem[(sel_num * 4) + 1].item_key != 0)
         {
-            slot_glasses.sprite = glasses_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 1].item_key / 10];
+            slot_glasses.sprite = GameManager.instance.glasses_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 1].item_key / 10];
         }
         else
         {
-            slot_glasses.sprite = glasses_item_card[0];
+            slot_glasses.sprite = GameManager.instance.glasses_item_card[0];
         }
 
         if (GameManager.instance.WearingItem[(sel_num * 4) + 2].item_key != 0)
         {
-            slot_back.sprite = back_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 2].item_key / 100];
+            slot_back.sprite = GameManager.instance.back_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 2].item_key / 100];
         }
         else
         {
-            slot_back.sprite = back_item_card[0];
+            slot_back.sprite = GameManager.instance.back_item_card[0];
         }
 
         if (GameManager.instance.WearingItem[(sel_num * 4) + 3].item_key != 0)
         {
-            slot_shoes.sprite = shoes_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 3].item_key / 1000];
+            slot_shoes.sprite = GameManager.instance.shoes_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 3].item_key / 1000];
         }
         else
         {
-            slot_shoes.sprite = shoes_item_card[0];
+            slot_shoes.sprite = GameManager.instance.shoes_item_card[0];
         }
     }
 
@@ -686,19 +681,19 @@ public class ButtonControl : MonoBehaviour
 
             if (button_num == 0)
             {
-                item_s.sprite = hat_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4)].item_key];
+                item_s.sprite = GameManager.instance.hat_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4)].item_key];
             }
             else if (button_num == 1)
             {
-                item_s.sprite = glasses_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 1].item_key / 10];
+                item_s.sprite = GameManager.instance.glasses_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 1].item_key / 10];
             }
             else if (button_num == 2)
             {
-                item_s.sprite = back_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 2].item_key / 100];
+                item_s.sprite = GameManager.instance.back_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 2].item_key / 100];
             }
             else if (button_num == 3)
             {
-                item_s.sprite = shoes_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 3].item_key / 1000];
+                item_s.sprite = GameManager.instance.shoes_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 3].item_key / 1000];
             }
 
         }
@@ -709,19 +704,19 @@ public class ButtonControl : MonoBehaviour
 
             if (GameManager.instance.UserItem[button_num].key < 10)
             {
-                item_s.sprite = hat_item_card[GameManager.instance.UserItem[button_num].key];
+                item_s.sprite = GameManager.instance.hat_item_card[GameManager.instance.UserItem[button_num].key];
             }
             else if (GameManager.instance.UserItem[button_num].key < 100)
             {
-                item_s.sprite = glasses_item_card[(GameManager.instance.UserItem[button_num].key) / 10];
+                item_s.sprite = GameManager.instance.glasses_item_card[(GameManager.instance.UserItem[button_num].key) / 10];
             }
             else if (GameManager.instance.UserItem[button_num].key < 1000)
             {
-                item_s.sprite = back_item_card[(GameManager.instance.UserItem[button_num].key) / 100];
+                item_s.sprite = GameManager.instance.back_item_card[(GameManager.instance.UserItem[button_num].key) / 100];
             }
             else if (GameManager.instance.UserItem[button_num].key < 10000)
             {
-                item_s.sprite = shoes_item_card[(GameManager.instance.UserItem[button_num].key) / 1000];
+                item_s.sprite = GameManager.instance.shoes_item_card[(GameManager.instance.UserItem[button_num].key) / 1000];
             }
         }
     }
