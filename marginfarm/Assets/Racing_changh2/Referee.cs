@@ -58,29 +58,35 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
 
             for(int playerNum =0;playerNum < GameManager.instance.horsesLocation.Length;playerNum++)
             {
+                bool d=false;
                 if(Final.Contains(playerNum.ToString()))
                         continue;
                 if(GameManager.instance.horsesLocation[playerNum] == "First")
                 {
                     First.Add(playerNum);
+                    d=true;
                 }
                 else if(GameManager.instance.horsesLocation[playerNum] == "Second")
                 {
                     Second.Add(playerNum);
+                    d=true;
                 }
                 else if(GameManager.instance.horsesLocation[playerNum] == "Third")
                 {
                     Third.Add(playerNum);
+                    d=true;
                 }
                 else if(GameManager.instance.horsesLocation[playerNum] == "Fourth")
                 {
                     Fourth.Add(playerNum);
+                    d=true;
                 }
                 else if(GameManager.instance.horsesLocation[playerNum] == "Final")
                 {
                     Final.Add(playerNum.ToString());
+                    d=true;
                 }
-                
+                Debug.Log(d + "는" + playerNum);
             }
             for(int i =0; i < Final.Count ; i++)
             {
@@ -89,7 +95,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
 
                 horseRanking.Add(Final[i]);
             }
-            Debug.Log("여기5");
             for(int i =0; i <Fourth.Count; i++)
             {
                 int max = i;
@@ -105,7 +110,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                 Fourth[max] = tmp;
         
             }
-            Debug.Log("여기4");
             for(int i =0; i <Third.Count; i++)
             {
                 int min = i;
@@ -121,7 +125,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                 Third[min] = tmp;
                 
             }
-            Debug.Log("여기3");
             for(int i =0; i <Second.Count; i++)
             {
                 int min = i;
@@ -137,7 +140,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                 Second[min] = tmp;
                 
             }
-            Debug.Log("여기2");
             for(int i =0; i <First.Count; i++)
             {
                 int max = i;
@@ -153,13 +155,12 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                 First[max] = tmp;
         
             }
-            Debug.Log("여기1");
             string R = "";
             for (int i = horseRanking.Count-1;  i >=0 ; i--)
             {
+                Debug.Log("임당" + i);
                 R += (i + 1).ToString() + " : Player" + (int.Parse(horseRanking[i])+1).ToString();
             }
-            Debug.Log("여기");
             ranking.text = R;
 
             horseRanking.Clear();
