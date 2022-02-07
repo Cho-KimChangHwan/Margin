@@ -158,7 +158,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             string R = "";
             for (int i = horseRanking.Count-1;  i >=0 ; i--)
             {
-                Debug.Log("임당" + i);
                 R += (i + 1).ToString() + " : Player" + (int.Parse(horseRanking[i])+1).ToString();
             }
             ranking.text = R;
