@@ -49,8 +49,8 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         {
 
             //photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition );
-
-
+            GameManager.instance.horsesLocation[GameManager.instance.mytern-1] = myLocation;
+            GameManager.instance.horsesPosition[GameManager.instance.mytern-1] = horseStatus.currentPosition;
             List<int> First = new List<int>(); 
             List<int> Second = new List<int>(); 
             List<int> Third = new List<int>(); 
@@ -167,7 +167,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         Debug.Log("0번 " + GameManager.instance.horsesLocation[0]);
         Debug.Log("1번" + GameManager.instance.horsesLocation[1]);
     }
-    public void OnPhotonSerializeView(PhotonStream stream,PhotonMessageInfo info) {
+   public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
         if(stream.IsWriting)
         {
             stream.SendNext(GameManager.instance.mytern-1);
