@@ -473,50 +473,6 @@ MonoBehaviour:
   - {fileID: 8400000, guid: 4a150ed119caa2049bef1d5de5654ba1, type: 2}
   - {fileID: 8400000, guid: c1689efe802013647809cb05f4630e06, type: 2}
   - {fileID: 8400000, guid: 271d214ef60f10643be23552213cffec, type: 2}
-  back_item_card:
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 55ca90399e87a8d4fbb59641aaff2695, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  hat_item_card:
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 4187ba7c57c06aa4f886593668c5edf6, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  glasses_item_card:
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 0fb600e3ed66a874db5e18b8b96f33c7, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  shoes_item_card:
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   slot_back: {fileID: 0}
   slot_hat: {fileID: 0}
   slot_glasses: {fileID: 0}
@@ -1009,7 +965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 421, y: 8.000006}
+  m_AnchoredPosition: {x: 423, y: 9.000006}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &58255702
@@ -5100,7 +5056,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -90, y: 8.000006}
+  m_AnchoredPosition: {x: -88, y: 9.000006}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351034540
@@ -6421,7 +6377,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: 8}
+  m_AnchoredPosition: {x: 82, y: 9}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &456099230
@@ -16671,7 +16627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -429, y: 8}
+  m_AnchoredPosition: {x: -427, y: 9}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209124964
@@ -19040,7 +18996,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 249, y: 8.000006}
+  m_AnchoredPosition: {x: 251, y: 9}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1373821586
@@ -20565,7 +20521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260, y: 7.9999986}
+  m_AnchoredPosition: {x: -258, y: 8.999998}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479529107
