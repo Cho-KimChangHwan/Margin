@@ -473,7 +473,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Horse_ScratchChew
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101240543989221906}
@@ -500,7 +500,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Horse_Snooze
-  m_Speed: 1
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101364754424813350}
@@ -653,7 +653,7 @@ AnimatorStateMachine:
     m_Position: {x: 504, y: -12, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102782703972229790}
-    m_Position: {x: 576, y: 84, z: 0}
+    m_Position: {x: 588, y: 72, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102533064289028772}
     m_Position: {x: 576, y: 156, z: 0}
