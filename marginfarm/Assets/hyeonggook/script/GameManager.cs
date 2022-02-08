@@ -105,7 +105,6 @@ public class GameManager : MonoBehaviour
 
     public string[] horsesLocation = new string[2];
     public Vector3[] horsesPosition = new Vector3[2];
-    public string[] id = new string[2];
     public string ranking = "";
     public HorseInfo[] UserHorse = new HorseInfo[]
     {

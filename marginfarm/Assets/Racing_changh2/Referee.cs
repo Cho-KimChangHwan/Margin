@@ -33,8 +33,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     
     void FixedUpdate()
     {
-        Debug.Log(GameManager.instance.Id);
-        photonView.RPC("NameSet", RpcTarget.AllBuffered, GameManager.instance.Id);
         myLocation = horseStatus.myLocation;
         if ((GameManager.instance.mytern - 1)!=0)
         {
@@ -149,7 +147,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             int rank = 1;
             for (int i = horseRanking.Count-1;  i >=0 ; i--)
             {
-                R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + GameManager.instance.id[int.Parse(horseRanking[i])] + "\n";
+                R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + "\n";
             }
             photonView.RPC("RankingSet", RpcTarget.AllBuffered,R);
    
@@ -172,11 +170,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             GameManager.instance.horsesPosition[index] = (Vector3)stream.ReceiveNext();
             ranking.text = (string)stream.ReceiveNext();
         }
-    }
-    [PunRPC]
-    void NameSet(string name)
-    {
-        GameManager.instance.id[GameManager.instance.mytern - 1] = name;
     }
     [PunRPC]
     void RankingSet(string r)
