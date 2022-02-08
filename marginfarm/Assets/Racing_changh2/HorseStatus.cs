@@ -68,7 +68,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         }
     }
     void Start()
-    {      
+    {
+        InputLocation();
         if (SceneManager.GetActiveScene().name == "RacingScene")
         {
             animator = GetComponent<Animator>();
@@ -78,7 +79,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             if (photonView.IsMine)
             {
                 InputVariable();
-                InputLocation();
                 InputStatus();
                 ApplyConsis();
             }
@@ -159,7 +159,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     void countRecord()
     {
-        if(myLocation == "Final")
+        if(horseLocation["Final"])
         {
             record.text = "Record : " + myRecord.ToString("F3") ;
         }
