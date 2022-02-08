@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     public int many;  // 유저의 말 수
     public int itemMany; // 유저의 아이템 수
     public string Id;  // 유저 ID
-    public string[2] id;
+    
     public int captain;
     public int select;
     public bool gameStart;  // 게임스타드 유무파악
@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
 
     public string[] horsesLocation = new string[2];
     public Vector3[] horsesPosition = new Vector3[2];
+    public string[] id = new string[2];
     public string ranking = "";
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
