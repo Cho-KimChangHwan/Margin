@@ -45,7 +45,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     void FixedUpdate()
     {
         myLocation = horseStatus.myLocation;
-        if((GameManager.instance.mytern - 1)!=0)
+        //if(photonView.IsMine)
         {
 
             //photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition );
@@ -155,17 +155,16 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                 First[max] = tmp;
         
             }
-           
-        }
-        string R = "";
-        int rank = 1;
-        for (int i = horseRanking.Count - 1; i >= 0; i--)
-        {
-            R += (rank++).ToString() + " : Player" + (int.Parse(horseRanking[i]) + 1).ToString() + "\n";
-        }
-        ranking.text = R;
+            string R = "";
+            int rank = 1;
+            for (int i = horseRanking.Count-1;  i >=0 ; i--)
+            {
+                R += (rank++).ToString() + " : Player" + (int.Parse(horseRanking[i])+1).ToString() +"\n";
+            }
+            ranking.text = R;
 
-        horseRanking.Clear();
+            horseRanking.Clear();
+        }
         Debug.Log("0번 " + GameManager.instance.horsesLocation[0]);
         Debug.Log("1번" + GameManager.instance.horsesLocation[1]);
     }
@@ -175,13 +174,11 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             stream.SendNext(GameManager.instance.mytern-1);
             stream.SendNext(myLocation);
             stream.SendNext(horseStatus.currentPosition);
-            stream.SendNext(horseRanking);
         }
         else{
             int index = (int)stream.ReceiveNext();
             GameManager.instance.horsesLocation[index] = (string)stream.ReceiveNext();
             GameManager.instance.horsesPosition[index] = (Vector3)stream.ReceiveNext();
-            horseRanking = (List<string>)stream.ReceiveNext();
         }
     }
     // [PunRPC]
