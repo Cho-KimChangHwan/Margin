@@ -70,6 +70,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     void Start()
     {
         InputLocation();
+        InputVariable();
         if (SceneManager.GetActiveScene().name == "RacingScene")
         {
             animator = GetComponent<Animator>();
@@ -78,7 +79,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             gameObject.layer = 10;
             if (photonView.IsMine)
             {
-                InputVariable();
                 InputStatus();
                 ApplyConsis();
             }
