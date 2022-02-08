@@ -162,9 +162,10 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             {
                 R += (rank++).ToString() + " : Player" + (int.Parse(horseRanking[i])+1).ToString() +"\n";
             }
-            isR = true;
+            photonView.RPC("RankingSet", RpcTarget.AllBuffered,R);
+   
             horseRanking.Clear();
-            isR = false;
+
         }
         Debug.Log("0번 " + GameManager.instance.horsesLocation[0]);
         Debug.Log("1번" + GameManager.instance.horsesLocation[1]);
@@ -184,10 +185,16 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             ranking.text = (string)stream.ReceiveNext();
         }
     }
+    [PunRPC]
+    void RankingSet(string r)
+    {
+        GameManager.instance.ranking = r;
+        ranking.text = GameManager.instance.ranking;
+    }
     // [PunRPC]
     // void HorsesSet(string myLocation,Vector3 currentPosition )
     // {   
-        
+
     //     GameManager.instance.horsesLocation[GameManager.instance.mytern-1] = myLocation;
     //     GameManager.instance.horsesPosition[GameManager.instance.mytern-1] = currentPosition;
     // }
