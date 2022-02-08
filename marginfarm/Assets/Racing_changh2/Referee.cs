@@ -28,20 +28,8 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         myLocation = horseStatus.myLocation;
         
         horses = new GameObject[2];
-        Debug.Log(GameManager.instance.mytern + "gt개수");
     }
-    // public void OnPhotonSerializeView(PhotonStream stream , PhotonMessageInfo info) {
-    //     if(stream.IsWriting)
-    //     {
-    //         stream.SendNext(horsesLocation);
-    //         stream.SendNext(horsesPosition);
-    //     }
-    //     else{
-    //         horsesLocation = (string[])stream.ReceiveNext();
-    //         horsesPosition = (Vector3[])stream.ReceiveNext();
-    //     }
-    // }
-    // Update is called once per frame
+
     
     void FixedUpdate()
     {
@@ -87,7 +75,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                     Final.Add(playerNum.ToString());
                     d=true;
                 }
-                Debug.Log(d + "는" + playerNum);
             }
             for(int i =0; i < Final.Count ; i++)
             {
@@ -167,8 +154,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             horseRanking.Clear();
 
         }
-        Debug.Log("0번 " + GameManager.instance.horsesLocation[0]);
-        Debug.Log("1번" + GameManager.instance.horsesLocation[1]);
     }
    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
         if(stream.IsWriting)
