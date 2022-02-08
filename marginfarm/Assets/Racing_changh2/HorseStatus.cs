@@ -159,7 +159,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     void countRecord()
     {
-        if(horseLocation["Final"])
+        if(myLocation == "Final")
         {
             record.text = "Record : " + myRecord.ToString("F3") ;
         }

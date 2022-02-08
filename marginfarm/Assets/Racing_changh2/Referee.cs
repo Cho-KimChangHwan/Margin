@@ -153,7 +153,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                 tmp = First[i];
                 First[i] = First[max];
                 First[max] = tmp;
-        
             }
             string R = "";
             int rank = 1;
@@ -180,7 +179,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             GameManager.instance.horsesLocation[index] = (string)stream.ReceiveNext();
             GameManager.instance.horsesPosition[index] = (Vector3)stream.ReceiveNext();
         }
-    }
+   }
     // [PunRPC]
     // void HorsesSet(string myLocation,Vector3 currentPosition )
     // {   
