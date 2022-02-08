@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -580,6 +580,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943830907}
   m_CullTransparentMesh: 0
+--- !u!1 &944268536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 944268538}
+  - component: {fileID: 944268537}
+  m_Layer: 0
+  m_Name: PhotonMono
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &944268537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944268536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177bddf229f8d8445a70c0652f03b7df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisconnectAfterKeepAlive: 0
+  KeepAliveInBackground: 60000
+  ApplyDontDestroyOnLoad: 1
+--- !u!4 &944268538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944268536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &951036741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,8 +1510,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2137417716}
-  - component: {fileID: 2137417715}
   - component: {fileID: 2137417717}
+  - component: {fileID: 2137417715}
   m_Layer: 0
   m_Name: GMng
   m_TagString: Untagged
@@ -1486,12 +1532,121 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   many: 0
+  itemMany: 0
   Id: 
   captain: 0
   select: 0
   gameStart: 0
+  racingStart: 0
   money: 0
   spec_check: 0
+  inven_check: 0
+  mytern: 0
+  hMats:
+  - {fileID: 2800000, guid: 28462d5649c48b748b1239a32f680c44, type: 3}
+  - {fileID: 2800000, guid: dc64045ee35c1044c8e64b471c314eb1, type: 3}
+  - {fileID: 2800000, guid: a02d05ea44786924c88ea4bf60e57bfc, type: 3}
+  - {fileID: 2800000, guid: 21820c7034686334595d7cdd5cdc6388, type: 3}
+  - {fileID: 2800000, guid: 7cb8a6d0de89d3e4ba04651ec4d44c8a, type: 3}
+  - {fileID: 2800000, guid: 50b93b57e1197984ca879097eeb17725, type: 3}
+  - {fileID: 2800000, guid: 2b46fd2954c254f4b9540622b49c24d6, type: 3}
+  - {fileID: 2800000, guid: 0b6608fa67c3f7b4bba9b32222421d21, type: 3}
+  lineKey: 00000000000000000000000000000000
+  back_item:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 7455351002414369877, guid: af6d2f99249e1434d84ebe95d7cbcef4, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  hat_item:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 2314684268039623587, guid: eb1f6173815a9c247af27dcd4e4de623, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  glasses_item:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 3581888275051724182, guid: 99d48a5906f6dde4b99b09fa51ce8fb4, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  shoes_item:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  back_item_card:
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 55ca90399e87a8d4fbb59641aaff2695, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  hat_item_card:
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 4187ba7c57c06aa4f886593668c5edf6, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  glasses_item_card:
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 0fb600e3ed66a874db5e18b8b96f33c7, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  shoes_item_card:
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  horsesLocation:
+  - 
+  - 
+  horsesPosition:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  horse_items: 000000000000000000000000000000000000000000000000
 --- !u!4 &2137417716
 Transform:
   m_ObjectHideFlags: 0

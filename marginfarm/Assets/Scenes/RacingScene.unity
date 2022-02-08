@@ -3027,6 +3027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1419304212}
   - component: {fileID: 1419304213}
+  - component: {fileID: 1419304214}
   m_Layer: 0
   m_Name: Referee
   m_TagString: Untagged
@@ -3060,8 +3061,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5615730c5615f486c91262ac9dce03af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horsesLocation:
+  - 
+  - 
+  horsesPosition:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  myLocation: First
   rPoint1: 30
   rPoint2: -15
+--- !u!114 &1419304214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419304211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 0
+  ObservedComponents:
+  - {fileID: 1419304213}
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &1423396877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3924,6 +3955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1920832287}
   - component: {fileID: 1920832286}
+  - component: {fileID: 1920832288}
   m_Layer: 0
   m_Name: Plugin
   m_TagString: Untagged
@@ -3943,6 +3975,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f808bf974a2474cabc525f3fc7d3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horseSkin: {fileID: 0}
+  thisHorse: {fileID: 0}
 --- !u!4 &1920832287
 Transform:
   m_ObjectHideFlags: 0
@@ -3957,6 +3991,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1920832288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920832285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1956309576
 GameObject:
   m_ObjectHideFlags: 0

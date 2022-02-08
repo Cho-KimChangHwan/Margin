@@ -10,7 +10,6 @@ public class ListSetting : MonoBehaviour
 
     public Texture[] h_Texture = new Texture[8];
 
-
     public Button button;
     public GameObject x1;
     public GameObject x2;
@@ -34,6 +33,31 @@ public class ListSetting : MonoBehaviour
 
             horseSkin = GameObject.Find("horse_s" + i.ToString()).GetComponent<SkinnedMeshRenderer>();
             horseSkin.material.SetTexture("_MainTex", h_Texture[GameManager.instance.UserHorse[i - 1].key]);
+
+            if(GameManager.instance.WearingItem[(i - 1) * 4].item_key != 0)
+            {
+                GameObject under1 = GameObject.Find("hat_h" + i.ToString());
+                GameObject temp1 = Instantiate(GameManager.instance.hat_item[GameManager.instance.WearingItem[(i - 1) * 4].item_key], under1.transform.position, Quaternion.Euler(new Vector3(38f, -97f, -6f)));
+                temp1.transform.parent = under1.transform;
+            }
+            if (GameManager.instance.WearingItem[(i - 1) * 4 + 1].item_key != 0)
+            {
+                GameObject under2 = GameObject.Find("glasses_h" + i.ToString());
+                GameObject temp2 = Instantiate(GameManager.instance.glasses_item[GameManager.instance.WearingItem[(i - 1) * 4 + 1].item_key / 10], under2.transform.position, Quaternion.Euler(new Vector3(20f, -87f, -1f)));
+                temp2.transform.parent = under2.transform;
+            }
+            if(GameManager.instance.WearingItem[(i - 1) * 4 + 2].item_key != 0)
+            {
+                GameObject under3 = GameObject.Find("back_h" + i.ToString());
+                GameObject temp3 = Instantiate(GameManager.instance.back_item[GameManager.instance.WearingItem[(i - 1) * 4 + 2].item_key / 100], under3.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
+                temp3.transform.parent = under3.transform;
+            }
+            if(GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key != 0)
+            {
+                GameObject under4 = GameObject.Find("shoes_h" + i.ToString());
+                GameObject temp4 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000], under4.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
+                temp4.transform.parent = under4.transform;
+            }
         }
 
         for (int i = 6; i > GameManager.instance.many; i--) //없는말의경우 비활성화

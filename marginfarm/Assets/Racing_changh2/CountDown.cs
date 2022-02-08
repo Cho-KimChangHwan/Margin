@@ -36,7 +36,9 @@ public class CountDown : MonoBehaviour
             else if (timer <= 2f && timer > 0f)
                 count.text = "2";
             else if (timer <= 3f && timer > 0f)
+            {
                 count.text = "1";
+            }
         }
         else if ( timer >= 3f ){
             count.text = "Start !";
@@ -51,7 +53,6 @@ public class CountDown : MonoBehaviour
             {
                 count.text = "";
             }
-
         }
     }
 }

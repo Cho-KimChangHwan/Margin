@@ -5,17 +5,16 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
-// using WebSocketSharp;
 
 public class HorseStatus : MonoBehaviourPunCallbacks
 {
-    // private WebSocket m_WebSocket;
-    // Start is called before the first frame update
     public struct Status
     {
         public float speed, accel, hp, agility, consis;
-        public Status(float s, float a, float h, float ag, float c)
+        public string name;
+        public Status(string n,float s, float a, float h, float ag, float c)
         {
+            this.name = n;
             this.speed = s;
             this.accel = a;
             this.hp = h;
@@ -23,7 +22,12 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             this.consis = c;
         }
     }
+    
     public float s,a,h,ag,c;
+    public int hApp;
+    public int tern;
+    public string myLocation = "First";
+    public string n;
     public Dictionary<string, bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
     public float resultSpeed, timeChecker;
@@ -50,23 +54,21 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     bool isCollide=false;
     public float myRecord;
 
+    public SkinnedMeshRenderer horseSkin;
     void Awake()
     {
         if (photonView.IsMine)
         {
+            n = GameManager.instance.UserHorse[GameManager.instance.captain].name;
             s = GameManager.instance.UserHorse[GameManager.instance.captain].speed;
             a = GameManager.instance.UserHorse[GameManager.instance.captain].accel;
             h = GameManager.instance.UserHorse[GameManager.instance.captain].hp;
             ag = GameManager.instance.UserHorse[GameManager.instance.captain].agility;
-            c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;
+            c = GameManager.instance.UserHorse[GameManager.instance.captain].consis;           
         }
     }
     void Start()
-    {
-        // m_WebSocket = new WebSocket("ws://172.30.1.51:3333");
-        // m_WebSocket.Connect();
-        // m_WebSocket.OnMessage += ws_OnMessage;
-
+    {      
         if (SceneManager.GetActiveScene().name == "RacingScene")
         {
             animator = GetComponent<Animator>();
@@ -80,13 +82,48 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 InputStatus();
                 ApplyConsis();
             }
+            Debug.Log(GameManager.instance.mytern - 1 );
+            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            if (GameManager.instance.mytern - 1 == 0)
+            {
+                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+                photonView.RPC("miniSet",RpcTarget.AllBuffered, new Vector3(0f,0f,1f));
+                photonView.RPC("rpcName",RpcTarget.AllBuffered, GameManager.instance.UserHorse[0].name );
+            }
+            else if(GameManager.instance.mytern - 1 == 1)
+            {
+                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
+                photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(0f,0f,0f));
+                photonView.RPC("rpcName",RpcTarget.AllBuffered, GameManager.instance.UserHorse[1].name );
+            }
+            //else if (GameManager.instance.mytern - 1 == 2)
+            //{
+            //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
+           //       photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(0f,1f,0f));
+            //}
+            //else if (GameManager.instance.mytern - 1 == 3)
+            //{
+            //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[3]);
+            //    photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(1f,0f,0f));
+            //}
+            //gameObject.name = status.name;
         }
     }
-    // public void ws_OnMessage(object sender, MessageEventArgs e)
-    // {
-
-    // }
-
+    [PunRPC]
+    void rpcName(string myHName)
+    {
+        gameObject.name = myHName;
+    }
+    [PunRPC]
+    void miniSet(Vector3 miniColor)
+    {   
+        transform.GetChild(3).GetComponent<Renderer>().material.color = new Color(miniColor.x ,miniColor.y ,miniColor.z);
+    }
+    [PunRPC]
+    void otMatSet(int myKey)
+    {   
+        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
+    }
     void InputVariable()
     {
         firstAxis = new Vector3(15f, 0f, rPoint1);
@@ -99,7 +136,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     void InputStatus()
     {
-        status = new Status(s,a,h,ag,c);
+        status = new Status(n,s,a,h,ag,c);
         //status = new Status(10.0f, 60.0f, 40.0f, 50.0f, 8.0f);
     }
 
@@ -111,10 +148,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             if (count.isStart)
             {
                 countRecord();
-                if (photonView.IsMine)
-                {
-                    Run();
-                }
+                
+                Run();
             }
             else
             {
@@ -142,6 +177,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         {
             horseLocation["First"] = false;
             horseLocation["Second"] = true;
+            myLocation = "Second";
             isRotate = true;
             isDiagonal = false;
             radius = Vector3.Distance(currentPosition, firstAxis);
@@ -151,6 +187,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         {
             horseLocation["Third"] = false;
             horseLocation["Fourth"] = true;
+            myLocation = "Fourth";
             isRotate = true;
             isDiagonal = false;
             radius = Vector3.Distance(currentPosition, secondAxis);
@@ -163,58 +200,74 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         }
         else if (currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1 && horseLocation["First"]) // 직선 코스
         {
-            if (isDiagonal) // 대각선 주행 
+            if (photonView.IsMine)
             {
-                transform.position = Vector3.MoveTowards(currentPosition,
-                                            new Vector3(dRandom, currentPosition.y, rPoint1), 4.5f * resultSpeed * Time.deltaTime);
+                if (isDiagonal) // 대각선 주행 
+                {
+                    transform.position = Vector3.MoveTowards(currentPosition,
+                                                new Vector3(dRandom, currentPosition.y, rPoint1), 4.5f * resultSpeed * Time.deltaTime);
+                }
+                else if (currentPosition.z >= dPoint1 && !isDiagonal)
+                {
+                    isDiagonal = true;
+                    dRandom = Random.Range(34f, (float)currentPosition.x);
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(currentPosition,
+                                                new Vector3(currentPosition.x, currentPosition.y, rPoint1), 5f * resultSpeed * Time.deltaTime);
+                    rotateTime = 0;
+                }
+                ApplyRotate();
             }
-            else if (currentPosition.z >= dPoint1 && !isDiagonal)
-            {
-                isDiagonal = true;
-                dRandom = Random.Range(34f, (float)currentPosition.x);
-            }
-            else
-            {
-                transform.position = Vector3.MoveTowards(currentPosition,
-                                            new Vector3(currentPosition.x, currentPosition.y, rPoint1), 5f * resultSpeed * Time.deltaTime);
-                rotateTime = 0;
-            }
-            ApplyRotate();
-            animator.Play("Horse_Gallop");
+            //animator.Play("Horse_Gallop");
+            myLocation = "First";
+            photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Gallop");
         }
         else if (currentPosition.z >= rPoint2 && currentPosition.z <= rPoint1 && horseLocation["Third"])
         {
-            if (isDiagonal)
+            if (photonView.IsMine)
             {
-                transform.position = Vector3.MoveTowards(currentPosition,
-                                            new Vector3(dRandom, currentPosition.y, rPoint2), 4.5f * resultSpeed * Time.deltaTime);
+                if (isDiagonal)
+                {
+                    transform.position = Vector3.MoveTowards(currentPosition,
+                                                new Vector3(dRandom, currentPosition.y, rPoint2), 4.5f * resultSpeed * Time.deltaTime);
+                }
+                else if (currentPosition.z <= dPoint2 && !isDiagonal)
+                {
+                    isDiagonal = true;
+                    dRandom = -1f * Random.Range(4f, -1f * (float)currentPosition.x);
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(currentPosition,
+                                                new Vector3(currentPosition.x, currentPosition.y, rPoint2), 5f * resultSpeed * Time.deltaTime);
+                    rotateTime = 0;
+                    isHalf = true;
+                }
+                ApplyRotate();
             }
-            else if (currentPosition.z <= dPoint2 && !isDiagonal)
-            {
-                isDiagonal = true;
-                dRandom = -1f * Random.Range(4f, -1f * (float)currentPosition.x);
-            }
-            else
-            {
-                transform.position = Vector3.MoveTowards(currentPosition,
-                                            new Vector3(currentPosition.x, currentPosition.y, rPoint2), 5f * resultSpeed * Time.deltaTime);
-                rotateTime = 0;
-                isHalf = true;
-            }
-            ApplyRotate();
-            animator.Play("Horse_Gallop");
+            //animator.Play("Horse_Gallop");
+            myLocation = "Third";
+            photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Gallop");
         }
         else if (horseLocation["Final"])
         {
-            transform.position = Vector3.MoveTowards(currentPosition,
+            if (photonView.IsMine)
+            {
+                transform.position = Vector3.MoveTowards(currentPosition,
                                         finalPosition, 5f * resultSpeed * Time.deltaTime);
+            }
             if (transform.position == finalPosition)
             {
-                animator.Play("Horse_Paw2");
+                //animator.Play("Horse_Paw2");
+                photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Paw2");
             }
             else{
-                animator.Play("Horse_Trot");
+                //animator.Play("Horse_Trot");
+                photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Trot");
             }
+            myLocation = "Final";
         }
     }
 
@@ -250,7 +303,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         status.agility *= consisValue;
         status.hp *= consisValue;
         status.speed *= consisValue;
-        Debug.Log(status.speed);
     }
     void CalculateSpeed()
     {
@@ -336,48 +388,59 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     void Rotate()
     {
-        Vector3 currentPosition = transform.position;
+        if (photonView.IsMine)
+        {
+            Vector3 currentPosition = transform.position;
 
-        if (horseLocation["Second"])
-        {
-            rotateTime += resultSpeed * Time.deltaTime * 0.3f;
-            rotateX = radius * Mathf.Cos(rotateTime);
-            rotateZ = radius * Mathf.Sin(-rotateTime);
-            transform.position = new Vector3(firstAxis.x + rotateX, startPosition.y, (firstAxis.z - rotateZ));
-            if (transform.position.z <= rPoint1 && !isHalf)
+            if (horseLocation["Second"])
             {
-                isRotate = false;
-                isHalf = true;
-                horseLocation["Second"] = false;
-                horseLocation["Third"] = true;
-                timeChecker = 0f;
-                lookDirection = new Vector3(0f, 0f, 0f);
+                rotateTime += resultSpeed * Time.deltaTime * 0.3f;
+                rotateX = radius * Mathf.Cos(rotateTime);
+                rotateZ = radius * Mathf.Sin(-rotateTime);
+                transform.position = new Vector3(firstAxis.x + rotateX, startPosition.y, (firstAxis.z - rotateZ));
+                if (transform.position.z <= rPoint1 && !isHalf)
+                {
+                    isRotate = false;
+                    isHalf = true;
+                    horseLocation["Second"] = false;
+                    horseLocation["Third"] = true;
+                    timeChecker = 0f;
+                    lookDirection = new Vector3(0f, 0f, 0f);
+                }
             }
-        }
-        else if (horseLocation["Fourth"])
-        {
-            rotateTime += resultSpeed * Time.deltaTime * 0.3f;
-            rotateX = radius * Mathf.Cos(-rotateTime);
-            rotateZ = radius * Mathf.Sin(-rotateTime);
-            transform.position = new Vector3((secondAxis.x - rotateX), startPosition.y, (secondAxis.z + rotateZ));
-            if (transform.position.z >= rPoint2 && isHalf)
+            else if (horseLocation["Fourth"])
             {
-                isRotate = false;
-                isHalf = false;
-                horseLocation["Fourth"] = false;
-                horseLocation["Final"] = true;
-                timeChecker = 0f;
-                finalPosition = new Vector3(currentPosition.x, currentPosition.y, Random.Range(6.0f, 25.0f));
-                lookDirection = new Vector3(0f, 0f, 0f);
+                rotateTime += resultSpeed * Time.deltaTime * 0.3f;
+                rotateX = radius * Mathf.Cos(-rotateTime);
+                rotateZ = radius * Mathf.Sin(-rotateTime);
+                transform.position = new Vector3((secondAxis.x - rotateX), startPosition.y, (secondAxis.z + rotateZ));
+                if (transform.position.z >= rPoint2 && isHalf)
+                {
+                    isRotate = false;
+                    isHalf = false;
+                    horseLocation["Fourth"] = false;
+                    horseLocation["Final"] = true;
+                    timeChecker = 0f;
+                    finalPosition = new Vector3(currentPosition.x, currentPosition.y, Random.Range(6.0f, 25.0f));
+                    lookDirection = new Vector3(0f, 0f, 0f);
+                }
             }
+            Vector3 currentRotation = transform.eulerAngles;
+            // lookDirection = (transform.position -currentPosition);
+            // transform.rotation = Quaternion.LookRotation(lookDirection);   
+            ApplyRotate();
+            changeRotation = -currentRotation + transform.eulerAngles;
         }
-        Vector3 currentRotation = transform.eulerAngles;
-        // lookDirection = (transform.position -currentPosition);
-        // transform.rotation = Quaternion.LookRotation(lookDirection);   
-        ApplyRotate();
-        animator.Play("Horse_Canter");
-        changeRotation = -currentRotation + transform.eulerAngles;
+        //animator.Play("Horse_Canter");
+        photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Canter");
     }
+    [PunRPC]
+    void rpcAni(string strAni)
+    {
+        if (animator != null)
+            animator.Play(strAni);
+    }
+
     void ApplyRotate()
     {
         lookDirection = -(transform.position - currentPosition);

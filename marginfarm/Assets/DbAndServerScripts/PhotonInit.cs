@@ -10,17 +10,18 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     public string version = "v1.0";
     public Text show;
     bool isGameStart = false;
+    bool getReady = false;
     void Awake()
     {
         PhotonNetwork.ConnectUsingSettings();
     }
     void Start()
     {
-        show = GameObject.Find("loadingText").GetComponent<Text>();   
+        show = GameObject.Find("loadingText").GetComponent<Text>();
     }
     private void Update()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1 && isGameStart == false) //3명일 때
+        if (getReady == true && PhotonNetwork.CurrentRoom.PlayerCount > 1 && isGameStart == false) //3명일 때
         {
             StartCoroutine(this.LoadRacing());
             PhotonNetwork.CurrentRoom.IsOpen = false;
@@ -40,7 +41,6 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         Debug.Log("No Room!!");
         show.text = "방이 없습니다 방을 생성하는 중...";
         PhotonNetwork.CreateRoom("MyRoom", new RoomOptions { MaxPlayers = 4 }); //방을 만들어줌 (최대 4명) 
-
     }
 
     public override void OnJoinedRoom()
@@ -48,7 +48,8 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         Debug.Log("Enter Room");
         show.text = "게임 대기 중...";
-    
+        GameManager.instance.mytern = PhotonNetwork.CurrentRoom.PlayerCount;
+        getReady = true;
     }
     IEnumerator LoadRacing()
     {

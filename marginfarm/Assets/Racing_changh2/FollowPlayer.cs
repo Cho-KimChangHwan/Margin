@@ -16,7 +16,7 @@ public class FollowPlayer : MonoBehaviour
     Vector3 currentPosition;
     void Start()
     {
-        miniplayer = GameObject.Find("MiniPlayer1");
+        miniplayer = GameObject.Find("MiniPlayer");
         realPlayer = miniplayer.transform.parent.gameObject;
         horsestatus = realPlayer.GetComponent<HorseStatus>();
         distanceV = -realPlayer.transform.position + transform.position;
