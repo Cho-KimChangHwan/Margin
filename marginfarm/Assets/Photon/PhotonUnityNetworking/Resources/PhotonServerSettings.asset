@@ -42,7 +42,6 @@ MonoBehaviour:
   - rpcAni
   - rpcRend
   - matSet
-  - rpcName
   - otMatSet
   - miniSet
   - HorsesSet
