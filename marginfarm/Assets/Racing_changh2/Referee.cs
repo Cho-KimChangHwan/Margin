@@ -15,7 +15,8 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     GameObject[] horses ;
     HorseStatus horseStatus;
     Text ranking;
- 
+    bool isR = false;
+    string R;
     public string myLocation = "First";
     List<string> Final = new List<string>(); 
     List<string> horseRanking = new List<string>();
@@ -155,15 +156,15 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                 First[max] = tmp;
         
             }
-            string R = "";
+            R = "";
             int rank = 1;
             for (int i = horseRanking.Count-1;  i >=0 ; i--)
             {
                 R += (rank++).ToString() + " : Player" + (int.Parse(horseRanking[i])+1).ToString() +"\n";
             }
-            ranking.text = R;
-
+            isR = true;
             horseRanking.Clear();
+            isR = false;
         }
         Debug.Log("0번 " + GameManager.instance.horsesLocation[0]);
         Debug.Log("1번" + GameManager.instance.horsesLocation[1]);
@@ -174,12 +175,13 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             stream.SendNext(GameManager.instance.mytern-1);
             stream.SendNext(myLocation);
             stream.SendNext(horseStatus.currentPosition);
-
+            stream.SendNext(R);
         }
         else{
             int index = (int)stream.ReceiveNext();
             GameManager.instance.horsesLocation[index] = (string)stream.ReceiveNext();
             GameManager.instance.horsesPosition[index] = (Vector3)stream.ReceiveNext();
+            ranking.text = (string)stream.ReceiveNext();
         }
     }
     // [PunRPC]
