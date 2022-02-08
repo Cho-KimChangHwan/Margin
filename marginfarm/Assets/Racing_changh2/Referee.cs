@@ -28,11 +28,13 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         myLocation = horseStatus.myLocation;
         
         horses = new GameObject[2];
+        photonView.RPC("NameSet", RpcTarget.AllBuffered, GameManager.instance.Id);
     }
 
     
     void FixedUpdate()
     {
+
         myLocation = horseStatus.myLocation;
         GameManager.instance.id[GameManager.instance.mytern - 1] = GameManager.instance.Id;
         if ((GameManager.instance.mytern - 1)!=0)
@@ -164,15 +166,18 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             stream.SendNext(myLocation);
             stream.SendNext(horseStatus.currentPosition);
             stream.SendNext(R);
-            stream.SendNext(GameManager.instance.Id);
         }
         else{
             int index = (int)stream.ReceiveNext();
             GameManager.instance.horsesLocation[index] = (string)stream.ReceiveNext();
             GameManager.instance.horsesPosition[index] = (Vector3)stream.ReceiveNext();
             ranking.text = (string)stream.ReceiveNext();
-            GameManager.instance.id[index] = (string)stream.ReceiveNext();
         }
+    }
+    [PunRPC]
+    void NameSet(string name)
+    {
+        GameManager.instance.id[GameManager.instance.mytern - 1] = name;
     }
     [PunRPC]
     void RankingSet(string r)
