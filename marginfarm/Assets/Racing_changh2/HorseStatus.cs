@@ -409,6 +409,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                     timeChecker = 0f;
                     lookDirection = new Vector3(0f, 0f, 0f);
                 }
+                photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Canter");
             }
             else if (horseLocation["Fourth"])
             {
@@ -426,6 +427,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                     finalPosition = new Vector3(currentPosition.x, currentPosition.y, Random.Range(6.0f, 25.0f));
                     lookDirection = new Vector3(0f, 0f, 0f);
                 }
+                photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Canter");
             }
             Vector3 currentRotation = transform.eulerAngles;
             // lookDirection = (transform.position -currentPosition);
@@ -434,7 +436,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             changeRotation = -currentRotation + transform.eulerAngles;
         }
         //animator.Play("Horse_Canter");
-        photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Canter");
+        
     }
     [PunRPC]
     void rpcAni(string strAni)
