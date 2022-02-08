@@ -28,13 +28,13 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         myLocation = horseStatus.myLocation;
         
         horses = new GameObject[2];
-        photonView.RPC("NameSet", RpcTarget.AllBuffered, GameManager.instance.Id);
     }
 
     
     void FixedUpdate()
     {
-
+        Debug.Log(GameManager.instance.Id);
+        photonView.RPC("NameSet", RpcTarget.AllBuffered, GameManager.instance.Id);
         myLocation = horseStatus.myLocation;
         if ((GameManager.instance.mytern - 1)!=0)
         {
