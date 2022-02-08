@@ -10,7 +10,7 @@ public class OpenSellBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SellBoard.gameObject.SetActive(false);
+        //SellBoard.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

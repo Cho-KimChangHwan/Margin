@@ -40,4 +40,8 @@ public class maincontrol : MonoBehaviour
     {
         SceneManager.LoadScene("raceWaitScene");
     }
+    public void gototrade()
+    {
+        SceneManager.LoadScene("Trade");
+    }
 }

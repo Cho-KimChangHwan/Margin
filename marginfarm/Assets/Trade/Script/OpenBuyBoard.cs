@@ -9,7 +9,7 @@ public class OpenBuyBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BuyBoard.gameObject.SetActive(false);
+        //BuyBoard.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
