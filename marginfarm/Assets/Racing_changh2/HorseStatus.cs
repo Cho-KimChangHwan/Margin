@@ -83,16 +83,18 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 ApplyConsis();
             }
             Debug.Log(GameManager.instance.mytern - 1 );
-            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            
             if (GameManager.instance.mytern - 1 == 0)
             {
+                horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
                 photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
-                //photonView.RPC("miniSet",RpcTarget.AllBuffered, new Vector3(0f,0f,1f));
+                photonView.RPC("miniSet",RpcTarget.AllBuffered, new Vector3(0f,0f,1f));
             }
             else if(GameManager.instance.mytern - 1 == 1)
             {
+                horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
                 photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
-                //photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(0f,0f,0f));    
+                photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(0f,0f,0f));    
             }
             //else if (GameManager.instance.mytern - 1 == 2)
             //{
