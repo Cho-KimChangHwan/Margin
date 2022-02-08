@@ -34,7 +34,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     void FixedUpdate()
     {
         myLocation = horseStatus.myLocation;
-        GameManager.instance.id[GameManager.instance.mytern - 1] = GameManager.instance.Id;
         if ((GameManager.instance.mytern - 1)!=0)
         {
 
@@ -148,7 +147,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             int rank = 1;
             for (int i = horseRanking.Count-1;  i >=0 ; i--)
             {
-                R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + GameManager.instance.id[int.Parse(horseRanking[i])] + "\n";
+                R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + "\n";
             }
             photonView.RPC("RankingSet", RpcTarget.AllBuffered,R);
    
@@ -164,14 +163,12 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             stream.SendNext(myLocation);
             stream.SendNext(horseStatus.currentPosition);
             stream.SendNext(R);
-            stream.SendNext(GameManager.instance.Id);
         }
         else{
             int index = (int)stream.ReceiveNext();
             GameManager.instance.horsesLocation[index] = (string)stream.ReceiveNext();
             GameManager.instance.horsesPosition[index] = (Vector3)stream.ReceiveNext();
             ranking.text = (string)stream.ReceiveNext();
-            GameManager.instance.id[index] = (string)stream.ReceiveNext();
         }
     }
     [PunRPC]
