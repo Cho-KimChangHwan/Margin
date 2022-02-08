@@ -36,7 +36,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     {
 
         myLocation = horseStatus.myLocation;
-        GameManager.instance.id[GameManager.instance.mytern - 1] = GameManager.instance.Id;
         if ((GameManager.instance.mytern - 1)!=0)
         {
 
