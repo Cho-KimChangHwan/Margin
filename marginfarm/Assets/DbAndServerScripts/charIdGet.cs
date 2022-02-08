@@ -15,14 +15,14 @@ public class charIdGet : MonoBehaviourPunCallbacks
     void Awake()
     {
         PhotonNetwork.IsMessageQueueRunning = true;
-        CreateChar();      
+        CreateChar();
     }
     void CreateChar()
     {
         switch (GameManager.instance.mytern)
         {
             case 1:
-                PhotonNetwork.Instantiate("myHorse", new Vector3(34.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);                
+                PhotonNetwork.Instantiate("myHorse", new Vector3(34.0f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
                 break;
             case 2:
                 PhotonNetwork.Instantiate("myHorse", new Vector3(35.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
@@ -40,10 +40,5 @@ public class charIdGet : MonoBehaviourPunCallbacks
     void matSet(int myline, int matKey)
     {
         GameManager.instance.lineKey[myline] = matKey;
-    }
-    [PunRPC]
-    void rpcName(string myHName)
-    {
-        gameObject.name = myHName;
     }
 }
