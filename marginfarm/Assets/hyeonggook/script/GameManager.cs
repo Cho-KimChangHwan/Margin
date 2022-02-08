@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
     public int many;  // 유저의 말 수
     public int itemMany; // 유저의 아이템 수
     public string Id;  // 유저 ID
+    public string[] id;
     public int captain;
     public int select;
     public bool gameStart;  // 게임스타드 유무파악
