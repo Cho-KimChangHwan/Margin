@@ -34,7 +34,8 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     void FixedUpdate()
     {
         myLocation = horseStatus.myLocation;
-        if((GameManager.instance.mytern - 1)!=0)
+        GameManager.instance.id[GameManager.instance.mytern - 1] = GameManager.instance.Id;
+        if ((GameManager.instance.mytern - 1)!=0)
         {
 
             //photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition );
