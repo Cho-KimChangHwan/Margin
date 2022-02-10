@@ -161,6 +161,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         }
         else if( !horseLocation["Final"] )
         {
+            Debug.Log("안끝나써");
             myRecord += Time.deltaTime;
             record.text = "Record : " + myRecord.ToString("F3") ;
         }
@@ -263,6 +264,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 //animator.Play("Horse_Trot");
                 photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Trot");
             }
+            horseLocation["Final"] = true;
             myLocation = "Final";
         }
     }
