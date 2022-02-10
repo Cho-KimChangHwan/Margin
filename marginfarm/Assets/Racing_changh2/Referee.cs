@@ -16,16 +16,19 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     HorseStatus horseStatus;
     Text ranking;
     bool isR = false;
+    bool everyReady = false; 
     string R;
     public string myLocation = "First";
     public List<string> Final = new List<string>(); 
     List<string> horseRanking = new List<string>();
+    CountDown countDown;
     EndLog endLog;
     public float rPoint1 = 30f , rPoint2 = -15f;
     void Start()
     {
         ranking = GameObject.Find("Ranking").GetComponent<Text>();
         horseStatus = GameObject.FindWithTag("Player").GetComponent<HorseStatus>();
+        countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
         myLocation = horseStatus.myLocation;
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
         horses = new GameObject[2];
@@ -34,6 +37,22 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     
     void FixedUpdate()
     {
+        photonView.RPC("ReadySet", RpcTarget.AllBuffered, true);    
+        if(!everyReady) 
+        {
+            bool tmpReady = true;
+            for(int i=0; i < GameManager.instance.horsesReady.Length ; i++)
+            {  
+                if( !GameManager.instance.horsesReady[i] )
+                    tmpReady = false;
+            }
+            if(tmpReady)
+            {
+                everyReady = true;
+                countDown.isReady = true;
+            }
+        }
+
         myLocation = horseStatus.myLocation;
         if ((GameManager.instance.mytern - 1)!=0)
         {
@@ -182,6 +201,11 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     {
         GameManager.instance.ranking = r;
         ranking.text = GameManager.instance.ranking;
+    }
+    [PunRPC]
+    void ReadySet(bool ready)
+    {
+        GameManager.instance.horsesReady[GameManager.instance.mytern-1] = ready;
     }
     // [PunRPC]
     // void HorsesSet(string myLocation,Vector3 currentPosition )

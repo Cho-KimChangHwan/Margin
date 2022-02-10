@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-
+using Photon.Pun;
+using Photon.Realtime;
 public class CountDown : MonoBehaviour
 {
     // Start is called before the first frame update
     float timer;
     float startTimer ;
+
     Text count;
     public bool isStart = false;
+    public bool isReady = false;
+    
     void Start()
     {
         isStart = false;
@@ -20,39 +24,43 @@ public class CountDown : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(timer == 0)
+        if(!isReady)
         {
-            //Time.timeScale = 0.0f;
+            Time.timeScale = 0.0f;  
         }
-
-        if ( timer < 3f )
+        else
         {
-            timer += Time.deltaTime;
-            //Debug.Log(timer);
-            if (timer <= 1f && timer > 0f)
-                count.text = "3";
-            else if (timer <= 2f && timer > 0f)
-                count.text = "2";
-            else if (timer <= 3f && timer > 0f)
+            if ( timer < 3f )
             {
-                count.text = "1";
+                timer += Time.deltaTime;
+                //Debug.Log(timer);
+                if (timer <= 1f && timer > 0f)
+                    count.text = "3";
+                else if (timer <= 2f && timer > 1f)
+                    count.text = "2";
+                else if (timer <= 3f && timer > 2f)
+                {
+                    count.text = "1";
+                }
             }
-        }
-        else if ( timer >= 3f ){
-            count.text = "Start !";
-            isStart = true;
-            Time.timeScale = 1.0f;
-        }
+            else if ( timer >= 3f ){
+                count.text = "Start !";
+                isStart = true;
+                Time.timeScale = 1.0f;
+            }
 
-        if ( isStart )
-        {
-            startTimer += Time.deltaTime;
-            if ( startTimer >= 1f )
+            if ( isStart )
             {
-                count.text = "";
+                startTimer += Time.deltaTime;
+                if ( startTimer >= 1f )
+                {
+                    count.text = "";
+                }
             }
         }
     }
+
+
 }
