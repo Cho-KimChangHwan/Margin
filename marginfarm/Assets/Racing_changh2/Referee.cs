@@ -37,14 +37,16 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     
     void FixedUpdate()
     {
-        photonView.RPC("ReadySet", RpcTarget.AllBuffered, true);    
         if(!everyReady) 
         {
+            photonView.RPC("ReadySet", RpcTarget.AllBuffered, true);   
             bool tmpReady = true;
             for(int i=0; i < GameManager.instance.horsesReady.Length ; i++)
             {  
                 if( !GameManager.instance.horsesReady[i] )
                     tmpReady = false;
+
+                Debug.Log(i+"번째"+GameManager.instance.horsesReady[i]);
             }
             if(tmpReady)
             {
