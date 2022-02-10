@@ -153,7 +153,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             photonView.RPC("RankingSet", RpcTarget.AllBuffered,R);
 
         }
-        if( (Final.Count == horseRanking.Count) && horseStatus.horseLocation["Fianl"])
+        if( (Final.Count == horseRanking.Count) && horseStatus.horseLocation["Final"])
         {
             endLog.myN = GameManager.instance.mytern-1;
             endLog.isEnd = true;
