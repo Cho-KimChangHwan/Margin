@@ -31,8 +31,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
         myLocation = horseStatus.myLocation;
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
-        horses = new GameObject[2];
-        photonView.RPC("ReadySet", RpcTarget.AllBuffered, true);   
+        horses = new GameObject[2];  
     }
 
     
@@ -40,8 +39,8 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     {
         if(!everyReady) 
         {
-            //GameManager.instance.horsesReady[GameManager.instance.mytern-1] = true;
-            photonView.RPC("ReadySet", RpcTarget.AllBuffered, true);   
+            GameManager.instance.horsesReady[GameManager.instance.mytern-1] = true;
+            photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern-1 ,true);   
             bool tmpReady = true;
             for(int i=0; i < GameManager.instance.horsesReady.Length ; i++)
             {  
@@ -207,9 +206,9 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         ranking.text = GameManager.instance.ranking;
     }
     [PunRPC]
-    void ReadySet(bool ready)
+    void ReadySet(int pNum , bool ready)
     {
-        GameManager.instance.horsesReady[GameManager.instance.mytern-1] = ready;
+        GameManager.instance.horsesReady[pNum] = ready;
     }
     // [PunRPC]
     // void HorsesSet(string myLocation,Vector3 currentPosition )
