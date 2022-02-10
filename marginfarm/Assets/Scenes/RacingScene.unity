@@ -2417,7 +2417,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 130
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2451,6 +2451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnd: 0
   isCountEnd: 0
+  myN: 0
 --- !u!1001 &1002988105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3156,6 +3157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myLocation: First
+  Final: []
   rPoint1: 30
   rPoint2: -15
 --- !u!114 &1419304214
