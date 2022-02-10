@@ -28,7 +28,6 @@ public class CountDown : MonoBehaviour
     {
         if(!isReady)
         {
-            Time.timeScale = 0.0f;  
         }
         else
         {
