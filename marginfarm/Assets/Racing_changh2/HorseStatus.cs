@@ -142,7 +142,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         {
             if (count.isStart)
             {
-                countRecord();
+                if (photonView.IsMine)
+                    countRecord();
                 
                 Run();
             }
