@@ -18,16 +18,16 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     bool isR = false;
     string R;
     public string myLocation = "First";
-    List<string> Final = new List<string>(); 
+    public List<string> Final = new List<string>(); 
     List<string> horseRanking = new List<string>();
-    EndLog engLog;
+    EndLog endLog;
     public float rPoint1 = 30f , rPoint2 = -15f;
     void Start()
     {
         ranking = GameObject.Find("Ranking").GetComponent<Text>();
         horseStatus = GameObject.FindWithTag("Player").GetComponent<HorseStatus>();
         myLocation = horseStatus.myLocation;
-        engLog = GameObject.Find("EndText").GetComponent<EndLog>();
+        endLog = GameObject.Find("EndText").GetComponent<EndLog>();
         horses = new GameObject[2];
     }
 
@@ -148,24 +148,18 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             int rank = 1;
             for (int i = horseRanking.Count-1;  i >=0 ; i--)
             {
-                if((GameManager.instance.mytern-1) == int.Parse(horseRanking[i]))
-                {
-                    R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + "(me)" +"\n";
-                }
-                else
-                {
-                    R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + "\n";
-                }
+                R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + "\n";
             }
             photonView.RPC("RankingSet", RpcTarget.AllBuffered,R);
-            if(Final.Count == horseRanking.Count)
-            {
-                engLog.isEnd = true;
-            }
-
-            horseRanking.Clear();
 
         }
+        if(Final.Count == horseRanking.Count)
+        {
+            endLog.myN = GameManager.instance.mytern-1;
+            endLog.isEnd = true;
+        }
+
+        horseRanking.Clear();
     }
    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
         if(stream.IsWriting)

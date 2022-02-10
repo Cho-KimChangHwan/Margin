@@ -8,19 +8,24 @@ public class EndLog : MonoBehaviour
     // Start is called before the first frame update
     public bool isEnd ;
     public bool isCountEnd;
+    public int myN;
+    bool isinput;
     float timer;
     Text endText;
-    Text rank;
     Text record;
+    Referee referee;
     HorseStatus horsestatus;
+    string rank;
     void Start()
     {
         isEnd = false;
         isCountEnd = false;
+        isinput = false;
         timer = 0;
+        rank = "";
         endText = GameObject.Find("EndText").GetComponent<Text>();
-        rank = GameObject.Find("Ranking").GetComponent<Text>();
         record = GameObject.Find("Record").GetComponent<Text>();
+        referee = GameObject.Find("Referee").GetComponent<Referee>();
         horsestatus = GameObject.FindWithTag("Player").GetComponent<HorseStatus>();
     }
 
@@ -29,7 +34,22 @@ public class EndLog : MonoBehaviour
     {
         if(isEnd)
         {
-            string T = rank.text +"\n" + "MyRecord :"  + record.text +"\n";
+            if(isinput)
+            {
+                for(int i=0;i<referee.Final.Count;i++)
+                {
+                    if( myN == (int.Parse(referee.Final[i])) )
+                    {
+                        rank += (i+1).ToString() + " : Player"  +(int.Parse(referee.Final[i])+1).ToString() + "(me)" + "\n";
+                    }
+                    else
+                    {
+                        rank += (i+1).ToString() + " : Player"  +(int.Parse(referee.Final[i])+1).ToString() + "\n";
+                    }
+                }
+                isinput = true;
+            }
+            string T = rank + "MyRecord :"  + record.text +"\n";
             if ( timer < 10f )
             {
                 timer += Time.deltaTime;
