@@ -82,7 +82,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 InputStatus();
                 ApplyConsis();
             }
-            Debug.Log(GameManager.instance.mytern - 1 );
             horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
             if (GameManager.instance.mytern - 1 == 0)
             {
@@ -157,9 +156,10 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
         if(horseLocation["Final"])
         {
+            Debug.Log("끝나써");
             record.text = "Record : " + myRecord.ToString("F3") ;
         }
-        else
+        else if( !horseLocation["Final"] )
         {
             myRecord += Time.deltaTime;
             record.text = "Record : " + myRecord.ToString("F3") ;
