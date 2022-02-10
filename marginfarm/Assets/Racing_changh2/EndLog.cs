@@ -34,7 +34,7 @@ public class EndLog : MonoBehaviour
     {
         if(isEnd)
         {
-            if(isinput)
+            if(!isinput)
             {
                 for(int i=0;i<referee.Final.Count;i++)
                 {
