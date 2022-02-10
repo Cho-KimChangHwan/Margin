@@ -32,6 +32,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         myLocation = horseStatus.myLocation;
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
         horses = new GameObject[2];
+        photonView.RPC("ReadySet", RpcTarget.AllBuffered, true);   
     }
 
     
@@ -39,7 +40,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     {
         if(!everyReady) 
         {
-            GameManager.instance.horsesReady[GameManager.instance.mytern-1] = true;
+            //GameManager.instance.horsesReady[GameManager.instance.mytern-1] = true;
             photonView.RPC("ReadySet", RpcTarget.AllBuffered, true);   
             bool tmpReady = true;
             for(int i=0; i < GameManager.instance.horsesReady.Length ; i++)
