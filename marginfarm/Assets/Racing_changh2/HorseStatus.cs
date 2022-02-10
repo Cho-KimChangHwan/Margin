@@ -157,12 +157,10 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
         if(horseLocation["Final"])
         {
-            Debug.Log("끝나써");
             record.text = "Record : " + myRecord.ToString("F3") ;
         }
         else if( !horseLocation["Final"] )
         {
-            Debug.Log("안끝나써");
             myRecord += Time.deltaTime;
             record.text = "Record : " + myRecord.ToString("F3") ;
         }
