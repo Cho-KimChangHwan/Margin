@@ -13,6 +13,7 @@ public class EndLog : MonoBehaviour
     float timer;
     Text endText;
     Text record;
+    Text ranking;
     Referee referee;
     HorseStatus horsestatus;
     string rank;
@@ -25,6 +26,7 @@ public class EndLog : MonoBehaviour
         rank = "";
         endText = GameObject.Find("EndText").GetComponent<Text>();
         record = GameObject.Find("Record").GetComponent<Text>();
+        ranking = GameObject.Find("Ranking").GetComponent<Text>();
         referee = GameObject.Find("Referee").GetComponent<Referee>();
         horsestatus = GameObject.FindWithTag("Player").GetComponent<HorseStatus>();
     }
@@ -34,22 +36,22 @@ public class EndLog : MonoBehaviour
     {
         if(isEnd)
         {
-            if(!isinput)
-            {
-                for(int i=0;i<referee.Final.Count;i++)
-                {
-                    if( myN == (int.Parse(referee.Final[i])) )
-                    {
-                        rank += (i+1).ToString() + " : Player"  +(int.Parse(referee.Final[i])+1).ToString() + "(me)" + "\n";
-                    }
-                    else
-                    {
-                        rank += (i+1).ToString() + " : Player"  +(int.Parse(referee.Final[i])+1).ToString() + "\n";
-                    }
-                }
-                isinput = true;
-            }
-            string T = rank + "MyRecord :"  + record.text +"\n";
+            // if(!isinput)
+            // {
+            //     for(int i=0;i<referee.Final.Count;i++)
+            //     {
+            //         if( myN == (int.Parse(referee.Final[i])) )
+            //         {
+            //             rank += (i+1).ToString() + " : Player"  +(int.Parse(referee.Final[i])+1).ToString() + "(me)" + "\n";
+            //         }
+            //         else
+            //         {
+            //             rank += (i+1).ToString() + " : Player"  +(int.Parse(referee.Final[i])+1).ToString() + "\n";
+            //         }
+            //     }
+            //     isinput = true;
+            // }
+            string T = ranking.text  + record.text +"\n";
             if ( timer < 10f )
             {
                 timer += Time.deltaTime;
