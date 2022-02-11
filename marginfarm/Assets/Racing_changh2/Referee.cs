@@ -190,6 +190,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     public void serverDisconnect() 
     {
         PhotonNetwork.Disconnect();
+        SceneManager.LoadScene("mainmap");
     }
     
    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
