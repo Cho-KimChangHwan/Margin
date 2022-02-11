@@ -85,7 +85,7 @@ public class EndLog : MonoBehaviour
         }
         if(isCountEnd)
         {
-            // GameManager.instance.ranking = "";
+            referee.serverDisconnect();
         }
     }
 }

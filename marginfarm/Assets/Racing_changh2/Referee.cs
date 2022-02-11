@@ -187,6 +187,11 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
 
         horseRanking.Clear();
     }
+    public void serverDisconnect() 
+    {
+        PhotonNetwork.Disconnect();
+    }
+    
    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
         if(stream.IsWriting)
         {
