@@ -24,6 +24,8 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     CountDown countDown;
     EndLog endLog;
     public float rPoint1 = 30f , rPoint2 = -15f;
+    string[] rankColor = { "<color=#0054FF>" , "<color=#191919>" ,"<color=#1DDB16>","<color=#FF0000>"};
+
     void Start()
     {
         ranking = GameObject.Find("Ranking").GetComponent<Text>();
@@ -31,7 +33,8 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
         myLocation = horseStatus.myLocation;
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
-        horses = new GameObject[2];  
+        horses = new GameObject[2];
+
     }
 
     
@@ -167,7 +170,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             // }
             for (int i = 0;  i < horseRanking.Count ; i++)
             {
-                R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + "\n";
+                R +=  rankColor[i] +(rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() +"</color> " +"\n";
             }
             photonView.RPC("RankingSet", RpcTarget.AllBuffered,R);
         }
