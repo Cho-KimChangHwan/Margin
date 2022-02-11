@@ -67,15 +67,15 @@ public class EndLog : MonoBehaviour
                 else if (timer <= 5f && timer > 4f)
                     endText.text = T +"6 초 후 종료";    
                 else if (timer <= 6f && timer > 5f)
-                    endText.text = T +"5 초 후 종료";
+                    endText.text = T +"5 초 후 종료" +"\n" +"메인화면으로 돌아갑니다.";
                 else if (timer <= 7f && timer > 6f)
-                    endText.text = T +"4 초 후 종료";
+                    endText.text = T +"4 초 후 종료"+"\n" +"메인화면으로 돌아갑니다.";
                 else if (timer <= 8f && timer > 7f)
-                    endText.text = T +"3 초 후 종료";
+                    endText.text = T +"3 초 후 종료"+"\n" +"메인화면으로 돌아갑니다.";
                 else if (timer <= 9f && timer > 8f)
-                    endText.text = T +"2 초 후 종료";
+                    endText.text = T +"2 초 후 종료"+"\n" +"메인화면으로 돌아갑니다.";
                 else if (timer <= 10f && timer > 9f)
-                    endText.text = T +"1 초 후 종료";
+                    endText.text = T +"1 초 후 종료"+"\n" +"메인화면으로 돌아갑니다.";
 
             }
             else if ( timer >= 10f ){

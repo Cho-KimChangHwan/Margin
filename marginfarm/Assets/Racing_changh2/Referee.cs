@@ -47,7 +47,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                 if( !GameManager.instance.horsesReady[i] )
                     tmpReady = false;
 
-                Debug.Log(i+"번째"+GameManager.instance.horsesReady[i]);
             }
             if(tmpReady)
             {
@@ -177,7 +176,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
                 R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + "\n";
             }
             photonView.RPC("RankingSet", RpcTarget.AllBuffered,R);
-        Debug.Log(GameManager.instance.mytern-1);
         }
         if( (Final.Count == horseRanking.Count) && horseStatus.horseLocation["Final"])
         {
