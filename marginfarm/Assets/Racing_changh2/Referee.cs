@@ -69,33 +69,27 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
 
             for(int playerNum =0;playerNum < GameManager.instance.horsesLocation.Length;playerNum++)
             {
-                bool d=false;
                 if(Final.Contains(playerNum.ToString()))
                         continue;
                 if(GameManager.instance.horsesLocation[playerNum] == "First")
                 {
                     First.Add(playerNum);
-                    d=true;
                 }
                 else if(GameManager.instance.horsesLocation[playerNum] == "Second")
                 {
                     Second.Add(playerNum);
-                    d=true;
                 }
                 else if(GameManager.instance.horsesLocation[playerNum] == "Third")
                 {
                     Third.Add(playerNum);
-                    d=true;
                 }
                 else if(GameManager.instance.horsesLocation[playerNum] == "Fourth")
                 {
                     Fourth.Add(playerNum);
-                    d=true;
                 }
                 else if(GameManager.instance.horsesLocation[playerNum] == "Final")
                 {
                     Final.Add(playerNum.ToString());
-                    d=true;
                 }
             }
             for(int i =0; i < Final.Count ; i++)
