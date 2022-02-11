@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Trade.unity
     guid: 1c3f5cf3ddf00544a9c2d5bbae0e374a
+  - enabled: 1
+    path: Assets/Scenes/aftermain.unity
+    guid: 5ea40ccd4cba39946ada844d92398d31
   m_configObjects: {}

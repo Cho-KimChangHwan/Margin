@@ -59,6 +59,8 @@ public class ButtonControl : MonoBehaviour
     public int what_item;
     public Animator anim;
 
+    public GameObject fadeImg;
+
     public TempItemInfo[] TempUserItem = new TempItemInfo[]
     {
         new TempItemInfo (0, 0, 0, 0, 0, 0)
@@ -67,6 +69,8 @@ public class ButtonControl : MonoBehaviour
     public int data;
     public int i;
     public int[] userdata = new int[5];
+    public int[] userdatapitem = new int[5];
+    public int[] itemdata = new int[5];
 
     public GameObject picture;
     public Transform camera_po;
@@ -74,6 +78,7 @@ public class ButtonControl : MonoBehaviour
     public void Start()
     {
         spec_open_check = true;
+        StartCoroutine("FadeInStart");
     }
     public void specview_close()  //스펙뷰 닫으면 카메라 원위치 이동시키고 창 닫기
     {
@@ -130,7 +135,6 @@ public class ButtonControl : MonoBehaviour
             
         }
     }
-
     public void specview_h1()
     {
         if(GameManager.instance.select != -1)
@@ -139,55 +143,12 @@ public class ButtonControl : MonoBehaviour
             anim = GameObject.Find("horse_o" + n.ToString()).GetComponent<Animator>();
             anim.SetBool("inven", false);
         }
-   
         GameManager.instance.select = 0;
 
         int m = GameManager.instance.select + 1;
         anim = GameObject.Find("horse_o" + m.ToString()).GetComponent<Animator>();
         anim.SetBool("inven", true);
-
-        data = GameManager.instance.select;
-
-        name_t = GameObject.Find("name_t").GetComponent<Text>();
-        name_t.text = GameManager.instance.UserHorse[data].name;
-
-        userdata[0] = GameManager.instance.UserHorse[data].speed;
-        userdata[1] = GameManager.instance.UserHorse[data].accel;
-        userdata[2] = GameManager.instance.UserHorse[data].hp;
-        userdata[3] = GameManager.instance.UserHorse[data].agility;
-        userdata[4] = GameManager.instance.UserHorse[data].consis;
-
-        GameObject picture = GameObject.Find("Main Camera");
-        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
-        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
-        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
-
-        if (GameManager.instance.spec_check == false)
-        {
-            GameObject spec = GameObject.Find("spec");
-            iTween.MoveTo(spec, iTween.Hash("y", 470, "delay", 0.1f, "time", 0.5f));
-        }
-        GameManager.instance.spec_check = true;
-
-        for (i = 1; i < 6; i++)
-        {
-            bar = GameObject.Find("gauge" + i.ToString()).GetComponent<Image>();
-            bar.fillAmount = userdata[i - 1] / 100f;
-            gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
-            gauge.text = userdata[i - 1].ToString() + "/ 100";
-        }
-
-        cap_b = GameObject.Find("cap").GetComponent<Image>();
-
-        if (GameManager.instance.captain == GameManager.instance.select)
-        {
-            cap_b.sprite = captain_check[1];
-        }
-        else
-        {
-            cap_b.sprite = captain_check[0];
-        }
-
+        spec_make();
         inven_itemlist_make(data);
     }
     public void specview_h2()
@@ -198,55 +159,13 @@ public class ButtonControl : MonoBehaviour
             anim = GameObject.Find("horse_o" + n.ToString()).GetComponent<Animator>();
             anim.SetBool("inven", false);
         }
-
         GameManager.instance.select = 1;
 
         int m = GameManager.instance.select + 1;
         anim = GameObject.Find("horse_o" + m.ToString()).GetComponent<Animator>();
         anim.SetBool("inven", true);
 
-        data = GameManager.instance.select;
-
-        name_t = GameObject.Find("name_t").GetComponent<Text>();
-        name_t.text = GameManager.instance.UserHorse[data].name;
-
-        userdata[0] = GameManager.instance.UserHorse[data].speed;
-        userdata[1] = GameManager.instance.UserHorse[data].accel;
-        userdata[2] = GameManager.instance.UserHorse[data].hp;
-        userdata[3] = GameManager.instance.UserHorse[data].agility;
-        userdata[4] = GameManager.instance.UserHorse[data].consis;
-
-        GameObject picture = GameObject.Find("Main Camera");
-        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
-        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
-        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
-
-        if (GameManager.instance.spec_check == false)
-        {
-            GameObject spec = GameObject.Find("spec");
-            iTween.MoveTo(spec, iTween.Hash("y", 470, "delay", 0.1f, "time", 0.5f));
-        }
-        GameManager.instance.spec_check = true;
-
-        for (i = 1; i < 6; i++)
-        {
-            bar = GameObject.Find("gauge" + i.ToString()).GetComponent<Image>();
-            bar.fillAmount = userdata[i - 1] / 100f;
-            gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
-            gauge.text = userdata[i - 1].ToString() + "/ 100";
-        }
-
-        cap_b = GameObject.Find("cap").GetComponent<Image>();
-
-        if (GameManager.instance.captain == GameManager.instance.select)
-        {
-            cap_b.sprite = captain_check[1];
-        }
-        else
-        {
-            cap_b.sprite = captain_check[0];
-        }
-
+        spec_make();
         inven_itemlist_make(data);
     }
     public void specview_h3()
@@ -257,55 +176,12 @@ public class ButtonControl : MonoBehaviour
             anim = GameObject.Find("horse_o" + n.ToString()).GetComponent<Animator>();
             anim.SetBool("inven", false);
         }
-
         GameManager.instance.select = 2;
 
         int m = GameManager.instance.select + 1;
         anim = GameObject.Find("horse_o" + m.ToString()).GetComponent<Animator>();
         anim.SetBool("inven", true);
-
-        data = GameManager.instance.select;
-
-        name_t = GameObject.Find("name_t").GetComponent<Text>();
-        name_t.text = GameManager.instance.UserHorse[data].name;
-
-        userdata[0] = GameManager.instance.UserHorse[data].speed;
-        userdata[1] = GameManager.instance.UserHorse[data].accel;
-        userdata[2] = GameManager.instance.UserHorse[data].hp;
-        userdata[3] = GameManager.instance.UserHorse[data].agility;
-        userdata[4] = GameManager.instance.UserHorse[data].consis;
-
-        GameObject picture = GameObject.Find("Main Camera");
-        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
-        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
-        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
-
-        if (GameManager.instance.spec_check == false)
-        {
-            GameObject spec = GameObject.Find("spec");
-            iTween.MoveTo(spec, iTween.Hash("y", 470, "delay", 0.1f, "time", 0.5f));
-        }
-        GameManager.instance.spec_check = true;
-
-        for (i = 1; i < 6; i++)
-        {
-            bar = GameObject.Find("gauge" + i.ToString()).GetComponent<Image>();
-            bar.fillAmount = userdata[i - 1] / 100f;
-            gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
-            gauge.text = userdata[i - 1].ToString() + "/ 100";
-        }
-
-        cap_b = GameObject.Find("cap").GetComponent<Image>();
-
-        if (GameManager.instance.captain == GameManager.instance.select)
-        {
-            cap_b.sprite = captain_check[1];
-        }
-        else
-        {
-            cap_b.sprite = captain_check[0];
-        }
-
+        spec_make();
         inven_itemlist_make(data);
     }
     public void specview_h4()
@@ -316,58 +192,14 @@ public class ButtonControl : MonoBehaviour
             anim = GameObject.Find("horse_o" + n.ToString()).GetComponent<Animator>();
             anim.SetBool("inven", false);
         }
-
         GameManager.instance.select = 3;
 
         int m = GameManager.instance.select + 1;
         anim = GameObject.Find("horse_o" + m.ToString()).GetComponent<Animator>();
         anim.SetBool("inven", true);
-
-        data = GameManager.instance.select;
-
-        name_t = GameObject.Find("name_t").GetComponent<Text>();
-        name_t.text = GameManager.instance.UserHorse[data].name;
-
-        userdata[0] = GameManager.instance.UserHorse[data].speed;
-        userdata[1] = GameManager.instance.UserHorse[data].accel;
-        userdata[2] = GameManager.instance.UserHorse[data].hp;
-        userdata[3] = GameManager.instance.UserHorse[data].agility;
-        userdata[4] = GameManager.instance.UserHorse[data].consis;
-
-        GameObject picture = GameObject.Find("Main Camera");
-        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
-        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
-        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
-
-        if (GameManager.instance.spec_check == false)
-        {
-            GameObject spec = GameObject.Find("spec");
-            iTween.MoveTo(spec, iTween.Hash("y", 470, "delay", 0.1f, "time", 0.5f));
-        }
-        GameManager.instance.spec_check = true;
-
-        for (i = 1; i < 6; i++)
-        {
-            bar = GameObject.Find("gauge" + i.ToString()).GetComponent<Image>();
-            bar.fillAmount = userdata[i - 1] / 100f;
-            gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
-            gauge.text = userdata[i - 1].ToString() + "/ 100";
-        }
-
-        cap_b = GameObject.Find("cap").GetComponent<Image>();
-
-        if (GameManager.instance.captain == GameManager.instance.select)
-        {
-            cap_b.sprite = captain_check[1];
-        }
-        else
-        {
-            cap_b.sprite = captain_check[0];
-        }
-
+        spec_make();
         inven_itemlist_make(data);
     }
-
     public void specview_h5()
     {
         if (GameManager.instance.select != -1)
@@ -376,58 +208,14 @@ public class ButtonControl : MonoBehaviour
             anim = GameObject.Find("horse_o" + n.ToString()).GetComponent<Animator>();
             anim.SetBool("inven", false);
         }
-
         GameManager.instance.select = 4;
 
         int m = GameManager.instance.select + 1;
         anim = GameObject.Find("horse_o" + m.ToString()).GetComponent<Animator>();
         anim.SetBool("inven", true);
-
-        data = GameManager.instance.select;
-
-        name_t = GameObject.Find("name_t").GetComponent<Text>();
-        name_t.text = GameManager.instance.UserHorse[data].name;
-
-        userdata[0] = GameManager.instance.UserHorse[data].speed;
-        userdata[1] = GameManager.instance.UserHorse[data].accel;
-        userdata[2] = GameManager.instance.UserHorse[data].hp;
-        userdata[3] = GameManager.instance.UserHorse[data].agility;
-        userdata[4] = GameManager.instance.UserHorse[data].consis;
-
-        GameObject picture = GameObject.Find("Main Camera");
-        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
-        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
-        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
-
-        if (GameManager.instance.spec_check == false)
-        {
-            GameObject spec = GameObject.Find("spec");
-            iTween.MoveTo(spec, iTween.Hash("y", 470, "delay", 0.1f, "time", 0.5f));
-        }
-        GameManager.instance.spec_check = true;
-
-        for (i = 1; i < 6; i++)
-        {
-            bar = GameObject.Find("gauge" + i.ToString()).GetComponent<Image>();
-            bar.fillAmount = userdata[i - 1] / 100f;
-            gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
-            gauge.text = userdata[i - 1].ToString() + "/ 100";
-        }
-
-        cap_b = GameObject.Find("cap").GetComponent<Image>();
-
-        if (GameManager.instance.captain == GameManager.instance.select)
-        {
-            cap_b.sprite = captain_check[1];
-        }
-        else
-        {
-            cap_b.sprite = captain_check[0];
-        }
-
+        spec_make();
         inven_itemlist_make(data);
     }
-
     public void specview_h6()
     {
         if (GameManager.instance.select != -1)
@@ -436,54 +224,12 @@ public class ButtonControl : MonoBehaviour
             anim = GameObject.Find("horse_o" + n.ToString()).GetComponent<Animator>();
             anim.SetBool("inven", false);
         }
-
         GameManager.instance.select = 5;
 
         int m = GameManager.instance.select + 1;
         anim = GameObject.Find("horse_o" + m.ToString()).GetComponent<Animator>();
         anim.SetBool("inven", true);
-
-        data = GameManager.instance.select;
-
-        name_t = GameObject.Find("name_t").GetComponent<Text>();
-        name_t.text = GameManager.instance.UserHorse[data].name;
-
-        userdata[0] = GameManager.instance.UserHorse[data].speed;
-        userdata[1] = GameManager.instance.UserHorse[data].accel;
-        userdata[2] = GameManager.instance.UserHorse[data].hp;
-        userdata[3] = GameManager.instance.UserHorse[data].agility;
-        userdata[4] = GameManager.instance.UserHorse[data].consis;
-
-        GameObject picture = GameObject.Find("Main Camera");
-        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
-        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
-        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
-
-        if (GameManager.instance.spec_check == false)
-        {
-            GameObject spec = GameObject.Find("spec");
-            iTween.MoveTo(spec, iTween.Hash("y", 470, "delay", 0.1f, "time", 0.5f));
-        }
-        GameManager.instance.spec_check = true;
-
-        for (i = 1; i < 6; i++)
-        {
-            bar = GameObject.Find("gauge" + i.ToString()).GetComponent<Image>();
-            bar.fillAmount = userdata[i - 1] / 100f;
-            gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
-            gauge.text = userdata[i - 1].ToString() + "/ 100";
-        }
-
-        cap_b = GameObject.Find("cap").GetComponent<Image>();
-
-        if (GameManager.instance.captain == GameManager.instance.select)
-        {
-            cap_b.sprite = captain_check[1];
-        }
-        else
-        {
-            cap_b.sprite = captain_check[0];
-        }
+        spec_make();
         inven_itemlist_make(data);
     }
 
@@ -682,18 +428,46 @@ public class ButtonControl : MonoBehaviour
             if (button_num == 0)
             {
                 item_s.sprite = GameManager.instance.hat_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4)].item_key];
+                itemdata[0] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].speed;
+                itemdata[1] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].accel;
+                itemdata[2] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].hp;
+                itemdata[3] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].agility;
+                itemdata[4] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].consis;
             }
             else if (button_num == 1)
             {
                 item_s.sprite = GameManager.instance.glasses_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 1].item_key / 10];
+                itemdata[0] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].speed;
+                itemdata[1] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].accel;
+                itemdata[2] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].hp;
+                itemdata[3] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].agility;
+                itemdata[4] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].consis;
             }
             else if (button_num == 2)
             {
                 item_s.sprite = GameManager.instance.back_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 2].item_key / 100];
+                itemdata[0] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].speed;
+                itemdata[1] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].accel;
+                itemdata[2] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].hp;
+                itemdata[3] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].agility;
+                itemdata[4] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].consis;
             }
             else if (button_num == 3)
             {
                 item_s.sprite = GameManager.instance.shoes_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 3].item_key / 1000];
+                itemdata[0] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].speed;
+                itemdata[1] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].accel;
+                itemdata[2] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].hp;
+                itemdata[3] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].agility;
+                itemdata[4] = GameManager.instance.WearingItem[(GameManager.instance.select * 4) + button_num].consis;
+            }
+
+            for (int i = 1; i < 6; i++)
+            {
+                bar = GameObject.Find("itemgauge" + i.ToString()).GetComponent<Image>();
+                bar.fillAmount = itemdata[i - 1] / 20f;
+                gauge = GameObject.Find("itemgauge_t" + i.ToString()).GetComponent<Text>();
+                gauge.text = itemdata[i - 1].ToString();
             }
 
         }
@@ -705,18 +479,46 @@ public class ButtonControl : MonoBehaviour
             if (GameManager.instance.UserItem[button_num].key < 10)
             {
                 item_s.sprite = GameManager.instance.hat_item_card[GameManager.instance.UserItem[button_num].key];
+                itemdata[0] = GameManager.instance.UserItem[button_num].speed;
+                itemdata[1] = GameManager.instance.UserItem[button_num].accel;
+                itemdata[2] = GameManager.instance.UserItem[button_num].hp;
+                itemdata[3] = GameManager.instance.UserItem[button_num].agility;
+                itemdata[4] = GameManager.instance.UserItem[button_num].consis;
             }
             else if (GameManager.instance.UserItem[button_num].key < 100)
             {
                 item_s.sprite = GameManager.instance.glasses_item_card[(GameManager.instance.UserItem[button_num].key) / 10];
+                itemdata[0] = GameManager.instance.UserItem[button_num].speed;
+                itemdata[1] = GameManager.instance.UserItem[button_num].accel;
+                itemdata[2] = GameManager.instance.UserItem[button_num].hp;
+                itemdata[3] = GameManager.instance.UserItem[button_num].agility;
+                itemdata[4] = GameManager.instance.UserItem[button_num].consis;
             }
             else if (GameManager.instance.UserItem[button_num].key < 1000)
             {
                 item_s.sprite = GameManager.instance.back_item_card[(GameManager.instance.UserItem[button_num].key) / 100];
+                itemdata[0] = GameManager.instance.UserItem[button_num].speed;
+                itemdata[1] = GameManager.instance.UserItem[button_num].accel;
+                itemdata[2] = GameManager.instance.UserItem[button_num].hp;
+                itemdata[3] = GameManager.instance.UserItem[button_num].agility;
+                itemdata[4] = GameManager.instance.UserItem[button_num].consis;
             }
             else if (GameManager.instance.UserItem[button_num].key < 10000)
             {
                 item_s.sprite = GameManager.instance.shoes_item_card[(GameManager.instance.UserItem[button_num].key) / 1000];
+                itemdata[0] = GameManager.instance.UserItem[button_num].speed;
+                itemdata[1] = GameManager.instance.UserItem[button_num].accel;
+                itemdata[2] = GameManager.instance.UserItem[button_num].hp;
+                itemdata[3] = GameManager.instance.UserItem[button_num].agility;
+                itemdata[4] = GameManager.instance.UserItem[button_num].consis;
+            }
+
+            for (int i = 1; i < 6; i++)
+            {
+                bar = GameObject.Find("itemgauge" + i.ToString()).GetComponent<Image>();
+                bar.fillAmount = itemdata[i - 1] / 20f;
+                gauge = GameObject.Find("itemgauge_t" + i.ToString()).GetComponent<Text>();
+                gauge.text = itemdata[i - 1].ToString();
             }
         }
     }
@@ -739,6 +541,7 @@ public class ButtonControl : MonoBehaviour
 
                     uninstall(select_num);
                     inven_itemlist_make(horse_s_n);
+                    spec_make();
                 }
                 else
                 {
@@ -755,6 +558,7 @@ public class ButtonControl : MonoBehaviour
 
                     uninstall(select_num);
                     inven_itemlist_make(horse_s_n);
+                    spec_make();
                 }
                 else
                 {
@@ -771,6 +575,7 @@ public class ButtonControl : MonoBehaviour
 
                     uninstall(select_num);
                     inven_itemlist_make(horse_s_n);
+                    spec_make();
                 }
                 else
                 {
@@ -787,6 +592,7 @@ public class ButtonControl : MonoBehaviour
 
                     uninstall(select_num);
                     inven_itemlist_make(horse_s_n);
+                    spec_make();
                 }
                 else
                 {
@@ -813,7 +619,8 @@ public class ButtonControl : MonoBehaviour
                 install(what_item, select_num);
 
                 inven_itemlist_make(horse_s_n);
-                
+                spec_make();
+
             }
             else if (GameManager.instance.UserItem[select_num].key < 100)
             {
@@ -832,6 +639,7 @@ public class ButtonControl : MonoBehaviour
                 install(what_item, select_num);
 
                 inven_itemlist_make(horse_s_n);
+                spec_make();
             }
             else if (GameManager.instance.UserItem[select_num].key < 1000)
             {
@@ -850,6 +658,7 @@ public class ButtonControl : MonoBehaviour
                 install(what_item, select_num);
 
                 inven_itemlist_make(horse_s_n);
+                spec_make();
             }
             else if (GameManager.instance.UserItem[select_num].key < 10000)
             {
@@ -868,6 +677,7 @@ public class ButtonControl : MonoBehaviour
                 install(what_item, select_num);
 
                 inven_itemlist_make(horse_s_n);
+                spec_make();
             }
         }
 
@@ -885,12 +695,12 @@ public class ButtonControl : MonoBehaviour
 
     public void gotohome()
     {
-        SceneManager.LoadScene("mainmap");
+        StartCoroutine("FadeOutStart_main");
     }
 
     public void gotoshop()
     {
-       SceneManager.LoadScene("gacha");
+        StartCoroutine("FadeOutStart_gacha");
     }
 
     public void install(int item, int select_num)
@@ -1010,10 +820,10 @@ public class ButtonControl : MonoBehaviour
     {
         byemyhorse();
 
-        GameObject error_p = GameObject.Find("check");
-        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
+        //GameObject error_p = GameObject.Find("check");
+        //iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
 
-        specview_close();
+        //specview_close();
 
     }
 
@@ -1047,5 +857,114 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.UserHorse[GameManager.instance.many - 1].consis = -1;
 
         GameManager.instance.many = GameManager.instance.many - 1;
+
+        StartCoroutine("FadeOutStart_restart");
     }
+
+    public void spec_make()
+    {
+        data = GameManager.instance.select;
+
+        name_t = GameObject.Find("name_t").GetComponent<Text>();
+        name_t.text = GameManager.instance.UserHorse[data].name;
+
+        userdata[0] = GameManager.instance.UserHorse[data].speed;
+        userdatapitem[0] = userdata[0] + GameManager.instance.WearingItem[(data * 4)].speed + GameManager.instance.WearingItem[(data * 4) + 1].speed + GameManager.instance.WearingItem[(data * 4) + 2].speed + GameManager.instance.WearingItem[(data * 4) + 3].speed;
+        userdata[1] = GameManager.instance.UserHorse[data].accel;
+        userdatapitem[1] = userdata[1] + GameManager.instance.WearingItem[(data * 4)].accel + GameManager.instance.WearingItem[(data * 4) + 1].accel + GameManager.instance.WearingItem[(data * 4) + 2].accel + GameManager.instance.WearingItem[(data * 4) + 3].accel;
+        userdata[2] = GameManager.instance.UserHorse[data].hp;
+        userdatapitem[2] = userdata[2] + GameManager.instance.WearingItem[(data * 4)].hp + GameManager.instance.WearingItem[(data * 4) + 1].hp + GameManager.instance.WearingItem[(data * 4) + 2].hp + GameManager.instance.WearingItem[(data * 4) + 3].hp;
+        userdata[3] = GameManager.instance.UserHorse[data].agility;
+        userdatapitem[3] = userdata[3] + GameManager.instance.WearingItem[(data * 4)].agility + GameManager.instance.WearingItem[(data * 4) + 1].agility + GameManager.instance.WearingItem[(data * 4) + 2].agility + GameManager.instance.WearingItem[(data * 4) + 3].agility;
+        userdata[4] = GameManager.instance.UserHorse[data].consis;
+        userdatapitem[4] = userdata[4] + GameManager.instance.WearingItem[(data * 4)].consis + GameManager.instance.WearingItem[(data * 4) + 1].consis + GameManager.instance.WearingItem[(data * 4) + 2].consis + GameManager.instance.WearingItem[(data * 4) + 3].consis;
+
+        GameObject picture = GameObject.Find("Main Camera");
+        camera_po = GameObject.Find("c_point" + GameManager.instance.select.ToString()).GetComponent<Transform>();
+        iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(0, 143.33f, 0), "delay", 0.1f, "time", 2f));
+        iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
+
+        if (GameManager.instance.spec_check == false)
+        {
+            GameObject spec = GameObject.Find("spec");
+            iTween.MoveTo(spec, iTween.Hash("y", 470, "delay", 0.1f, "time", 0.5f));
+        }
+        GameManager.instance.spec_check = true;
+
+        for (i = 1; i < 6; i++)
+        {
+            bar = GameObject.Find("gauge" + i.ToString()).GetComponent<Image>();
+            bar.fillAmount = userdata[i - 1] / 100f;
+            bar = GameObject.Find("gauge_i" + i.ToString()).GetComponent<Image>();
+            bar.fillAmount = userdatapitem[i - 1] / 100f;
+            gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
+            gauge.text = userdatapitem[i - 1].ToString() + "/ 100";
+        }
+
+        cap_b = GameObject.Find("cap").GetComponent<Image>();
+
+        if (GameManager.instance.captain == GameManager.instance.select)
+        {
+            cap_b.sprite = captain_check[1];
+        }
+        else
+        {
+            cap_b.sprite = captain_check[0];
+        }
+    }
+    public IEnumerator FadeInStart()
+    {
+        fadeImg.SetActive(true);
+        for (float f = 1f; f > 0; f -= 0.02f)
+        {
+            Color c = fadeImg.GetComponent<Image>().color;
+            c.a = f;
+            fadeImg.GetComponent<Image>().color = c;
+            yield return null;
+        }
+        yield return new WaitForSeconds(1);
+        fadeImg.SetActive(false);
+    }
+
+    //페이드 인
+    public IEnumerator FadeOutStart_main()
+    {
+        fadeImg.SetActive(true);
+        for (float f = 0f; f < 1; f += 0.02f)
+        {
+            Color c = fadeImg.GetComponent<Image>().color;
+            c.a = f;
+            fadeImg.GetComponent<Image>().color = c;
+            yield return null;
+        }
+        SceneManager.LoadScene("aftermain");
+    }
+
+    public IEnumerator FadeOutStart_gacha()
+    {
+        fadeImg.SetActive(true);
+        for (float f = 0f; f < 1; f += 0.02f)
+        {
+            Color c = fadeImg.GetComponent<Image>().color;
+            c.a = f;
+            fadeImg.GetComponent<Image>().color = c;
+            yield return null;
+        }
+        SceneManager.LoadScene("gacha");
+    }
+
+    public IEnumerator FadeOutStart_restart()
+    {
+        fadeImg.SetActive(true);
+        for (float f = 0f; f < 1; f += 0.02f)
+        {
+            Color c = fadeImg.GetComponent<Image>().color;
+            c.a = f;
+            fadeImg.GetComponent<Image>().color = c;
+            yield return null;
+        }
+        SceneManager.LoadScene("farm");
+    }
+
+
 }

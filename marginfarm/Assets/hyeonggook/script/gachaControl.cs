@@ -62,6 +62,8 @@ public class gachaControl : MonoBehaviour
     public int timero;
     public int timers;
     public Button go_item;
+
+    public GameObject fadeImg;
     /*
     public int[] speed_t = new int[3]; 0번인덱스
     public int[] accel_t = new int[3]; 1번인덱스
@@ -73,6 +75,7 @@ public class gachaControl : MonoBehaviour
     void Start()
     {
         m_Reference = FirebaseDatabase.DefaultInstance.RootReference;
+        StartCoroutine("FadeInStart");
     }
 
     public void horse_gacha()
@@ -335,15 +338,15 @@ public class gachaControl : MonoBehaviour
             // 아이템 스펙 값 설정
             int temp;
 
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 21);
             item_spec[0] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 21);
             item_spec[1] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 21);
             item_spec[2] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 21);
             item_spec[3] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 21);
             item_spec[4] = temp;
 
             for (int n = 1; n < 6; n++)
@@ -537,7 +540,7 @@ public class gachaControl : MonoBehaviour
 
     public void home_click ()
     {
-        SceneManager.LoadScene("farm");
+        StartCoroutine("FadeOutStart_farm");
     }
     public void CardFlip1()
     {
@@ -720,6 +723,33 @@ public class gachaControl : MonoBehaviour
 
         }
         timers = 0;
+    }
+
+    public IEnumerator FadeInStart()
+    {
+        fadeImg.SetActive(true);
+        for (float f = 1f; f > 0; f -= 0.02f)
+        {
+            Color c = fadeImg.GetComponent<Image>().color;
+            c.a = f;
+            fadeImg.GetComponent<Image>().color = c;
+            yield return null;
+        }
+        yield return new WaitForSeconds(1);
+        fadeImg.SetActive(false);
+    }
+    //페이드 인
+    public IEnumerator FadeOutStart_farm()
+    {
+        fadeImg.SetActive(true);
+        for (float f = 0f; f < 1; f += 0.02f)
+        {
+            Color c = fadeImg.GetComponent<Image>().color;
+            c.a = f;
+            fadeImg.GetComponent<Image>().color = c;
+            yield return null;
+        }
+        SceneManager.LoadScene("farm");
     }
 
 }
