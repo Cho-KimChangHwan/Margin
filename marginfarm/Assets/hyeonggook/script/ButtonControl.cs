@@ -846,6 +846,16 @@ public class ButtonControl : MonoBehaviour
             GameManager.instance.UserHorse[i].agility = GameManager.instance.UserHorse[i + 1].agility;
             GameManager.instance.UserHorse[i].consis = GameManager.instance.UserHorse[i + 1].consis;
             GameManager.instance.UserHorse[i].items = GameManager.instance.UserHorse[i + 1].items;
+
+            for(int n = 0; n < 4; n++)
+            {
+                GameManager.instance.WearingItem[(horse_n * 4) + n].item_key = GameManager.instance.WearingItem[((horse_n + 1) * 4) + n].item_key;
+                GameManager.instance.WearingItem[(horse_n * 4) + n].speed = GameManager.instance.WearingItem[((horse_n + 1) * 4) + n].speed;
+                GameManager.instance.WearingItem[(horse_n * 4) + n].accel = GameManager.instance.WearingItem[((horse_n + 1) * 4) + n].accel;
+                GameManager.instance.WearingItem[(horse_n * 4) + n].hp = GameManager.instance.WearingItem[((horse_n + 1) * 4) + n].hp;
+                GameManager.instance.WearingItem[(horse_n * 4) + n].agility = GameManager.instance.WearingItem[((horse_n + 1) * 4) + n].agility;
+                GameManager.instance.WearingItem[(horse_n * 4) + n].consis = GameManager.instance.WearingItem[((horse_n + 1) * 4) + n].consis;
+            }
         }
 
         GameManager.instance.UserHorse[GameManager.instance.many - 1].name = "";
@@ -857,6 +867,16 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.UserHorse[GameManager.instance.many - 1].consis = -1;
 
         GameManager.instance.many = GameManager.instance.many - 1;
+
+        for (int n = 0; n < 4; n++)
+        {
+            GameManager.instance.WearingItem[(GameManager.instance.many * 4) + n].item_key = 0;
+            GameManager.instance.WearingItem[(GameManager.instance.many * 4) + n].speed = 0;
+            GameManager.instance.WearingItem[(GameManager.instance.many * 4) + n].accel = 0;
+            GameManager.instance.WearingItem[(GameManager.instance.many * 4) + n].hp = 0;
+            GameManager.instance.WearingItem[(GameManager.instance.many * 4) + n].agility = 0;
+            GameManager.instance.WearingItem[(GameManager.instance.many * 4) + n].consis = 0;
+        }
 
         StartCoroutine("FadeOutStart_restart");
     }
@@ -922,7 +942,7 @@ public class ButtonControl : MonoBehaviour
             fadeImg.GetComponent<Image>().color = c;
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
         fadeImg.SetActive(false);
     }
 

@@ -36,7 +36,7 @@ public class aftermain : MonoBehaviour
             fadeImg.GetComponent<Image>().color = c;
             yield return null;
         }
-        yield return new WaitForSeconds(1);
+        
         fadeImg.SetActive(false);
     }
 
