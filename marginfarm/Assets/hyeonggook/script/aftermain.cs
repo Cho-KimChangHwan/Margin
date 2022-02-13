@@ -29,7 +29,7 @@ public class aftermain : MonoBehaviour
     public IEnumerator FadeInStart()
     {
         fadeImg.SetActive(true);
-        for (float f = 1f; f > 0; f -= 0.02f)
+        for (float f = 1f; f > 0; f -= GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;
@@ -44,7 +44,7 @@ public class aftermain : MonoBehaviour
     public IEnumerator FadeOutStart_farm()
     {
         fadeImg.SetActive(true);
-        for (float f = 0f; f < 1; f += 0.02f)
+        for (float f = 0f; f < 1; f += GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;
@@ -57,7 +57,7 @@ public class aftermain : MonoBehaviour
     public IEnumerator FadeOutStart_race()
     {
         fadeImg.SetActive(true);
-        for (float f = 0f; f < 1; f += 0.02f)
+        for (float f = 0f; f < 1; f += GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;
@@ -70,7 +70,7 @@ public class aftermain : MonoBehaviour
     public IEnumerator FadeOutStart_trade()
     {
         fadeImg.SetActive(true);
-        for (float f = 0f; f < 1; f += 0.02f)
+        for (float f = 0f; f < 1; f += GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;

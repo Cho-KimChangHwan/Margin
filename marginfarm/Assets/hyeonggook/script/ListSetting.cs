@@ -18,6 +18,7 @@ public class ListSetting : MonoBehaviour
 
     public int check;
     public int con;
+    public int[] layer_num = { 0, 11, 10, 9, 8, 5, 4 };
 
     // Start is called before the first frame update
     void Start()
@@ -39,24 +40,28 @@ public class ListSetting : MonoBehaviour
                 GameObject under1 = GameObject.Find("hat_h" + i.ToString());
                 GameObject temp1 = Instantiate(GameManager.instance.hat_item[GameManager.instance.WearingItem[(i - 1) * 4].item_key], under1.transform.position, Quaternion.Euler(new Vector3(38f, -97f, -6f)));
                 temp1.transform.parent = under1.transform;
+                temp1.layer = layer_num[i];
             }
             if (GameManager.instance.WearingItem[(i - 1) * 4 + 1].item_key != 0)
             {
                 GameObject under2 = GameObject.Find("glasses_h" + i.ToString());
                 GameObject temp2 = Instantiate(GameManager.instance.glasses_item[GameManager.instance.WearingItem[(i - 1) * 4 + 1].item_key / 10], under2.transform.position, Quaternion.Euler(new Vector3(20f, -87f, -1f)));
                 temp2.transform.parent = under2.transform;
+                temp2.layer = layer_num[i];
             }
             if(GameManager.instance.WearingItem[(i - 1) * 4 + 2].item_key != 0)
             {
                 GameObject under3 = GameObject.Find("back_h" + i.ToString());
                 GameObject temp3 = Instantiate(GameManager.instance.back_item[GameManager.instance.WearingItem[(i - 1) * 4 + 2].item_key / 100], under3.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
                 temp3.transform.parent = under3.transform;
+                temp3.layer = layer_num[i];
             }
             if(GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key != 0)
             {
                 GameObject under4 = GameObject.Find("shoes_h" + i.ToString());
                 GameObject temp4 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000], under4.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
                 temp4.transform.parent = under4.transform;
+                temp4.layer = layer_num[i];
             }
         }
 

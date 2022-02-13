@@ -36,13 +36,17 @@ public class ButtonControl : MonoBehaviour
     public Image cap_b;
 
     public Sprite[] captain_check = new Sprite[2];
-
     public Texture[] horse_render = new Texture[6];
+    public int[] layer_num = { 0, 11, 10, 9, 8, 5, 4 };
 
     public Image slot_back;
     public Image slot_hat;
     public Image slot_glasses;
     public Image slot_shoes;
+    public Button slot_back_b;
+    public Button slot_hat_b;
+    public Button slot_glasses_b;
+    public Button slot_shoes_b;
 
     public RawImage horse_image;
     public Button item_b;
@@ -75,10 +79,10 @@ public class ButtonControl : MonoBehaviour
     public GameObject picture;
     public Transform camera_po;
 
-    public void Start()
+    void Start()
     {
         spec_open_check = true;
-        StartCoroutine("FadeInStart");
+        StartCoroutine(FadeInStart());
     }
     public void specview_close()  //스펙뷰 닫으면 카메라 원위치 이동시키고 창 닫기
     {
@@ -273,41 +277,53 @@ public class ButtonControl : MonoBehaviour
         slot_hat = GameObject.Find("slot_hat_i").GetComponent<Image>();
         slot_glasses = GameObject.Find("slot_glasses_i").GetComponent<Image>();
         slot_shoes = GameObject.Find("slot_shoes_i").GetComponent<Image>();
+        slot_back_b = GameObject.Find("slot_back").GetComponent<Button>();
+        slot_hat_b = GameObject.Find("slot_hat").GetComponent<Button>();
+        slot_glasses_b = GameObject.Find("slot_glasses").GetComponent<Button>();
+        slot_shoes_b = GameObject.Find("slot_shoes").GetComponent<Button>();
 
         if (GameManager.instance.WearingItem[(sel_num * 4)].item_key != 0)
         {
             slot_hat.sprite = GameManager.instance.hat_item_card[GameManager.instance.WearingItem[(sel_num * 4)].item_key];
+            slot_hat_b.interactable = true;
         }
         else
         {
             slot_hat.sprite = GameManager.instance.hat_item_card[0];
+            slot_hat_b.interactable = false;
         }
 
         if (GameManager.instance.WearingItem[(sel_num * 4) + 1].item_key != 0)
         {
             slot_glasses.sprite = GameManager.instance.glasses_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 1].item_key / 10];
+            slot_glasses_b.interactable = true;
         }
         else
         {
             slot_glasses.sprite = GameManager.instance.glasses_item_card[0];
+            slot_glasses_b.interactable = false;
         }
 
         if (GameManager.instance.WearingItem[(sel_num * 4) + 2].item_key != 0)
         {
             slot_back.sprite = GameManager.instance.back_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 2].item_key / 100];
+            slot_back_b.interactable = true;
         }
         else
         {
             slot_back.sprite = GameManager.instance.back_item_card[0];
+            slot_back_b.interactable = false;
         }
 
         if (GameManager.instance.WearingItem[(sel_num * 4) + 3].item_key != 0)
         {
             slot_shoes.sprite = GameManager.instance.shoes_item_card[GameManager.instance.WearingItem[(sel_num * 4) + 3].item_key / 1000];
+            slot_shoes_b.interactable = true;
         }
         else
         {
             slot_shoes.sprite = GameManager.instance.shoes_item_card[0];
+            slot_shoes_b.interactable = false;
         }
     }
 
@@ -614,6 +630,7 @@ public class ButtonControl : MonoBehaviour
                 GameObject under = GameObject.Find("hat_h" + horse_ss.ToString());
                 GameObject temp = Instantiate(GameManager.instance.hat_item[GameManager.instance.UserItem[select_num].key], under.transform.position, Quaternion.Euler(new Vector3(38f, -97f, -6f)));
                 temp.transform.parent = under.transform;
+                temp.layer = layer_num[horse_ss];
 
                 what_item = 0;
                 install(what_item, select_num);
@@ -632,8 +649,9 @@ public class ButtonControl : MonoBehaviour
                 }
 
                 GameObject under = GameObject.Find("glasses_h" + horse_ss.ToString());
-                GameObject temp = Instantiate(GameManager.instance.glasses_item[GameManager.instance.UserItem[select_num].key / 10], under.transform.position, Quaternion.Euler(new Vector3(20f, -87f, -1f)));
-                temp.transform.parent = under.transform;
+                GameObject tempa = Instantiate(GameManager.instance.glasses_item[GameManager.instance.UserItem[select_num].key / 10], under.transform.position, Quaternion.Euler(new Vector3(20f, -87f, -1f)));
+                tempa.transform.parent = under.transform;
+                tempa.layer = layer_num[horse_ss];
 
                 what_item = 1;
                 install(what_item, select_num);
@@ -651,8 +669,9 @@ public class ButtonControl : MonoBehaviour
                 }
 
                 GameObject under = GameObject.Find("back_h" + horse_ss.ToString());
-                GameObject temp = Instantiate(GameManager.instance.back_item[GameManager.instance.UserItem[select_num].key / 100], under.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
-                temp.transform.parent = under.transform;
+                GameObject tempb = Instantiate(GameManager.instance.back_item[GameManager.instance.UserItem[select_num].key / 100], under.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
+                tempb.transform.parent = under.transform;
+                tempb.layer = layer_num[horse_ss];
 
                 what_item = 2;
                 install(what_item, select_num);
@@ -670,8 +689,9 @@ public class ButtonControl : MonoBehaviour
                 }
 
                 GameObject under = GameObject.Find("shoes_h" + horse_ss.ToString());
-                GameObject temp = Instantiate(GameManager.instance.shoes_item[GameManager.instance.UserItem[select_num].key / 1000], under.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
-                temp.transform.parent = under.transform;
+                GameObject tempc = Instantiate(GameManager.instance.shoes_item[GameManager.instance.UserItem[select_num].key / 1000], under.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
+                tempc.transform.parent = under.transform;
+                tempc.layer = layer_num[horse_ss];
 
                 what_item = 3;
                 install(what_item, select_num);
@@ -809,6 +829,10 @@ public class ButtonControl : MonoBehaviour
         {
             senderror("대표말은 보낼 수 없습니다.");
         }
+        else if (GameManager.instance.WearingItem[(GameManager.instance.select * 4)].item_key != 0 || GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 1].item_key != 0 || GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 2].item_key != 0 || GameManager.instance.WearingItem[(GameManager.instance.select * 4) + 3].item_key != 0)
+        {
+            senderror("장착된 아이템이 있습니다.");
+        }
         else
         {
             sendcheck(GameManager.instance.UserHorse[GameManager.instance.select].name + " 말을 보내시겠습니까?");
@@ -818,6 +842,7 @@ public class ButtonControl : MonoBehaviour
 
     public void click_bye_yes()
     {
+        
         byemyhorse();
 
         //GameObject error_p = GameObject.Find("check");
@@ -935,7 +960,7 @@ public class ButtonControl : MonoBehaviour
     public IEnumerator FadeInStart()
     {
         fadeImg.SetActive(true);
-        for (float f = 1f; f > 0; f -= 0.02f)
+        for (float f = 1f; f > 0; f -= GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;
@@ -950,7 +975,7 @@ public class ButtonControl : MonoBehaviour
     public IEnumerator FadeOutStart_main()
     {
         fadeImg.SetActive(true);
-        for (float f = 0f; f < 1; f += 0.02f)
+        for (float f = 0f; f < 1; f += GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;
@@ -963,7 +988,7 @@ public class ButtonControl : MonoBehaviour
     public IEnumerator FadeOutStart_gacha()
     {
         fadeImg.SetActive(true);
-        for (float f = 0f; f < 1; f += 0.02f)
+        for (float f = 0f; f < 1; f += GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;
@@ -976,7 +1001,7 @@ public class ButtonControl : MonoBehaviour
     public IEnumerator FadeOutStart_restart()
     {
         fadeImg.SetActive(true);
-        for (float f = 0f; f < 1; f += 0.02f)
+        for (float f = 0f; f < 1; f += GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;

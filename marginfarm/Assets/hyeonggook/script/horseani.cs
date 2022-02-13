@@ -22,7 +22,7 @@ public class horseani : MonoBehaviour
         }
         else
         {
-            randomNum = Random.Range(0, 7);
+            randomNum = Random.Range(0, 8);
         }
 
         anim.SetInteger("state", randomNum);

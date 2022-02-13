@@ -125,6 +125,15 @@ public class gachaControl : MonoBehaviour
         iTween.MoveTo(zero, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
         iTween.MoveTo(item_first, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
     }
+
+    public void item_after_back()
+    {
+        GameObject zero = GameObject.Find("item_second");
+        GameObject item_first = GameObject.Find("item_first");
+
+        iTween.MoveTo(zero, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(item_first, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
     public void hat_click()
     {
         itemselect = 1;
@@ -513,9 +522,9 @@ public class gachaControl : MonoBehaviour
     public void save_click()
     {
         newname = GameObject.Find("name_input").GetComponent<InputField>();
-        if (newname.text == "")
+        if (string.IsNullOrWhiteSpace(newname.text) || string.IsNullOrEmpty(newname.text))
         {
-            senderror("말 이름을 입력해주세요.");
+            senderror("공백은 입력할 수 없습니다.");
         }
         else
         {
@@ -728,21 +737,21 @@ public class gachaControl : MonoBehaviour
     public IEnumerator FadeInStart()
     {
         fadeImg.SetActive(true);
-        for (float f = 1f; f > 0; f -= 0.02f)
+        for (float f = 1f; f > 0; f -= GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;
             fadeImg.GetComponent<Image>().color = c;
             yield return null;
         }
-        //yield return new WaitForSeconds(1);
+        
         fadeImg.SetActive(false);
     }
     //페이드 인
     public IEnumerator FadeOutStart_farm()
     {
         fadeImg.SetActive(true);
-        for (float f = 0f; f < 1; f += 0.02f)
+        for (float f = 0f; f < 1; f += GameManager.instance.fade_speed)
         {
             Color c = fadeImg.GetComponent<Image>().color;
             c.a = f;

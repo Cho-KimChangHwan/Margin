@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
     public bool inven_check;
 
     public int mytern;
+    public float fade_speed;
 
     public Texture[] hMats = new Texture[8];
     public int[] lineKey = new int[4];
@@ -173,6 +174,7 @@ public class GameManager : MonoBehaviour
         select = -1;
         money = 3000;
         itemMany = 0;
+        fade_speed = 0.12f;
 
         instance = this;
     }
