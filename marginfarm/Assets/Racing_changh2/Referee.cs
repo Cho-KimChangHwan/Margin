@@ -40,7 +40,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     
     void FixedUpdate()
     {
-        GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
+        //GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
         photonView.RPC("ReadySet", RpcTarget.All , GameManager.instance.mytern - 1);
         Debug.Log("0번레디"+GameManager.instance.horsesReady[0]);
         Debug.Log("1번레디"+GameManager.instance.horsesReady[1]);
