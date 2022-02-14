@@ -19,6 +19,9 @@ public class Referee : MonoBehaviourPunCallbacks
     bool everyReady = false; 
     string R;
     public string myLocation = "First";
+    int tmpindex;
+    public string tmpLocation;
+    public Vector3 tmpVector;
     public List<string> Final = new List<string>(); 
     List<string> horseRanking = new List<string>();
     CountDown countDown;
@@ -66,6 +69,8 @@ public class Referee : MonoBehaviourPunCallbacks
             {
                 
                 photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
+                 GameManager.instance.horsesLocation[tmpindex] = tmpLocation;
+                 GameManager.instance.horsesPosition[tmpindex] = tmpVector;
                 List<int> First = new List<int>();
                 List<int> Second = new List<int>();
                 List<int> Third = new List<int>();
@@ -204,8 +209,10 @@ public class Referee : MonoBehaviourPunCallbacks
     [PunRPC]
      void LocationSet(string myLocation,Vector3 currentPosition, int pNum)
      {
-        Debug.Log(pNum);
-        GameManager.instance.horsesLocation[pNum] = myLocation;
-        GameManager.instance.horsesPosition[pNum] = currentPosition;
+        // GameManager.instance.horsesLocation[pNum] = myLocation;
+        // GameManager.instance.horsesPosition[pNum] = currentPosition;
+        tmpindex = pNum;
+        tmpLocation = myLocation;
+        tmpVector = currentPosition;
      }
 }
