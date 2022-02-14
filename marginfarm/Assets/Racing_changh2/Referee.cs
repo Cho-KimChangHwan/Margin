@@ -33,7 +33,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
         myLocation = horseStatus.myLocation;
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
-        horses = new GameObject[2];
+        horses = new GameObject[3];
 
     }
 
