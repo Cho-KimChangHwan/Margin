@@ -64,6 +64,7 @@ public class gachaControl : MonoBehaviour
     public Button go_item;
 
     public GameObject fadeImg;
+    public Text money_t;
     /*
     public int[] speed_t = new int[3]; 0번인덱스
     public int[] accel_t = new int[3]; 1번인덱스
@@ -76,6 +77,9 @@ public class gachaControl : MonoBehaviour
     {
         m_Reference = FirebaseDatabase.DefaultInstance.RootReference;
         StartCoroutine("FadeInStart");
+
+        Text money_t = GameObject.Find("money_t").GetComponent<Text>();
+        money_t.text = GameManager.instance.money.ToString();
     }
 
     public void horse_gacha()
@@ -179,12 +183,8 @@ public class gachaControl : MonoBehaviour
 
     public void gacha_b1_click()
     {
-        GameObject first = GameObject.Find("first");
-        GameObject second = GameObject.Find("second");
-      
-        iTween.MoveTo(first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
-        iTween.MoveTo(second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
-      
+
+        sendcheck("500골드로 뽑으시겠습니까?");
 
         classnum = 1;
     }
@@ -732,6 +732,30 @@ public class gachaControl : MonoBehaviour
 
         }
         timers = 0;
+    }
+
+    public void sendcheck(string message)
+    {
+        GameObject error_p = GameObject.Find("check");
+        Text error_m = GameObject.Find("check_m").GetComponent<Text>();
+
+        error_m.text = message;
+        iTween.MoveTo(error_p, iTween.Hash("y", 680, "delay", 0, "time", 0.5f));
+    }
+
+    public void check_yes()
+    {
+        GameObject first = GameObject.Find("first");
+        GameObject second = GameObject.Find("second");
+      
+        iTween.MoveTo(first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+    }
+
+    public void click_bye_no()
+    {
+        GameObject error_p = GameObject.Find("check");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
     }
 
     public IEnumerator FadeInStart()

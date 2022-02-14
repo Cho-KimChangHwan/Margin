@@ -857,6 +857,7 @@ public class ButtonControl : MonoBehaviour
         GameObject error_p = GameObject.Find("check");
         iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
     }
+    
     public void byemyhorse()
     {
         int horse_n = GameManager.instance.select;
