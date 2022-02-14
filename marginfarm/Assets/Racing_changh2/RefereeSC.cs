@@ -182,7 +182,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks
             if ((Final.Count == horseRanking.Count) && horseStatus.horseLocation["Final"])
             {
                 endLog.myN = GameManager.instance.mytern - 1;
-                //endLog.isEnd = true;
+                endLog.isEnd = true;
             }
             horseRanking.Clear();
         }
