@@ -26,7 +26,7 @@ public class Horse_Rotate : MonoBehaviour
             Debug.Log(mouseposition.ToString());
             if(mouseposition.x > 5.0f && mouseposition.x<425.0f)
             {
-                if(mouseposition.y > 145.0f && mouseposition.y <465.0f)
+                if(mouseposition.y > 140.0f && mouseposition.y <490.0f)
                 {
                     Debug.Log("ss");
                     isclick = true;       
