@@ -19,7 +19,7 @@ public class Horse_Rotate : MonoBehaviour
     void Update()
     {
         
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButtonDown(0))
         {
             mouseposition = Input.mousePosition;
             //mouseposition = camera.ScreenToWorldPoint(mouseposition);
@@ -33,7 +33,7 @@ public class Horse_Rotate : MonoBehaviour
                 }
             }
         }
-        else
+        else if(Input.GetMouseButtonUp(0))
         {
             isclick = false;
         }
