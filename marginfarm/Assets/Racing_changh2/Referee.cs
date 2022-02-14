@@ -69,8 +69,6 @@ public class Referee : MonoBehaviourPunCallbacks
             {
                 
                 photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
-                 GameManager.instance.horsesLocation[tmpindex] = tmpLocation;
-                 GameManager.instance.horsesPosition[tmpindex] = tmpVector;
                 List<int> First = new List<int>();
                 List<int> Second = new List<int>();
                 List<int> Third = new List<int>();
@@ -209,10 +207,7 @@ public class Referee : MonoBehaviourPunCallbacks
     [PunRPC]
      void LocationSet(string myLocation,Vector3 currentPosition, int pNum)
      {
-        // GameManager.instance.horsesLocation[pNum] = myLocation;
-        // GameManager.instance.horsesPosition[pNum] = currentPosition;
-        tmpindex = pNum;
-        tmpLocation = myLocation;
-        tmpVector = currentPosition;
+         GameManager.instance.horsesLocation[pNum] = myLocation;
+         GameManager.instance.horsesPosition[pNum] = currentPosition;
      }
 }
