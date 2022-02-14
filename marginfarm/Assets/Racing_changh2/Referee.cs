@@ -175,12 +175,12 @@ public class Referee : MonoBehaviourPunCallbacks
                 }
                 photonView.RPC("RankingSet", RpcTarget.AllBuffered, R);
             }
-            Debug.Log("총 파이널"+Final.Count);
-            Debug.Log("내 홀스 파이널?"+horseStatus.horseLocation["Final"]);
+            //Debug.Log("총 파이널"+Final.Count);
+            //Debug.Log("내 홀스 파이널?"+horseStatus.horseLocation["Final"]);
             if ((Final.Count == horseRanking.Count) && horseStatus.horseLocation["Final"])
             {
                 endLog.myN = GameManager.instance.mytern - 1;
-                endLog.isEnd = true;
+                //endLog.isEnd = true;
             }
             horseRanking.Clear();
         }
@@ -203,7 +203,8 @@ public class Referee : MonoBehaviourPunCallbacks
     }
     [PunRPC]
      void LocationSet(string myLocation,Vector3 currentPosition, int pNum)
-     {   
+     {
+        Debug.Log(pNum);
         GameManager.instance.horsesLocation[pNum] = myLocation;
         GameManager.instance.horsesPosition[pNum] = currentPosition;
      }
