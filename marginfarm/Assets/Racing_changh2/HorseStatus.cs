@@ -121,17 +121,38 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
                 if (GameManager.instance.mytern - 1 == 0)
                 {
-                    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+                    if (photonView.IsMine)
+                    {
+                        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[0]]);
+                    }
+                    else
+                    {
+                        photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+                    }
                     photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 1f)); //파랑
                 }
                 else if (GameManager.instance.mytern - 1 == 1)
                 {
-                    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
+                    if (photonView.IsMine)
+                    {
+                        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[1]]);
+                    }
+                    else
+                    {
+                        photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
+                    }
                     photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 0f)); //검정
                 }
                 else if (GameManager.instance.mytern - 1 == 2)
                 {
-                    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
+                    if (photonView.IsMine)
+                    {
+                        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[GameManager.instance.lineKey[2]]);
+                    }
+                    else
+                    {
+                        photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
+                    }
                     photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 1f, 0f)); //초록
                 }
                 //else if (GameManager.instance.mytern - 1 == 3)
