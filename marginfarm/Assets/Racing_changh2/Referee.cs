@@ -43,151 +43,150 @@ public class Referee : MonoBehaviourPunCallbacks //, IPunObservable
         Debug.Log("0번째" + GameManager.instance.lineKey[0]);
         Debug.Log("1번쨰" + GameManager.instance.lineKey[1]);
         Debug.Log("2번째" + GameManager.instance.lineKey[2]);
-        if (!everyReady) 
+
+        GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
+        photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1, true);
+        if (!everyReady)
         {
-            GameManager.instance.horsesReady[GameManager.instance.mytern-1] = true;
-            photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern-1 ,true);   
             bool tmpReady = true;
-            for(int i=0; i < GameManager.instance.horsesReady.Length ; i++)
+            for (int i = 0; i < GameManager.instance.horsesReady.Length; i++)
             {
                 if (!GameManager.instance.horsesReady[i])
                 {
-
-
                     tmpReady = false;
-                   // Debug.Log(i + "에"+GameManager.instance.horsesReady[i]);
                 }
             }
-            if(tmpReady)
+            if (tmpReady)
             {
                 everyReady = true;
                 countDown.isReady = true;
             }
         }
-
-        myLocation = horseStatus.myLocation;
-        //if ((GameManager.instance.mytern - 1)!=0)
+        else
         {
-
-            photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition, GameManager.instance.mytern - 1);
-            GameManager.instance.horsesLocation[GameManager.instance.mytern-1] = myLocation;
-            GameManager.instance.horsesPosition[GameManager.instance.mytern-1] = horseStatus.currentPosition;
-            //Debug.Log(GameManager.instance.horsesLocation[2]);
-            List<int> First = new List<int>(); 
-            List<int> Second = new List<int>(); 
-            List<int> Third = new List<int>(); 
-            List<int> Fourth = new List<int>();
-
-            for(int playerNum =0;playerNum < GameManager.instance.horsesLocation.Length;playerNum++)
+            myLocation = horseStatus.myLocation;
+            //if ((GameManager.instance.mytern - 1)!=0)
             {
-                if(Final.Contains(playerNum.ToString()))
+
+                photonView.RPC("HorsesSet", RpcTarget.AllBuffered, myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
+                GameManager.instance.horsesLocation[GameManager.instance.mytern - 1] = myLocation;
+                GameManager.instance.horsesPosition[GameManager.instance.mytern - 1] = horseStatus.currentPosition;
+                List<int> First = new List<int>();
+                List<int> Second = new List<int>();
+                List<int> Third = new List<int>();
+                List<int> Fourth = new List<int>();
+
+                for (int playerNum = 0; playerNum < GameManager.instance.horsesLocation.Length; playerNum++)
+                {
+                    if (Final.Contains(playerNum.ToString()))
                         continue;
-                if(GameManager.instance.horsesLocation[playerNum] == "First")
-                {
-                    First.Add(playerNum);
+                    if (GameManager.instance.horsesLocation[playerNum] == "First")
+                    {
+                        First.Add(playerNum);
+                    }
+                    else if (GameManager.instance.horsesLocation[playerNum] == "Second")
+                    {
+                        Second.Add(playerNum);
+                    }
+                    else if (GameManager.instance.horsesLocation[playerNum] == "Third")
+                    {
+                        Third.Add(playerNum);
+                    }
+                    else if (GameManager.instance.horsesLocation[playerNum] == "Fourth")
+                    {
+                        Fourth.Add(playerNum);
+                    }
+                    else if (GameManager.instance.horsesLocation[playerNum] == "Final")
+                    {
+                        Final.Add(playerNum.ToString());
+                    }
                 }
-                else if(GameManager.instance.horsesLocation[playerNum] == "Second")
+                for (int i = 0; i < Final.Count; i++)
                 {
-                    Second.Add(playerNum);
-                }
-                else if(GameManager.instance.horsesLocation[playerNum] == "Third")
-                {
-                    Third.Add(playerNum);
-                }
-                else if(GameManager.instance.horsesLocation[playerNum] == "Fourth")
-                {
-                    Fourth.Add(playerNum);
-                }
-                else if(GameManager.instance.horsesLocation[playerNum] == "Final")
-                {
-                    Final.Add(playerNum.ToString());
-                }
-            }
-            for(int i =0; i < Final.Count ; i++)
-            {
-                if(horseRanking.Contains(Final[i]))
-                    continue;
+                    if (horseRanking.Contains(Final[i]))
+                        continue;
 
-                horseRanking.Add(Final[i]);
-            }
-            for(int i =0; i <Fourth.Count; i++)
-            {
-                int max = i;
-                for( int j = i+1; j<Fourth.Count;j++)
-                {
-                    if( GameManager.instance.horsesPosition[Fourth[max]].x <= GameManager.instance.horsesPosition[Fourth[j]].x)
-                        max = j;
+                    horseRanking.Add(Final[i]);
                 }
-                horseRanking.Add(Fourth[max].ToString());
-                int tmp;
-                tmp = Fourth[i];
-                Fourth[i] = Fourth[max];
-                Fourth[max] = tmp;
-        
-            }
-            for(int i =0; i <Third.Count; i++)
-            {
-                int min = i;
-                for( int j = i+1; j<Third.Count;j++)
+                for (int i = 0; i < Fourth.Count; i++)
                 {
-                    if( GameManager.instance.horsesPosition[Third[min]].z >= GameManager.instance.horsesPosition[Third[j]].z)
-                        min = j;
+                    int max = i;
+                    for (int j = i + 1; j < Fourth.Count; j++)
+                    {
+                        if (GameManager.instance.horsesPosition[Fourth[max]].x <= GameManager.instance.horsesPosition[Fourth[j]].x)
+                            max = j;
+                    }
+                    horseRanking.Add(Fourth[max].ToString());
+                    int tmp;
+                    tmp = Fourth[i];
+                    Fourth[i] = Fourth[max];
+                    Fourth[max] = tmp;
+
                 }
-                horseRanking.Add(Third[min].ToString());
-                int tmp;
-                tmp = Third[i];
-                Third[i] = Third[min];
-                Third[min] = tmp;
-                
-            }
-            for(int i =0; i <Second.Count; i++)
-            {
-                int min = i;
-                for( int j = i+1; j<Second.Count;j++)
+                for (int i = 0; i < Third.Count; i++)
                 {
-                    if( GameManager.instance.horsesPosition[Second[min]].x >= GameManager.instance.horsesPosition[Second[j]].x)
-                        min = j;
+                    int min = i;
+                    for (int j = i + 1; j < Third.Count; j++)
+                    {
+                        if (GameManager.instance.horsesPosition[Third[min]].z >= GameManager.instance.horsesPosition[Third[j]].z)
+                            min = j;
+                    }
+                    horseRanking.Add(Third[min].ToString());
+                    int tmp;
+                    tmp = Third[i];
+                    Third[i] = Third[min];
+                    Third[min] = tmp;
+
                 }
-                horseRanking.Add(Second[min].ToString());
-                int tmp;
-                tmp = Second[i];
-                Second[i] = Second[min];
-                Second[min] = tmp;
-                
-            }
-            for(int i =0; i <First.Count; i++)
-            {
-                int max = i;
-                for( int j = i+1; j<First.Count;j++)
+                for (int i = 0; i < Second.Count; i++)
                 {
-                    if( GameManager.instance.horsesPosition[First[max]].z <= GameManager.instance.horsesPosition[First[j]].z)
-                        max = j;
+                    int min = i;
+                    for (int j = i + 1; j < Second.Count; j++)
+                    {
+                        if (GameManager.instance.horsesPosition[Second[min]].x >= GameManager.instance.horsesPosition[Second[j]].x)
+                            min = j;
+                    }
+                    horseRanking.Add(Second[min].ToString());
+                    int tmp;
+                    tmp = Second[i];
+                    Second[i] = Second[min];
+                    Second[min] = tmp;
+
                 }
-                horseRanking.Add(First[max].ToString());
-                int tmp;
-                tmp = First[i];
-                First[i] = First[max];
-                First[max] = tmp;
-        
+                for (int i = 0; i < First.Count; i++)
+                {
+                    int max = i;
+                    for (int j = i + 1; j < First.Count; j++)
+                    {
+                        if (GameManager.instance.horsesPosition[First[max]].z <= GameManager.instance.horsesPosition[First[j]].z)
+                            max = j;
+                    }
+                    horseRanking.Add(First[max].ToString());
+                    int tmp;
+                    tmp = First[i];
+                    First[i] = First[max];
+                    First[max] = tmp;
+
+                }
+                R = "";
+                int rank = 1;
+                // for (int i = horseRanking.Count-1;  i >=0 ; i--)
+                // {
+                //     R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + "\n";
+                // }
+                for (int i = 0; i < horseRanking.Count; i++)
+                {
+                    R += rankColor[i] + (rank++).ToString() + " : Player" + (int.Parse(horseRanking[i]) + 1).ToString() + "</color> " + "\n";
+                }
+                photonView.RPC("RankingSet", RpcTarget.AllBuffered, R);
             }
-            R = "";
-            int rank = 1;
-            // for (int i = horseRanking.Count-1;  i >=0 ; i--)
-            // {
-            //     R += (rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() + "\n";
-            // }
-            for (int i = 0;  i < horseRanking.Count ; i++)
+            if ((Final.Count == horseRanking.Count) && horseStatus.horseLocation["Final"])
             {
-                R +=  rankColor[i] +(rank++).ToString() + " : Player"  +(int.Parse(horseRanking[i])+1).ToString() +"</color> " +"\n";
+                endLog.myN = GameManager.instance.mytern - 1;
+                endLog.isEnd = true;
             }
-            photonView.RPC("RankingSet", RpcTarget.AllBuffered,R);
+            horseRanking.Clear();
         }
-        if( (Final.Count == horseRanking.Count) && horseStatus.horseLocation["Final"])
-        {
-            endLog.myN = GameManager.instance.mytern-1;
-            endLog.isEnd = true;
-        }
-        horseRanking.Clear();
     }
     public void serverDisconnect() 
     {
