@@ -40,10 +40,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     
     void FixedUpdate()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            Debug.Log(GameManager.instance.lineKey[i]);
-        }
+        
         if(!everyReady) 
         {
             GameManager.instance.horsesReady[GameManager.instance.mytern-1] = true;
@@ -63,10 +60,10 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
         }
 
         myLocation = horseStatus.myLocation;
-        if ((GameManager.instance.mytern - 1)!=0)
+        //if ((GameManager.instance.mytern - 1)!=0)
         {
 
-            //photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition );
+            photonView.RPC("HorsesSet",RpcTarget.AllBuffered, myLocation , horseStatus.currentPosition, GameManager.instance.mytern - 1);
             GameManager.instance.horsesLocation[GameManager.instance.mytern-1] = myLocation;
             GameManager.instance.horsesPosition[GameManager.instance.mytern-1] = horseStatus.currentPosition;
             List<int> First = new List<int>(); 
@@ -183,7 +180,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             endLog.myN = GameManager.instance.mytern-1;
             endLog.isEnd = true;
         }
-        Debug.Log(GameManager.instance.horsesLocation[2]);
         horseRanking.Clear();
     }
     public void serverDisconnect() 
@@ -219,11 +215,11 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     {
         GameManager.instance.horsesReady[pNum] = ready;
     }
-    // [PunRPC]
-    // void HorsesSet(string myLocation,Vector3 currentPosition )
-    // {   
+    [PunRPC]
+     void HorsesSet(string myLocation,Vector3 currentPosition, int pNum)
+     {   
 
-    //     GameManager.instance.horsesLocation[GameManager.instance.mytern-1] = myLocation;
-    //     GameManager.instance.horsesPosition[GameManager.instance.myftern-1] = currentPosition;
-    // }
+        GameManager.instance.horsesLocation[pNum] = myLocation;
+        GameManager.instance.horsesPosition[pNum] = currentPosition;
+     }
 }
