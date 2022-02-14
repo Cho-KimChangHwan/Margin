@@ -45,8 +45,8 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     {
         if (!everyReady)
         {
-//            GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
-          //  photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
+            GameManager.instance.horseReady[GameManager.instance.mytern - 1] = true;
+            photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
           //  photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
             bool tmpReady = true;
             for (int i = 0; i < GameManager.instance.horseReady.Length; i++)
@@ -65,10 +65,10 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         }
         else
         {
-            if ((GameManager.instance.mytern - 1)!=0)
+            //if ((GameManager.instance.mytern - 1)!=0)
             {
                 
-                //photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
+                photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
                 List<int> First = new List<int>();
                 List<int> Second = new List<int>();
                 List<int> Third = new List<int>();
