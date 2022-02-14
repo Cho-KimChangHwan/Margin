@@ -43,7 +43,7 @@ public class Referee : MonoBehaviourPunCallbacks
     
     void Update()
     {
-        /*if (!everyReady)
+        if (!everyReady)
         {
             GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
             photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
@@ -62,8 +62,7 @@ public class Referee : MonoBehaviourPunCallbacks
                 countDown.isReady = true;
             }
         }
-        else*/
-        countDown.isReady = true;
+        else
         {
             //if ((GameManager.instance.mytern - 1)!=0)
             {
