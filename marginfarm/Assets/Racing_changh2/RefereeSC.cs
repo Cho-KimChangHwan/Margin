@@ -45,6 +45,8 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     {
         if (!everyReady)
         {
+            Debug.Log(GameManager.instance.horseLocation.Length +"로케");
+            Debug.Log(GameManager.instance.horsePosition.Length +"포지");
             GameManager.instance.horseReady[GameManager.instance.mytern - 1] = true;
             photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
           //  photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
@@ -65,7 +67,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         }
         else
         {
-            if ((GameManager.instance.mytern - 1)!=0)
+            //if ((GameManager.instance.mytern - 1)!=0)
             {
                 
                 photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
