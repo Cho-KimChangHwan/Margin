@@ -7,7 +7,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
 
-public class RefereeSC : MonoBehaviourPunCallbacks 
+public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
 {
     // Start is called before the first frame update
      // 4구간 나누고 , 4구간 안ㅔ서 좌표로 ㅏㅍ단 , 각으로 판단
@@ -46,8 +46,8 @@ public class RefereeSC : MonoBehaviourPunCallbacks
         if (!everyReady)
         {
 //            GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
-            photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
-            photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
+          //  photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
+          //  photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
             bool tmpReady = true;
             for (int i = 0; i < GameManager.instance.horsesReady.Length; i++)
             {
@@ -65,10 +65,10 @@ public class RefereeSC : MonoBehaviourPunCallbacks
         }
         else
         {
-            //if ((GameManager.instance.mytern - 1)!=0)
+            if ((GameManager.instance.mytern - 1)!=0)
             {
                 
-                photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
+                //photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
                 List<int> First = new List<int>();
                 List<int> Second = new List<int>();
                 List<int> Third = new List<int>();
@@ -176,7 +176,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks
                 {
                     R += rankColor[i] + (rank++).ToString() + " : Player" + (int.Parse(horseRanking[i]) + 1).ToString() + "</color> " + "\n";
                 }
-                photonView.RPC("RankingSet", RpcTarget.AllBuffered, R);
+               photonView.RPC("RankingSet", RpcTarget.AllBuffered, R);
             }
             //Debug.Log("총 파이널"+Final.Count);
             //Debug.Log("내 홀스 파이널?"+horseStatus.horseLocation["Final"]);
@@ -186,6 +186,23 @@ public class RefereeSC : MonoBehaviourPunCallbacks
                 endLog.isEnd = true;
             }
             horseRanking.Clear();
+        }
+    }
+     
+   public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+        if(stream.IsWriting)
+        {
+            stream.SendNext(GameManager.instance.mytern-1);
+            stream.SendNext(myLocation);
+            stream.SendNext(horseStatus.currentPosition);
+            stream.SendNext(R);
+        }
+        else{
+            int index = (int)stream.ReceiveNext();
+            GameManager.instance.horsesLocation[index] = (string)stream.ReceiveNext();
+            GameManager.instance.horsesPosition[index] = (Vector3)stream.ReceiveNext();
+            ranking.text = (string)stream.ReceiveNext();
+            GameManager.instance.horsesReady[index] = true;
         }
     }
     public void serverDisconnect()
