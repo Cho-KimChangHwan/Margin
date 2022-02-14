@@ -34,7 +34,7 @@ public class charIdGet : MonoBehaviourPunCallbacks
                 PhotonNetwork.Instantiate("myHorse", new Vector3(38.5f, 0f, -12.0f), Quaternion.Euler(new Vector3(0f, 180f, 0f)), 0);
                 break;
         }
-        GameManager.instance.lineKey[GameManager.instance.mytern - 1] = GameManager.instance.UserHorse[GameManager.instance.captain].key;
+        //GameManager.instance.lineKey[GameManager.instance.mytern - 1] = GameManager.instance.UserHorse[GameManager.instance.captain].key;
         photonView.RPC("matSet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1, GameManager.instance.UserHorse[GameManager.instance.captain].key);
     }
     [PunRPC]
