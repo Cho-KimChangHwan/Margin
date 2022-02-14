@@ -65,6 +65,12 @@ public class gachaControl : MonoBehaviour
 
     public GameObject fadeImg;
     public Text money_t;
+    public int usedmoney;
+
+    public Button horsebuttonactive1;
+    public Button horsebuttonactive2;
+    public Button horsebuttonactive3;
+    public Button homebotton;
     /*
     public int[] speed_t = new int[3]; 0번인덱스
     public int[] accel_t = new int[3]; 1번인덱스
@@ -183,12 +189,62 @@ public class gachaControl : MonoBehaviour
 
     public void gacha_b1_click()
     {
-
-        sendcheck("500골드로 뽑으시겠습니까?");
-
-        classnum = 1;
+        if(GameManager.instance.money >= 500)
+        {
+            sendcheck("500골드로 뽑으시겠습니까?");
+            usedmoney = 500;
+            classnum = 1;
+            horsebuttonactive1 = GameObject.Find("level1").GetComponent<Button>();
+            horsebuttonactive1.interactable = false;
+            horsebuttonactive2 = GameObject.Find("level2").GetComponent<Button>();
+            horsebuttonactive2.interactable = false;
+            horsebuttonactive3 = GameObject.Find("level3").GetComponent<Button>();
+            horsebuttonactive3.interactable = false;
+        }
+        else
+        {
+            senderror("골드가 부족합니다.");
+        }  
     }
-     
+    public void gacha_b2_click()
+    {
+        if (GameManager.instance.money >= 1000)
+        {
+            sendcheck("1000골드로 뽑으시겠습니까?");
+            usedmoney = 1000;
+            classnum = 2;
+            horsebuttonactive1 = GameObject.Find("level1").GetComponent<Button>();
+            horsebuttonactive1.interactable = false;
+            horsebuttonactive2 = GameObject.Find("level2").GetComponent<Button>();
+            horsebuttonactive2.interactable = false;
+            horsebuttonactive3 = GameObject.Find("level3").GetComponent<Button>();
+            horsebuttonactive3.interactable = false;
+        }
+        else
+        {
+            senderror("골드가 부족합니다.");
+        }
+    }
+    public void gacha_b3_click()
+    {
+        if (GameManager.instance.money >= 3000)
+        {
+            sendcheck("3000골드로 뽑으시겠습니까?");
+            usedmoney = 3000;
+            classnum = 3;
+            horsebuttonactive1 = GameObject.Find("level1").GetComponent<Button>();
+            horsebuttonactive1.interactable = false;
+            horsebuttonactive2 = GameObject.Find("level2").GetComponent<Button>();
+            horsebuttonactive2.interactable = false;
+            horsebuttonactive3 = GameObject.Find("level3").GetComponent<Button>();
+            horsebuttonactive3.interactable = false;
+        }
+        else
+        {
+            senderror("골드가 부족합니다.");
+        }
+    }
+
     public void horse_b1_click()
     {
         //세번째 창 값 설정
@@ -285,27 +341,27 @@ public class gachaControl : MonoBehaviour
 
             for(int j = 0; j <3; j++)  // speed 값 조절
             {
-                temp = Random.Range(1, 101);
+                temp = Random.Range(1, 31);
                 horse_spec_t[0, j] = temp;
             }
             for (int j = 0; j < 3; j++)   // accel 값 조절
             {
-                temp = Random.Range(1, 101);
+                temp = Random.Range(1, 31);
                 horse_spec_t[1, j] = temp;
             }
             for (int j = 0; j < 3; j++)   // hp 값 조절
             {
-                temp = Random.Range(1, 101);
+                temp = Random.Range(1, 31);
                 horse_spec_t[2, j] = temp;
             }
             for (int j = 0; j < 3; j++)   // agility 값 조절
             {
-                temp = Random.Range(1, 101);
+                temp = Random.Range(1, 31);
                 horse_spec_t[3, j] = temp;
             }
             for (int j = 0; j < 3; j++)   // consis 값 조절
             {
-                temp = Random.Range(1, 101);
+                temp = Random.Range(1, 31);
                 horse_spec_t[4, j] = temp;
             }
 
@@ -319,18 +375,117 @@ public class gachaControl : MonoBehaviour
                     gauge.text = horse_spec_t[n-1, m-1].ToString() + "/ 100";
                 }
             }
-
             CardFlip1();
             CardFlip2();
             CardFlip3();
         }
         else if(classnum == 2)
         {
+            int i = Random.Range(0, 8);
+            horse1.material.SetTexture("_MainTex", h_Texture[i]);
+            horse_style[0] = i;
+            i = Random.Range(0, 8);
+            horse2.material.SetTexture("_MainTex", h_Texture[i]);
+            horse_style[1] = i;
+            i = Random.Range(0, 8);
+            horse3.material.SetTexture("_MainTex", h_Texture[i]);
+            horse_style[2] = i;
 
+            int temp;
+
+            for (int j = 0; j < 3; j++)  // speed 값 조절
+            {
+                temp = Random.Range(1, 65);
+                horse_spec_t[0, j] = temp;
+            }
+            for (int j = 0; j < 3; j++)   // accel 값 조절
+            {
+                temp = Random.Range(1, 65);
+                horse_spec_t[1, j] = temp;
+            }
+            for (int j = 0; j < 3; j++)   // hp 값 조절
+            {
+                temp = Random.Range(1, 65);
+                horse_spec_t[2, j] = temp;
+            }
+            for (int j = 0; j < 3; j++)   // agility 값 조절
+            {
+                temp = Random.Range(1, 65);
+                horse_spec_t[3, j] = temp;
+            }
+            for (int j = 0; j < 3; j++)   // consis 값 조절
+            {
+                temp = Random.Range(1, 65);
+                horse_spec_t[4, j] = temp;
+            }
+
+            for (int m = 1; m < 4; m++)
+            {
+                for (int n = 1; n < 6; n++)
+                {
+                    bar = GameObject.Find("c" + m.ToString() + "_gauge" + n.ToString()).GetComponent<Image>();
+                    bar.fillAmount = horse_spec_t[n - 1, m - 1] / 100f;
+                    gauge = GameObject.Find("c" + m.ToString() + "_gauge_t" + n.ToString()).GetComponent<Text>();
+                    gauge.text = horse_spec_t[n - 1, m - 1].ToString() + "/ 100";
+                }
+            }
+            CardFlip1();
+            CardFlip2();
+            CardFlip3();
         }
         else if(classnum == 3)
         {
+            int i = Random.Range(0, 8);
+            horse1.material.SetTexture("_MainTex", h_Texture[i]);
+            horse_style[0] = i;
+            i = Random.Range(0, 8);
+            horse2.material.SetTexture("_MainTex", h_Texture[i]);
+            horse_style[1] = i;
+            i = Random.Range(0, 8);
+            horse3.material.SetTexture("_MainTex", h_Texture[i]);
+            horse_style[2] = i;
 
+            int temp;
+
+            for (int j = 0; j < 3; j++)  // speed 값 조절
+            {
+                temp = Random.Range(35, 101);
+                horse_spec_t[0, j] = temp;
+            }
+            for (int j = 0; j < 3; j++)   // accel 값 조절
+            {
+                temp = Random.Range(35, 101);
+                horse_spec_t[1, j] = temp;
+            }
+            for (int j = 0; j < 3; j++)   // hp 값 조절
+            {
+                temp = Random.Range(35, 101);
+                horse_spec_t[2, j] = temp;
+            }
+            for (int j = 0; j < 3; j++)   // agility 값 조절
+            {
+                temp = Random.Range(35, 101);
+                horse_spec_t[3, j] = temp;
+            }
+            for (int j = 0; j < 3; j++)   // consis 값 조절
+            {
+                temp = Random.Range(35, 101);
+                horse_spec_t[4, j] = temp;
+            }
+
+            for (int m = 1; m < 4; m++)
+            {
+                for (int n = 1; n < 6; n++)
+                {
+                    bar = GameObject.Find("c" + m.ToString() + "_gauge" + n.ToString()).GetComponent<Image>();
+                    bar.fillAmount = horse_spec_t[n - 1, m - 1] / 100f;
+                    gauge = GameObject.Find("c" + m.ToString() + "_gauge_t" + n.ToString()).GetComponent<Text>();
+                    gauge.text = horse_spec_t[n - 1, m - 1].ToString() + "/ 100";
+                }
+            }
+            CardFlip1();
+            CardFlip2();
+            CardFlip3();
         }
 
     }
@@ -528,6 +683,9 @@ public class gachaControl : MonoBehaviour
         }
         else
         {
+            homebotton = GameObject.Find("home_b").GetComponent<Button>();
+            homebotton.interactable = true;
+
             GameManager.instance.UserHorse[GameManager.instance.many].name = newname.text;
 
             GameManager.instance.UserHorse[GameManager.instance.many].key = horse_style[selectnum];
@@ -745,17 +903,35 @@ public class gachaControl : MonoBehaviour
 
     public void check_yes()
     {
+        GameObject error_p = GameObject.Find("check");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0, "time", 0.5f));
+
         GameObject first = GameObject.Find("first");
         GameObject second = GameObject.Find("second");
       
         iTween.MoveTo(first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
         iTween.MoveTo(second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+
+        GameManager.instance.money -= usedmoney;
+        Text money_t = GameObject.Find("money_t").GetComponent<Text>();
+        money_t.text = GameManager.instance.money.ToString();
+
+        homebotton = GameObject.Find("home_b").GetComponent<Button>();
+        homebotton.interactable = false;
+
     }
 
-    public void click_bye_no()
+    public void check_no()
     {
         GameObject error_p = GameObject.Find("check");
         iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
+
+        horsebuttonactive1 = GameObject.Find("level1").GetComponent<Button>();
+        horsebuttonactive1.interactable = true;
+        horsebuttonactive2 = GameObject.Find("level2").GetComponent<Button>();
+        horsebuttonactive2.interactable = true;
+        horsebuttonactive3 = GameObject.Find("level3").GetComponent<Button>();
+        horsebuttonactive3.interactable = true;
     }
 
     public IEnumerator FadeInStart()
