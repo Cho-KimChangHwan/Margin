@@ -14,7 +14,7 @@ public class EndLog : MonoBehaviour
     Text endText;
     Text record;
     Text ranking;
-    Referee referee;
+    RefereeSC referee;
     HorseStatus horsestatus;
     string rank;
     void Start()
@@ -27,7 +27,7 @@ public class EndLog : MonoBehaviour
         endText = GameObject.Find("EndText").GetComponent<Text>();
         record = GameObject.Find("Record").GetComponent<Text>();
         ranking = GameObject.Find("Ranking").GetComponent<Text>();
-        referee = GameObject.Find("Referee").GetComponent<Referee>();
+        referee = GameObject.Find("Referee").GetComponent<RefereeSC>();
         horsestatus = GameObject.FindWithTag("Player").GetComponent<HorseStatus>();
     }
 
