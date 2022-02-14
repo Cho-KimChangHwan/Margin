@@ -180,7 +180,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
             endLog.myN = GameManager.instance.mytern-1;
             endLog.isEnd = true;
         }
-        Debug.Log(GameManager.instance.horseLocation[2]);
+        Debug.Log(GameManager.instance.horsesLocation[2]);
         horseRanking.Clear();
     }
     public void serverDisconnect() 
