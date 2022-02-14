@@ -23,12 +23,11 @@ public class Horse_Rotate : MonoBehaviour
         {
             mouseposition = Input.mousePosition;
             //mouseposition = camera.ScreenToWorldPoint(mouseposition);
-            Debug.Log(mouseposition.ToString());
+            //Debug.Log(mouseposition.ToString());
             if(mouseposition.x > 5.0f && mouseposition.x<425.0f)
             {
                 if(mouseposition.y > 140.0f && mouseposition.y <490.0f)
                 {
-                    Debug.Log("ss");
                     isclick = true;       
                 }
             }
