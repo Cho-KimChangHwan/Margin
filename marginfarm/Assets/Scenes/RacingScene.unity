@@ -3123,8 +3123,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1419304212}
-  - component: {fileID: 1419304213}
+  - component: {fileID: 1419304215}
   - component: {fileID: 1419304214}
+  - component: {fileID: 1419304213}
   m_Layer: 0
   m_Name: Referee
   m_TagString: Untagged
@@ -3155,13 +3156,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1419304211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5615730c5615f486c91262ac9dce03af, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLocation: First
-  Final: []
-  rPoint1: 30
-  rPoint2: -15
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!114 &1419304214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3185,6 +3186,24 @@ MonoBehaviour:
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1419304215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419304211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99054cc75645b5a498b73fb133ddbdcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocation: First
+  tmpLocation: 
+  tmpVector: {x: 0, y: 0, z: 0}
+  Final: []
+  rPoint1: 30
+  rPoint2: -15
 --- !u!1001 &1423396877
 PrefabInstance:
   m_ObjectHideFlags: 0
