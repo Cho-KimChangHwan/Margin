@@ -8,7 +8,7 @@ public class Gohome : MonoBehaviour
 {
 
     public GameObject fadeImg;
-
+    bool isclicker = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +26,11 @@ public class Gohome : MonoBehaviour
         StartCoroutine(FadeOutStart_main());
     }
 
+    public void startselling()
+    {
+        if(isclicker == 1)
+        
+    }
     public IEnumerator FadeInStart()
     {
         fadeImg.SetActive(true);
