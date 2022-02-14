@@ -59,10 +59,10 @@ public class Referee : MonoBehaviourPunCallbacks// , IPunObservable
         }
         else
         {
-            //if ((GameManager.instance.mytern - 1)!=0)
+            if ((GameManager.instance.mytern - 1)!=0)
             {
 
-                photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
+                //photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
                 List<int> First = new List<int>();
                 List<int> Second = new List<int>();
                 List<int> Third = new List<int>();
@@ -187,7 +187,7 @@ public class Referee : MonoBehaviourPunCallbacks// , IPunObservable
         PhotonNetwork.Disconnect();
         SceneManager.LoadScene("aftermain");
     }
-    /*
+    
    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
         if(stream.IsWriting)
         {
@@ -203,7 +203,7 @@ public class Referee : MonoBehaviourPunCallbacks// , IPunObservable
             GameManager.instance.horsesPosition[index] = (Vector3)stream.ReceiveNext();
             ranking.text = (string)stream.ReceiveNext();
         }
-    }*/
+    }
     [PunRPC]
     void RankingSet(string r)
     {
@@ -218,7 +218,6 @@ public class Referee : MonoBehaviourPunCallbacks// , IPunObservable
     [PunRPC]
      void LocationSet(string myLocation,Vector3 currentPosition, int pNum)
      {   
-
         GameManager.instance.horsesLocation[pNum] = myLocation;
         GameManager.instance.horsesPosition[pNum] = currentPosition;
      }
