@@ -40,6 +40,7 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     
     void FixedUpdate()
     {
+        Debug.Log(GameManager.instance.mytern-1);
         if(!everyReady) 
         {
             GameManager.instance.horsesReady[GameManager.instance.mytern-1] = true;
@@ -220,6 +221,6 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     // {   
 
     //     GameManager.instance.horsesLocation[GameManager.instance.mytern-1] = myLocation;
-    //     GameManager.instance.horsesPosition[GameManager.instance.mytern-1] = currentPosition;
+    //     GameManager.instance.horsesPosition[GameManager.instance.myftern-1] = currentPosition;
     // }
 }
