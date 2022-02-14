@@ -22,7 +22,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             this.consis = c;
         }
     }
-    public bool isMeshChanged = false;
+
     public float s,a,h,ag,c;
     public int hApp;
     public int tern;
@@ -73,6 +73,28 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         InputVariable();
         if (SceneManager.GetActiveScene().name == "RacingScene")
         {
+            if (GameManager.instance.mytern - 1 == 0)
+            {
+                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+                photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 1f)); //파랑
+            }
+            else if (GameManager.instance.mytern - 1 == 1)
+            {
+                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
+                photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 0f)); //검정
+            }
+            else if (GameManager.instance.mytern - 1 == 2)
+            {
+                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
+                photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 1f, 0f)); //초록
+            }
+            //else if (GameManager.instance.mytern - 1 == 3)
+            //{
+            //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+            //    photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(1f,0f,0f)); //레드
+            //photonView.RPC("rpcName",RpcTarget.AllBuffered, GameManager.instance.UserHorse[3].name );
+            //}
+            //gameObject.name = status.name;
             animator = GetComponent<Animator>();
             count = GameObject.Find("Canvas").GetComponent<CountDown>();
             record = GameObject.Find("Record").GetComponent<Text>();
@@ -119,33 +141,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         {
             if (count.isStart)
             {
-                if (isMeshChanged == false)
-                {
-                    Debug.Log("씨발");
-                    if (GameManager.instance.mytern - 1 == 0)
-                    {
-                        photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
-                        photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 1f)); //파랑
-                    }
-                    else if (GameManager.instance.mytern - 1 == 1)
-                    {
-                        photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
-                        photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 0f)); //검정
-                    }
-                    else if (GameManager.instance.mytern - 1 == 2)
-                    {
-                        photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
-                        photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 1f, 0f)); //초록
-                    }
-                    //else if (GameManager.instance.mytern - 1 == 3)
-                    //{
-                    //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
-                    //    photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(1f,0f,0f)); //레드
-                    //photonView.RPC("rpcName",RpcTarget.AllBuffered, GameManager.instance.UserHorse[3].name );
-                    //}
-                    //gameObject.name = status.name;
-                    isMeshChanged = true;
-                }
                 if (photonView.IsMine)
                     countRecord();
                 
