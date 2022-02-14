@@ -82,6 +82,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 InputStatus();
                 ApplyConsis();
             }
+            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         }
     }
     [PunRPC]
@@ -120,7 +121,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             {
                 if (isMeshChanged == false)
                 {
-                    horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+                    
                     if (GameManager.instance.mytern - 1 == 0)
                     {
                         photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
