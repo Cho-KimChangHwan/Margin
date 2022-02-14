@@ -63,7 +63,7 @@ public class Referee : MonoBehaviourPunCallbacks //, IPunObservable
         {
             //if ((GameManager.instance.mytern - 1)!=0)
             {
-
+                GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
                 photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
                 List<int> First = new List<int>();
                 List<int> Second = new List<int>();
