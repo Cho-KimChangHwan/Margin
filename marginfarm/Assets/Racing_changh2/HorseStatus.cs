@@ -121,7 +121,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             {
                 if (isMeshChanged == false)
                 {
-                    
+                    Debug.Log("씨발");
                     if (GameManager.instance.mytern - 1 == 0)
                     {
                         photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
