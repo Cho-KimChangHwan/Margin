@@ -45,7 +45,8 @@ public class RefereeSC : MonoBehaviourPunCallbacks
     {
         if (!everyReady)
         {
-            GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
+//            GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
+            photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
             photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
             bool tmpReady = true;
             for (int i = 0; i < GameManager.instance.horsesReady.Length; i++)
