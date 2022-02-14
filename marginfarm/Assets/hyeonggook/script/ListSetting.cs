@@ -19,13 +19,16 @@ public class ListSetting : MonoBehaviour
     public int check;
     public int con;
     public int[] layer_num = { 0, 11, 10, 9, 8, 5, 4 };
+    public Text money_t;
 
     // Start is called before the first frame update
     void Start()
     {
-
         GameManager.instance.spec_check = false;
         GameManager.instance.inven_check = false;
+        Text money_t = GameObject.Find("money_t").GetComponent<Text>();
+
+        money_t.text = GameManager.instance.money.ToString();
 
         for (int i = 1; i <= GameManager.instance.many; i++) //말 그려주기 가지고 있는 말대로 피부 결정
         {
