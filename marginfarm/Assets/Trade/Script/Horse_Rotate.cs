@@ -20,11 +20,12 @@ public class Horse_Rotate : MonoBehaviour
        if(Input.GetMouseButton(0))
         {
            mouseposition = Input.mousePosition;
+           //mouseposition = camera.ScreenToWorldPoint(mouseposition);
+           Debug.Log(mouseposition.ToString());
            if(mouseposition.x > 1.0f && mouseposition.x<4.0f)
            {
                if(mouseposition.y < -0.5f && mouseposition.y >-2.5f)
                {
-                // mouseposition = camera.ScreenToWorldPoint(mouseposition);
                 transform.Rotate(0f, -Input.GetAxis("Mouse X") * rotateSpeed, 0f, Space.World);
                 //transform.Rotate(-Input.GetAxis("Mouse Y") * rotateSpeed, 0f, 0f);
                }
