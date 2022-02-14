@@ -104,9 +104,9 @@ public class GameManager : MonoBehaviour
     public Sprite[] glasses_item_card = new Sprite[10];
     public Sprite[] shoes_item_card = new Sprite[10];
 
-    public string[] horsesLocation = new string[4];
-    public Vector3[] horsesPosition = new Vector3[4];
-    public bool[] horsesReady = new bool[4];
+    public string[] horseLocation = new string[4];
+    public Vector3[] horsePosition = new Vector3[4];
+    public bool[] horseReady = new bool[4];
     public string ranking = "";
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
