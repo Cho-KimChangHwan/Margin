@@ -7,7 +7,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
 
-public class Referee : MonoBehaviourPunCallbacks //, IPunObservable
+public class Referee : MonoBehaviourPunCallbacks 
 {
     // Start is called before the first frame update
      // 4구간 나누고 , 4구간 안ㅔ서 좌표로 ㅏㅍ단 , 각으로 판단
@@ -185,28 +185,11 @@ public class Referee : MonoBehaviourPunCallbacks //, IPunObservable
             horseRanking.Clear();
         }
     }
-    public void serverDisconnect() 
+    public void serverDisconnect()
     {
         PhotonNetwork.Disconnect();
         SceneManager.LoadScene("aftermain");
     }
-    /*
-   public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
-        if(stream.IsWriting)
-        {
-     
-            stream.SendNext(GameManager.instance.mytern-1);
-            stream.SendNext(myLocation);
-            stream.SendNext(horseStatus.currentPosition);
-            stream.SendNext(R);
-        }
-        else{
-            int index = (int)stream.ReceiveNext();
-            GameManager.instance.horsesLocation[index] = (string)stream.ReceiveNext();
-            GameManager.instance.horsesPosition[index] = (Vector3)stream.ReceiveNext();
-            ranking.text = (string)stream.ReceiveNext();
-        }
-    }*/
     [PunRPC]
     void RankingSet(string r)
     {
