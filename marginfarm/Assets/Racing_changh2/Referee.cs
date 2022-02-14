@@ -40,7 +40,10 @@ public class Referee : MonoBehaviourPunCallbacks , IPunObservable
     
     void FixedUpdate()
     {
-        
+        for (int i = 0; i < 3; i++)
+        {
+            Debug.Log(GameManager.instance.lineKey[i]);
+        }
         if(!everyReady) 
         {
             GameManager.instance.horsesReady[GameManager.instance.mytern-1] = true;
