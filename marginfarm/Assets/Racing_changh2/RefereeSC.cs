@@ -48,17 +48,17 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     {
         if (!everyReady)
         {
-            Debug.Log(GameManager.instance.horseLocatio.Length +"로케");
-            Debug.Log(GameManager.instance.horsePositio.Length +"포지");
-            GameManager.instance.horseRead[GameManager.instance.mytern - 1] = true;
+            Debug.Log(GameManager.instance.horseLocation.Length +"로케");
+            Debug.Log(GameManager.instance.horsePosition.Length +"포지");
+            GameManager.instance.horseReady[GameManager.instance.mytern - 1] = true;
             photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
           //  photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
             bool tmpReady = true;
-            for (int i = 0; i < GameManager.instance.horseRead.Length; i++)
+            for (int i = 0; i < GameManager.instance.horseReady.Length; i++)
             {
-                if (!GameManager.instance.horseRead[i])
+                if (!GameManager.instance.horseReady[i])
                 {
-                    Debug.Log(GameManager.instance.horseRead.Length +"랑"+i);
+                    Debug.Log(GameManager.instance.horseReady.Length +"랑"+i);
                     tmpReady = false;
                 }
             }
@@ -79,27 +79,27 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                 List<int> Third = new List<int>();
                 List<int> Fourth = new List<int>();
 
-                for (int playerNum = 0; playerNum < GameManager.instance.horseLocatio.Length; playerNum++)
+                for (int playerNum = 0; playerNum < GameManager.instance.horseLocation.Length; playerNum++)
                 {
                     if (Final.Contains(playerNum.ToString()))
                         continue;
-                    if (GameManager.instance.horseLocatio[playerNum] == "First")
+                    if (GameManager.instance.horseLocation[playerNum] == "First")
                     {
                         First.Add(playerNum);
                     }
-                    else if (GameManager.instance.horseLocatio[playerNum] == "Second")
+                    else if (GameManager.instance.horseLocation[playerNum] == "Second")
                     {
                         Second.Add(playerNum);
                     }
-                    else if (GameManager.instance.horseLocatio[playerNum] == "Third")
+                    else if (GameManager.instance.horseLocation[playerNum] == "Third")
                     {
                         Third.Add(playerNum);
                     }
-                    else if (GameManager.instance.horseLocatio[playerNum] == "Fourth")
+                    else if (GameManager.instance.horseLocation[playerNum] == "Fourth")
                     {
                         Fourth.Add(playerNum);
                     }
-                    else if (GameManager.instance.horseLocatio[playerNum] == "Final")
+                    else if (GameManager.instance.horseLocation[playerNum] == "Final")
                     {
                         Final.Add(playerNum.ToString());
                     }
@@ -116,7 +116,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     int max = i;
                     for (int j = i + 1; j < Fourth.Count; j++)
                     {
-                        if (GameManager.instance.horsePositio[Fourth[max]].x <= GameManager.instance.horsePositio[Fourth[j]].x)
+                        if (GameManager.instance.horsePosition[Fourth[max]].x <= GameManager.instance.horsePosition[Fourth[j]].x)
                             max = j;
                     }
                     horseRanking.Add(Fourth[max].ToString());
@@ -131,7 +131,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     int min = i;
                     for (int j = i + 1; j < Third.Count; j++)
                     {
-                        if (GameManager.instance.horsePositio[Third[min]].z >= GameManager.instance.horsePositio[Third[j]].z)
+                        if (GameManager.instance.horsePosition[Third[min]].z >= GameManager.instance.horsePosition[Third[j]].z)
                             min = j;
                     }
                     horseRanking.Add(Third[min].ToString());
@@ -146,7 +146,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     int min = i;
                     for (int j = i + 1; j < Second.Count; j++)
                     {
-                        if (GameManager.instance.horsePositio[Second[min]].x >= GameManager.instance.horsePositio[Second[j]].x)
+                        if (GameManager.instance.horsePosition[Second[min]].x >= GameManager.instance.horsePosition[Second[j]].x)
                             min = j;
                     }
                     horseRanking.Add(Second[min].ToString());
@@ -161,7 +161,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     int max = i;
                     for (int j = i + 1; j < First.Count; j++)
                     {
-                        if (GameManager.instance.horsePositio[First[max]].z <= GameManager.instance.horsePositio[First[j]].z)
+                        if (GameManager.instance.horsePosition[First[max]].z <= GameManager.instance.horsePosition[First[j]].z)
                             max = j;
                     }
                     horseRanking.Add(First[max].ToString());
@@ -205,10 +205,10 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         }
         else{
             int index = (int)stream.ReceiveNext();
-            GameManager.instance.horseLocatio[index] = (string)stream.ReceiveNext();
-            GameManager.instance.horsePositio[index] = (Vector3)stream.ReceiveNext();
+            GameManager.instance.horseLocation[index] = (string)stream.ReceiveNext();
+            GameManager.instance.horsePosition[index] = (Vector3)stream.ReceiveNext();
             ranking.text = (string)stream.ReceiveNext();
-            GameManager.instance.horseRead[index] = true;
+            GameManager.instance.horseReady[index] = true;
         }
     }
     public void serverDisconnect()
@@ -225,12 +225,12 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     [PunRPC]
     void ReadySet(int pNum )
     {
-        GameManager.instance.horseRead[pNum] = true; 
+        GameManager.instance.horseReady[pNum] = true; 
     }
     [PunRPC]
      void LocationSet(string myLocation,Vector3 currentPosition, int pNum)
      {
-         GameManager.instance.horseLocatio[pNum] = myLocation;
-         GameManager.instance.horsePositio[pNum] = currentPosition;
+         GameManager.instance.horseLocation[pNum] = myLocation;
+         GameManager.instance.horsePosition[pNum] = currentPosition;
      }
 }
