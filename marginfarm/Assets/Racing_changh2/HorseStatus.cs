@@ -71,6 +71,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
         InputLocation();
         InputVariable();
+        InputSkin();
     }
     public void InputSkin()
     {
