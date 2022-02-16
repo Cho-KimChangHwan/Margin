@@ -54,7 +54,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     bool isCollide=false;
     public float myRecord;
     public SkinnedMeshRenderer horseSkin;
-    public bool isInput = false;
     void Awake()
     {
         if (photonView.IsMine)
@@ -71,11 +70,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
         InputLocation();
         InputVariable();
-        InputSkin();
-    }
-    public void InputSkin()
-    {
-         if (SceneManager.GetActiveScene().name == "RacingScene")
+        if (SceneManager.GetActiveScene().name == "RacingScene")
         {
             if (GameManager.instance.mytern - 1 == 0)
             { 
@@ -111,6 +106,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         }
     }
+
     [PunRPC]
     void otMatSet(int myKey)
     {   
@@ -148,10 +144,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 if (photonView.IsMine)
                     countRecord();
                 
-                if(!isInput){
-                    InputSkin();
-                    isInput=true;
-                }               
                 Run();
             }
             else
