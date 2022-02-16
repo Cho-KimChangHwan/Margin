@@ -73,7 +73,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         if (SceneManager.GetActiveScene().name == "RacingScene")
         {
             if (GameManager.instance.mytern - 1 == 0)
-            {
+            { 
+                
                 photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
                 photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 1f)); //파랑 검 갈 갈 / 갈
             }
