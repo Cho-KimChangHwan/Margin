@@ -29,7 +29,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     EndLog endLog;
     public float rPoint1 = 30f , rPoint2 = -15f;
     string[] rankColor = { "<color=#0054FF>" , "<color=#191919>" ,"<color=#1DDB16>","<color=#FF0000>"};
-    public GameObject[] players;
 
     void Start()
     {
@@ -41,14 +40,16 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
         myLocation = horseStatus.myLocation;
         horses = new GameObject[3];
-        players = GameObject.FindGameObjectsWithTag("Player");
 
     }
+
+    
     void Update()
     {
         if (!everyReady)
         {
-            
+            Debug.Log(GameManager.instance.horsesLocation.Length +"로케");
+            Debug.Log(GameManager.instance.horsesPosition.Length +"포지");
             GameManager.instance.horsesReady[GameManager.instance.mytern - 1] = true;
             photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
           //  photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
@@ -71,7 +72,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         {
             //if ((GameManager.instance.mytern - 1)!=0)
             {
-                Debug.Log("개수"+players.Length);
+                
                 photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
                 List<int> First = new List<int>();
                 List<int> Second = new List<int>();
@@ -174,7 +175,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                 int rank = 1;
                 for (int i = 0; i < horseRanking.Count; i++)
                 {
-                    R += rankColor[int.Parse(horseRanking[i])] + (rank++).ToString() + GameManager.instance.usersId[int.Parse(horseRanking[i])]  + "</color> " + "\n";
+                    R += rankColor[int.Parse(horseRanking[i])] + (rank++).ToString() + " : Player" + (int.Parse(horseRanking[i]) + 1).ToString() + "</color> " + "\n";
                 }
                photonView.RPC("RankingSet", RpcTarget.AllBuffered, R);
             }
@@ -220,7 +221,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     [PunRPC]
     void ReadySet(int pNum )
     {
-        GameManager.instance.usersId[pNum]= GameManager.instance.Id;
         GameManager.instance.horsesReady[pNum] = true; 
     }
     [PunRPC]
