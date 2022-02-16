@@ -75,22 +75,22 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             if (GameManager.instance.mytern - 1 == 0)
             { 
                 
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
+                //photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
                 photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 1f)); //파랑 검 갈 갈 / 갈
             }
             else if (GameManager.instance.mytern - 1 == 1)
             {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
+                //photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
                 photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 0f)); //검정 흰 갈 갈 / 검
             }
             else if (GameManager.instance.mytern - 1 == 2)
             {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+                //photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
                 photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 1f, 0f)); //초 검 초록 흰 흰 흰 / 흰
             }
             else if (GameManager.instance.mytern - 1 == 3)
             {
-               photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+               //photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
                photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(1f,0f,0f)); //레드
             }
 
