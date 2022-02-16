@@ -88,13 +88,12 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
                 photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 1f, 0f)); //초 검 초록 흰 흰 흰 / 흰
             }
-            //else if (GameManager.instance.mytern - 1 == 3)
-            //{
-            //    photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
-            //    photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(1f,0f,0f)); //레드
-            //photonView.RPC("rpcName",RpcTarget.AllBuffered, GameManager.instance.UserHorse[3].name );
-            //}
-            //gameObject.name = status.name;
+            else if (GameManager.instance.mytern - 1 == 3)
+            {
+               photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
+               photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(1f,0f,0f)); //레드
+            }
+
             animator = GetComponent<Animator>();
             count = GameObject.Find("Canvas").GetComponent<CountDown>();
             record = GameObject.Find("Record").GetComponent<Text>();
