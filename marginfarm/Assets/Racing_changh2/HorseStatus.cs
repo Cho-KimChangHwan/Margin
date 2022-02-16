@@ -53,7 +53,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     HorseStatus leadStatus ;
     bool isCollide=false;
     public float myRecord;
-
     public SkinnedMeshRenderer horseSkin;
     void Awake()
     {
