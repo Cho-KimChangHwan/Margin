@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] back_item = new GameObject[10];
     public GameObject[] hat_item = new GameObject[10];
     public GameObject[] glasses_item = new GameObject[10];
-    public GameObject[] shoes_item = new GameObject[10];
+    public GameObject[] shoes_item = new GameObject[20];
 
     public Sprite[] back_item_card = new Sprite[10];
     public Sprite[] hat_item_card = new Sprite[10];

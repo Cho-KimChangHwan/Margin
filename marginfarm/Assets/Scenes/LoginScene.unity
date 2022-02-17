@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1589,6 +1589,16 @@ MonoBehaviour:
   shoes_item:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 1809127238358676, guid: d7fc6ed120457e7449404808436cf234, type: 3}
+  - {fileID: 1809127238358676, guid: 4501587b63e1a6740be51e007c218cf2, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1633,7 +1643,7 @@ MonoBehaviour:
   shoes_item_card:
   - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
   - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 6d049eeaa04434542a8d7eca4572d333, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1648,6 +1658,10 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   horsesReady: 0000
+  usersId:
+  - 
+  - 
+  - 
   ranking: 
   horse_items: 000000000000000000000000000000000000000000000000
 --- !u!4 &2137417716
