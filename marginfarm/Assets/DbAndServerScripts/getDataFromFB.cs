@@ -51,6 +51,7 @@ public class getDataFromFB : MonoBehaviour
                 GameManager.instance.money = Convert.ToInt32(snapshot.Child("money").Value);
                 GameManager.instance.captain = Convert.ToInt32(snapshot.Child("captain").Value);
                 GameManager.instance.many = Convert.ToInt32(snapshot.Child("many").Value);
+                GameManager.instance.itemMany = Convert.ToInt32(snapshot.Child("itemMany").Value);
             });
     }
 }
