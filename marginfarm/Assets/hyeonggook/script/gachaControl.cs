@@ -71,6 +71,11 @@ public class gachaControl : MonoBehaviour
     public Button horsebuttonactive2;
     public Button horsebuttonactive3;
     public Button homebotton;
+
+    public Button itembuttonactive1;
+    public Button itembuttonactive2;
+    public Button itembuttonactive3;
+    public Button itembuttonactive4;
     /*
     public int[] speed_t = new int[3]; 0번인덱스
     public int[] accel_t = new int[3]; 1번인덱스
@@ -146,45 +151,94 @@ public class gachaControl : MonoBehaviour
     }
     public void hat_click()
     {
-        itemselect = 1;
+        if (GameManager.instance.money >= 300)
+        {
+            sendcheck_i("300골드로 뽑으시겠습니까?");
+            usedmoney = 300;
+            itemselect = 1;
 
-        GameObject item_second = GameObject.Find("item_second");
-        GameObject item_first = GameObject.Find("item_first");
-
-        iTween.MoveTo(item_first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
-        iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+            itembuttonactive1 = GameObject.Find("hat").GetComponent<Button>();
+            itembuttonactive1.interactable = false;
+            itembuttonactive2 = GameObject.Find("glasses").GetComponent<Button>();
+            itembuttonactive2.interactable = false;
+            itembuttonactive3 = GameObject.Find("back").GetComponent<Button>();
+            itembuttonactive3.interactable = false;
+            itembuttonactive4 = GameObject.Find("shoes").GetComponent<Button>();
+            itembuttonactive4.interactable = false;
+        }
+        else
+        {
+            senderror("골드가 부족합니다.");
+        }
+ 
     }
 
     public void glasses_click()
     {
-        itemselect = 2;
+        if (GameManager.instance.money >= 300)
+        {
+            sendcheck_i("300골드로 뽑으시겠습니까?");
+            usedmoney = 300;
+            itemselect = 2;
 
-        GameObject item_second = GameObject.Find("item_second");
-        GameObject item_first = GameObject.Find("item_first");
-
-        iTween.MoveTo(item_first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
-        iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+            itembuttonactive1 = GameObject.Find("hat").GetComponent<Button>();
+            itembuttonactive1.interactable = false;
+            itembuttonactive2 = GameObject.Find("glasses").GetComponent<Button>();
+            itembuttonactive2.interactable = false;
+            itembuttonactive3 = GameObject.Find("back").GetComponent<Button>();
+            itembuttonactive3.interactable = false;
+            itembuttonactive4 = GameObject.Find("shoes").GetComponent<Button>();
+            itembuttonactive4.interactable = false;
+        }
+        else
+        {
+            senderror("골드가 부족합니다.");
+        }
     }
 
     public void back_click()
     {
-        itemselect = 3;
+        if (GameManager.instance.money >= 300)
+        {
+            sendcheck_i("300골드로 뽑으시겠습니까?");
+            usedmoney = 300;
+            itemselect = 3;
 
-        GameObject item_second = GameObject.Find("item_second");
-        GameObject item_first = GameObject.Find("item_first");
-
-        iTween.MoveTo(item_first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
-        iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+            itembuttonactive1 = GameObject.Find("hat").GetComponent<Button>();
+            itembuttonactive1.interactable = false;
+            itembuttonactive2 = GameObject.Find("glasses").GetComponent<Button>();
+            itembuttonactive2.interactable = false;
+            itembuttonactive3 = GameObject.Find("back").GetComponent<Button>();
+            itembuttonactive3.interactable = false;
+            itembuttonactive4 = GameObject.Find("shoes").GetComponent<Button>();
+            itembuttonactive4.interactable = false;
+        }
+        else
+        {
+            senderror("골드가 부족합니다.");
+        }
     }
     public void shoes_click()
     {
-        itemselect = 4;
+        if (GameManager.instance.money >= 300)
+        {
+            sendcheck_i("300골드로 뽑으시겠습니까?");
+            usedmoney = 300;
+            itemselect = 4;
 
-        GameObject item_second = GameObject.Find("item_second");
-        GameObject item_first = GameObject.Find("item_first");
-
-        iTween.MoveTo(item_first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
-        iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+            itembuttonactive1 = GameObject.Find("hat").GetComponent<Button>();
+            itembuttonactive1.interactable = false;
+            itembuttonactive2 = GameObject.Find("glasses").GetComponent<Button>();
+            itembuttonactive2.interactable = false;
+            itembuttonactive3 = GameObject.Find("back").GetComponent<Button>();
+            itembuttonactive3.interactable = false;
+            itembuttonactive4 = GameObject.Find("shoes").GetComponent<Button>();
+            itembuttonactive4.interactable = false;
+        }
+        else
+        {
+            senderror("골드가 부족합니다.");
+        }
     }
 
     public void gacha_b1_click()
@@ -491,6 +545,9 @@ public class gachaControl : MonoBehaviour
     }
     public void goitem_click()
     {
+        homebotton = GameObject.Find("home_b").GetComponent<Button>();
+        homebotton.interactable = true;
+
         obj_card_i = GameObject.Find("obj_card_i").GetComponent<Image>();
 
         if (itemselect == 1)
@@ -932,6 +989,50 @@ public class gachaControl : MonoBehaviour
         horsebuttonactive2.interactable = true;
         horsebuttonactive3 = GameObject.Find("level3").GetComponent<Button>();
         horsebuttonactive3.interactable = true;
+    }
+
+    public void sendcheck_i(string message)
+    {
+        GameObject error_p = GameObject.Find("check_i");
+        Text error_m = GameObject.Find("check_m_i").GetComponent<Text>();
+
+        error_m.text = message;
+        iTween.MoveTo(error_p, iTween.Hash("y", 680, "delay", 0, "time", 0.5f));
+    }
+
+    public void check_i_yes()
+    {
+        GameObject error_p = GameObject.Find("check_i");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0, "time", 0.5f));
+
+        GameObject item_second = GameObject.Find("item_second");
+        GameObject item_first = GameObject.Find("item_first");
+
+        iTween.MoveTo(item_first, iTween.Hash("y", 1100, "delay", 0.1f, "time", 0.5f));
+        iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
+
+        GameManager.instance.money -= usedmoney;
+        Text money_t = GameObject.Find("money_t").GetComponent<Text>();
+        money_t.text = GameManager.instance.money.ToString();
+
+        homebotton = GameObject.Find("home_b").GetComponent<Button>();
+        homebotton.interactable = false;
+
+    }
+
+    public void check_i_no()
+    {
+        GameObject error_p = GameObject.Find("check_i");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
+
+        itembuttonactive1 = GameObject.Find("hat").GetComponent<Button>();
+        itembuttonactive1.interactable = true;
+        itembuttonactive2 = GameObject.Find("glasses").GetComponent<Button>();
+        itembuttonactive2.interactable = true;
+        itembuttonactive3 = GameObject.Find("back").GetComponent<Button>();
+        itembuttonactive3.interactable = true;
+        itembuttonactive4 = GameObject.Find("shoes").GetComponent<Button>();
+        itembuttonactive4.interactable = true;
     }
 
     public IEnumerator FadeInStart()

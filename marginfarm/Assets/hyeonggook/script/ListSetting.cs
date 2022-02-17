@@ -61,10 +61,41 @@ public class ListSetting : MonoBehaviour
             }
             if(GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key != 0)
             {
-                GameObject under4 = GameObject.Find("shoes_h" + i.ToString());
-                GameObject temp4 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000], under4.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
-                temp4.transform.parent = under4.transform;
-                temp4.layer = layer_num[i];
+                GameObject under5 = GameObject.Find("shoes_fl_h" + i.ToString());
+                GameObject temp5 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000], under5.transform.position, Quaternion.Euler(under5.transform.eulerAngles));
+                temp5.transform.parent = under5.transform;
+                temp5.layer = layer_num[i];
+                GameObject getchildd = temp5.transform.GetChild(0).gameObject;
+                getchildd.layer = layer_num[i];
+                getchildd = temp5.transform.GetChild(1).gameObject;
+                getchildd.layer = layer_num[i];
+
+                GameObject under6 = GameObject.Find("shoes_fr_h" + i.ToString());
+                GameObject temp6 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000 + 1], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
+                temp6.transform.parent = under6.transform;
+                temp6.layer = layer_num[i];
+                getchildd = temp6.transform.GetChild(0).gameObject;
+                getchildd.layer = layer_num[i];
+                getchildd = temp6.transform.GetChild(1).gameObject;
+                getchildd.layer = layer_num[i];
+
+                GameObject under7 = GameObject.Find("shoes_bl_h" + i.ToString());
+                GameObject temp7 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
+                temp7.transform.parent = under7.transform;
+                temp7.layer = layer_num[i];
+                getchildd = temp7.transform.GetChild(0).gameObject;
+                getchildd.layer = layer_num[i];
+                getchildd = temp7.transform.GetChild(1).gameObject;
+                getchildd.layer = layer_num[i];
+
+                GameObject under8 = GameObject.Find("shoes_br_h" + i.ToString());
+                GameObject temp8 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000 + 1], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
+                temp8.transform.parent = under8.transform;
+                temp8.layer = layer_num[i];
+                getchildd = temp8.transform.GetChild(0).gameObject;
+                getchildd.layer = layer_num[i];
+                getchildd = temp8.transform.GetChild(1).gameObject;
+                getchildd.layer = layer_num[i];
             }
         }
 
