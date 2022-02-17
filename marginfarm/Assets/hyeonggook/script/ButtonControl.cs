@@ -602,9 +602,18 @@ public class ButtonControl : MonoBehaviour
             {
                 if (GameManager.instance.itemMany != 12)
                 {
-                    GameObject under = GameObject.Find("shoes_h" + horse_ss.ToString());
-                    GameObject temp = under.transform.GetChild(0).gameObject;
-                    Destroy(temp);
+                    GameObject under1 = GameObject.Find("shoes_fl_h" + horse_ss.ToString());
+                    GameObject temp1 = under1.transform.GetChild(0).gameObject;
+                    Destroy(temp1);
+                    GameObject under2 = GameObject.Find("shoes_fr_h" + horse_ss.ToString());
+                    GameObject temp2 = under2.transform.GetChild(0).gameObject;
+                    Destroy(temp2);
+                    GameObject under3 = GameObject.Find("shoes_bl_h" + horse_ss.ToString());
+                    GameObject temp3 = under3.transform.GetChild(0).gameObject;
+                    Destroy(temp3);
+                    GameObject under4 = GameObject.Find("shoes_br_h" + horse_ss.ToString());
+                    GameObject temp4 = under4.transform.GetChild(0).gameObject;
+                    Destroy(temp4);
 
                     uninstall(select_num);
                     inven_itemlist_make(horse_s_n);
@@ -683,16 +692,41 @@ public class ButtonControl : MonoBehaviour
             {
                 if (GameManager.instance.WearingItem[(horse_s_n * 4) + 3].item_key != 0)
                 {
-                    GameObject under1 = GameObject.Find("shoes_h" + horse_ss.ToString());
+                    GameObject under1 = GameObject.Find("shoes_fl_h" + horse_ss.ToString());
                     GameObject temp1 = under1.transform.GetChild(0).gameObject;
                     Destroy(temp1);
+                    GameObject under2 = GameObject.Find("shoes_fr_h" + horse_ss.ToString());
+                    GameObject temp2 = under2.transform.GetChild(0).gameObject;
+                    Destroy(temp2);
+                    GameObject under3 = GameObject.Find("shoes_bl_h" + horse_ss.ToString());
+                    GameObject temp3 = under3.transform.GetChild(0).gameObject;
+                    Destroy(temp3);
+                    GameObject under4 = GameObject.Find("shoes_br_h" + horse_ss.ToString());
+                    GameObject temp4 = under4.transform.GetChild(0).gameObject;
+                    Destroy(temp4);
                 }
 
-                GameObject under = GameObject.Find("shoes_h" + horse_ss.ToString());
-                GameObject tempc = Instantiate(GameManager.instance.shoes_item[GameManager.instance.UserItem[select_num].key / 1000], under.transform.position, Quaternion.Euler(new Vector3(-178f, -178f, 243f)));
-                tempc.transform.parent = under.transform;
-                tempc.layer = layer_num[horse_ss];
+                GameObject under5 = GameObject.Find("shoes_fl_h" + horse_ss.ToString());
+                GameObject temp5 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.UserItem[select_num].key / 1000], under5.transform.position, Quaternion.Euler(under5.transform.eulerAngles));
+                temp5.transform.parent = under5.transform;
+                temp5.layer = layer_num[horse_ss];
 
+                GameObject under6 = GameObject.Find("shoes_fr_h" + horse_ss.ToString());
+                GameObject temp6 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.UserItem[select_num].key / 1000 + 1], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
+                temp6.transform.parent = under6.transform;
+                temp6.layer = layer_num[horse_ss];
+
+                GameObject under7 = GameObject.Find("shoes_bl_h" + horse_ss.ToString());
+                GameObject temp7 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.UserItem[select_num].key / 1000], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
+                temp7.transform.parent = under7.transform;
+                temp7.layer = layer_num[horse_ss];
+
+                GameObject under8 = GameObject.Find("shoes_br_h" + horse_ss.ToString());
+                GameObject temp8 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.UserItem[select_num].key / 1000 + 1], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
+                temp8.transform.parent = under8.transform;
+                temp8.layer = layer_num[horse_ss];
+
+  
                 what_item = 3;
                 install(what_item, select_num);
 
