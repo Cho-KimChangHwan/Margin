@@ -104,10 +104,10 @@ public class GameManager : MonoBehaviour
     public Sprite[] glasses_item_card = new Sprite[10];
     public Sprite[] shoes_item_card = new Sprite[10];
 
-    public string[] hLocation = new string[4];
-    public Vector3[] hPosition = new Vector3[4];
-    public bool[] hReady = new bool[4];
-    public string[] uId = new string[4];
+    public string[] hsLocation = new string[2];
+    public Vector3[] hsPosition = new Vector3[2];
+    public bool[] hsReady = new bool[2];
+    public string[] usId = new string[2];
     public string ranking = "";
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
