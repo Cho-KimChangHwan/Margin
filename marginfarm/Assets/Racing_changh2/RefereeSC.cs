@@ -28,7 +28,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     GameObject end;
     EndLog endLog;
     public float rPoint1 = 30f , rPoint2 = -15f;
-    string[] rankColor = { "<color=#0054FF>" , "<color=#191919>" ,"<color=#1DDB16>","<color=#FF0000>"};
+    string[] rankColor = { "<color=#0054FF>" ,"<color=#1DDB16>", "<color=#191919>" ,"<color=#FF0000>"};
 
     void Start()
     {
@@ -56,7 +56,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
             {
                 if (!GameManager.instance.hReady[i])
                 {
-                    Debug.Log(GameManager.instance.hReady.Length +"랑"+i);
                     tmpReady = false;
                 }
             }
