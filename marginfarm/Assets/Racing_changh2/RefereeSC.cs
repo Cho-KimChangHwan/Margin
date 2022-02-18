@@ -40,16 +40,11 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         horseStatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();
         countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
         myLocation = horseStatus.myLocation;
-
-        horses = GameObject.FindGameObjectsWithTag("Player");
-
     }
 
     
     void Update()
     {
-        horses = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log(horses.Length);
         if (!everyReady)
         {
             GameManager.instance.hReady[GameManager.instance.mytern - 1] = true;
@@ -71,7 +66,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         }
         else
         {
-            //if ((GameManager.instance.mytern - 1)!=0)
             {
                 
                 photonView.RPC("LocationSet", RpcTarget.AllBuffered, horseStatus.myLocation, horseStatus.currentPosition, GameManager.instance.mytern - 1);
@@ -125,7 +119,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     tmp = Fourth[i];
                     Fourth[i] = Fourth[max];
                     Fourth[max] = tmp;
-
                 }
                 for (int i = 0; i < Third.Count; i++)
                 {
@@ -140,7 +133,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     tmp = Third[i];
                     Third[i] = Third[min];
                     Third[min] = tmp;
-
                 }
                 for (int i = 0; i < Second.Count; i++)
                 {
@@ -155,7 +147,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     tmp = Second[i];
                     Second[i] = Second[min];
                     Second[min] = tmp;
-
                 }
                 for (int i = 0; i < First.Count; i++)
                 {
@@ -170,7 +161,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     tmp = First[i];
                     First[i] = First[max];
                     First[max] = tmp;
-
                 }
                 R = "";
                 int rank = 1;
