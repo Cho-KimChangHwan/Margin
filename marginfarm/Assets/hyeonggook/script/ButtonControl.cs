@@ -877,6 +877,7 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].consis = 0;
 
         GameManager.instance.itemMany = GameManager.instance.itemMany + 1;
+        k = GameManager.instance.itemMany;
 
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(k);
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
@@ -967,7 +968,10 @@ public class ButtonControl : MonoBehaviour
             GameManager.instance.UserHorse[i].consis = GameManager.instance.UserHorse[i + 1].consis;
             GameManager.instance.UserHorse[i].items = GameManager.instance.UserHorse[i + 1].items;
 
-            for(int n = 0; n < 4; n++)
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(horse_n.ToString()).Child("name").SetValueAsync(GameManager.instance.UserHorse[horse_n].name);
+
+
+            for (int n = 0; n < 4; n++)
             {
                 GameManager.instance.WearingItem[(horse_n * 4) + n].item_key = GameManager.instance.WearingItem[((horse_n + 1) * 4) + n].item_key;
                 GameManager.instance.WearingItem[(horse_n * 4) + n].speed = GameManager.instance.WearingItem[((horse_n + 1) * 4) + n].speed;
@@ -986,7 +990,12 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.UserHorse[GameManager.instance.many - 1].agility = -1;
         GameManager.instance.UserHorse[GameManager.instance.many - 1].consis = -1;
 
+        //m_Reference.Child("users").Child(GameManager.instance.Id).Child(horse_n.ToString()).Child("name").SetValueAsync(GameManager.instance.UserHorse[horse_n].name);
+
         GameManager.instance.many = GameManager.instance.many - 1;
+
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("many").SetValueAsync(GameManager.instance.many);
+
 
         for (int n = 0; n < 4; n++)
         {
