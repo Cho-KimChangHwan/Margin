@@ -70,6 +70,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
         InputLocation();
         InputVariable();
+        horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         if (SceneManager.GetActiveScene().name == "RacingScene")
         {
             if (GameManager.instance.mytern - 1 == 0)
@@ -103,7 +104,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 InputStatus();
                 ApplyConsis();
             }
-            horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            
         }
     }
 
