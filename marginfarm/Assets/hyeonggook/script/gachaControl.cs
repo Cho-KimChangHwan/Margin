@@ -375,6 +375,9 @@ public class gachaControl : MonoBehaviour
 
     public void go_click()
     {
+        Button horse_go_button = GameObject.Find("go").GetComponent<Button>();
+        horse_go_button.interactable = false;
+
         horse1 = GameObject.Find("horse_card1").GetComponent<SkinnedMeshRenderer>();
         horse2 = GameObject.Find("horse_card2").GetComponent<SkinnedMeshRenderer>();
         horse3 = GameObject.Find("horse_card3").GetComponent<SkinnedMeshRenderer>();
