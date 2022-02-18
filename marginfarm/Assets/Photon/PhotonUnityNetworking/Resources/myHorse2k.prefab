@@ -1649,7 +1649,7 @@ GameObject:
   - component: {fileID: 1665237236038134587}
   - component: {fileID: 8144333477202695135}
   m_Layer: 10
-  m_Name: myHorse2
+  m_Name: myHorse2k
   m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
