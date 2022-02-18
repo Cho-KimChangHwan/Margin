@@ -39,13 +39,16 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         horseStatus = GameObject.FindWithTag("Player").GetComponent<HorseStatus>();
         countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
         myLocation = horseStatus.myLocation;
-        horses = new GameObject[3];
+
+        horses = GameObject.FindGameObjectsWithTag("Player");
 
     }
 
     
     void Update()
     {
+        horses = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log(horses.Length);
         if (!everyReady)
         {
             GameManager.instance.hReady[GameManager.instance.mytern - 1] = true;
