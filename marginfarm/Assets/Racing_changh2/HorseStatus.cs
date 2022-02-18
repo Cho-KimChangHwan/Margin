@@ -443,7 +443,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
 
        // 이 컴포넌트가 부착된 게임 오브젝트의 콜라이더와 충돌한 게임 오브젝트 가져오기
-        Debug.Log("충돌함요");
         leadHorse = collision.gameObject;
 
         // 특정 컴포넌트 가져오기
