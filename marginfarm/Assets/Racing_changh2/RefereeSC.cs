@@ -32,11 +32,12 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
 
     void Start()
     {
+        string myname = "Player" + (GameManager.instance.mytern ).ToString();
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
         end = GameObject.Find("End");
         end.SetActive(false);
         ranking = GameObject.Find("Ranking").GetComponent<Text>();
-        horseStatus = GameObject.FindWithTag("Player").GetComponent<HorseStatus>();
+        horseStatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();
         countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
         myLocation = horseStatus.myLocation;
 

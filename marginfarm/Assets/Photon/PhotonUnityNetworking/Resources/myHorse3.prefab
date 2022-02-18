@@ -1650,7 +1650,7 @@ GameObject:
   - component: {fileID: 8144333477202695135}
   m_Layer: 10
   m_Name: myHorse3
-  m_TagString: Player
+  m_TagString: Player3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
