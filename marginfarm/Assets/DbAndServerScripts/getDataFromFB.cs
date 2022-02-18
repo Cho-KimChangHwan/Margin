@@ -48,6 +48,24 @@ public class getDataFromFB : MonoBehaviour
                     GameManager.instance.UserHorse[i].consis = Convert.ToInt32(snapshot.Child(i.ToString()).Child("consis").Value);
                     GameManager.instance.UserHorse[i].items = Convert.ToInt32(snapshot.Child(i.ToString()).Child("items").Value);
                 }
+                for (int i = 0; i < snapshot.Child("item" + i.ToString()).ChildrenCount; i++)
+                {
+                    GameManager.instance.UserItem[i].key = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("key").Value);
+                    GameManager.instance.UserItem[i].speed = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("speed").Value);
+                    GameManager.instance.UserItem[i].accel = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("accel").Value);
+                    GameManager.instance.UserItem[i].hp = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("hp").Value);
+                    GameManager.instance.UserItem[i].agility = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("agility").Value);
+                    GameManager.instance.UserItem[i].consis = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("consis").Value);
+                }
+                for (int i = 0; i < 24; i++)
+                {
+                    GameManager.instance.WearingItem[i].item_key = Convert.ToInt32(snapshot.Child("WearingItem").Child(i.ToString()).Child("item_key").Value);
+                    GameManager.instance.WearingItem[i].accel = Convert.ToInt32(snapshot.Child("WearingItem").Child(i.ToString()).Child("accel").Value);
+                    GameManager.instance.WearingItem[i].agility = Convert.ToInt32(snapshot.Child("WearingItem").Child(i.ToString()).Child("agility").Value);
+                    GameManager.instance.WearingItem[i].consis = Convert.ToInt32(snapshot.Child("WearingItem").Child(i.ToString()).Child("consis").Value);
+                    GameManager.instance.WearingItem[i].hp = Convert.ToInt32(snapshot.Child("WearingItem").Child(i.ToString()).Child("hp").Value);
+                    GameManager.instance.WearingItem[i].speed = Convert.ToInt32(snapshot.Child("WearingItem").Child(i.ToString()).Child("speed").Value);
+                }
                 GameManager.instance.money = Convert.ToInt32(snapshot.Child("money").Value);
                 GameManager.instance.captain = Convert.ToInt32(snapshot.Child("captain").Value);
                 GameManager.instance.many = Convert.ToInt32(snapshot.Child("many").Value);
