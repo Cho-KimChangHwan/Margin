@@ -1004,6 +1004,8 @@ public class gachaControl : MonoBehaviour
         iTween.MoveTo(second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
 
         GameManager.instance.money -= usedmoney;
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("money").SetValueAsync(GameManager.instance.money);
+
         Text money_t = GameObject.Find("money_t").GetComponent<Text>();
         money_t.text = GameManager.instance.money.ToString();
 
@@ -1046,6 +1048,8 @@ public class gachaControl : MonoBehaviour
         iTween.MoveTo(item_second, iTween.Hash("y", 360, "delay", 0.1f, "time", 0.5f));
 
         GameManager.instance.money -= usedmoney;
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("money").SetValueAsync(GameManager.instance.money);
+
         Text money_t = GameObject.Find("money_t").GetComponent<Text>();
         money_t.text = GameManager.instance.money.ToString();
 
