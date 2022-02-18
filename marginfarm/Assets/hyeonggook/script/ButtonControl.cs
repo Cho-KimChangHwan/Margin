@@ -983,6 +983,7 @@ public class ButtonControl : MonoBehaviour
         }
 
         GameManager.instance.UserHorse[GameManager.instance.many - 1].name = "";
+        GameManager.instance.UserHorse[GameManager.instance.many - 1].accel = -1;
         GameManager.instance.UserHorse[GameManager.instance.many - 1].key = -1;
         GameManager.instance.UserHorse[GameManager.instance.many - 1].level = -1;
         GameManager.instance.UserHorse[GameManager.instance.many - 1].speed = -1;
@@ -990,7 +991,18 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.UserHorse[GameManager.instance.many - 1].agility = -1;
         GameManager.instance.UserHorse[GameManager.instance.many - 1].consis = -1;
 
-        //m_Reference.Child("users").Child(GameManager.instance.Id).Child(horse_n.ToString()).Child("name").SetValueAsync(GameManager.instance.UserHorse[horse_n].name);
+        for (int i = 0; i < GameManager.instance.many; i++)
+        {
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(i.ToString()).Child("name").SetValueAsync(GameManager.instance.UserHorse[i].name);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(i.ToString()).Child("key").SetValueAsync(GameManager.instance.UserHorse[i].key);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(i.ToString()).Child("level").SetValueAsync(GameManager.instance.UserHorse[i].level);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(i.ToString()).Child("speed").SetValueAsync(GameManager.instance.UserHorse[i].speed);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(i.ToString()).Child("accel").SetValueAsync(GameManager.instance.UserHorse[i].accel);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(i.ToString()).Child("hp").SetValueAsync(GameManager.instance.UserHorse[i].hp);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(i.ToString()).Child("agility").SetValueAsync(GameManager.instance.UserHorse[i].agility);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(i.ToString()).Child("consis").SetValueAsync(GameManager.instance.UserHorse[i].consis);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child(i.ToString()).Child("item").SetValueAsync(GameManager.instance.UserHorse[i].items);
+        }
 
         GameManager.instance.many = GameManager.instance.many - 1;
 
