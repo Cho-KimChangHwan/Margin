@@ -73,27 +73,9 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         horseSkin = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         if (SceneManager.GetActiveScene().name == "RacingScene")
         {
-            if (GameManager.instance.mytern - 1 == 0)
-            { 
-                
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[0]);
-                //photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 1f)); //파랑 진갈
-            }
-            else if (GameManager.instance.mytern - 1 == 1)
-            {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[1]);
-                //photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 0f, 0f)); //검정 검
-            }
-            else if (GameManager.instance.mytern - 1 == 2)
-            {
-                photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[2]);
-               //photonView.RPC("miniSet", RpcTarget.AllBuffered, new Vector3(0f, 1f, 0f)); //초 연갈
-            }
-            else if (GameManager.instance.mytern - 1 == 3)
-            {
-               photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.lineKey[3]);
-               //photonView.RPC("miniSet",RpcTarget.AllBuffered,new Vector3(1f,0f,0f)); //레드 황갈
-            }
+
+            photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.mytern -1 );
+            
 
             animator = GetComponent<Animator>();
             count = GameObject.Find("Canvas").GetComponent<CountDown>();
@@ -109,9 +91,9 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void otMatSet(int myKey)
+    void otMatSet(int pNum)
     {   
-        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[myKey]);
+        horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[ GameManager.instance.lineKey[pNum]]);
     }
     [PunRPC]
     void miniSet(Vector3 miniColor)
@@ -459,7 +441,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     {
 
        // 이 컴포넌트가 부착된 게임 오브젝트의 콜라이더와 충돌한 게임 오브젝트 가져오기
-
+        Debug.Log("충돌함요");
         leadHorse = collision.gameObject;
 
         // 특정 컴포넌트 가져오기
