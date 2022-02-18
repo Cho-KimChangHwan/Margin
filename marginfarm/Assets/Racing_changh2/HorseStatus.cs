@@ -288,11 +288,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     void CalculateSpeed()
     {
-        // status.accel;
-        // status.agility;
-        // status.consis;
-        // status.hp;
-        // status.speed;
         timeChecker += 10f * Time.deltaTime;
         if (horseLocation["First"])
         {
