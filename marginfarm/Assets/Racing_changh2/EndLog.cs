@@ -28,7 +28,8 @@ public class EndLog : MonoBehaviour
         record = GameObject.Find("Record").GetComponent<Text>();
         ranking = GameObject.Find("Ranking").GetComponent<Text>();
         referee = GameObject.Find("Referee").GetComponent<RefereeSC>();
-        horsestatus = GameObject.FindWithTag("Player").GetComponent<HorseStatus>();
+        string myname = "Player" + (GameManager.instance.mytern ).ToString();
+        horsestatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();
     }
 
     // Update is called once per frame
