@@ -93,6 +93,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     [PunRPC]
     void otMatSet(int pNum)
     {   
+        Debug.Log("s");
         string hname = "Player" + (pNum+1 ).ToString();
         horseSkin = GameObject.FindWithTag(hname).GetComponentInChildren<SkinnedMeshRenderer>();
         horseSkin.material.SetTexture("_MainTex", GameManager.instance.hMats[ GameManager.instance.lineKey[pNum]]);
