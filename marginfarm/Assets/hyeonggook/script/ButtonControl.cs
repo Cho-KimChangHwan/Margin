@@ -876,7 +876,25 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].agility = 0;
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].consis = 0;
 
-        GameManager.instance.itemMany = GameManager.instance.itemMany + 1;      
+        GameManager.instance.itemMany = GameManager.instance.itemMany + 1;
+
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(k);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+
+        for (int i = 0; i < 24; i++)
+        {
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("item_key").SetValueAsync(GameManager.instance.WearingItem[i].item_key);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("speed").SetValueAsync(GameManager.instance.WearingItem[i].speed);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("accel").SetValueAsync(GameManager.instance.WearingItem[i].accel);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("hp").SetValueAsync(GameManager.instance.WearingItem[i].hp);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("agility").SetValueAsync(GameManager.instance.WearingItem[i].agility);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("consis").SetValueAsync(GameManager.instance.WearingItem[i].consis);
+        }
     }
 
     public void senderror(string message)
