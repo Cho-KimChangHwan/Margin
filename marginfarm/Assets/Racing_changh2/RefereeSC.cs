@@ -48,11 +48,9 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     {
         if (!everyReady)
         {
-            Debug.Log(GameManager.instance.hLocation.Length +"로케");
-            Debug.Log(GameManager.instance.hPosition.Length +"포지");
             GameManager.instance.hReady[GameManager.instance.mytern - 1] = true;
             photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
-          //  photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
+
             bool tmpReady = true;
             for (int i = 0; i < GameManager.instance.hReady.Length; i++)
             {

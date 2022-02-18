@@ -1651,14 +1651,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  horsesLocation:
+  hLocation:
   - 
   - 
-  horsesPosition:
+  - 
+  - 
+  hPosition:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  horsesReady: 0000
-  usersId:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  hReady: 00000000
+  uId:
+  - 
   - 
   - 
   - 
