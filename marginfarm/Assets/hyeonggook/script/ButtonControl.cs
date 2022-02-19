@@ -37,7 +37,7 @@ public class ButtonControl : MonoBehaviour
     public Text gauge;
     public Text name_t;
     public Image item_i;
- 
+
     public Image cap_b;
 
     public Sprite[] captain_check = new Sprite[2];
@@ -128,7 +128,7 @@ public class ButtonControl : MonoBehaviour
 
     public void invenview_close()
     {
-     
+
         if (GameManager.instance.inven_check == true)
         {
             GameObject inven = GameObject.Find("inven");
@@ -138,17 +138,17 @@ public class ButtonControl : MonoBehaviour
 
             GameManager.instance.inven_check = false;
 
-            if(spec_open_check == false)
+            if (spec_open_check == false)
             {
                 GameObject.Find("inven").transform.Find("select_x").gameObject.SetActive(true);
                 spec_open_check = true;
             }
-            
+
         }
     }
     public void specview_h1()
     {
-        if(GameManager.instance.select != -1)
+        if (GameManager.instance.select != -1)
         {
             int n = GameManager.instance.select + 1;
             anim = GameObject.Find("horse_o" + n.ToString()).GetComponent<Animator>();
@@ -254,7 +254,7 @@ public class ButtonControl : MonoBehaviour
             item_i = GameObject.Find("item" + i.ToString() + "_i").GetComponent<Image>();
             item_b = GameObject.Find("item" + i.ToString()).GetComponent<Button>();
             item_b.interactable = true;
-            
+
             if (GameManager.instance.UserItem[i - 1].key < 10)
             {
                 item_i.sprite = GameManager.instance.hat_item_card[GameManager.instance.UserItem[i - 1].key];
@@ -447,7 +447,6 @@ public class ButtonControl : MonoBehaviour
             change_t = GameObject.Find("change_t").GetComponent<Text>();
             change_t.text = "해제";
 
-
             if (button_num == 0)
             {
                 item_s.sprite = GameManager.instance.hat_item_card[GameManager.instance.WearingItem[(GameManager.instance.select * 4)].item_key];
@@ -545,6 +544,103 @@ public class ButtonControl : MonoBehaviour
             }
         }
     }
+    public void click_item_delete()
+    {
+        horse_s_n = GameManager.instance.select;
+        int horse_ss = horse_s_n + 1;
+
+        if (slot_check)
+        {
+            if (select_num == 0)
+            {
+                GameObject under = GameObject.Find("hat_h" + horse_ss.ToString());
+                GameObject temp = under.transform.GetChild(0).gameObject;
+                Destroy(temp);
+
+                wearing_delete();
+                inven_itemlist_make(horse_s_n);
+                spec_make();
+            }
+            else if (select_num == 1)
+            {
+                GameObject under = GameObject.Find("glasses_h" + horse_ss.ToString());
+                GameObject temp = under.transform.GetChild(0).gameObject;
+                Destroy(temp);
+
+                wearing_delete();
+                inven_itemlist_make(horse_s_n);
+                spec_make();
+            }
+            else if (select_num == 2)
+            {
+                GameObject under = GameObject.Find("back_h" + horse_ss.ToString());
+                GameObject temp = under.transform.GetChild(0).gameObject;
+                Destroy(temp);
+
+                wearing_delete();
+                inven_itemlist_make(horse_s_n);
+                spec_make();
+            }
+            else if (select_num == 3)
+            {
+                GameObject under1 = GameObject.Find("shoes_fl_h" + horse_ss.ToString());
+                GameObject temp1 = under1.transform.GetChild(0).gameObject;
+                Destroy(temp1);
+                GameObject under2 = GameObject.Find("shoes_fr_h" + horse_ss.ToString());
+                GameObject temp2 = under2.transform.GetChild(0).gameObject;
+                Destroy(temp2);
+                GameObject under3 = GameObject.Find("shoes_bl_h" + horse_ss.ToString());
+                GameObject temp3 = under3.transform.GetChild(0).gameObject;
+                Destroy(temp3);
+                GameObject under4 = GameObject.Find("shoes_br_h" + horse_ss.ToString());
+                GameObject temp4 = under4.transform.GetChild(0).gameObject;
+                Destroy(temp4);
+
+                wearing_delete();
+                inven_itemlist_make(horse_s_n);
+                spec_make();
+            }
+        }
+        else
+        {
+            for (int i = select_num; i < GameManager.instance.itemMany - 1; i++)
+            {
+                GameManager.instance.UserItem[i].key = GameManager.instance.UserItem[i + 1].key;
+                GameManager.instance.UserItem[i].speed = GameManager.instance.UserItem[i + 1].speed;
+                GameManager.instance.UserItem[i].accel = GameManager.instance.UserItem[i + 1].accel;
+                GameManager.instance.UserItem[i].hp = GameManager.instance.UserItem[i + 1].hp;
+                GameManager.instance.UserItem[i].agility = GameManager.instance.UserItem[i + 1].agility;
+                GameManager.instance.UserItem[i].consis = GameManager.instance.UserItem[i + 1].consis;
+            }
+
+            GameManager.instance.UserItem[GameManager.instance.itemMany - 1].key = -1;
+            GameManager.instance.UserItem[GameManager.instance.itemMany - 1].speed = -1;
+            GameManager.instance.UserItem[GameManager.instance.itemMany - 1].accel = -1;
+            GameManager.instance.UserItem[GameManager.instance.itemMany - 1].hp = -1;
+            GameManager.instance.UserItem[GameManager.instance.itemMany - 1].agility = -1;
+            GameManager.instance.UserItem[GameManager.instance.itemMany - 1].consis = -1;
+
+            GameManager.instance.itemMany = GameManager.instance.itemMany - 1;
+
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
+
+            for (int k = 0; k < GameManager.instance.itemMany + 1; k++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+            }
+
+            inven_itemlist_make(horse_s_n);
+            spec_make();
+        }
+
+        GameObject.Find("inven").transform.Find("select_x").gameObject.SetActive(true);
+        spec_open_check = true;
+    }
 
     public void click_change_button()
     {
@@ -556,7 +652,7 @@ public class ButtonControl : MonoBehaviour
         {
             if (select_num == 0)  //모자해제
             {
-                if(GameManager.instance.itemMany != 12)
+                if (GameManager.instance.itemMany != 12)
                 {
                     GameObject under = GameObject.Find("hat_h" + horse_ss.ToString());
                     GameObject temp = under.transform.GetChild(0).gameObject;
@@ -636,7 +732,7 @@ public class ButtonControl : MonoBehaviour
         {
             if (GameManager.instance.UserItem[select_num].key < 10)
             {
-                if(GameManager.instance.WearingItem[(horse_s_n * 4)].item_key != 0)
+                if (GameManager.instance.WearingItem[(horse_s_n * 4)].item_key != 0)
                 {
                     GameObject under1 = GameObject.Find("hat_h" + horse_ss.ToString());
                     GameObject temp1 = under1.transform.GetChild(0).gameObject;
@@ -766,7 +862,7 @@ public class ButtonControl : MonoBehaviour
     {
         cap_b = GameObject.Find("cap").GetComponent<Image>();
         cap_b.sprite = captain_check[1];
-        
+
         GameManager.instance.captain = GameManager.instance.select;
     }
 
@@ -804,7 +900,7 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.WearingItem[(horse_s_n * 4) + item].consis = GameManager.instance.UserItem[select_num].consis;
         //장착추가
 
-        for (int i = select_num; i < GameManager.instance.itemMany - 1; i++)     
+        for (int i = select_num; i < GameManager.instance.itemMany - 1; i++)
         {
             GameManager.instance.UserItem[i].key = GameManager.instance.UserItem[i + 1].key;
             GameManager.instance.UserItem[i].speed = GameManager.instance.UserItem[i + 1].speed;
@@ -837,15 +933,17 @@ public class ButtonControl : MonoBehaviour
             GameManager.instance.itemMany = GameManager.instance.itemMany + 1;
         }
 
-        int k = GameManager.instance.itemMany;
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
 
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(k);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+        for (int k = 0; k < GameManager.instance.itemMany + 1; k++)
+        {
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+        }
 
         for (int i = 0; i < 24; i++)
         {
@@ -861,7 +959,7 @@ public class ButtonControl : MonoBehaviour
     public void uninstall(int select_num)
     {
         int k = GameManager.instance.itemMany;
-        
+
         GameManager.instance.UserItem[k].key = GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].item_key;
         GameManager.instance.UserItem[k].speed = GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].speed;
         GameManager.instance.UserItem[k].accel = GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].accel;
@@ -877,15 +975,18 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].consis = 0;
 
         GameManager.instance.itemMany = GameManager.instance.itemMany + 1;
-        k = GameManager.instance.itemMany;
 
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(k);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
+
+        for (int m = 0; m < GameManager.instance.itemMany + 1; m++)
+        {
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (m.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[m].key);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (m.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[m].speed);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (m.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[m].accel);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (m.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[m].hp);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (m.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[m].agility);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (m.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[m].consis);
+        }
 
         for (int i = 0; i < 24; i++)
         {
@@ -896,6 +997,25 @@ public class ButtonControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("agility").SetValueAsync(GameManager.instance.WearingItem[i].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("consis").SetValueAsync(GameManager.instance.WearingItem[i].consis);
         }
+    }
+
+    public void wearing_delete()
+    {
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].item_key = 0;
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].speed = 0;
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].accel = 0;
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].hp = 0;
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].agility = 0;
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].consis = 0;
+
+        int i = (horse_s_n * 4) + select_num;
+
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("item_key").SetValueAsync(GameManager.instance.WearingItem[i].item_key);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("speed").SetValueAsync(GameManager.instance.WearingItem[i].speed);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("accel").SetValueAsync(GameManager.instance.WearingItem[i].accel);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("hp").SetValueAsync(GameManager.instance.WearingItem[i].hp);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("agility").SetValueAsync(GameManager.instance.WearingItem[i].agility);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("consis").SetValueAsync(GameManager.instance.WearingItem[i].consis);
     }
 
     public void senderror(string message)
@@ -915,7 +1035,21 @@ public class ButtonControl : MonoBehaviour
 
         error_m.text = message;
         iTween.MoveTo(error_p, iTween.Hash("y", 680, "delay", 0, "time", 0.5f));
-      
+
+    }
+    public void click_delete_button()
+    {
+        sendcheck_i("삭제하시겠습니까?");
+    }
+
+    public void sendcheck_i(string message)
+    {
+        GameObject error_p = GameObject.Find("check_i");
+        Text error_m = GameObject.Find("check_i_m").GetComponent<Text>();
+
+        error_m.text = message;
+        iTween.MoveTo(error_p, iTween.Hash("y", 680, "delay", 0, "time", 0.5f));
+
     }
 
     public void click_bye()
@@ -952,7 +1086,20 @@ public class ButtonControl : MonoBehaviour
         GameObject error_p = GameObject.Find("check");
         iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
     }
-    
+    public void click_item_yes()
+    {
+        click_item_delete();
+
+         GameObject error_p = GameObject.Find("check_i");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
+    }
+
+    public void click_item_no()
+    {
+        GameObject error_p = GameObject.Find("check_i");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
+    }
+
     public void byemyhorse()
     {
         int horse_n = GameManager.instance.select;
