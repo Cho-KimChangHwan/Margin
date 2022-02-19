@@ -28,6 +28,8 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     GameObject end;
     EndLog endLog;
     public float rPoint1 = 30f , rPoint2 = -15f;
+    public int myRank;
+    bool isPay = false;
     string[] rankColor = { "<color=#0054FF>" ,"<color=#1DDB16>", "<color=#191919>" ,"<color=#FF0000>"};
 
     void Start()
@@ -167,6 +169,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                 for (int i = 0; i < horseRanking.Count; i++)
                 {
                     R += rankColor[int.Parse(horseRanking[i])] + (rank++).ToString() + " : Player" + (int.Parse(horseRanking[i]) + 1).ToString() + "</color> " + "\n";
+                    if((GameManager.instance.mytern) == int.Parse(horseRanking[i])) myRank=rank-1;
                 }
                photonView.RPC("RankingSet", RpcTarget.AllBuffered, R);
             }
@@ -176,7 +179,31 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
             {
                 end.SetActive(true);
                 endLog.myN = GameManager.instance.mytern - 1;
+                endLog.myRank = myRank;
                 endLog.isEnd = true;
+                
+                if(isPay){
+                    if(myRank == 4)
+                    {
+                        endLog.myGold = 1;
+                        GameManager.instance.money += endLog.myGold;
+                    }
+                    else if(myRank == 3)
+                    {
+                        endLog.myGold = 300;
+                        GameManager.instance.money += endLog.myGold;
+                    }
+                    else if(myRank == 2)
+                    {
+                        endLog.myGold = 500;
+                        GameManager.instance.money += endLog.myGold;
+                    }
+                    else if(myRank == 1)
+                    {
+                        endLog.myGold = 1000;
+                        GameManager.instance.money += endLog.myGold;
+                    }
+                }
             }
             horseRanking.Clear();
         }
