@@ -182,7 +182,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                 endLog.myRank = myRank;
                 endLog.isEnd = true;
                 
-                if(isPay){
+                if( !isPay){
                     if(myRank == 4)
                     {
                         endLog.myGold = 1;
@@ -203,6 +203,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                         endLog.myGold = 1000;
                         GameManager.instance.money += endLog.myGold;
                     }
+                    isPay = true;
                 }
             }
             horseRanking.Clear();
