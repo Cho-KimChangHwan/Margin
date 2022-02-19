@@ -6,6 +6,7 @@ public class ItemScroll : MonoBehaviour
 {
     public int list = 10;
     public bool isclick = false;
+    public GameObject item;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +25,8 @@ public class ItemScroll : MonoBehaviour
             int y = 0;
             for(int i = 0; i<list; i++)
             {
-                //var node = Instantiate(item,new Vector3(0,y,0),Quaternion.identity);
-                //node.transform.SetParent(GameObject.Find("content").transform);
+                var node = Instantiate(item,new Vector3(0,y,0),Quaternion.identity);
+                node.transform.SetParent(GameObject.Find("content").transform);
                 y -= 115;
             }
             isclick = false;
