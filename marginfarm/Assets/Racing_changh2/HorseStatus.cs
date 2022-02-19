@@ -76,6 +76,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         {
 
             photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.mytern -1 );
+            bringItem();
             photonView.RPC("itemSet", RpcTarget.AllBuffered, GameManager.instance.mytern -1 , itemKey );
 
             animator = GetComponent<Animator>();
