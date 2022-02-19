@@ -853,7 +853,6 @@ public class ButtonControl : MonoBehaviour
                 spec_make();
             }
         }
-
         GameObject.Find("inven").transform.Find("select_x").gameObject.SetActive(true);
         spec_open_check = true;
     }
@@ -1071,14 +1070,7 @@ public class ButtonControl : MonoBehaviour
 
     public void click_bye_yes()
     {
-        
         byemyhorse();
-
-        //GameObject error_p = GameObject.Find("check");
-        //iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.2f, "time", 0.5f));
-
-        //specview_close();
-
     }
 
     public void click_bye_no()
