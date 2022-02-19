@@ -30,6 +30,7 @@ public class listupdate : MonoBehaviour
     {
         m_Reference = FirebaseDatabase.DefaultInstance.RootReference;
         inven_itemlist_make();
+        spec_open_check = true;
     }
 
     // Update is called once per frame
@@ -79,7 +80,7 @@ public class listupdate : MonoBehaviour
 
         select_num = button_num;
 
-        if (spec_open_check == true)
+        if (spec_open_check)
         {
             select_x.SetActive(false);
             spec_open_check = false;
@@ -135,74 +136,51 @@ public class listupdate : MonoBehaviour
 
     public void click_item_1()
     {
-        slot_check = false;
         click_item_button(0);
     }
     public void click_item_2()
     {
-        slot_check = false;
         click_item_button(1);
-        slot_check = false;
     }
     public void click_item_3()
     {
-        slot_check = false;
         click_item_button(2);
-        slot_check = false;
     }
     public void click_item_4()
     {
-        slot_check = false;
         click_item_button(3);
-        slot_check = false;
     }
     public void click_item_5()
     {
-        slot_check = false;
         click_item_button(4);
-        slot_check = false;
     }
     public void click_item_6()
     {
-        slot_check = false;
         click_item_button(5);
-        slot_check = false;
     }
     public void click_item_7()
     {
-        slot_check = false;
         click_item_button(6);
-        slot_check = false;
     }
     public void click_item_8()
     {
-        slot_check = false;
         click_item_button(7);
-        slot_check = false;
     }
     public void click_item_9()
     {
-        slot_check = false;
         click_item_button(8);
-        slot_check = false;
     }
     public void click_item_10()
     {
-        slot_check = false;
         click_item_button(9);
-        slot_check = false;
     }
     public void click_item_11()
     {
-        slot_check = false;
         click_item_button(10);
-        slot_check = false;
     }
     public void click_item_12()
     {
-        slot_check = false;
         click_item_button(11);
-        slot_check = false;
     }
 
     public void sell_button_click()
@@ -211,7 +189,7 @@ public class listupdate : MonoBehaviour
         delete_item();
 
         GameObject.Find("SellList").transform.Find("select_x").gameObject.SetActive(true);
-        spec_open_check = true;
+        spec_open_check = false;
     }
 
     public void delete_item()
