@@ -69,6 +69,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     void Start()
     {
+        applyItem();
         InputLocation();
         InputVariable();
         
@@ -90,6 +91,23 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             }
             
         }
+    }
+    void applyItem()
+    {
+        int capNum = GameManager.instance.captain ;
+        for(int i=0;i<4;i++)
+        {
+            status.speed += (float)GameManager.instance.WearingItem[capNum + i].speed;
+            status.accel += (float)GameManager.instance.WearingItem[capNum + i].accel;
+            status.hp += (float)GameManager.instance.WearingItem[capNum + i].hp;
+            status.agility += (float)GameManager.instance.WearingItem[capNum + i].agility;
+            status.consis += (float)GameManager.instance.WearingItem[capNum + i].consis;
+        }
+        if(status.speed >= 100f) status.speed = 100f;
+        if(status.accel >= 100f) status.accel = 100f;
+        if(status.hp >= 100f) status.hp = 100f;
+        if(status.agility >= 100f) status.agility = 100f;
+        if(status.consis >= 100f) status.consis = 100f;
     }
     void bringItem()
     {
