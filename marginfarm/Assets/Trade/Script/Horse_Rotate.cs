@@ -45,10 +45,5 @@ public class Horse_Rotate : MonoBehaviour
         
     }
 
-    public void clickposition()
-    {
-        
-    }
-
     
 }
