@@ -7,12 +7,12 @@ public class Horse_Rotate : MonoBehaviour
 {
     private float rotateSpeed = 3f;
     Vector2 mouseposition;
-    Camera camera;
+    public Camera camera;
     bool isclick = false;
     // Start is called before the first frame update
     void Start()
     {
-        camera = GameObject.Find("MainCamera").GetComponent<Camera>();
+        //camera = GameObject.Find("MainCamera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
