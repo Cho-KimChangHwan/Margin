@@ -169,7 +169,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                 for (int i = 0; i < horseRanking.Count; i++)
                 {
                     R += rankColor[int.Parse(horseRanking[i])] + (rank++).ToString() + " : Player" + (int.Parse(horseRanking[i]) + 1).ToString() + "</color> " + "\n";
-                    if((GameManager.instance.mytern) == int.Parse(horseRanking[i])) myRank=rank-1;
+                    if((GameManager.instance.mytern-1) == int.Parse(horseRanking[i])) myRank=rank-1;
                 }
                photonView.RPC("RankingSet", RpcTarget.AllBuffered, R);
             }
