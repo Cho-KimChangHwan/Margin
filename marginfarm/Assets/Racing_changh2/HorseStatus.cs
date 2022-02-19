@@ -112,7 +112,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                     if(child.gameObject.name == "hat_h1" )
                     {
                         GameObject under1 = child.gameObject;
-                        GameObject temp1 = Instantiate(GameManager.instance.hat_item[GameManager.instance.WearingItem[0].item_key], under1.transform.position, Quaternion.Euler(under1.transform.eulerAngles));
+                        GameObject temp1 = Instantiate(GameManager.instance.hat_item[Ikey[0]], under1.transform.position, Quaternion.Euler(under1.transform.eulerAngles));
                         temp1.transform.parent = under1.transform;
                     }
                 }
@@ -125,7 +125,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                     if(child.gameObject.name == "glasses_h1" )
                     {
                         GameObject under2 = child.gameObject;
-                        GameObject temp2 = Instantiate(GameManager.instance.glasses_item[GameManager.instance.WearingItem[1].item_key / 10], under2.transform.position, Quaternion.Euler(under2.transform.eulerAngles));
+                        GameObject temp2 = Instantiate(GameManager.instance.glasses_item[Ikey[1] / 10], under2.transform.position, Quaternion.Euler(under2.transform.eulerAngles));
                         temp2.transform.parent = under2.transform;                    }
                 }
             }
@@ -137,7 +137,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                     if(child.gameObject.name == "back_h1" )
                     {
                         GameObject under3 = child.gameObject;
-                        GameObject temp3 = Instantiate(GameManager.instance.back_item[GameManager.instance.WearingItem[2].item_key / 100], under3.transform.position, Quaternion.Euler(under3.transform.eulerAngles));
+                        GameObject temp3 = Instantiate(GameManager.instance.back_item[Ikey[2] / 100], under3.transform.position, Quaternion.Euler(under3.transform.eulerAngles));
                         temp3.transform.parent = under3.transform;                  
                     }
                 }              
@@ -150,25 +150,25 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                     if(child.gameObject.name == "shoes_fl_h1" )
                     {
                         GameObject under5 = child.gameObject;
-                        GameObject temp5 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[3].item_key / 1000], under5.transform.position, Quaternion.Euler(under5.transform.eulerAngles));
+                        GameObject temp5 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000], under5.transform.position, Quaternion.Euler(under5.transform.eulerAngles));
                         temp5.transform.parent = under5.transform;               
                     }
                     else if(child.gameObject.name == "shoes_fr_h1" )
                     {
                         GameObject under6 = child.gameObject;
-                        GameObject temp6 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[3].item_key / 1000 + 1], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
+                        GameObject temp6 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000 + 1], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
                         temp6.transform.parent = under6.transform;                 
                     }
                     else if(child.gameObject.name == "shoes_bl_h1" )
                     {
                         GameObject under7 = child.gameObject;
-                        GameObject temp7 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[3].item_key / 1000], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
+                        GameObject temp7 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
                         temp7.transform.parent = under7.transform;                
                     }
                     else if(child.gameObject.name == "shoes_br_h1" )
                     {
                         GameObject under8 = child.gameObject;
-                        GameObject temp8 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[3].item_key / 1000 + 1], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
+                        GameObject temp8 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000 + 1], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
                         temp8.transform.parent = under8.transform;                 
                     }
                 }   
