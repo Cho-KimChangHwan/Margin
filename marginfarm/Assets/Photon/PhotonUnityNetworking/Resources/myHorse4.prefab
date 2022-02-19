@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7544066352188388154}
   m_Layer: 10
-  m_Name: shoes_fr_h1
+  m_Name: shoes_fr_h4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3713664025964228289}
   m_Layer: 10
-  m_Name: shoes_fl_h1
+  m_Name: shoes_fl_h4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,6 +511,7 @@ MonoBehaviour:
   myRecord: 0
   horseSkin: {fileID: 8467049433235361409, guid: 35ba68609dbd7494796384208eeba346,
     type: 3}
+  itemKey: 00000000000000000000000000000000
 --- !u!114 &1007672294543533241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,7 +1250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8447809423231082612}
   m_Layer: 10
-  m_Name: hat_h1
+  m_Name: hat_h4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1347,7 +1348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3848789924341327018}
   m_Layer: 10
-  m_Name: shoes_br_h1
+  m_Name: shoes_br_h4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1687,7 +1688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2867197556232185954}
   m_Layer: 10
-  m_Name: shoes_bl_h1
+  m_Name: shoes_bl_h4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2042,7 +2043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6444606363337683582}
   m_Layer: 10
-  m_Name: back_h1
+  m_Name: back_h4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2134,7 +2135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9138833534564538671}
   m_Layer: 10
-  m_Name: glasses_h1
+  m_Name: glasses_h4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

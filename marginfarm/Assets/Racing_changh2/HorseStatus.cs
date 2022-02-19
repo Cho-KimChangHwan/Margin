@@ -123,75 +123,50 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     void itemSet(int pNum , int[] Ikey)
     {
         string hname = "Player" + (pNum+1 ).ToString();
-        Transform[] allChildren = GameObject.FindWithTag(hname).GetComponentsInChildren<Transform>(); 
             if(Ikey[0] != 0)
             {
-                foreach(Transform child in allChildren) 
-                { 
-                    //수행할 함수 작성 //Ex. AddComponent child.gameObject.AddComponent<MeshCollider>();
-                    if(child.gameObject.name == "hat_h1" )
-                    {
-                        GameObject under1 = child.gameObject;
-                        GameObject temp1 = Instantiate(GameManager.instance.hat_item[Ikey[0]], under1.transform.position, Quaternion.Euler(under1.transform.eulerAngles));
-                        temp1.transform.parent = under1.transform;
-                    }
-                }
+                    GameObject under1 = GameObject.Find("hat_h" + (pNum+1).ToString());
+                    GameObject temp1 = Instantiate(GameManager.instance.hat_item[Ikey[0]], under1.transform.position, Quaternion.Euler(under1.transform.eulerAngles));
+                    temp1.transform.parent = under1.transform;
+                
             }
             if(Ikey[1] != 0)
             {
-                foreach(Transform child in allChildren) 
-                { 
-                    //수행할 함수 작성 //Ex. AddComponent child.gameObject.AddComponent<MeshCollider>();
-                    if(child.gameObject.name == "glasses_h1" )
-                    {
-                        GameObject under2 = child.gameObject;
+
+                        GameObject under2 = GameObject.Find("glasses_h" + (pNum+1).ToString());
                         GameObject temp2 = Instantiate(GameManager.instance.glasses_item[Ikey[1] / 10], under2.transform.position, Quaternion.Euler(under2.transform.eulerAngles));
-                        temp2.transform.parent = under2.transform;                    }
-                }
+                        temp2.transform.parent = under2.transform;
             }
             if(Ikey[2] != 0)
             {
-                foreach(Transform child in allChildren) 
-                { 
-                    //수행할 함수 작성 //Ex. AddComponent child.gameObject.AddComponent<MeshCollider>();
-                    if(child.gameObject.name == "back_h1" )
-                    {
-                        GameObject under3 = child.gameObject;
+
+                        GameObject under3 = GameObject.Find("back_h" + (pNum+1).ToString());
                         GameObject temp3 = Instantiate(GameManager.instance.back_item[Ikey[2] / 100], under3.transform.position, Quaternion.Euler(under3.transform.eulerAngles));
                         temp3.transform.parent = under3.transform;                  
-                    }
-                }              
+                           
             }
            if(Ikey[3] != 0)
             {
-                foreach(Transform child in allChildren) 
-                { 
                     //수행할 함수 작성 //Ex. AddComponent child.gameObject.AddComponent<MeshCollider>();
-                    if(child.gameObject.name == "shoes_fl_h1" )
-                    {
-                        GameObject under5 = child.gameObject;
+
+                        GameObject under5 = GameObject.Find("shoes_fl_h" + (pNum+1).ToString());
                         GameObject temp5 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000], under5.transform.position, Quaternion.Euler(under5.transform.eulerAngles));
-                        temp5.transform.parent = under5.transform;               
-                    }
-                    else if(child.gameObject.name == "shoes_fr_h1" )
-                    {
-                        GameObject under6 = child.gameObject;
+                        temp5.transform.parent = under5.transform;    
+
+                        GameObject under6 = GameObject.Find("shoes_fr_h" + (pNum+1).ToString());
                         GameObject temp6 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000 + 1], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
-                        temp6.transform.parent = under6.transform;                 
-                    }
-                    else if(child.gameObject.name == "shoes_bl_h1" )
-                    {
-                        GameObject under7 = child.gameObject;
+                        temp6.transform.parent = under6.transform;  
+
+
+                        GameObject under7 = GameObject.Find("shoes_bl_h" + (pNum+1).ToString());
                         GameObject temp7 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
                         temp7.transform.parent = under7.transform;                
-                    }
-                    else if(child.gameObject.name == "shoes_br_h1" )
-                    {
-                        GameObject under8 = child.gameObject;
+
+                        GameObject under8 = GameObject.Find("shoes_br_h1" + (pNum+1).ToString());
                         GameObject temp8 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000 + 1], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
                         temp8.transform.parent = under8.transform;                 
-                    }
-                }   
+                    
+                 
 
             }
         
