@@ -5,10 +5,15 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using Firebase;
+using Firebase.Database;
+using Firebase.Extensions;
 
 
 public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
 {
+    DatabaseReference m_Reference;
+
     // Start is called before the first frame update
      // 4구간 나누고 , 4구간 안ㅔ서 좌표로 ㅏㅍ단 , 각으로 판단
     // Start is called before the first frame update
@@ -34,6 +39,8 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
 
     void Start()
     {
+        m_Reference = FirebaseDatabase.DefaultInstance.RootReference;
+
         string myname = "Player" + (GameManager.instance.mytern ).ToString();
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
         end = GameObject.Find("End");
@@ -204,6 +211,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                         GameManager.instance.money += endLog.myGold;
                     }
                     isPay = true;
+                    m_Reference.Child("users").Child(GameManager.instance.Id).Child("money").SetValueAsync(GameManager.instance.money);
                 }
             }
             horseRanking.Clear();
