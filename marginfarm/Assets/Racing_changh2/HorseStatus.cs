@@ -69,7 +69,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     void Start()
     {
-        applyItem();
+  
         InputLocation();
         InputVariable();
         
@@ -87,6 +87,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             if (photonView.IsMine)
             {
                 InputStatus();
+                applyItem();
                 ApplyConsis();
             }
             
