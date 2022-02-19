@@ -2036,5 +2036,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TradePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 7140756940763492158, guid: 99732364b9f43ea4c81c8c480ff68cb7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99732364b9f43ea4c81c8c480ff68cb7, type: 3}
