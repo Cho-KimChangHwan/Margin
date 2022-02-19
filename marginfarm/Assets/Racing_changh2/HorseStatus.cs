@@ -54,6 +54,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     bool isCollide=false;
     public float myRecord;
     public SkinnedMeshRenderer horseSkin;
+    public int[] itemKey = new int[4];
     void Awake()
     {
         if (photonView.IsMine)
@@ -75,7 +76,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         {
 
             photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.mytern -1 );
-            
+            photonView.RPC("itemSet", RpcTarget.AllBuffered, GameManager.instance.mytern -1 , itemKey );
 
             animator = GetComponent<Animator>();
             count = GameObject.Find("Canvas").GetComponent<CountDown>();
@@ -89,6 +90,61 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             
         }
     }
+    void bringItem()
+    {
+        int capNum = GameManager.instance.captain ;
+        for(int i=0 ; i<4 ;i++)
+        {
+            itemKey[i] = GameManager.instance.WearingItem[capNum + i].item_key;
+        }
+    }
+    [PunRPC]
+    void itemSet(int pNum , int[] Ikey)
+    {
+        string hname = "Player" + (pNum+1 ).ToString();
+        horseSkin = GameObject.FindWithTag(hname).GetComponentInChildren<SkinnedMeshRenderer>();
+
+        // horseSkin.material.SetTexture("_MainTex", h_Texture[GameManager.instance.UserHorse[i - 1].key]);
+            if(Ikey[0] != 0)
+            {
+                GameObject under1 = GameObject.FindWithTag(hname).transform.Find("hat_h1").gameObject;
+                GameObject temp1 = Instantiate(GameManager.instance.hat_item[GameManager.instance.WearingItem[0].item_key], under1.transform.position, Quaternion.Euler(under1.transform.eulerAngles));
+                temp1.transform.parent = under1.transform;
+            }
+            if(Ikey[1] != 0)
+            {
+                GameObject under2 = GameObject.Find("glasses_h1");
+                GameObject temp2 = Instantiate(GameManager.instance.glasses_item[GameManager.instance.WearingItem[1].item_key / 10], under2.transform.position, Quaternion.Euler(under2.transform.eulerAngles));
+                temp2.transform.parent = under2.transform;
+            }
+            if(Ikey[2] != 0)
+            {
+                GameObject under3 = GameObject.Find("back_h1");
+                GameObject temp3 = Instantiate(GameManager.instance.back_item[GameManager.instance.WearingItem[2].item_key / 100], under3.transform.position, Quaternion.Euler(under3.transform.eulerAngles));
+                temp3.transform.parent = under3.transform;
+            }
+           if(Ikey[3] != 0)
+            {
+                GameObject under5 = GameObject.Find("shoes_fl_h1");
+                GameObject temp5 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[3].item_key / 1000], under5.transform.position, Quaternion.Euler(under5.transform.eulerAngles));
+                temp5.transform.parent = under5.transform;
+
+                GameObject under6 = GameObject.Find("shoes_fr_h1");
+                GameObject temp6 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[3].item_key / 1000 + 1], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
+                temp6.transform.parent = under6.transform;
+
+                GameObject under7 = GameObject.Find("shoes_bl_h1");
+                GameObject temp7 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[3].item_key / 1000], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
+                temp7.transform.parent = under7.transform;
+
+                GameObject under8 = GameObject.Find("shoes_br_h1");
+                GameObject temp8 = Instantiate(GameManager.instance.shoes_item[GameManager.instance.WearingItem[3].item_key / 1000 + 1], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
+                temp8.transform.parent = under8.transform;
+
+            }
+        
+    }
+
 
     [PunRPC]
     void otMatSet(int pNum)

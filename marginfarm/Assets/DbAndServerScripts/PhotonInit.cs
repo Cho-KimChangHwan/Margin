@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +21,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        if (getReady == true && PhotonNetwork.CurrentRoom.PlayerCount >=2  && isGameStart == false) //3명일 때
+        if (getReady == true && PhotonNetwork.CurrentRoom.PlayerCount >=1  && isGameStart == false) //3명일 때
         {
             StartCoroutine(this.LoadRacing());
             PhotonNetwork.CurrentRoom.IsOpen = false;
