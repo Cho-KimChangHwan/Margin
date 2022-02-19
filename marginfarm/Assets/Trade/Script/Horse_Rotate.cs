@@ -7,7 +7,7 @@ public class Horse_Rotate : MonoBehaviour
 {
     private float rotateSpeed = 3f;
     Vector2 mouseposition;
-    public Camera camera;
+    //public Camera camera;
     bool isclick = false;
     // Start is called before the first frame update
     void Start()
