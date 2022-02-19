@@ -162,7 +162,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                         GameObject temp7 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
                         temp7.transform.parent = under7.transform;                
 
-                        GameObject under8 = GameObject.Find("shoes_br_h1" + (pNum+1).ToString());
+                        GameObject under8 = GameObject.Find("shoes_br_h" + (pNum+1).ToString());
                         GameObject temp8 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000 + 1], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
                         temp8.transform.parent = under8.transform;                 
                     
