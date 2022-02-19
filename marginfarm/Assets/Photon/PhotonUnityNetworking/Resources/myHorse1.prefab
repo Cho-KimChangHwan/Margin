@@ -511,6 +511,7 @@ MonoBehaviour:
   myRecord: 0
   horseSkin: {fileID: 8467049433235361409, guid: 35ba68609dbd7494796384208eeba346,
     type: 3}
+  itemKey: 00000000000000000000000000000000
 --- !u!114 &1007672294543533241
 MonoBehaviour:
   m_ObjectHideFlags: 0
