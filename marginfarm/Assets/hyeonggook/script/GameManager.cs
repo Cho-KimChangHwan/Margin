@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public int market_horse;
+
     public int many;  // 유저의 말 수
     public int itemMany; // 유저의 아이템 수
     public string Id;  // 유저 ID
