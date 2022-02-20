@@ -28,6 +28,18 @@ public class CFirebase : MonoBehaviour
     }
     void Update()
     {
+        if(logInput.isFocused != true && passwordInput.isFocused != true) {
+            if(Input.GetKeyDown(KeyCode.Tab)) {
+                logInput.Select();
+            }
+        }
+ 
+        if(logInput.isFocused == true) {
+            if(Input.GetKeyDown(KeyCode.Tab)) {
+                passwordInput.Select();
+            }
+        }
+ 
         getId = logInput.text;
         getPassword = passwordInput.text;
 

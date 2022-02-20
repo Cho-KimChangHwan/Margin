@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
-
+using TMPro;
 public class PhotonInit : MonoBehaviourPunCallbacks
 {
     public string version = "v1.0";
-    public Text show;
+    public TextMeshProUGUI show;
     bool isGameStart = false;
     bool getReady = false;
     void Awake()
@@ -17,7 +17,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     }
     void Start()
     {
-        show = GameObject.Find("loadingText").GetComponent<Text>();
+        show = GameObject.Find("loadingText").GetComponent<TextMeshProUGUI>();
     }
     private void Update()
     {
