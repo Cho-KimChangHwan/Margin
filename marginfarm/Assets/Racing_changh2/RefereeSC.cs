@@ -46,6 +46,8 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
         end = GameObject.Find("End");
         end.SetActive(false);
+        //using TMPro;
+
         ranking = GameObject.Find("Ranking").GetComponent<TextMeshProUGUI>();
         horseStatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();
         countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
