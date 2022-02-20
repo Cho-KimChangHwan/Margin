@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
+using TMPro;
 
 
 public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
@@ -19,7 +20,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     // Start is called before the first frame update
     GameObject[] horses ;
     HorseStatus horseStatus;
-    Text ranking;
+    TextMeshProUGUI ranking;
     bool isR = false;
     bool everyReady = false; 
     string R;
@@ -45,7 +46,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
         end = GameObject.Find("End");
         end.SetActive(false);
-        ranking = GameObject.Find("Ranking").GetComponent<Text>();
+        ranking = GameObject.Find("Ranking").GetComponent<TextMeshProUGUI>();
         horseStatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();
         countDown = GameObject.Find("Canvas").GetComponent<CountDown>();
         myLocation = horseStatus.myLocation;

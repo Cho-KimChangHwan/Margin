@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 public class HorseStatus : MonoBehaviourPunCallbacks
 {
     public struct Status
@@ -48,7 +48,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     public float dPoint1 = 19.75f, dPoint2 = -4.75f;
     public Animator animator;
     public CountDown count;
-    Text record ;
+    TextMeshProUGUI record ;
     GameObject leadHorse ;
     HorseStatus leadStatus ;
     bool isCollide=false;
@@ -82,7 +82,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
 
             animator = GetComponent<Animator>();
             count = GameObject.Find("Canvas").GetComponent<CountDown>();
-            record = GameObject.Find("Record").GetComponent<Text>();
+            record = GameObject.Find("Record").GetComponent<TextMeshProUGUI>();
             gameObject.layer = 10;
             if (photonView.IsMine)
             {

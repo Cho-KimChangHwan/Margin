@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EndLog : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class EndLog : MonoBehaviour
     public int myN;
     bool isinput;
     float timer;
-    Text endText;
-    Text record;
-    Text ranking;
+    TextMeshProUGUI endText;
+    TextMeshProUGUI record;
+    TextMeshProUGUI ranking;
     RefereeSC referee;
     HorseStatus horsestatus;
     string rank;
@@ -26,9 +27,9 @@ public class EndLog : MonoBehaviour
         isinput = false;
         timer = 0;
         rank = "";
-        endText = GameObject.Find("EndText").GetComponent<Text>();
-        record = GameObject.Find("Record").GetComponent<Text>();
-        ranking = GameObject.Find("Ranking").GetComponent<Text>();
+        endText = GameObject.Find("EndText").GetComponent<TextMeshProUGUI>();
+        record = GameObject.Find("Record").GetComponent<TextMeshProUGUI>();
+        ranking = GameObject.Find("Ranking").GetComponent<TextMeshProUGUI>();
         referee = GameObject.Find("Referee").GetComponent<RefereeSC>();
         string myname = "Player" + (GameManager.instance.mytern ).ToString();
         horsestatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();

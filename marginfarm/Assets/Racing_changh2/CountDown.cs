@@ -5,13 +5,15 @@ using UnityEngine.UI;
 using System;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
+
 public class CountDown : MonoBehaviour
 {
     // Start is called before the first frame update
     float timer;
     float startTimer ;
 
-    Text count;
+    TextMeshProUGUI count;
     public bool isStart = false;
     public bool isReady = false;
     
@@ -20,7 +22,7 @@ public class CountDown : MonoBehaviour
         isStart = false;
         timer = 0f;
         startTimer = 0f;
-        count = GameObject.Find("Count").GetComponent<Text>();
+        count = GameObject.Find("Count").GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
