@@ -201,7 +201,8 @@ public class listupdate : MonoBehaviour
         //client
         GameObject.Find("SellList").transform.Find("select_x").gameObject.SetActive(true);
         spec_open_check = false;
-    }
+        inven_itemlist_make();
+        }
 
     public void delete_item()
     {
