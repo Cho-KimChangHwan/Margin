@@ -19,6 +19,6 @@ public class GiveNum : MonoBehaviour
     public void click_market_button()
     {
         GameManager.instance.market_select = print_select;
-        Debug.Log(GameManager.instance.market_select);
+        //Debug.Log(GameManager.instance.market_select);
     }
 }

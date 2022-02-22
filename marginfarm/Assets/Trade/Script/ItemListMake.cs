@@ -34,7 +34,7 @@ public class ItemListMake : MonoBehaviour
         for (int i = 0; i < GameManager.instance.marketMany; i++)
         {
             GameObject temp = Instantiate(item_button, content.transform);
-            
+            Button temp_b = temp.GetComponent<Button>();
             GameObject temp_i = temp.transform.GetChild(0).gameObject;
 
             Image button_i = temp_i.transform.GetChild(0).gameObject.GetComponent<Image>();
@@ -72,6 +72,7 @@ public class ItemListMake : MonoBehaviour
                 gauge.text = itemdata[m - 1].ToString();
             }
             temp.GetComponent<GiveNum>().print_select = a;
+            temp_b.onClick.AddListener(Click_market_button);
             a++;
         }
        
@@ -117,5 +118,12 @@ public class ItemListMake : MonoBehaviour
 
                 GameManager.instance.money = Convert.ToInt32(snapshot.Child("money").Value);
             });
+    }
+
+    public void Click_market_button()
+    {
+        int k = GameManager.instance.market_select;
+
+        Debug.Log(GameManager.instance.MarketItems[k].key);
     }
 }
