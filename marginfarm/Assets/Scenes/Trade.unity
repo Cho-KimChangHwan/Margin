@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45068306, g: 0.49875724, b: 0.5647798, a: 1}
+  m_IndirectSpecularColor: {r: 0.450683, g: 0.49875712, b: 0.56477976, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1381,7 +1381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100982561, guid: 99732364b9f43ea4c81c8c480ff68cb7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.67450017
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100982561, guid: 99732364b9f43ea4c81c8c480ff68cb7, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1631,6 +1631,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3689103791528525847, guid: 99732364b9f43ea4c81c8c480ff68cb7,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689103791528525847, guid: 99732364b9f43ea4c81c8c480ff68cb7,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1117011167}
@@ -1638,6 +1643,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: isenrolled
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689103791528525847, guid: 99732364b9f43ea4c81c8c480ff68cb7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689103791528525847, guid: 99732364b9f43ea4c81c8c480ff68cb7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689103791528525847, guid: 99732364b9f43ea4c81c8c480ff68cb7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7686452705565811025}
+    - target: {fileID: 3689103791528525847, guid: 99732364b9f43ea4c81c8c480ff68cb7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: sell_button_click
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689103791528525847, guid: 99732364b9f43ea4c81c8c480ff68cb7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6246544844935730579, guid: 99732364b9f43ea4c81c8c480ff68cb7,
         type: 3}

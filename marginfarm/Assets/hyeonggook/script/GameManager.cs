@@ -143,8 +143,7 @@ public class GameManager : MonoBehaviour
 
     public int[] horse_items = new int[6];
 
-    public MarketItem[] MarketItems = new MarketItem[]
-    { };
+    public MarketItem[] MarketItems = new MarketItem[100];
 
     public ItemInfo[] UserItem = new ItemInfo[]
     {
