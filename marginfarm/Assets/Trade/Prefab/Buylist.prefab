@@ -510,7 +510,6 @@ GameObject:
   - component: {fileID: 6374448221354510655}
   - component: {fileID: 7823054923508750236}
   - component: {fileID: 4805715992308797795}
-  - component: {fileID: 5771316633976539279}
   - component: {fileID: 6244538808935300233}
   m_Layer: 5
   m_Name: Buylist
@@ -542,7 +541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 640, y: 437}
   m_SizeDelta: {x: 1100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7823054923508750236
@@ -580,22 +579,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &5771316633976539279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1897354277017980617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5327b8195ac0447a61a47016227de3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isclick: 0
-  item: {fileID: 1897354277017980617}
-  content: {fileID: 0}
-  yPos: 0
 --- !u!114 &6244538808935300233
 MonoBehaviour:
   m_ObjectHideFlags: 0

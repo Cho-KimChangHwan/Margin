@@ -200,7 +200,7 @@ public class listupdate : MonoBehaviour
         m_Reference.Child("market").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
         //client
         GameObject.Find("SellList").transform.Find("select_x").gameObject.SetActive(true);
-        spec_open_check = false;
+        spec_open_check = true;
         inven_itemlist_make();
         }
 

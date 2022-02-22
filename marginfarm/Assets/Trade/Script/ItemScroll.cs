@@ -32,6 +32,6 @@ public class ItemScroll : MonoBehaviour
         //noitem.gameObject.SetActive(false);
         var node = Instantiate(item,content.transform);
         //node.transform.SetParent(GameObject.Find("content").transform);
-        yPos -= 115;       
+        yPos -= 115;
     }
 }
