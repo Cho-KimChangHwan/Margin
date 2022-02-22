@@ -13,7 +13,7 @@ public class ItemListMake : MonoBehaviour
 
     public GameObject item_button;
     public GameObject content;
-
+    public int a = 0;
     public int[] itemdata = new int[5];
     // Start is called before the first frame update
     void Start()
@@ -30,9 +30,11 @@ public class ItemListMake : MonoBehaviour
     }
     public void button_make()
     {
-         for (int i = 0; i < GameManager.instance.marketMany; i++)
-         {
+        a = 0;
+        for (int i = 0; i < GameManager.instance.marketMany; i++)
+        {
             GameObject temp = Instantiate(item_button, content.transform);
+            
             GameObject temp_i = temp.transform.GetChild(0).gameObject;
 
             Image button_i = temp_i.transform.GetChild(0).gameObject.GetComponent<Image>();
@@ -69,7 +71,8 @@ public class ItemListMake : MonoBehaviour
                 gauge = temp.transform.GetChild(m).gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
                 gauge.text = itemdata[m - 1].ToString();
             }
-
+            temp.GetComponent<GiveNum>().print_select = a;
+            a++;
         }
        
     }

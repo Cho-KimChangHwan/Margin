@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
 
     public int mytern;
     public float fade_speed;
+    public int market_select;
 
     public Texture[] hMats = new Texture[8];
     public int[] lineKey = new int[4];
