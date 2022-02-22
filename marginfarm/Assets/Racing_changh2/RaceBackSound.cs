@@ -18,7 +18,6 @@ public class RaceBackSound : MonoBehaviour
     void Awake() {
         audioSource = GameObject.Find("SoundManager").GetComponent<AudioSource>();
         originalV = audioSource.volume;
-        TextMeshProUGUI soundT = GameObject.Find("SoundT").GetComponent<TextMeshProUGUI>();
     }
     // Start is called before the first frame update
     void Start()
@@ -30,13 +29,11 @@ public class RaceBackSound : MonoBehaviour
         if(On)
         {
             audioSource.volume = 0f;
-            soundT.text = "Sound ON";
             On = false;
         }
         else
         {
             audioSource.volume = originalV;
-            soundT.text = "Sound OFF";
             On = true;
         }
     }
