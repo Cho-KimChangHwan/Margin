@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class StartLineSwitch : MonoBehaviour
 {
     // Start is called before the first frame update
     HorseStatus horseStatus;
+    TextMeshProUGUI ranking;
     void Start()
     {
         string myname = "Player" + (GameManager.instance.mytern ).ToString();
