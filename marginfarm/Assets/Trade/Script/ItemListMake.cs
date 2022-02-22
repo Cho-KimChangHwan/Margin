@@ -15,4 +15,10 @@ public class ItemListMake : MonoBehaviour
     {
         
     }
+    public void button_make()
+    {
+        //GameObject temp = Instantiate(GameManager.instance.hat_item[GameManager.instance.UserItem[select_num].key], under.transform.position, Quaternion.Euler(new Vector3(38f, -97f, -6f)));
+        //temp.transform.parent = under.transform;
+        //temp.layer = layer_num[horse_ss];
+    }
 }
