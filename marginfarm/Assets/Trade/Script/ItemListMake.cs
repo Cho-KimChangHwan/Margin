@@ -15,6 +15,8 @@ public class ItemListMake : MonoBehaviour
     public GameObject content;
     public int a = 0;
     public int[] itemdata = new int[5];
+
+    public int k;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +74,7 @@ public class ItemListMake : MonoBehaviour
                 gauge.text = itemdata[m - 1].ToString();
             }
             temp.GetComponent<GiveNum>().print_select = a;
-            temp_b.onClick.AddListener(Click_market_button);
+            temp_b.onClick.AddListener(Click_market_i_button);
             a++;
         }
        
@@ -120,10 +122,80 @@ public class ItemListMake : MonoBehaviour
             });
     }
 
-    public void Click_market_button()
+    public void Click_market_i_button()
     {
-        int k = GameManager.instance.market_select;
+        k = GameManager.instance.market_select;
 
-        Debug.Log(GameManager.instance.MarketItems[k].key);
+        //아이템 오브젝트 끼워주기
+    }
+
+    public void Click_go_button()
+    {
+        sendcheck_buy("아이템을 구매하시겠습니까?");
+    }
+
+    public void Get_item()
+    {
+        int m = GameManager.instance.itemMany;
+        GameManager.instance.UserItem[m].key = GameManager.instance.MarketItems[k].key;
+        GameManager.instance.UserItem[m].speed = GameManager.instance.MarketItems[k].speed;
+        GameManager.instance.UserItem[m].accel = GameManager.instance.MarketItems[k].accel;
+        GameManager.instance.UserItem[m].hp = GameManager.instance.MarketItems[k].hp;
+        GameManager.instance.UserItem[m].agility = GameManager.instance.MarketItems[k].agility;
+        GameManager.instance.UserItem[m].consis = GameManager.instance.MarketItems[k].consis;
+        GameManager.instance.itemMany++;
+
+        /*
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+        */
+
+        //마켓 데이터베이스상 디비 어케할건지?
+
+        for (int i = k; i < GameManager.instance.marketMany - 1; i++)
+        {
+            GameManager.instance.MarketItems[i].key = GameManager.instance.MarketItems[i + 1].key;
+            GameManager.instance.MarketItems[i].speed = GameManager.instance.MarketItems[i + 1].speed;
+            GameManager.instance.MarketItems[i].accel = GameManager.instance.MarketItems[i + 1].accel;
+            GameManager.instance.MarketItems[i].hp = GameManager.instance.MarketItems[i + 1].hp;
+            GameManager.instance.MarketItems[i].agility = GameManager.instance.MarketItems[i + 1].agility;
+            GameManager.instance.MarketItems[i].consis = GameManager.instance.MarketItems[i + 1].consis;
+        }
+        GameManager.instance.marketMany--;
+
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].key = -1;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].speed = -1;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].accel = -1;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].hp = -1;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].agility = -1;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].consis = -1;
+
+    }
+
+    public void sendcheck_buy(string message)
+    {
+        GameObject error_p = GameObject.Find("check");
+        Text error_m = GameObject.Find("check_m").GetComponent<Text>();
+
+        error_m.text = message;
+        iTween.MoveTo(error_p, iTween.Hash("y", 680, "delay", 0, "time", 0.5f));
+
+    }
+    public void click_buy_yes()
+    {
+        Get_item();
+        GameObject error_p = GameObject.Find("check");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.1f, "time", 0.5f));
+    }
+
+    public void click_buy_no()
+    {
+        GameObject error_p = GameObject.Find("check");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.1f, "time", 0.5f));
     }
 }

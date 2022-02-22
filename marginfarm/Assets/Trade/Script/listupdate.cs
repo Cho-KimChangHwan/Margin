@@ -182,8 +182,12 @@ public class listupdate : MonoBehaviour
     {
         click_item_button(11);
     }
-
+    
     public void sell_button_click()
+    {
+        sendcheck_sell("아이템을 판매하시겠습니까?");
+    }
+    public void item_sell()
     {
         Debug.Log("asd");
         delete_item();
@@ -243,6 +247,30 @@ public class listupdate : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
         }
+    }
+
+    public void sendcheck_sell(string message)
+    {
+        GameObject error_p = GameObject.Find("check_i");
+        Text error_m = GameObject.Find("check_m_i").GetComponent<Text>();
+
+        error_m.text = message;
+        iTween.MoveTo(error_p, iTween.Hash("y", 680, "delay", 0, "time", 0.5f));
+
+    }
+
+    public void click_sell_yes()
+    {
+        GameObject error_p = GameObject.Find("check_i");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.1f, "time", 0.5f));
+
+        item_sell();
+    }
+
+    public void click_sell_no()
+    {
+        GameObject error_p = GameObject.Find("check_i");
+        iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.1f, "time", 0.5f));
     }
 
 }
