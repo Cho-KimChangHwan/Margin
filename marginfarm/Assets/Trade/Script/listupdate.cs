@@ -197,7 +197,7 @@ public class listupdate : MonoBehaviour
         m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("consis").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].consis);
 
         GameManager.instance.marketMany += 1;
-        m_Reference.Child("market").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
+        m_Reference.Child("market").Child("sellList").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
         //client
         GameObject.Find("SellList").transform.Find("select_x").gameObject.SetActive(true);
         spec_open_check = true;
