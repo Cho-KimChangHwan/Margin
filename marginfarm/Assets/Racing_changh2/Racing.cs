@@ -15,18 +15,19 @@ public class Ranking : MonoBehaviour
     public float rPoint1 = 30f , rPoint2 = -15f;
     void Start()
     {
+        FindOb();
+        InputInfo();
+    }
+    void FindOb()
+    {
         ranking = GameObject.Find("Ranking").GetComponent<Text>();
         minis = GameObject.FindGameObjectsWithTag("Mini");
         horses = new GameObject[minis.Length];
         for(int i=0;i<minis.Length;i++)
             horses[i] = minis[i].transform.parent.gameObject;
-        InputInfo();
     }
-
-    // Update is called once per frame
-    void FixedUpdate()
+    void SetRanking()
     {
-       
         List<int> First = new List<int>(); 
         List<int> Second = new List<int>(); 
         List<int> Third = new List<int>(); 
@@ -137,6 +138,11 @@ public class Ranking : MonoBehaviour
         //ranking.text = "1 : " + First[0]+"\n" +"\n" +"2 : " + First[1] +"\n" +"\n" + "3 : " + First[2] +"\n" +"\n" + "4 : " + First[3] +"\n";
 
          ranking.text = "1 : " + horseRanking[0]+"\n" +"\n" +"2 : " + horseRanking[1] +"\n" +"\n" + "3 : " + horseRanking[2] +"\n" +"\n" + "4 : " + horseRanking[3] +"\n";
+    }
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        SetRanking();
     }
     void InputInfo()
     {

@@ -31,24 +31,20 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     public Dictionary<string, bool> horseLocation = new Dictionary<string, bool>();
     public Status status;
     public float resultSpeed, timeChecker;
-    public bool isHalf; // 레일의 절반을 뛰었는지 판단
-    // 회전에 필요한 변수 및  오브젝트
+    public bool isHalf , isRotate; 
     public float rotateTime, radius;
-    public bool isRotate;
     public float rotateX, rotateZ;
-    // 대각선에 필요한 변수
     bool isDiagonal;
     public float dRandom;
     public Vector3 firstAxis, secondAxis;
     Vector3 startPosition, finalPosition;
     public Vector3 currentPosition;
     public Vector3 lookDirection, changeRotation;
-    // 회전 / 대각선의 z좌표
     public float rPoint1 = 30f, rPoint2 = -15f;
     public float dPoint1 = 19.75f, dPoint2 = -4.75f;
     public Animator animator;
-    public CountDown count;
-    TextMeshProUGUI record ;
+    public CountDown count = GameObject.Find("Canvas").GetComponent<CountDown>();
+    TextMeshProUGUI record = GameObject.Find("Record").GetComponent<TextMeshProUGUI>();
     GameObject leadHorse ;
     HorseStatus leadStatus ;
     bool isCollide=false;
@@ -69,7 +65,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     }
     void Start()
     {
-  
+        gameObject.layer = 10;
         InputLocation();
         InputVariable();
         
@@ -81,9 +77,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             photonView.RPC("itemSet", RpcTarget.AllBuffered, GameManager.instance.mytern -1 , itemKey );
 
             animator = GetComponent<Animator>();
-            count = GameObject.Find("Canvas").GetComponent<CountDown>();
-            record = GameObject.Find("Record").GetComponent<TextMeshProUGUI>();
-            gameObject.layer = 10;
+
             if (photonView.IsMine)
             {
                 InputStatus();
@@ -123,31 +117,30 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     void itemSet(int pNum , int[] Ikey)
     {
         string hname = "Player" + (pNum+1 ).ToString();
-            if(Ikey[0] != 0)
-            {
+        if(Ikey[0] != 0)
+        {
                     GameObject under1 = GameObject.Find("hat_h" + (pNum+1).ToString());
                     GameObject temp1 = Instantiate(GameManager.instance.hat_item[Ikey[0]], under1.transform.position, Quaternion.Euler(under1.transform.eulerAngles));
                     temp1.transform.parent = under1.transform;
                 
-            }
-            if(Ikey[1] != 0)
-            {
+        }
+        if(Ikey[1] != 0)
+        {
 
                         GameObject under2 = GameObject.Find("glasses_h" + (pNum+1).ToString());
                         GameObject temp2 = Instantiate(GameManager.instance.glasses_item[Ikey[1] / 10], under2.transform.position, Quaternion.Euler(under2.transform.eulerAngles));
                         temp2.transform.parent = under2.transform;
-            }
-            if(Ikey[2] != 0)
-            {
+        }
+        if(Ikey[2] != 0)
+        {
 
                         GameObject under3 = GameObject.Find("back_h" + (pNum+1).ToString());
                         GameObject temp3 = Instantiate(GameManager.instance.back_item[Ikey[2] / 100], under3.transform.position, Quaternion.Euler(under3.transform.eulerAngles));
                         temp3.transform.parent = under3.transform;                  
                            
-            }
-           if(Ikey[3] != 0)
-            {
-                    //수행할 함수 작성 //Ex. AddComponent child.gameObject.AddComponent<MeshCollider>();
+        }
+        if(Ikey[3] != 0)
+        {
 
                         GameObject under5 = GameObject.Find("shoes_fl_h" + (pNum+1).ToString());
                         GameObject temp5 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000], under5.transform.position, Quaternion.Euler(under5.transform.eulerAngles));
@@ -168,7 +161,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                     
                  
 
-            }
+        }
         
     }
 
@@ -199,7 +192,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     void InputStatus()
     {
         status = new Status(n,s,a,h,ag,c);
-        //status = new Status(10.0f, 60.0f, 40.0f, 50.0f, 8.0f);
     }
 
     // Update is called once per frame
@@ -255,7 +247,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             isDiagonal = false;
             radius = Vector3.Distance(currentPosition, secondAxis);
             startPosition = currentPosition;
-
         }
         else if (isRotate && (horseLocation["Second"] || horseLocation["Fourth"]))
         {
@@ -283,7 +274,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 }
                 ApplyRotate();
             }
-            //animator.Play("Horse_Gallop");
             myLocation = "First";
             photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Gallop");
         }
@@ -486,14 +476,10 @@ public class HorseStatus : MonoBehaviourPunCallbacks
                 }
                 photonView.RPC("rpcAni", RpcTarget.AllBuffered, "Horse_Canter");
             }
-            Vector3 currentRotation = transform.eulerAngles;
-            // lookDirection = (transform.position -currentPosition);
-            // transform.rotation = Quaternion.LookRotation(lookDirection);   
+            Vector3 currentRotation = transform.eulerAngles; 
             ApplyRotate();
             changeRotation = -currentRotation + transform.eulerAngles;
-        }
-        //animator.Play("Horse_Canter");
-        
+        }  
     }
     [PunRPC]
     void rpcAni(string strAni)
@@ -505,8 +491,7 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     void ApplyRotate()
     {
         lookDirection = -(transform.position - currentPosition);
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDirection), 5f * Time.deltaTime);
-        //\\transform.rotation = Quaternion.LookRotation(lookDirection);  
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDirection), 5f * Time.deltaTime); 
     }
     void InputLocation()
     {
@@ -519,18 +504,9 @@ public class HorseStatus : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter(Collision collision)
     {
-
-       // 이 컴포넌트가 부착된 게임 오브젝트의 콜라이더와 충돌한 게임 오브젝트 가져오기
         leadHorse = collision.gameObject;
-
-        // 특정 컴포넌트 가져오기
-
         leadStatus = collision.gameObject.GetComponent<HorseStatus>();
-
-        // 콜라이더 가져오기
-
         var collider = collision.collider;
-
     }
 
  
@@ -578,13 +554,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         }
     }
 
- 
-
-    // Collider 컴포넌트의 is Trigger가 false인 상태로 충돌이 끝났을 때
-
     private void OnCollisionExit(Collision collision)
     {
         isCollide = false;
-
     }
 }

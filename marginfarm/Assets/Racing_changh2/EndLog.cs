@@ -27,34 +27,15 @@ public class EndLog : MonoBehaviour
         isinput = false;
         timer = 0;
         rank = "";
-        endText = GameObject.Find("EndText").GetComponent<TextMeshProUGUI>();
-        record = GameObject.Find("Record").GetComponent<TextMeshProUGUI>();
-        ranking = GameObject.Find("Ranking").GetComponent<TextMeshProUGUI>();
-        referee = GameObject.Find("Referee").GetComponent<RefereeSC>();
-        string myname = "Player" + (GameManager.instance.mytern ).ToString();
-        horsestatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();
+        FindOb();
+        FindPlayer();
     }
-
+    
     // Update is called once per frame
     void Update()
     {
         if(isEnd)
         {
-            // if(!isinput)
-            // {
-            //     for(int i=0;i<referee.Final.Count;i++)
-            //     {
-            //         if( myN == (int.Parse(referee.Final[i])) )
-            //         {
-            //             rank += (i+1).ToString() + " : Player"  +(int.Parse(referee.Final[i])+1).ToString() + "(me)" + "\n";
-            //         }
-            //         else
-            //         {
-            //             rank += (i+1).ToString() + " : Player"  +(int.Parse(referee.Final[i])+1).ToString() + "\n";
-            //         }
-            //     }
-            //     isinput = true;
-            // }
             string T = ranking.text  + record.text +"\n";
             if ( timer < 10f )
             {
@@ -91,5 +72,17 @@ public class EndLog : MonoBehaviour
         {
             referee.serverDisconnect();
         }
+    }
+    void FindPlayer()
+    {
+        string myname = "Player" + (GameManager.instance.mytern ).ToString();
+        horsestatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();
+    }
+    void FindOb()
+    {
+         endText = GameObject.Find("EndText").GetComponent<TextMeshProUGUI>();
+        record = GameObject.Find("Record").GetComponent<TextMeshProUGUI>();
+        ranking = GameObject.Find("Ranking").GetComponent<TextMeshProUGUI>();
+        referee = GameObject.Find("Referee").GetComponent<RefereeSC>();
     }
 }

@@ -46,7 +46,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         endLog = GameObject.Find("EndText").GetComponent<EndLog>();
         end = GameObject.Find("End");
         end.SetActive(false);
-        //using TMPro;
 
         ranking = GameObject.Find("Ranking").GetComponent<TextMeshProUGUI>();
         horseStatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();
@@ -183,8 +182,6 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                 }
                photonView.RPC("RankingSet", RpcTarget.AllBuffered, R);
             }
-            //Debug.Log("총 파이널"+Final.Count);
-            //Debug.Log("내 홀스 파이널?"+horseStatus.horseLocation["Final"]);
             if ((Final.Count == horseRanking.Count) && horseStatus.horseLocation["Final"])
             {
                 end.SetActive(true);
