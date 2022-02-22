@@ -185,15 +185,33 @@ public class listupdate : MonoBehaviour
 
     public void sell_button_click()
     {
-        // 여기에 넣으세요 준영씨 마켓데이터베이스에 저장하는 것을. 저장해야할 아이템 인덱스는 select_num 변수에 저장되어 있답니다. ㅎㅎ
+        Debug.Log("asd");
         delete_item();
+        // database add item to market
 
+        m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("key").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].key);
+        m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("speed").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].speed);
+        m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("accel").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].accel);
+        m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("hp").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].hp);
+        m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("agility").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].agility);
+        m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("consis").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].consis);
+
+        GameManager.instance.marketMany += 1;
+        m_Reference.Child("market").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
+        //client
         GameObject.Find("SellList").transform.Find("select_x").gameObject.SetActive(true);
         spec_open_check = false;
     }
 
     public void delete_item()
     {
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].key = GameManager.instance.UserItem[select_num].key;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].speed = GameManager.instance.UserItem[select_num].speed;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].accel = GameManager.instance.UserItem[select_num].accel;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].hp = GameManager.instance.UserItem[select_num].hp;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].agility = GameManager.instance.UserItem[select_num].agility;
+        GameManager.instance.MarketItems[GameManager.instance.marketMany].consis = GameManager.instance.UserItem[select_num].consis;
+
         for (int i = select_num; i < GameManager.instance.itemMany - 1; i++)
         {
             GameManager.instance.UserItem[i].key = GameManager.instance.UserItem[i + 1].key;

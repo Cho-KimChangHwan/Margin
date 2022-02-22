@@ -71,11 +71,31 @@ public struct WearingItem
     }
 }
 
+public struct MarketItem
+{
+    public int key;
+    public int speed;
+    public int accel;
+    public int hp;
+    public int agility;
+    public int consis;
+
+    public MarketItem(int key, int speed, int accel, int hp, int agility, int consis)
+    {
+        this.key = key;
+        this.speed = speed;
+        this.accel = accel;
+        this.hp = hp;
+        this.agility = agility;
+        this.consis = consis;
+    }
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int market_horse;
+    public int marketMany;
 
     public int many;  // 유저의 말 수
     public int itemMany; // 유저의 아이템 수
@@ -122,6 +142,9 @@ public class GameManager : MonoBehaviour
     };
 
     public int[] horse_items = new int[6];
+
+    public MarketItem[] MarketItems = new MarketItem[]
+    { };
 
     public ItemInfo[] UserItem = new ItemInfo[]
     {
