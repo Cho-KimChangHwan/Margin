@@ -594,12 +594,12 @@ public class gachaControl : MonoBehaviour
             GameManager.instance.itemMany++;
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
         }
         else if (itemselect == 2)
         {
@@ -642,12 +642,12 @@ public class gachaControl : MonoBehaviour
             GameManager.instance.itemMany++;
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
         }
         else if (itemselect == 3)
         {
@@ -690,16 +690,15 @@ public class gachaControl : MonoBehaviour
             GameManager.instance.itemMany++;
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
         }
         else if (itemselect == 4)
         {
-            //int i = Random.Range(1, 10);
             int i = 2;
             obj_card_i.sprite = GameManager.instance.shoes_item_card[i];
 
@@ -738,12 +737,12 @@ public class gachaControl : MonoBehaviour
             GameManager.instance.itemMany++;
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
         }
 
         GameObject.Find("item_second").transform.Find("go_item_b").gameObject.SetActive(true);
@@ -753,15 +752,15 @@ public class gachaControl : MonoBehaviour
     }
     public void horseWrite()
     {
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("name").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].name);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("key").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].key);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("level").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].level);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("speed").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].speed);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("accel").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].accel);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("hp").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].hp);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("agility").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].agility);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("consis").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].consis);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child((GameManager.instance.many - 1).ToString()).Child("item").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].items);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("horses").Child((GameManager.instance.many - 1).ToString()).Child("name").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].name);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("horses").Child((GameManager.instance.many - 1).ToString()).Child("key").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].key);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("horses").Child((GameManager.instance.many - 1).ToString()).Child("level").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].level);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("horses").Child((GameManager.instance.many - 1).ToString()).Child("speed").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].speed);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("horses").Child((GameManager.instance.many - 1).ToString()).Child("accel").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].accel);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("horses").Child((GameManager.instance.many - 1).ToString()).Child("hp").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].hp);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("horses").Child((GameManager.instance.many - 1).ToString()).Child("agility").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].agility);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("horses").Child((GameManager.instance.many - 1).ToString()).Child("consis").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].consis);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("horses").Child((GameManager.instance.many - 1).ToString()).Child("item").SetValueAsync(GameManager.instance.UserHorse[GameManager.instance.many - 1].items);
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("many").SetValueAsync(GameManager.instance.many);
     }
 

@@ -36,7 +36,7 @@ public class getDataFromFB : MonoBehaviour
             {
                 DataSnapshot snapshot = task.Result;
                 //get first data
-                for (int i = 0; i < snapshot.Child(i.ToString()).ChildrenCount; i++)
+                for (int i = 0; i < snapshot.Child("horses").ChildrenCount; i++)
                 {
                     GameManager.instance.UserHorse[i].name = snapshot.Child(i.ToString()).Child("name").Value.ToString();
                     GameManager.instance.UserHorse[i].key = Convert.ToInt32(snapshot.Child(i.ToString()).Child("key").Value);
@@ -48,7 +48,7 @@ public class getDataFromFB : MonoBehaviour
                     GameManager.instance.UserHorse[i].consis = Convert.ToInt32(snapshot.Child(i.ToString()).Child("consis").Value);
                     GameManager.instance.UserHorse[i].items = Convert.ToInt32(snapshot.Child(i.ToString()).Child("items").Value);
                 }
-                for (int i = 0; i < snapshot.Child("item" + i.ToString()).ChildrenCount; i++)
+                for (int i = 0; i < snapshot.Child("items").ChildrenCount; i++)
                 {
                     GameManager.instance.UserItem[i].key = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("key").Value);
                     GameManager.instance.UserItem[i].speed = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("speed").Value);

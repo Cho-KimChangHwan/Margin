@@ -145,20 +145,16 @@ public class ItemListMake : MonoBehaviour
         GameManager.instance.UserItem[m].hp = GameManager.instance.MarketItems[k].hp;
         GameManager.instance.UserItem[m].agility = GameManager.instance.MarketItems[k].agility;
         GameManager.instance.UserItem[m].consis = GameManager.instance.MarketItems[k].consis;
+
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (GameManager.instance.itemMany.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (GameManager.instance.itemMany.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (GameManager.instance.itemMany.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (GameManager.instance.itemMany.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (GameManager.instance.itemMany.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (GameManager.instance.itemMany.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
         GameManager.instance.itemMany++;
-
-        /*
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[k].accel);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
-        m_Reference.Child("users").Child(GameManager.instance.Id).Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
-        */
-
-        //마켓 데이터베이스상 디비 어케할건지?
-
+        
         for (int i = k; i < GameManager.instance.marketMany - 1; i++)
         {
             GameManager.instance.MarketItems[i].key = GameManager.instance.MarketItems[i + 1].key;
@@ -177,6 +173,16 @@ public class ItemListMake : MonoBehaviour
         GameManager.instance.MarketItems[GameManager.instance.marketMany].agility = -1;
         GameManager.instance.MarketItems[GameManager.instance.marketMany].consis = -1;
 
+        for (int i = 0; i < GameManager.instance.marketMany; i++)
+        {
+            m_Reference.Child("market").Child("sellList").Child("item" + k.ToString()).Child("key").SetValueAsync(GameManager.instance.MarketItems[i].key);
+            m_Reference.Child("market").Child("sellList").Child("item" + k.ToString()).Child("speed").SetValueAsync(GameManager.instance.MarketItems[i].speed);
+            m_Reference.Child("market").Child("sellList").Child("item" + k.ToString()).Child("accel").SetValueAsync(GameManager.instance.MarketItems[i].accel);
+            m_Reference.Child("market").Child("sellList").Child("item" + k.ToString()).Child("hp").SetValueAsync(GameManager.instance.MarketItems[i].hp);
+            m_Reference.Child("market").Child("sellList").Child("item" + k.ToString()).Child("agility").SetValueAsync(GameManager.instance.MarketItems[i].agility);
+            m_Reference.Child("market").Child("sellList").Child("item" + k.ToString()).Child("consis").SetValueAsync(GameManager.instance.MarketItems[i].consis);
+        }
+        m_Reference.Child("market").Child("sellList").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
     }
 
     public void sendcheck_buy(string message)
