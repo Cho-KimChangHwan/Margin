@@ -94,7 +94,6 @@ public class ItemListMake : MonoBehaviour
                 }
             }
         }
-
         button_make();
     }
     public void GetMarketFb()
