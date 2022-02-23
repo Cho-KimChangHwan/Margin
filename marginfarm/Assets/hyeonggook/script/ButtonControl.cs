@@ -104,7 +104,7 @@ public class ButtonControl : MonoBehaviour
 
             GameObject picture = GameObject.Find("Main Camera");
             camera_po = GameObject.Find("c_main").GetComponent<Transform>();
-            iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(20.22f, 116.198f, 2.54f), "delay", 0.1f, "time", 2f));
+            iTween.RotateTo(picture, iTween.Hash("rotation", new Vector3(20.303f, 113.823f, 1.718f), "delay", 0.1f, "time", 2f));
             iTween.MoveTo(picture, iTween.Hash("position", camera_po.position, "delay", 0.1f, "time", 2f));
 
             GameManager.instance.spec_check = false;
