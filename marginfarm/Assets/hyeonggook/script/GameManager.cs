@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     public string savetran = "";
     public string genesishash = "";
     public string newblockhash = "";
-    public int hashMany;
+    public int[] hashMany = new int[12];
 
 
     public int marketMany;

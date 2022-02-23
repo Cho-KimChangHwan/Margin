@@ -652,6 +652,12 @@ public class gachaControl : MonoBehaviour
             GameManager.instance.UserItem[k].consis = item_spec[4];
             GameManager.instance.itemMany++;
 
+            BlockHeader blockheader = new BlockHeader(null, GameManager.instance.Id);
+            Block genesisBlock = new Block(blockheader, GameManager.instance.Id);
+
+            GameManager.instance.savetran = GameManager.instance.Id;
+            GameManager.instance.genesishash = genesisBlock.getBlockHash();
+
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[k].speed);
@@ -660,9 +666,9 @@ public class gachaControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
 
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("hashMany").SetValueAsync(GameManager.instance.hashMany);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.genesishash);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.savetran);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("hashMany").SetValueAsync(GameManager.instance.hashMany);
         }
         else if (itemselect == 3)
         {
@@ -703,6 +709,12 @@ public class gachaControl : MonoBehaviour
             GameManager.instance.UserItem[k].agility = item_spec[3];
             GameManager.instance.UserItem[k].consis = item_spec[4];
             GameManager.instance.itemMany++;
+
+            BlockHeader blockheader = new BlockHeader(null, GameManager.instance.Id);
+            Block genesisBlock = new Block(blockheader, GameManager.instance.Id);
+
+            GameManager.instance.savetran = GameManager.instance.Id;
+            GameManager.instance.genesishash = genesisBlock.getBlockHash();
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
@@ -754,6 +766,12 @@ public class gachaControl : MonoBehaviour
             GameManager.instance.UserItem[k].agility = item_spec[3];
             GameManager.instance.UserItem[k].consis = item_spec[4];
             GameManager.instance.itemMany++;
+
+            BlockHeader blockheader = new BlockHeader(null, GameManager.instance.Id);
+            Block genesisBlock = new Block(blockheader, GameManager.instance.Id);
+
+            GameManager.instance.savetran = GameManager.instance.Id;
+            GameManager.instance.genesishash = genesisBlock.getBlockHash();
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);

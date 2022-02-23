@@ -57,12 +57,12 @@ namespace Blockchain
         public BlockHeader(byte[] previousBlockHash, string transactions)
         {
             this.previousBlockHash = previousBlockHash;
-            this.merkleRootHash = transactions.GetHashCode();
+            this.merkleRootHash = transactions.GetHashCode()+timestamp;
         }
 
         private byte[] previousBlockHash;
         private int merkleRootHash;
-        private int timestamp;
+        private int timestamp = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
         private static uint difficultyTarget = 5;
         private static int nonce = 0;
 

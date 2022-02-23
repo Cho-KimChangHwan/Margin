@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -203,13 +204,20 @@ public class listupdate : MonoBehaviour
         m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("agility").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].agility);
         m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("consis").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].consis);
 
-        miner(GameManager.instance.savetran);
-        for (int i = 0; i < GameManager.instance.hashMany; i++)
-        {
-            m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("node").Child("Hash" + i).SetValueAsync(GameManager.instance.genesishash);
-            m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("owner").Child("Tran" + i).SetValueAsync(GameManager.instance.savetran);
-        }
+        //miner(GameManager.instance.savetran);
         GameManager.instance.hashMany += 1;
+        FirebaseDatabase.DefaultInstance.GetReference("users").Child(GameManager.instance.Id).Child("items").Child("item" + select_num.ToString()).Child("Block")
+        .GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+        DataSnapshot snapshot = task.Result;
+                  for (int i = 0; i < GameManager.instance.hashMany; i++)
+                  {
+                       m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("node").Child("Hash" + (i).ToString()).SetValueAsync(snapshot.Child("node").Child("Hash" + (i).ToString()).Value.ToString());
+                       m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("owner").Child("Tran" + (i).ToString()).SetValueAsync(snapshot.Child("owner").Child("Tran" + (i).ToString()).Value.ToString());
+                   }
+               });
+        //해시매니 값이상
+        
         m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("HashMany").SetValueAsync(GameManager.instance.hashMany);
 
         GameManager.instance.marketMany += 1;
@@ -246,6 +254,27 @@ public class listupdate : MonoBehaviour
         GameManager.instance.UserItem[GameManager.instance.itemMany - 1].agility = -1;
         GameManager.instance.UserItem[GameManager.instance.itemMany - 1].consis = -1;
 
+        for (int k = select_num; k < GameManager.instance.itemMany; k++)
+        {
+            string aftHash = "";
+            string aftTran = "";
+
+            for (int q = 0; q < GameManager.instance.hashMany - 1; q++)
+            {
+                FirebaseDatabase.DefaultInstance.GetReference("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k + 1).ToString()).Child("Block")
+               .GetValueAsync().ContinueWithOnMainThread(task =>
+               {
+                   DataSnapshot snapshot = task.Result;
+                   aftHash = snapshot.Child("node").Child("Hash" + q.ToString()).Value.ToString();
+                   aftTran = snapshot.Child("node").Child("Tran" + q.ToString()).Value.ToString();
+               });
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + q.ToString()).SetValueAsync(aftHash);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + q.ToString()).SetValueAsync(aftTran);
+            }
+        }
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (GameManager.instance.itemMany - 1).ToString()).Child("Block").Child("node").SetValueAsync("");
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (GameManager.instance.itemMany - 1).ToString()).Child("Block").Child("owner").SetValueAsync("");
+
         GameManager.instance.itemMany = GameManager.instance.itemMany - 1;
 
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
@@ -258,11 +287,8 @@ public class listupdate : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
-            for (int q = 0; q < GameManager.instance.hashMany + 1; q++)
-            {
-                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + q).SetValueAsync(GameManager.instance.genesishash);
-            }
         }
+        
     }
 
     public void sendcheck_sell(string message)
