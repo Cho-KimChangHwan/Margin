@@ -2411,15 +2411,15 @@ MonoBehaviour:
   - {fileID: 205896159343555216, guid: eea52503381b2654193733c6008a2576, type: 3}
   hat_item:
   - {fileID: 0}
-  - {fileID: 2314684268039623587, guid: eb1f6173815a9c247af27dcd4e4de623, type: 3}
-  - {fileID: 2314684268039623587, guid: eb1f6173815a9c247af27dcd4e4de623, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7193409316796719639, guid: 4da5a6af4b34455498ce0cfecdad0bfb, type: 3}
+  - {fileID: 4263915906020332830, guid: 1eb869430b201a04a84d1fd7ad8d4f2a, type: 3}
+  - {fileID: 7929917570586605016, guid: 0c274a87572ad36499416db4dae2780f, type: 3}
+  - {fileID: 1508068661738278756, guid: f012d4502ca2ba740a6cfa900b225906, type: 3}
+  - {fileID: 8799807201201878453, guid: b5742850b38b2684d8740c7657400245, type: 3}
+  - {fileID: 7924750102489858188, guid: 57777a027de6f624da8dfcafc904ef19, type: 3}
+  - {fileID: 2129663904352439417, guid: 05ec0ce4c469dac4caa8f59c4a228b1a, type: 3}
+  - {fileID: 2624546371104805453, guid: aaf5a3bf6014f8840a91c1d19c4e4d0e, type: 3}
+  - {fileID: 3033965717555898587, guid: 0b04535e14c665b4b8fac313643dd369, type: 3}
   glasses_item:
   - {fileID: 0}
   - {fileID: 3581888275051724182, guid: 99d48a5906f6dde4b99b09fa51ce8fb4, type: 3}
