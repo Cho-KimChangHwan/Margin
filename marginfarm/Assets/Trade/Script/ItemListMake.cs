@@ -18,10 +18,13 @@ public class ItemListMake : MonoBehaviour
 
     public int k;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_Reference = FirebaseDatabase.DefaultInstance.RootReference;
         GetMarketFb();
+    }
+    void Start()
+    {
         button_make();
     }
 
@@ -102,7 +105,7 @@ public class ItemListMake : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 //get first data
                 GameManager.instance.marketMany = Convert.ToInt32(snapshot.Child("marketMany").Value);
-                for (int i = 0; i < snapshot.Child("item" + i.ToString()).ChildrenCount; i++)
+                for (int i = 0; i < snapshot.ChildrenCount; i++)
                 {
                     GameManager.instance.MarketItems[i].key = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("key").Value);
                     GameManager.instance.MarketItems[i].speed = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("speed").Value);
@@ -111,7 +114,6 @@ public class ItemListMake : MonoBehaviour
                     GameManager.instance.MarketItems[i].agility = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("agility").Value);
                     GameManager.instance.MarketItems[i].consis = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("consis").Value);
                 }
-                Debug.Log("키값은??? : " + GameManager.instance.MarketItems[0].key.ToString());
             });
         FirebaseDatabase.DefaultInstance.GetReference("users").Child(GameManager.instance.Id)
             .GetValueAsync().ContinueWithOnMainThread(task =>
