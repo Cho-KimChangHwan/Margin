@@ -1,12 +1,16 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace BlockchainTest.Class
+namespace Blockchains
 {
-    public class Block
+    public class Blockchain : MonoBehaviour
     {
-        public Block(BlockHeader blockHeader, Object transactions)
+        public Blockchain(BlockHeader blockHeader, string transactions)
         {
             this.blockHeader = blockHeader;
             this.transactions = transactions;
@@ -15,7 +19,7 @@ namespace BlockchainTest.Class
         private int blockSize;
         private BlockHeader blockHeader;
         private int transactionCount;
-        private object transactions;
+        private string transactions;
 
      
         public string getBlockHash()
@@ -33,7 +37,7 @@ namespace BlockchainTest.Class
             
        public string getBlocktransaction()
        {
-           object tran = transactions;
+           string tran = transactions;
 
            return tran.ToString();
        }
@@ -50,7 +54,7 @@ namespace BlockchainTest.Class
 
     public class BlockHeader
     {
-        public BlockHeader(byte[] previousBlockHash, object transactions)
+        public BlockHeader(byte[] previousBlockHash, string transactions)
         {
             this.previousBlockHash = previousBlockHash;
             this.merkleRootHash = transactions.GetHashCode();
@@ -72,7 +76,7 @@ namespace BlockchainTest.Class
                 while (sHash == string.Empty || sHash.Substring(0, (int)difficultyTarget) != ("").PadLeft((int)difficultyTarget, '0'))
                 {
                     bt = Encoding.UTF8.GetBytes(merkleRootHash + nonce.ToString());
-                    sHash = Block.ByteArrayToString(hashstring.ComputeHash(bt));
+                    sHash = Blockchain.ByteArrayToString(hashstring.ComputeHash(bt));
                     nonce++;
                 }
                 return nonce;
