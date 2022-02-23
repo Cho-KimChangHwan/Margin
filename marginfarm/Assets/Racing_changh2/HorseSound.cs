@@ -9,7 +9,9 @@ public class HorseSound : MonoBehaviour
     AudioSource audioSource;
     CountDown count;
     HorseStatus horseStatus;
+    bool isRun;
     void Awake() {
+        isRun = false;
         this.audioSource = GetComponent<AudioSource>();
         count = GameObject.Find("Canvas").GetComponent<CountDown>();
  
@@ -26,10 +28,16 @@ public class HorseSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(count.isStart && !horseStatus.horseLocation["Final"])
+        if(count.isStart && !horseStatus.horseLocation["Final"] && !isRun)
         {
             audioSource.clip = runSound;
+            audioSource.loop = true;
             audioSource.Play();
+            isRun = true;
+        }
+        else if(horseStatus.horseLocation["Final"])
+        {
+            audioSource.Stop();
         }
     }
 }
