@@ -143,20 +143,20 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         {
 
                         GameObject under5 = GameObject.Find("shoes_fl_h" + (pNum+1).ToString());
-                        GameObject temp5 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000], under5.transform.position, Quaternion.Euler(under5.transform.eulerAngles));
+                        GameObject temp5 = Instantiate(GameManager.instance.shoes_item[((Ikey[3] / 1000) * 2) - 1], under5.transform.position, Quaternion.Euler(under5.transform.eulerAngles));
                         temp5.transform.parent = under5.transform;    
 
                         GameObject under6 = GameObject.Find("shoes_fr_h" + (pNum+1).ToString());
-                        GameObject temp6 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000 + 1], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
+                        GameObject temp6 = Instantiate(GameManager.instance.shoes_item[(Ikey[3] / 1000) * 2], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
                         temp6.transform.parent = under6.transform;  
 
 
                         GameObject under7 = GameObject.Find("shoes_bl_h" + (pNum+1).ToString());
-                        GameObject temp7 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
+                        GameObject temp7 = Instantiate(GameManager.instance.shoes_item[((Ikey[3] / 1000) * 2) - 1], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
                         temp7.transform.parent = under7.transform;                
 
                         GameObject under8 = GameObject.Find("shoes_br_h" + (pNum+1).ToString());
-                        GameObject temp8 = Instantiate(GameManager.instance.shoes_item[Ikey[3] / 1000 + 1], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
+                        GameObject temp8 = Instantiate(GameManager.instance.shoes_item[(Ikey[3] / 1000) * 2], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
                         temp8.transform.parent = under8.transform;                 
                     
                  

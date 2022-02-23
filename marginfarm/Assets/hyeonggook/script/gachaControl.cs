@@ -556,21 +556,21 @@ public class gachaControl : MonoBehaviour
         if (itemselect == 1)
         {
             //int i = Random.Range(1, 10);
-            int i = 2;
+            int i = Random.Range(1, 10);
             obj_card_i.sprite = GameManager.instance.hat_item_card[i];
 
             // 아이템 스펙 값 설정
             int temp;
 
-            temp = Random.Range(0, 21);
+            temp = Random.Range(0, 11);
             item_spec[0] = temp;
-            temp = Random.Range(0, 21);
+            temp = Random.Range(0, 11);
             item_spec[1] = temp;
-            temp = Random.Range(0, 21);
+            temp = Random.Range(0, 11);
             item_spec[2] = temp;
-            temp = Random.Range(0, 21);
+            temp = Random.Range(0, 11);
             item_spec[3] = temp;
-            temp = Random.Range(0, 21);
+            temp = Random.Range(0, 11);
             item_spec[4] = temp;
 
             for (int n = 1; n < 6; n++)
@@ -604,21 +604,21 @@ public class gachaControl : MonoBehaviour
         else if (itemselect == 2)
         {
             //int i = Random.Range(1, 10);
-            int i = 2;
+            int i = Random.Range(1, 4);
             obj_card_i.sprite = GameManager.instance.glasses_item_card[i];
 
             // 아이템 스펙 값 설정
             int temp;
 
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[0] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[1] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[2] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[3] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[4] = temp;
 
             for (int n = 1; n < 6; n++)
@@ -652,21 +652,21 @@ public class gachaControl : MonoBehaviour
         else if (itemselect == 3)
         {
             //int i = Random.Range(1, 10);
-            int i = 2;
+            int i = Random.Range(1, 10);
             obj_card_i.sprite = GameManager.instance.back_item_card[i];
 
             // 아이템 스펙 값 설정
             int temp;
 
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[0] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[1] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[2] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[3] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[4] = temp;
 
             for (int n = 1; n < 6; n++)
@@ -699,21 +699,21 @@ public class gachaControl : MonoBehaviour
         }
         else if (itemselect == 4)
         {
-            int i = 2;
+            int i = Random.Range(1, 4);
             obj_card_i.sprite = GameManager.instance.shoes_item_card[i];
 
             // 아이템 스펙 값 설정
             int temp;
 
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[0] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[1] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[2] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[3] = temp;
-            temp = Random.Range(0, 31);
+            temp = Random.Range(0, 11);
             item_spec[4] = temp;
 
             for (int n = 1; n < 6; n++)

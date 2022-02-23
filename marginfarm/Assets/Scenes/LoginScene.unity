@@ -2254,7 +2254,7 @@ MonoBehaviour:
   - {fileID: 205896159343555216, guid: eea52503381b2654193733c6008a2576, type: 3}
   hat_item:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2314684268039623587, guid: eb1f6173815a9c247af27dcd4e4de623, type: 3}
   - {fileID: 2314684268039623587, guid: eb1f6173815a9c247af27dcd4e4de623, type: 3}
   - {fileID: 0}
   - {fileID: 0}
@@ -2265,9 +2265,9 @@ MonoBehaviour:
   - {fileID: 0}
   glasses_item:
   - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 3581888275051724182, guid: 99d48a5906f6dde4b99b09fa51ce8fb4, type: 3}
-  - {fileID: 0}
+  - {fileID: 3827973100905003566, guid: 0055ad12b7d2a0c43a0a441ba0e39064, type: 3}
+  - {fileID: 2255816961406899690, guid: 6a1ef2eadd7f5284c83951a45c223d7d, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -2276,12 +2276,12 @@ MonoBehaviour:
   - {fileID: 0}
   shoes_item:
   - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 1809127238358676, guid: d7fc6ed120457e7449404808436cf234, type: 3}
   - {fileID: 1809127238358676, guid: 4501587b63e1a6740be51e007c218cf2, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1807653490101474762, guid: d9561d59402cefa45ac5f0cc87f1915d, type: 3}
+  - {fileID: 7508302024027355858, guid: 7daa2bffb9e7f244880268b11aa28bd8, type: 3}
+  - {fileID: 2432995109439032427, guid: d122b1eecfac7c540b354ebfab895d41, type: 3}
+  - {fileID: 56914378293499240, guid: 1435f75b8b78f034a96d9c244a9f4dcf, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -2339,16 +2339,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  hrLocation:
+  hLocation:
   - 
   - 
   - 
-  hrPosition:
+  - 
+  hPosition:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  hrReady: 000000
-  urId:
+  - {x: 0, y: 0, z: 0}
+  hReady: 00000000
+  uId:
+  - 
   - 
   - 
   - 
