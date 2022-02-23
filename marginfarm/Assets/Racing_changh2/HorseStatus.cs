@@ -43,8 +43,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
     public float rPoint1 = 30f, rPoint2 = -15f;
     public float dPoint1 = 19.75f, dPoint2 = -4.75f;
     public Animator animator;
-    public CountDown count = GameObject.Find("Canvas").GetComponent<CountDown>();
-    TextMeshProUGUI record = GameObject.Find("Record").GetComponent<TextMeshProUGUI>();
+    public CountDown count;
+    TextMeshProUGUI record;
     GameObject leadHorse ;
     HorseStatus leadStatus ;
     bool isCollide=false;
@@ -75,7 +75,8 @@ public class HorseStatus : MonoBehaviourPunCallbacks
             photonView.RPC("otMatSet", RpcTarget.AllBuffered, GameManager.instance.mytern -1 );
             bringItem();
             photonView.RPC("itemSet", RpcTarget.AllBuffered, GameManager.instance.mytern -1 , itemKey );
-
+            count = GameObject.Find("Canvas").GetComponent<CountDown>();
+            record = GameObject.Find("Record").GetComponent<TextMeshProUGUI>();
             animator = GetComponent<Animator>();
 
             if (photonView.IsMine)
