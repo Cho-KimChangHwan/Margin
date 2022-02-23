@@ -58,13 +58,13 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     {
         if (!everyReady)
         {
-            GameManager.instance.hrReady[GameManager.instance.mytern - 1] = true;
+            GameManager.instance.hReady[GameManager.instance.mytern - 1] = true;
             photonView.RPC("ReadySet", RpcTarget.AllBuffered, GameManager.instance.mytern - 1);
 
             bool tmpReady = true;
-            for (int i = 0; i < GameManager.instance.hrReady.Length; i++)
+            for (int i = 0; i < GameManager.instance.hReady.Length; i++)
             {
-                if (!GameManager.instance.hrReady[i])
+                if (!GameManager.instance.hReady[i])
                 {
                     tmpReady = false;
                 }
@@ -85,27 +85,27 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                 List<int> Third = new List<int>();
                 List<int> Fourth = new List<int>();
 
-                for (int playerNum = 0; playerNum < GameManager.instance.hrLocation.Length; playerNum++)
+                for (int playerNum = 0; playerNum < GameManager.instance.hLocation.Length; playerNum++)
                 {
                     if (Final.Contains(playerNum.ToString()))
                         continue;
-                    if (GameManager.instance.hrLocation[playerNum] == "First")
+                    if (GameManager.instance.hLocation[playerNum] == "First")
                     {
                         First.Add(playerNum);
                     }
-                    else if (GameManager.instance.hrLocation[playerNum] == "Second")
+                    else if (GameManager.instance.hLocation[playerNum] == "Second")
                     {
                         Second.Add(playerNum);
                     }
-                    else if (GameManager.instance.hrLocation[playerNum] == "Third")
+                    else if (GameManager.instance.hLocation[playerNum] == "Third")
                     {
                         Third.Add(playerNum);
                     }
-                    else if (GameManager.instance.hrLocation[playerNum] == "Fourth")
+                    else if (GameManager.instance.hLocation[playerNum] == "Fourth")
                     {
                         Fourth.Add(playerNum);
                     }
-                    else if (GameManager.instance.hrLocation[playerNum] == "Final")
+                    else if (GameManager.instance.hLocation[playerNum] == "Final")
                     {
                         Final.Add(playerNum.ToString());
                     }
@@ -122,7 +122,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     int max = i;
                     for (int j = i + 1; j < Fourth.Count; j++)
                     {
-                        if (GameManager.instance.hrPosition[Fourth[max]].x <= GameManager.instance.hrPosition[Fourth[j]].x)
+                        if (GameManager.instance.hPosition[Fourth[max]].x <= GameManager.instance.hPosition[Fourth[j]].x)
                             max = j;
                     }
                     horseRanking.Add(Fourth[max].ToString());
@@ -136,7 +136,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     int min = i;
                     for (int j = i + 1; j < Third.Count; j++)
                     {
-                        if (GameManager.instance.hrPosition[Third[min]].z >= GameManager.instance.hrPosition[Third[j]].z)
+                        if (GameManager.instance.hPosition[Third[min]].z >= GameManager.instance.hPosition[Third[j]].z)
                             min = j;
                     }
                     horseRanking.Add(Third[min].ToString());
@@ -150,7 +150,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     int min = i;
                     for (int j = i + 1; j < Second.Count; j++)
                     {
-                        if (GameManager.instance.hrPosition[Second[min]].x >= GameManager.instance.hrPosition[Second[j]].x)
+                        if (GameManager.instance.hPosition[Second[min]].x >= GameManager.instance.hPosition[Second[j]].x)
                             min = j;
                     }
                     horseRanking.Add(Second[min].ToString());
@@ -164,7 +164,7 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
                     int max = i;
                     for (int j = i + 1; j < First.Count; j++)
                     {
-                        if (GameManager.instance.hrPosition[First[max]].z <= GameManager.instance.hrPosition[First[j]].z)
+                        if (GameManager.instance.hPosition[First[max]].z <= GameManager.instance.hPosition[First[j]].z)
                             max = j;
                     }
                     horseRanking.Add(First[max].ToString());
@@ -228,10 +228,10 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
         }
         else{
             int index = (int)stream.ReceiveNext();
-            GameManager.instance.hrLocation[index] = (string)stream.ReceiveNext();
-            GameManager.instance.hrPosition[index] = (Vector3)stream.ReceiveNext();
+            GameManager.instance.hLocation[index] = (string)stream.ReceiveNext();
+            GameManager.instance.hPosition[index] = (Vector3)stream.ReceiveNext();
             ranking.text = (string)stream.ReceiveNext();
-            GameManager.instance.hrReady[index] = true;
+            GameManager.instance.hReady[index] = true;
         }
     }
     public void serverDisconnect()
@@ -248,12 +248,12 @@ public class RefereeSC : MonoBehaviourPunCallbacks , IPunObservable
     [PunRPC]
     void ReadySet(int pNum )
     {
-        GameManager.instance.hrReady[pNum] = true; 
+        GameManager.instance.hReady[pNum] = true; 
     }
     [PunRPC]
      void LocationSet(string myLocation,Vector3 currentPosition, int pNum)
      {
-         GameManager.instance.hrLocation[pNum] = myLocation;
-         GameManager.instance.hrPosition[pNum] = currentPosition;
+         GameManager.instance.hLocation[pNum] = myLocation;
+         GameManager.instance.hPosition[pNum] = currentPosition;
      }
 }
