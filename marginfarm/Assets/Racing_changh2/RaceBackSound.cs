@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class RaceBackSound : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -22,7 +22,12 @@ public class RaceBackSound : MonoBehaviour
     void Awake() {
         audioSource = GameObject.Find("SoundManager").GetComponent<AudioSource>();
         originalV = audioSource.volume;
-        clickaudio = GameObject.Find("Canvas").GetComponent<AudioSource>();
+        if (SceneManager.GetActiveScene().name == "Trade"){
+            clickaudio = GameObject.Find("TradePanel").GetComponent<AudioSource>();
+        }
+        else{
+            clickaudio = GameObject.Find("Canvas").GetComponent<AudioSource>();
+        }
         clickV = clickaudio.volume;
         thisimg = this.GetComponent<Image>();
     }
