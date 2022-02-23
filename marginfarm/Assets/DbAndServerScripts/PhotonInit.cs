@@ -21,7 +21,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        if (getReady == true && PhotonNetwork.CurrentRoom.PlayerCount >=3  && isGameStart == false) //3명일 때
+        if (getReady == true && PhotonNetwork.CurrentRoom.PlayerCount >=4  && isGameStart == false) //3명일 때
         {
             StartCoroutine(this.LoadRacing());
             PhotonNetwork.CurrentRoom.IsOpen = false;
