@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +6,11 @@ using UnityEngine.UI;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Blockchains
+namespace Blockchain
 {
-    public class Blockchain : MonoBehaviour
+    public class Block : MonoBehaviour
     {
-        public Blockchain(BlockHeader blockHeader, string transactions)
+        public Block(BlockHeader blockHeader, string transactions)
         {
             this.blockHeader = blockHeader;
             this.transactions = transactions;
@@ -21,26 +21,26 @@ namespace Blockchains
         private int transactionCount;
         private string transactions;
 
-     
+
         public string getBlockHash()
         {
             byte[] bytes = blockHeader.toByteArray();
             using (SHA256Managed hashstring = new SHA256Managed())
             {
-                
+
                 byte[] blockHash = hashstring.ComputeHash(bytes);
                 blockHash = hashstring.ComputeHash(blockHash);
 
                 return ByteArrayToString(blockHash);
             }
         }
-            
-       public string getBlocktransaction()
-       {
-           string tran = transactions;
 
-           return tran.ToString();
-       }
+        public string getBlocktransaction()
+        {
+            string tran = transactions;
+
+            return tran.ToString();
+        }
         public static string ByteArrayToString(byte[] bts)
         {
             StringBuilder strBld = new StringBuilder();
@@ -59,14 +59,14 @@ namespace Blockchains
             this.previousBlockHash = previousBlockHash;
             this.merkleRootHash = transactions.GetHashCode();
         }
-    
+
         private byte[] previousBlockHash;
         private int merkleRootHash;
         private int timestamp;
         private static uint difficultyTarget = 5;
         private static int nonce = 0;
-        
-        
+
+
         public int ProofOfWorkCount()
         {
             using (SHA256Managed hashstring = new SHA256Managed())
@@ -76,18 +76,18 @@ namespace Blockchains
                 while (sHash == string.Empty || sHash.Substring(0, (int)difficultyTarget) != ("").PadLeft((int)difficultyTarget, '0'))
                 {
                     bt = Encoding.UTF8.GetBytes(merkleRootHash + nonce.ToString());
-                    sHash = Blockchain.ByteArrayToString(hashstring.ComputeHash(bt));
+                    sHash = Block.ByteArrayToString(hashstring.ComputeHash(bt));
                     nonce++;
                 }
                 return nonce;
             }
         }
 
-      
+
         public byte[] toByteArray()
         {
             string tmpStr = "";
-            
+
             if (previousBlockHash != null)
             {
                 tmpStr += Convert.ToBase64String(previousBlockHash);
