@@ -196,10 +196,11 @@ public class listupdate : MonoBehaviour
     {
         delete_item();
         // database add item to market
-
+        int childC;
         GameManager.instance.marketMany += 1;
         m_Reference.Child("market").Child("sellList").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
 
+        
         for (int i = 0; i < GameManager.instance.marketMany; i++)
         {
             m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("key").SetValueAsync(GameManager.instance.MarketItems[i].key);
@@ -223,7 +224,7 @@ public class listupdate : MonoBehaviour
         GameObject.Find("SellList").transform.Find("select_x").gameObject.SetActive(true);
         spec_open_check = true;
         inven_itemlist_make();
-        }
+    }
 
     public void delete_item()
     {
@@ -233,6 +234,7 @@ public class listupdate : MonoBehaviour
         GameManager.instance.MarketItems[GameManager.instance.marketMany].hp = GameManager.instance.UserItem[select_num].hp;
         GameManager.instance.MarketItems[GameManager.instance.marketMany].agility = GameManager.instance.UserItem[select_num].agility;
         GameManager.instance.MarketItems[GameManager.instance.marketMany].consis = GameManager.instance.UserItem[select_num].consis;
+        
         if(GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash == null)
         {
             GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash = new ArrayList();
@@ -328,7 +330,7 @@ public class listupdate : MonoBehaviour
         GameObject error_p = GameObject.Find("check_i");
         iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.1f, "time", 0.5f));
     }
-     void miner(string transactions)
+    void miner(string transactions)
     {
 
         BlockHeader secondBlockheader = new BlockHeader(Encoding.UTF8.GetBytes(GameManager.instance.newblockhash), transactions);
