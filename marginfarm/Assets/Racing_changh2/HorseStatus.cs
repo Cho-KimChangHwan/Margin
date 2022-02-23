@@ -104,7 +104,6 @@ public class HorseStatus : MonoBehaviourPunCallbacks
         if(status.hp >= 100f) status.hp = 100f;
         if(status.agility >= 100f) status.agility = 100f;
         if(status.consis >= 100f) status.consis = 100f;
-        Debug.Log(status.speed +"스피드");
     }
     void bringItem()
     {
