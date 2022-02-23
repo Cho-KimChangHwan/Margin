@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class RaceBackSound : MonoBehaviour
@@ -14,6 +15,8 @@ public class RaceBackSound : MonoBehaviour
     float clickV;
     bool On= true;
     TextMeshProUGUI soundT;
+    public Sprite soundImg,muteImg;
+    Image thisimg;
 
 
     void Awake() {
@@ -21,6 +24,7 @@ public class RaceBackSound : MonoBehaviour
         originalV = audioSource.volume;
         clickaudio = GameObject.Find("Canvas").GetComponent<AudioSource>();
         clickV = clickaudio.volume;
+        thisimg = this.GetComponent<Image>();
     }
     // Start is called before the first frame update
     void Start()
@@ -33,12 +37,14 @@ public class RaceBackSound : MonoBehaviour
         {
             audioSource.volume = 0f;
             clickaudio.volume = 0f;
+            thisimg.sprite = soundImg;
             On = false;
         }
         else
         {
             audioSource.volume = originalV;
             clickaudio.volume = clickV;
+            thisimg.sprite = muteImg;
             On = true;
         }
     }
