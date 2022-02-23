@@ -218,7 +218,7 @@ public class GameManager : MonoBehaviour
         money = 3000;
         itemMany = 0;
         fade_speed = 0.12f;
-        marketMany = 0;
+        //marketMany = 0;
         instance = this;
     }
 }

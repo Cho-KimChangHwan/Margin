@@ -196,12 +196,11 @@ public class listupdate : MonoBehaviour
     {
         delete_item();
         // database add item to market
-        int childC;
         GameManager.instance.marketMany += 1;
         m_Reference.Child("market").Child("sellList").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
 
         
-        for (int i = 0; i < GameManager.instance.marketMany; i++)
+        for (int i = 0; i < GameManager.instance.marketMany-1; i++)
         {
             m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("key").SetValueAsync(GameManager.instance.MarketItems[i].key);
             m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("speed").SetValueAsync(GameManager.instance.MarketItems[i].speed);
@@ -304,7 +303,20 @@ public class listupdate : MonoBehaviour
             }
             
         }
-        //miner(GameManager.instance.savetran);
+
+
+        int savlen = GameManager.instance.MarketItems[GameManager.instance.marketMany].savetran.Count;
+        string mintran = (string)GameManager.instance.MarketItems[GameManager.instance.marketMany].savetran[savlen - 1];
+        int genlen = GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash.Count;
+        string minhash = (string)GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash[genlen - 1];
+        miner(mintran, minhash, GameManager.instance.marketMany);
+        m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("node").RemoveValueAsync();
+        for (int j = 0; j < GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash.Count; j++)
+        {
+            m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("node").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash[j]);
+        }
+
+
     }
 
     public void sendcheck_sell(string message)
@@ -330,17 +342,18 @@ public class listupdate : MonoBehaviour
         GameObject error_p = GameObject.Find("check_i");
         iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.1f, "time", 0.5f));
     }
-    void miner(string transactions)
+    void miner(string transactions,string minhash,int many)
     {
 
-        BlockHeader secondBlockheader = new BlockHeader(Encoding.UTF8.GetBytes(GameManager.instance.newblockhash), transactions);
+        BlockHeader secondBlockheader = new BlockHeader(Encoding.UTF8.GetBytes(minhash), transactions);
         Block nextBlock = new Block(secondBlockheader, transactions);
 
         int count = secondBlockheader.ProofOfWorkCount();
 
         Block previousBlock = nextBlock;
 
-        GameManager.instance.newblockhash = previousBlock.getBlockHash();
-        //GameManager.instance.savetran = previousBlock.getBlocktransaction();
+        string newhash = previousBlock.getBlockHash();
+        GameManager.instance.MarketItems[many].genesishash.Add(newhash);
+
     }
 }
