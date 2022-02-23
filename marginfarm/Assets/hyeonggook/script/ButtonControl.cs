@@ -487,7 +487,7 @@ public class ButtonControl : MonoBehaviour
             for (int i = 1; i < 6; i++)
             {
                 bar = GameObject.Find("itemgauge" + i.ToString()).GetComponent<Image>();
-                bar.fillAmount = itemdata[i - 1] / 20f;
+                bar.fillAmount = itemdata[i - 1] / 10f;
                 gauge = GameObject.Find("itemgauge_t" + i.ToString()).GetComponent<Text>();
                 gauge.text = itemdata[i - 1].ToString();
             }
@@ -538,7 +538,7 @@ public class ButtonControl : MonoBehaviour
             for (int i = 1; i < 6; i++)
             {
                 bar = GameObject.Find("itemgauge" + i.ToString()).GetComponent<Image>();
-                bar.fillAmount = itemdata[i - 1] / 20f;
+                bar.fillAmount = itemdata[i - 1] / 10f;
                 gauge = GameObject.Find("itemgauge_t" + i.ToString()).GetComponent<Text>();
                 gauge.text = itemdata[i - 1].ToString();
             }
@@ -1267,10 +1267,20 @@ public class ButtonControl : MonoBehaviour
         {
             bar = GameObject.Find("gauge" + i.ToString()).GetComponent<Image>();
             bar.fillAmount = userdata[i - 1] / 100f;
-            bar = GameObject.Find("gauge_i" + i.ToString()).GetComponent<Image>();
-            bar.fillAmount = userdatapitem[i - 1] / 100f;
-            gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
-            gauge.text = userdatapitem[i - 1].ToString() + "/ 100";
+            if (userdatapitem[i - 1] < 100)
+            {
+                bar = GameObject.Find("gauge_i" + i.ToString()).GetComponent<Image>();
+                bar.fillAmount = userdatapitem[i - 1] / 100f;
+                gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
+                gauge.text = userdatapitem[i - 1].ToString() + "/ 100";
+            }
+            else
+            {
+                bar = GameObject.Find("gauge_i" + i.ToString()).GetComponent<Image>();
+                bar.fillAmount = 1f;
+                gauge = GameObject.Find("gauge_t" + i.ToString()).GetComponent<Text>();
+                gauge.text = "100 / 100";
+            }
         }
 
         cap_b = GameObject.Find("cap").GetComponent<Image>();
