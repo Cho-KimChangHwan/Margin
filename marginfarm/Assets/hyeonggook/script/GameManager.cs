@@ -39,9 +39,11 @@ public struct ItemInfo
     public int hp;
     public int agility;
     public int consis;
+    public ArrayList genesishash;
+    public ArrayList savetran;
 
 
-    public ItemInfo(int key, int speed, int accel, int hp, int agility, int consis)
+    public ItemInfo(int key, int speed, int accel, int hp, int agility, int consis, ArrayList genesishash, ArrayList savetran)
     {
         this.key = key;
         this.speed = speed;
@@ -49,6 +51,8 @@ public struct ItemInfo
         this.hp = hp;
         this.agility = agility;
         this.consis = consis;
+        this.genesishash = genesishash;
+        this.savetran = savetran;
     }
 }
 public struct WearingItem
@@ -59,9 +63,10 @@ public struct WearingItem
     public int hp;
     public int agility;
     public int consis;
+    public ArrayList genesishash;
+    public ArrayList savetran;
 
-
-    public WearingItem(int item_key, int speed, int accel, int hp, int agility, int consis)
+    public WearingItem(int item_key, int speed, int accel, int hp, int agility, int consis, ArrayList genesishash, ArrayList savetran)
     {
         this.item_key = item_key;
         this.speed = speed;
@@ -69,6 +74,8 @@ public struct WearingItem
         this.hp = hp;
         this.agility = agility;
         this.consis = consis;
+        this.genesishash = genesishash;
+        this.savetran = savetran;
     }
 }
 
@@ -80,8 +87,10 @@ public struct MarketItem
     public int hp;
     public int agility;
     public int consis;
+    public ArrayList genesishash;
+    public ArrayList savetran;
 
-    public MarketItem(int key, int speed, int accel, int hp, int agility, int consis)
+    public MarketItem(int key, int speed, int accel, int hp, int agility, int consis, ArrayList genesishash, ArrayList savetran)
     {
         this.key = key;
         this.speed = speed;
@@ -89,6 +98,8 @@ public struct MarketItem
         this.hp = hp;
         this.agility = agility;
         this.consis = consis;
+        this.genesishash = genesishash;
+        this.savetran = savetran;
     }
 }
 
@@ -97,10 +108,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public List<Block> blockchain = new List<Block>();
-    public string savetran = "";
-    public string genesishash = "";
     public string newblockhash = "";
-    public int[] hashMany = new int[12];
 
 
     public int marketMany;
@@ -140,6 +148,8 @@ public class GameManager : MonoBehaviour
     public bool[] hReady = new bool[4];
     public string[] uId = new string[4];
     public string ranking = "";
+
+
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
         new HorseInfo ("", -1, -1, -1, -1, -1, -1, -1, 1111),
@@ -156,47 +166,46 @@ public class GameManager : MonoBehaviour
 
     public ItemInfo[] UserItem = new ItemInfo[]
     {
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0),
-        new ItemInfo (0, 0, 0, 0, 0, 0)
-
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new ItemInfo (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList())
     };
 
     public WearingItem[] WearingItem = new WearingItem[]
 {
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0),
-        new WearingItem (0, 0, 0, 0, 0, 0)
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
+        new WearingItem (0, 0, 0, 0, 0, 0, new ArrayList(), new ArrayList()),
 };
 
     void Awake()

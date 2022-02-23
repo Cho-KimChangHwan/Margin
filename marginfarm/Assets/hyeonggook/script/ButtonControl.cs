@@ -81,6 +81,9 @@ public class ButtonControl : MonoBehaviour
     public int[] userdatapitem = new int[5];
     public int[] itemdata = new int[5];
 
+    public ArrayList temp_hash = new ArrayList();
+    public ArrayList temp_tran = new ArrayList();
+
     public GameObject picture;
     public Transform camera_po;
 
@@ -549,9 +552,9 @@ public class ButtonControl : MonoBehaviour
         horse_s_n = GameManager.instance.select;
         int horse_ss = horse_s_n + 1;
 
-        if (slot_check)
+        if (slot_check) // 장착중인 아이템
         {
-            if (select_num == 0)
+            if (select_num == 0) // 모자일때
             {
                 GameObject under = GameObject.Find("hat_h" + horse_ss.ToString());
                 GameObject temp = under.transform.GetChild(0).gameObject;
@@ -561,7 +564,7 @@ public class ButtonControl : MonoBehaviour
                 inven_itemlist_make(horse_s_n);
                 spec_make();
             }
-            else if (select_num == 1)
+            else if (select_num == 1) // 안경일때
             {
                 GameObject under = GameObject.Find("glasses_h" + horse_ss.ToString());
                 GameObject temp = under.transform.GetChild(0).gameObject;
@@ -571,7 +574,7 @@ public class ButtonControl : MonoBehaviour
                 inven_itemlist_make(horse_s_n);
                 spec_make();
             }
-            else if (select_num == 2)
+            else if (select_num == 2) // 가방일때
             {
                 GameObject under = GameObject.Find("back_h" + horse_ss.ToString());
                 GameObject temp = under.transform.GetChild(0).gameObject;
@@ -581,7 +584,7 @@ public class ButtonControl : MonoBehaviour
                 inven_itemlist_make(horse_s_n);
                 spec_make();
             }
-            else if (select_num == 3)
+            else if (select_num == 3) // 신발일때
             {
                 GameObject under1 = GameObject.Find("shoes_fl_h" + horse_ss.ToString());
                 GameObject temp1 = under1.transform.GetChild(0).gameObject;
@@ -601,7 +604,7 @@ public class ButtonControl : MonoBehaviour
                 spec_make();
             }
         }
-        else
+        else // 장착안한 아이템
         {
             for (int i = select_num; i < GameManager.instance.itemMany - 1; i++)
             {
@@ -611,6 +614,15 @@ public class ButtonControl : MonoBehaviour
                 GameManager.instance.UserItem[i].hp = GameManager.instance.UserItem[i + 1].hp;
                 GameManager.instance.UserItem[i].agility = GameManager.instance.UserItem[i + 1].agility;
                 GameManager.instance.UserItem[i].consis = GameManager.instance.UserItem[i + 1].consis;
+
+                GameManager.instance.UserItem[i].genesishash.Clear();
+                GameManager.instance.UserItem[i].savetran.Clear();
+
+                for (int j = 0; j < GameManager.instance.UserItem[i + 1].genesishash.Count; j++)
+                {
+                    GameManager.instance.UserItem[i].genesishash.Add(GameManager.instance.UserItem[i + 1].genesishash[j]);
+                    GameManager.instance.UserItem[i].savetran.Add(GameManager.instance.UserItem[i + 1].savetran[j]);
+                }
             }
 
             GameManager.instance.UserItem[GameManager.instance.itemMany - 1].key = -1;
@@ -619,6 +631,9 @@ public class ButtonControl : MonoBehaviour
             GameManager.instance.UserItem[GameManager.instance.itemMany - 1].hp = -1;
             GameManager.instance.UserItem[GameManager.instance.itemMany - 1].agility = -1;
             GameManager.instance.UserItem[GameManager.instance.itemMany - 1].consis = -1;
+
+            GameManager.instance.UserItem[GameManager.instance.itemMany - 1].genesishash.Clear();
+            GameManager.instance.UserItem[GameManager.instance.itemMany - 1].savetran.Clear();
 
             GameManager.instance.itemMany = GameManager.instance.itemMany - 1;
 
@@ -632,6 +647,15 @@ public class ButtonControl : MonoBehaviour
                 m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
                 m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
                 m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").RemoveValueAsync();
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").RemoveValueAsync();
+
+                for (int a = 0; a < GameManager.instance.UserItem[k].genesishash.Count; a++)
+                {
+                    m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].genesishash[a]);
+                    m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].savetran[a]);
+                }
             }
 
             inven_itemlist_make(horse_s_n);
@@ -947,11 +971,11 @@ public class ButtonControl : MonoBehaviour
         StartCoroutine("FadeOutStart_gacha");
     }
 
-    public void install(int item, int select_num)
+    public void install(int item, int select_num) //item = 0,1,2,3 = 모안가신, select_num = 아이템 선택 인덱스 (0부터시작)
     {
         bool n = false;
 
-        if (GameManager.instance.WearingItem[(horse_s_n * 4) + item].item_key != 0) //비어있지않을때
+        if (GameManager.instance.WearingItem[(horse_s_n * 4) + item].item_key != 0) //비어있지않을때 이미 있던 걸 템프에 저장
         {
             TempUserItem[0].key = GameManager.instance.WearingItem[(horse_s_n * 4) + item].item_key;
             TempUserItem[0].speed = GameManager.instance.WearingItem[(horse_s_n * 4) + item].speed;
@@ -959,9 +983,19 @@ public class ButtonControl : MonoBehaviour
             TempUserItem[0].hp = GameManager.instance.WearingItem[(horse_s_n * 4) + item].hp;
             TempUserItem[0].agility = GameManager.instance.WearingItem[(horse_s_n * 4) + item].agility;
             TempUserItem[0].consis = GameManager.instance.WearingItem[(horse_s_n * 4) + item].consis;
-            n = true;
+            
+            temp_hash.Clear();
+            temp_tran.Clear();
 
+            for(int i = 0; i < GameManager.instance.WearingItem[(horse_s_n * 4) + item].genesishash.Count; i++)
+            {
+                temp_hash.Add(GameManager.instance.WearingItem[(horse_s_n * 4) + item].genesishash[i]);
+                temp_tran.Add(GameManager.instance.WearingItem[(horse_s_n * 4) + item].savetran[i]);
+            }
+            n = true;
         }
+
+        //옮길 아이템 장착 값 넘겨주는 부분임 
 
         GameManager.instance.WearingItem[(horse_s_n * 4) + item].item_key = GameManager.instance.UserItem[select_num].key;
         GameManager.instance.WearingItem[(horse_s_n * 4) + item].speed = GameManager.instance.UserItem[select_num].speed;
@@ -969,6 +1003,16 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.WearingItem[(horse_s_n * 4) + item].hp = GameManager.instance.UserItem[select_num].hp;
         GameManager.instance.WearingItem[(horse_s_n * 4) + item].agility = GameManager.instance.UserItem[select_num].agility;
         GameManager.instance.WearingItem[(horse_s_n * 4) + item].consis = GameManager.instance.UserItem[select_num].consis;
+
+        GameManager.instance.WearingItem[(horse_s_n * 4) + item].genesishash.Clear();
+        GameManager.instance.WearingItem[(horse_s_n * 4) + item].savetran.Clear();
+
+        for (int i = 0; i < GameManager.instance.UserItem[select_num].genesishash.Count; i++)
+        {
+            GameManager.instance.WearingItem[(horse_s_n * 4) + item].genesishash.Add(GameManager.instance.UserItem[select_num].genesishash[i]);
+            GameManager.instance.WearingItem[(horse_s_n * 4) + item].savetran.Add(GameManager.instance.UserItem[select_num].savetran[i]);
+        }
+
         //장착추가
 
         for (int i = select_num; i < GameManager.instance.itemMany - 1; i++)
@@ -979,6 +1023,15 @@ public class ButtonControl : MonoBehaviour
             GameManager.instance.UserItem[i].hp = GameManager.instance.UserItem[i + 1].hp;
             GameManager.instance.UserItem[i].agility = GameManager.instance.UserItem[i + 1].agility;
             GameManager.instance.UserItem[i].consis = GameManager.instance.UserItem[i + 1].consis;
+
+            GameManager.instance.UserItem[i].genesishash.Clear();
+            GameManager.instance.UserItem[i].savetran.Clear();
+
+            for (int j = 0; j < GameManager.instance.UserItem[i + 1].genesishash.Count; j++)
+            {
+                GameManager.instance.UserItem[i].genesishash.Add(GameManager.instance.UserItem[i + 1].genesishash[j]);
+                GameManager.instance.UserItem[i].savetran.Add(GameManager.instance.UserItem[i + 1].savetran[j]);
+            }
         }
 
         GameManager.instance.UserItem[GameManager.instance.itemMany - 1].key = -1;
@@ -988,9 +1041,12 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.UserItem[GameManager.instance.itemMany - 1].agility = -1;
         GameManager.instance.UserItem[GameManager.instance.itemMany - 1].consis = -1;
 
+        GameManager.instance.UserItem[GameManager.instance.itemMany - 1].genesishash.Clear();
+        GameManager.instance.UserItem[GameManager.instance.itemMany - 1].savetran.Clear();
+
         GameManager.instance.itemMany = GameManager.instance.itemMany - 1;
 
-        if (n)
+        if (n) // 아까 임시에 넣어준거 다시 추가해주기
         {
             int m = GameManager.instance.itemMany;
             GameManager.instance.UserItem[m].key = TempUserItem[0].key;
@@ -999,6 +1055,15 @@ public class ButtonControl : MonoBehaviour
             GameManager.instance.UserItem[m].hp = TempUserItem[0].hp;
             GameManager.instance.UserItem[m].agility = TempUserItem[0].agility;
             GameManager.instance.UserItem[m].consis = TempUserItem[0].consis;
+
+            GameManager.instance.UserItem[m].genesishash.Clear();
+            GameManager.instance.UserItem[m].savetran.Clear();
+
+            for (int j = 0; j < temp_hash.Count; j++)
+            {
+                GameManager.instance.UserItem[m].genesishash.Add(temp_hash[j]);
+                GameManager.instance.UserItem[m].savetran.Add(temp_tran[j]);
+            }
             n = false;
 
             GameManager.instance.itemMany = GameManager.instance.itemMany + 1;
@@ -1014,6 +1079,15 @@ public class ButtonControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").RemoveValueAsync();
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").RemoveValueAsync();
+            
+            for (int a = 0; a < GameManager.instance.UserItem[k].genesishash.Count; a++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].genesishash[a]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].savetran[a]);
+            }
         }
 
         for (int i = 0; i < 24; i++)
@@ -1024,10 +1098,19 @@ public class ButtonControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("hp").SetValueAsync(GameManager.instance.WearingItem[i].hp);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("agility").SetValueAsync(GameManager.instance.WearingItem[i].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("consis").SetValueAsync(GameManager.instance.WearingItem[i].consis);
+
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("node").RemoveValueAsync();
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("owner").RemoveValueAsync();
+
+            for (int a = 0; a < GameManager.instance.WearingItem[i].genesishash.Count; a++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("node").Child("Hash" + a.ToString()).SetValueAsync(GameManager.instance.WearingItem[i].genesishash[a]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("owner").Child("Tran" + a.ToString()).SetValueAsync(GameManager.instance.WearingItem[i].savetran[a]);
+            }
         }
     }
 
-    public void uninstall(int select_num)
+    public void uninstall(int select_num) //select_num 0 1 2 3 
     {
         int k = GameManager.instance.itemMany;
 
@@ -1037,6 +1120,15 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.UserItem[k].hp = GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].hp;
         GameManager.instance.UserItem[k].agility = GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].agility;
         GameManager.instance.UserItem[k].consis = GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].consis;
+        
+        GameManager.instance.UserItem[k].genesishash.Clear();
+        GameManager.instance.UserItem[k].savetran.Clear();
+        
+        for(int i = 0 ; i < GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].genesishash.Count; i++)
+        {
+            GameManager.instance.UserItem[k].genesishash.Add(GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].genesishash[i]);
+            GameManager.instance.UserItem[k].savetran.Add(GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].savetran[i]);
+        }
 
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].item_key = 0;
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].speed = 0;
@@ -1044,6 +1136,9 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].hp = 0;
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].agility = 0;
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].consis = 0;
+
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].genesishash.Clear();
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].savetran.Clear();
 
         GameManager.instance.itemMany = GameManager.instance.itemMany + 1;
 
@@ -1057,6 +1152,15 @@ public class ButtonControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[m].hp);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[m].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[m].consis);
+
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("Block").Child("node").RemoveValueAsync();
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("Block").Child("owner").RemoveValueAsync();
+
+            for (int a = 0; a < GameManager.instance.UserItem[m].genesishash.Count; a++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("Block").Child("node").Child("Hash" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[m].genesishash[a]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("Block").Child("owner").Child("Tran" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[m].savetran[a]);
+            }
         }
 
         for (int i = 0; i < 24; i++)
@@ -1067,6 +1171,15 @@ public class ButtonControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("hp").SetValueAsync(GameManager.instance.WearingItem[i].hp);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("agility").SetValueAsync(GameManager.instance.WearingItem[i].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("consis").SetValueAsync(GameManager.instance.WearingItem[i].consis);
+
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("node").RemoveValueAsync();
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("owner").RemoveValueAsync();
+
+            for (int a = 0; a < GameManager.instance.WearingItem[i].genesishash.Count; a++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("node").Child("Hash" + a.ToString()).SetValueAsync(GameManager.instance.WearingItem[i].genesishash[a]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("owner").Child("Tran" + a.ToString()).SetValueAsync(GameManager.instance.WearingItem[i].savetran[a]);
+            }
         }
     }
 
@@ -1079,6 +1192,9 @@ public class ButtonControl : MonoBehaviour
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].agility = 0;
         GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].consis = 0;
 
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].genesishash.Clear();
+        GameManager.instance.WearingItem[(horse_s_n * 4) + select_num].savetran.Clear();
+
         int i = (horse_s_n * 4) + select_num;
 
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("item_key").SetValueAsync(GameManager.instance.WearingItem[i].item_key);
@@ -1087,6 +1203,9 @@ public class ButtonControl : MonoBehaviour
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("hp").SetValueAsync(GameManager.instance.WearingItem[i].hp);
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("agility").SetValueAsync(GameManager.instance.WearingItem[i].agility);
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("consis").SetValueAsync(GameManager.instance.WearingItem[i].consis);
+
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("node").RemoveValueAsync();
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("WearingItem").Child(i.ToString()).Child("Block").Child("owner").RemoveValueAsync();
     }
 
     public void senderror(string message)

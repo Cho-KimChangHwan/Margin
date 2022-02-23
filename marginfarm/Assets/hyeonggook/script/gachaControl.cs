@@ -577,9 +577,9 @@ public class gachaControl : MonoBehaviour
             for (int n = 1; n < 6; n++)
             {
                 bar = GameObject.Find("i_gauge" + n.ToString()).GetComponent<Image>();
-                bar.fillAmount = item_spec[n - 1] / 100f;
+                bar.fillAmount = item_spec[n - 1] / 10f;
                 gauge = GameObject.Find("i_gauge_t" + n.ToString()).GetComponent<Text>();
-                gauge.text = item_spec[n - 1].ToString() + " / 100";
+                gauge.text = item_spec[n - 1].ToString() + " / 10";
             }
 
             CardFlip_obj();
@@ -597,8 +597,9 @@ public class gachaControl : MonoBehaviour
             BlockHeader blockheader = new BlockHeader(null, GameManager.instance.Id);
             Block genesisBlock = new Block(blockheader, GameManager.instance.Id);
 
-            GameManager.instance.savetran = GameManager.instance.Id;
-            GameManager.instance.genesishash = genesisBlock.getBlockHash();
+            GameManager.instance.UserItem[k].savetran.Add(GameManager.instance.Id);
+            GameManager.instance.UserItem[k].genesishash.Add(genesisBlock.getBlockHash());
+
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
@@ -608,9 +609,11 @@ public class gachaControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
 
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("hashMany").SetValueAsync(GameManager.instance.hashMany);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.genesishash);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.savetran);
+            for(int a = 0; a < GameManager.instance.UserItem[k].genesishash.Count; a++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].genesishash[a]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].savetran[a]);
+            }
         }
         else if (itemselect == 2)
         {
@@ -655,8 +658,8 @@ public class gachaControl : MonoBehaviour
             BlockHeader blockheader = new BlockHeader(null, GameManager.instance.Id);
             Block genesisBlock = new Block(blockheader, GameManager.instance.Id);
 
-            GameManager.instance.savetran = GameManager.instance.Id;
-            GameManager.instance.genesishash = genesisBlock.getBlockHash();
+            GameManager.instance.UserItem[k].savetran.Add(GameManager.instance.Id);
+            GameManager.instance.UserItem[k].genesishash.Add(genesisBlock.getBlockHash());
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
@@ -666,9 +669,11 @@ public class gachaControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
 
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.genesishash);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.savetran);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("hashMany").SetValueAsync(GameManager.instance.hashMany);
+            for (int a = 0; a < GameManager.instance.UserItem[k].genesishash.Count; a++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].genesishash[a]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].savetran[a]);
+            }
         }
         else if (itemselect == 3)
         {
@@ -713,8 +718,8 @@ public class gachaControl : MonoBehaviour
             BlockHeader blockheader = new BlockHeader(null, GameManager.instance.Id);
             Block genesisBlock = new Block(blockheader, GameManager.instance.Id);
 
-            GameManager.instance.savetran = GameManager.instance.Id;
-            GameManager.instance.genesishash = genesisBlock.getBlockHash();
+            GameManager.instance.UserItem[k].savetran.Add(GameManager.instance.Id);
+            GameManager.instance.UserItem[k].genesishash.Add(genesisBlock.getBlockHash());
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
@@ -724,9 +729,11 @@ public class gachaControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
 
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("hashMany").SetValueAsync(GameManager.instance.hashMany);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.genesishash);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.savetran);
+            for (int a = 0; a < GameManager.instance.UserItem[k].genesishash.Count; a++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].genesishash[a]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].savetran[a]);
+            }
         }
         else if (itemselect == 4)
         {
@@ -770,8 +777,8 @@ public class gachaControl : MonoBehaviour
             BlockHeader blockheader = new BlockHeader(null, GameManager.instance.Id);
             Block genesisBlock = new Block(blockheader, GameManager.instance.Id);
 
-            GameManager.instance.savetran = GameManager.instance.Id;
-            GameManager.instance.genesishash = genesisBlock.getBlockHash();
+            GameManager.instance.UserItem[k].savetran.Add(GameManager.instance.Id);
+            GameManager.instance.UserItem[k].genesishash.Add(genesisBlock.getBlockHash());
 
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("itemMany").SetValueAsync(GameManager.instance.itemMany);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[k].key);
@@ -781,9 +788,11 @@ public class gachaControl : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
 
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("hashMany").SetValueAsync(GameManager.instance.hashMany);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.genesishash);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + GameManager.instance.hashMany).SetValueAsync(GameManager.instance.savetran);
+            for (int a = 0; a < GameManager.instance.UserItem[k].genesishash.Count; a++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].genesishash[a]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + a.ToString()).SetValueAsync(GameManager.instance.UserItem[k].savetran[a]);
+            }
         }
 
         GameObject.Find("item_second").transform.Find("go_item_b").gameObject.SetActive(true);
