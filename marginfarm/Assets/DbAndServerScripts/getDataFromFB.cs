@@ -56,6 +56,12 @@ public class getDataFromFB : MonoBehaviour
                     GameManager.instance.UserItem[i].hp = Convert.ToInt32(snapshot.Child("items").Child("item" + i.ToString()).Child("hp").Value);
                     GameManager.instance.UserItem[i].agility = Convert.ToInt32(snapshot.Child("items").Child("item" + i.ToString()).Child("agility").Value);
                     GameManager.instance.UserItem[i].consis = Convert.ToInt32(snapshot.Child("items").Child("item" + i.ToString()).Child("consis").Value);
+
+
+                    for (int q = 0; q < GameManager.instance.hashMany + 1; q++)
+                    {
+
+                    }
                 }
                 for (int i = 0; i < 24; i++)
                 {

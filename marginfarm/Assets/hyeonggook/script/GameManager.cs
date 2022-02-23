@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Blockchain;
 
 public struct HorseInfo
 {
@@ -94,6 +95,13 @@ public struct MarketItem
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    public List<Block> blockchain = new List<Block>();
+    public string savetran = "";
+    public string genesishash = "";
+    public string newblockhash = "";
+    public int hashMany;
+
 
     public int marketMany;
 

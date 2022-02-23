@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 using Blockchain;
-public class Program
+ namespace Program
 {
-
     class Program
     {
         List<Block> blockchain = new List<Block>();
@@ -21,7 +20,6 @@ public class Program
             //GenesisBlock create
             BlockHeader blockheader = new BlockHeader(null, transactions);
             Block genesisBlock = new Block(blockheader, transactions);
-            Console.WriteLine("Genesis Block Hash : {0} ", genesisBlock.getBlockHash());
 
             //hash save
             genesishash = genesisBlock.getBlockHash();

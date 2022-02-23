@@ -5,10 +5,14 @@ using UnityEngine;
 using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
+using System.Text;
+using Blockchain;
 
 public class listupdate : MonoBehaviour
 {
     DatabaseReference m_Reference;
+
+    public List<Block> blockchain = new List<Block>();
 
     public Image item_i;
     public Button item_b;
@@ -189,7 +193,6 @@ public class listupdate : MonoBehaviour
     }
     public void item_sell()
     {
-        Debug.Log("asd");
         delete_item();
         // database add item to market
 
@@ -199,6 +202,15 @@ public class listupdate : MonoBehaviour
         m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("hp").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].hp);
         m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("agility").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].agility);
         m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("consis").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].consis);
+
+        miner(GameManager.instance.savetran);
+        for (int i = 0; i < GameManager.instance.hashMany; i++)
+        {
+            m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("node").Child("Hash" + i).SetValueAsync(GameManager.instance.genesishash);
+            m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("owner").Child("Tran" + i).SetValueAsync(GameManager.instance.savetran);
+        }
+        GameManager.instance.hashMany += 1;
+        m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("HashMany").SetValueAsync(GameManager.instance.hashMany);
 
         GameManager.instance.marketMany += 1;
         m_Reference.Child("market").Child("sellList").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
@@ -246,6 +258,10 @@ public class listupdate : MonoBehaviour
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("hp").SetValueAsync(GameManager.instance.UserItem[k].hp);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("agility").SetValueAsync(GameManager.instance.UserItem[k].agility);
             m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("consis").SetValueAsync(GameManager.instance.UserItem[k].consis);
+            for (int q = 0; q < GameManager.instance.hashMany + 1; q++)
+            {
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + q).SetValueAsync(GameManager.instance.genesishash);
+            }
         }
     }
 
@@ -272,5 +288,17 @@ public class listupdate : MonoBehaviour
         GameObject error_p = GameObject.Find("check_i");
         iTween.MoveTo(error_p, iTween.Hash("y", 900, "delay", 0.1f, "time", 0.5f));
     }
+     void miner(string transactions)
+    {
 
+        BlockHeader secondBlockheader = new BlockHeader(Encoding.UTF8.GetBytes(GameManager.instance.newblockhash), transactions);
+        Block nextBlock = new Block(secondBlockheader, transactions);
+
+        int count = secondBlockheader.ProofOfWorkCount();
+
+        Block previousBlock = nextBlock;
+
+        GameManager.instance.newblockhash = previousBlock.getBlockHash();
+        GameManager.instance.savetran = previousBlock.getBlocktransaction();
+    }
 }
