@@ -2697,7 +2697,6 @@ GameObject:
   m_Component:
   - component: {fileID: 95052677}
   - component: {fileID: 95052679}
-  - component: {fileID: 95052678}
   m_Layer: 2
   m_Name: Camera
   m_TagString: Untagged
@@ -2719,14 +2718,6 @@ Transform:
   m_Father: {fileID: 2106493429}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -6.065, y: -71.013, z: 0.952}
---- !u!81 &95052678
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95052676}
-  m_Enabled: 1
 --- !u!20 &95052679
 Camera:
   m_ObjectHideFlags: 0
@@ -8628,7 +8619,6 @@ GameObject:
   m_Component:
   - component: {fileID: 517992145}
   - component: {fileID: 517992147}
-  - component: {fileID: 517992146}
   m_Layer: 2
   m_Name: Camera
   m_TagString: Untagged
@@ -8650,14 +8640,6 @@ Transform:
   m_Father: {fileID: 1922230915}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -6.065, y: -71.013, z: 0.952}
---- !u!81 &517992146
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 517992144}
-  m_Enabled: 1
 --- !u!20 &517992147
 Camera:
   m_ObjectHideFlags: 0
@@ -9135,7 +9117,6 @@ GameObject:
   m_Component:
   - component: {fileID: 554302655}
   - component: {fileID: 554302657}
-  - component: {fileID: 554302656}
   m_Layer: 2
   m_Name: Camera
   m_TagString: Untagged
@@ -9157,14 +9138,6 @@ Transform:
   m_Father: {fileID: 2024280687}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -6.065, y: -71.013, z: 0.952}
---- !u!81 &554302656
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554302654}
-  m_Enabled: 1
 --- !u!20 &554302657
 Camera:
   m_ObjectHideFlags: 0
@@ -28405,7 +28378,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1658696184}
   - component: {fileID: 1658696186}
-  - component: {fileID: 1658696185}
   m_Layer: 2
   m_Name: Camera
   m_TagString: Untagged
@@ -28427,14 +28399,6 @@ Transform:
   m_Father: {fileID: 406329052}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -6.065, y: -71.013, z: 0.952}
---- !u!81 &1658696185
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658696183}
-  m_Enabled: 1
 --- !u!20 &1658696186
 Camera:
   m_ObjectHideFlags: 0
