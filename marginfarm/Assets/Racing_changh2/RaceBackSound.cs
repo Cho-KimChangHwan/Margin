@@ -42,14 +42,14 @@ public class RaceBackSound : MonoBehaviour
         {
             audioSource.volume = 0f;
             clickaudio.volume = 0f;
-            thisimg.sprite = soundImg;
+            thisimg.sprite = muteImg;
             On = false;
         }
         else
         {
             audioSource.volume = originalV;
             clickaudio.volume = clickV;
-            thisimg.sprite = muteImg;
+            thisimg.sprite = soundImg;
             On = true;
         }
     }
