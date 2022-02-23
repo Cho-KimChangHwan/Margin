@@ -11,8 +11,10 @@ public class HorseSound : MonoBehaviour
     HorseStatus horseStatus;
     void Awake() {
         this.audioSource = GetComponent<AudioSource>();
-        count = GameObject.Find("Count").GetComponent<CountDown>();
-        horseStatus = this.GetComponent<HorseStatus>();
+        count = GameObject.Find("Canvas").GetComponent<CountDown>();
+ 
+        string myname = "Player" + (GameManager.instance.mytern ).ToString();
+        horseStatus = GameObject.FindWithTag(myname).GetComponent<HorseStatus>();
     }
     // Start is called before the first frame update
     void Start()
