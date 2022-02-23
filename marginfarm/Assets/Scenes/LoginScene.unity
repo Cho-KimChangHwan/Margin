@@ -2243,15 +2243,15 @@ MonoBehaviour:
   lineKey: 00000000000000000000000000000000
   back_item:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4942686441758973256, guid: b90d7405e2d462c4c944ff5ad0e1a36d, type: 3}
   - {fileID: 7455351002414369877, guid: af6d2f99249e1434d84ebe95d7cbcef4, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8732467391033695491, guid: 85cfc9e38991e1a43b7cc6ca59712343, type: 3}
+  - {fileID: 5608712067027735661, guid: f1a85b43cc9997e4c98a90d52e955738, type: 3}
+  - {fileID: 2970286301791652323, guid: d1870c441a0d8634983fead803cdfd4f, type: 3}
+  - {fileID: 2588527227179735742, guid: 39590233f86e4b1499b6c8b7ab77bfe7, type: 3}
+  - {fileID: 8460810541334694390, guid: 479e7349ba1adf74f95f5457d5b14691, type: 3}
+  - {fileID: 1251971317430293600, guid: 2fb8cb50c247f42419fe072e4820676a, type: 3}
+  - {fileID: 205896159343555216, guid: eea52503381b2654193733c6008a2576, type: 3}
   hat_item:
   - {fileID: 0}
   - {fileID: 0}
@@ -2297,15 +2297,15 @@ MonoBehaviour:
   - {fileID: 0}
   back_item_card:
   - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
   - {fileID: 21300000, guid: 55ca90399e87a8d4fbb59641aaff2695, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: a7edd4607fe74014d94c792cba3f9086, type: 3}
+  - {fileID: 21300000, guid: 2df5250d5d2384f4f9ac7ce90eb32ed4, type: 3}
+  - {fileID: 21300000, guid: 88b9438c345f8804180926d8f111a316, type: 3}
+  - {fileID: 21300000, guid: 77738e299ab9aaf4195b0bc866e4cc89, type: 3}
+  - {fileID: 21300000, guid: 87ddab0f5c252a14eb2d823ae7d319ed, type: 3}
+  - {fileID: 21300000, guid: 2852c5e8a1be4634e97cd327bdb0ecb0, type: 3}
+  - {fileID: 21300000, guid: 74a05e82811236e4883fbdf8072ffcf5, type: 3}
+  - {fileID: 21300000, guid: 646eecfe01da99f4ebd2d677ef29b843, type: 3}
   hat_item_card:
   - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
   - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
