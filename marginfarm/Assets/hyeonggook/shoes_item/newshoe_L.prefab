@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2311384126013566851}
   m_Layer: 11
-  m_Name: newshoe
+  m_Name: newshoe_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,19 +56,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: da3ea70420d34ce40845a085b439ca41, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000119209204
+      value: -0.00000011920921
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: da3ea70420d34ce40845a085b439ca41, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6961473
+      value: 0.6961474
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: da3ea70420d34ce40845a085b439ca41, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000016391266
+      value: 0.00000016391267
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: da3ea70420d34ce40845a085b439ca41, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7178989
+      value: 0.71789896
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: da3ea70420d34ce40845a085b439ca41, type: 3}
       propertyPath: m_RootOrder
@@ -88,7 +88,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: da3ea70420d34ce40845a085b439ca41, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.15
+      value: 0.15000007
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: da3ea70420d34ce40845a085b439ca41, type: 3}
       propertyPath: m_LocalScale.y
@@ -96,7 +96,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: da3ea70420d34ce40845a085b439ca41, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.15
+      value: 0.15000007
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: da3ea70420d34ce40845a085b439ca41, type: 3}
       propertyPath: m_Materials.Array.data[0]

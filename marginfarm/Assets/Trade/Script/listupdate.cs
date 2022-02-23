@@ -69,7 +69,7 @@ public class listupdate : MonoBehaviour
         {
             item_b = GameObject.Find("item" + i.ToString()).GetComponent<Button>();
             item_i = GameObject.Find("item" + i.ToString() + "_i").GetComponent<Image>();
-            item_i.sprite = GameManager.instance.hat_item_card[1];
+            item_i.sprite = GameManager.instance.hat_item_card[0];
             item_b.interactable = false;
         }
     }

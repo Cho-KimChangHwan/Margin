@@ -44,6 +44,19 @@ public class ListSetting : MonoBehaviour
                 GameObject temp1 = Instantiate(GameManager.instance.hat_item[GameManager.instance.WearingItem[(i - 1) * 4].item_key], under1.transform.position, Quaternion.Euler(new Vector3(38f, -97f, -6f)));
                 temp1.transform.parent = under1.transform;
                 temp1.layer = layer_num[i];
+
+                Transform[] childList = temp1.GetComponentsInChildren<Transform>();
+                if (childList != null)
+                {
+                    for (int k = 1; k < childList.Length; k++)
+                    {
+                        if (childList[k] != transform)
+                        {
+                            GameObject temp_layer = childList[k].gameObject;
+                            temp_layer.layer = layer_num[i];
+                        }
+                    }
+                }
             }
             if (GameManager.instance.WearingItem[(i - 1) * 4 + 1].item_key != 0)
             {
@@ -51,6 +64,24 @@ public class ListSetting : MonoBehaviour
                 GameObject temp2 = Instantiate(GameManager.instance.glasses_item[GameManager.instance.WearingItem[(i - 1) * 4 + 1].item_key / 10], under2.transform.position, Quaternion.Euler(new Vector3(20f, -87f, -1f)));
                 temp2.transform.parent = under2.transform;
                 temp2.layer = layer_num[i];
+
+                GameObject tempb = temp2.transform.GetChild(0).gameObject;
+                tempb.layer = layer_num[i];
+
+                Transform[] childList = tempb.GetComponentsInChildren<Transform>();
+                if (childList != null)
+                {
+                    for (int k = 1; k < childList.Length; k++)
+                    {
+                        if (childList[k] != transform)
+                        {
+                            GameObject temp_layer = childList[k].gameObject;
+                            temp_layer.layer = layer_num[i];
+                        }
+                    }
+                }
+
+
             }
             if(GameManager.instance.WearingItem[(i - 1) * 4 + 2].item_key != 0)
             {
@@ -67,8 +98,19 @@ public class ListSetting : MonoBehaviour
                 temp5.layer = layer_num[i];
                 GameObject getchildd = temp5.transform.GetChild(0).gameObject;
                 getchildd.layer = layer_num[i];
-                getchildd = temp5.transform.GetChild(1).gameObject;
-                getchildd.layer = layer_num[i];
+
+                Transform[] childList0 = getchildd.GetComponentsInChildren<Transform>();
+                if (childList0 != null)
+                {
+                    for (int a = 1; a < childList0.Length; a++)
+                    {
+                        if (childList0[a] != transform)
+                        {
+                            GameObject temp_layer = childList0[a].gameObject;
+                            temp_layer.layer = layer_num[i];
+                        }
+                    }
+                }
 
                 GameObject under6 = GameObject.Find("shoes_fr_h" + i.ToString());
                 GameObject temp6 = Instantiate(GameManager.instance.shoes_item[((GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000) * 2)], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
@@ -76,8 +118,19 @@ public class ListSetting : MonoBehaviour
                 temp6.layer = layer_num[i];
                 getchildd = temp6.transform.GetChild(0).gameObject;
                 getchildd.layer = layer_num[i];
-                getchildd = temp6.transform.GetChild(1).gameObject;
-                getchildd.layer = layer_num[i];
+
+                Transform[] childList1 = getchildd.GetComponentsInChildren<Transform>();
+                if (childList1 != null)
+                {
+                    for (int a = 1; a < childList1.Length; a++)
+                    {
+                        if (childList1[a] != transform)
+                        {
+                            GameObject temp_layer = childList1[a].gameObject;
+                            temp_layer.layer = layer_num[i];
+                        }
+                    }
+                }
 
                 GameObject under7 = GameObject.Find("shoes_bl_h" + i.ToString());
                 GameObject temp7 = Instantiate(GameManager.instance.shoes_item[((GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000) * 2) - 1], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
@@ -85,8 +138,19 @@ public class ListSetting : MonoBehaviour
                 temp7.layer = layer_num[i];
                 getchildd = temp7.transform.GetChild(0).gameObject;
                 getchildd.layer = layer_num[i];
-                getchildd = temp7.transform.GetChild(1).gameObject;
-                getchildd.layer = layer_num[i];
+
+                Transform[] childList2 = getchildd.GetComponentsInChildren<Transform>();
+                if (childList2 != null)
+                {
+                    for (int a = 1; a < childList2.Length; a++)
+                    {
+                        if (childList2[a] != transform)
+                        {
+                            GameObject temp_layer = childList2[a].gameObject;
+                            temp_layer.layer = layer_num[i];
+                        }
+                    }
+                }
 
                 GameObject under8 = GameObject.Find("shoes_br_h" + i.ToString());
                 GameObject temp8 = Instantiate(GameManager.instance.shoes_item[((GameManager.instance.WearingItem[(i - 1) * 4 + 3].item_key / 1000) * 2)], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
@@ -94,8 +158,19 @@ public class ListSetting : MonoBehaviour
                 temp8.layer = layer_num[i];
                 getchildd = temp8.transform.GetChild(0).gameObject;
                 getchildd.layer = layer_num[i];
-                getchildd = temp8.transform.GetChild(1).gameObject;
-                getchildd.layer = layer_num[i];
+
+                Transform[] childList3 = getchildd.GetComponentsInChildren<Transform>();
+                if (childList3 != null)
+                {
+                    for (int a = 1; a < childList3.Length; a++)
+                    {
+                        if (childList3[a] != transform)
+                        {
+                            GameObject temp_layer = childList3[a].gameObject;
+                            temp_layer.layer = layer_num[i];
+                        }
+                    }
+                }
             }
         }
 

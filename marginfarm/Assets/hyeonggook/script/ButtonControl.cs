@@ -276,7 +276,7 @@ public class ButtonControl : MonoBehaviour
         {
             item_b = GameObject.Find("item" + i.ToString()).GetComponent<Button>();
             item_i = GameObject.Find("item" + i.ToString() + "_i").GetComponent<Image>();
-            item_i.sprite = GameManager.instance.hat_item_card[1];
+            item_i.sprite = GameManager.instance.hat_item_card[0];
             item_b.interactable = false;
         }
 
@@ -744,6 +744,19 @@ public class ButtonControl : MonoBehaviour
                 temp.transform.parent = under.transform;
                 temp.layer = layer_num[horse_ss];
 
+                Transform[] childList = temp.GetComponentsInChildren<Transform>();
+                if (childList != null)
+                {
+                    for (int i = 1; i < childList.Length; i++)
+                    {
+                        if (childList[i] != transform)
+                        {
+                            GameObject temp_layer = childList[i].gameObject;
+                            temp_layer.layer = layer_num[horse_ss];
+                        }
+                    }
+                }
+
                 what_item = 0;
                 install(what_item, select_num);
 
@@ -764,6 +777,22 @@ public class ButtonControl : MonoBehaviour
                 GameObject tempa = Instantiate(GameManager.instance.glasses_item[GameManager.instance.UserItem[select_num].key / 10], under.transform.position, Quaternion.Euler(new Vector3(20f, -87f, -1f)));
                 tempa.transform.parent = under.transform;
                 tempa.layer = layer_num[horse_ss];
+
+                GameObject tempb = tempa.transform.GetChild(0).gameObject;
+                tempb.layer = layer_num[horse_ss];
+
+                Transform[] childList = tempb.GetComponentsInChildren<Transform>();
+                if (childList != null)
+                {
+                    for (int i = 1; i < childList.Length; i++)
+                    {
+                        if (childList[i] != transform)
+                        {
+                            GameObject temp_layer = childList[i].gameObject;
+                            temp_layer.layer = layer_num[horse_ss];
+                        }
+                    }
+                }
 
                 what_item = 1;
                 install(what_item, select_num);
@@ -815,8 +844,19 @@ public class ButtonControl : MonoBehaviour
                 temp5.layer = layer_num[horse_ss];
                 GameObject getchildd = temp5.transform.GetChild(0).gameObject;
                 getchildd.layer = layer_num[horse_ss];
-                getchildd = temp5.transform.GetChild(1).gameObject;
-                getchildd.layer = layer_num[horse_ss];
+
+                Transform[] childList1 = getchildd.GetComponentsInChildren<Transform>();
+                if (childList1 != null)
+                {
+                    for (int i = 1; i < childList1.Length; i++)
+                    {
+                        if (childList1[i] != transform)
+                        {
+                            GameObject temp_layer = childList1[i].gameObject;
+                            temp_layer.layer = layer_num[horse_ss];
+                        }
+                    }
+                }
 
                 GameObject under6 = GameObject.Find("shoes_fr_h" + horse_ss.ToString());
                 GameObject temp6 = Instantiate(GameManager.instance.shoes_item[((GameManager.instance.UserItem[select_num].key / 1000) * 2)], under6.transform.position, Quaternion.Euler(under6.transform.eulerAngles));
@@ -824,8 +864,19 @@ public class ButtonControl : MonoBehaviour
                 temp6.layer = layer_num[horse_ss];
                 getchildd = temp6.transform.GetChild(0).gameObject;
                 getchildd.layer = layer_num[horse_ss];
-                getchildd = temp6.transform.GetChild(1).gameObject;
-                getchildd.layer = layer_num[horse_ss];
+
+                Transform[] childList2 = getchildd.GetComponentsInChildren<Transform>();
+                if (childList2 != null)
+                {
+                    for (int i = 1; i < childList2.Length; i++)
+                    {
+                        if (childList2[i] != transform)
+                        {
+                            GameObject temp_layer = childList2[i].gameObject;
+                            temp_layer.layer = layer_num[horse_ss];
+                        }
+                    }
+                }
 
                 GameObject under7 = GameObject.Find("shoes_bl_h" + horse_ss.ToString());
                 GameObject temp7 = Instantiate(GameManager.instance.shoes_item[((GameManager.instance.UserItem[select_num].key / 1000) * 2) - 1], under7.transform.position, Quaternion.Euler(under7.transform.eulerAngles));
@@ -833,8 +884,19 @@ public class ButtonControl : MonoBehaviour
                 temp7.layer = layer_num[horse_ss];
                 getchildd = temp7.transform.GetChild(0).gameObject;
                 getchildd.layer = layer_num[horse_ss];
-                getchildd = temp7.transform.GetChild(1).gameObject;
-                getchildd.layer = layer_num[horse_ss];
+
+                Transform[] childList3 = getchildd.GetComponentsInChildren<Transform>();
+                if (childList3 != null)
+                {
+                    for (int i = 1; i < childList3.Length; i++)
+                    {
+                        if (childList3[i] != transform)
+                        {
+                            GameObject temp_layer = childList3[i].gameObject;
+                            temp_layer.layer = layer_num[horse_ss];
+                        }
+                    }
+                }
 
                 GameObject under8 = GameObject.Find("shoes_br_h" + horse_ss.ToString());
                 GameObject temp8 = Instantiate(GameManager.instance.shoes_item[((GameManager.instance.UserItem[select_num].key / 1000) * 2)], under8.transform.position, Quaternion.Euler(under8.transform.eulerAngles));
@@ -842,9 +904,19 @@ public class ButtonControl : MonoBehaviour
                 temp8.layer = layer_num[horse_ss];
                 getchildd = temp8.transform.GetChild(0).gameObject;
                 getchildd.layer = layer_num[horse_ss];
-                getchildd = temp8.transform.GetChild(1).gameObject;
-                getchildd.layer = layer_num[horse_ss];
 
+                Transform[] childList4 = getchildd.GetComponentsInChildren<Transform>();
+                if (childList4 != null)
+                {
+                    for (int i = 1; i < childList4.Length; i++)
+                    {
+                        if (childList4[i] != transform)
+                        {
+                            GameObject temp_layer = childList4[i].gameObject;
+                            temp_layer.layer = layer_num[horse_ss];
+                        }
+                    }
+                }
 
                 what_item = 3;
                 install(what_item, select_num);

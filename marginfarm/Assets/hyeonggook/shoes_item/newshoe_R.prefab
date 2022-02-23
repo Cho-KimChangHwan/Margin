@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5852256403758153883}
   m_Layer: 11
-  m_Name: newshoe
+  m_Name: newshoe_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
