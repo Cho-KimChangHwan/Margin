@@ -2308,20 +2308,20 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 646eecfe01da99f4ebd2d677ef29b843, type: 3}
   hat_item_card:
   - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 4187ba7c57c06aa4f886593668c5edf6, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 57beb4fe2387f964892171d60cb3e604, type: 3}
+  - {fileID: 21300000, guid: 4622d4cb6dfcca84ca8ab68611b12137, type: 3}
+  - {fileID: 21300000, guid: f2113da303d052543bbe070883203b50, type: 3}
+  - {fileID: 21300000, guid: 12d4e25eb7f667840ae4b440894803c5, type: 3}
+  - {fileID: 21300000, guid: 58224dca71c661240b3b644bc1b4d640, type: 3}
+  - {fileID: 21300000, guid: 49b8a6a8a66549f4690424049b4507de, type: 3}
+  - {fileID: 21300000, guid: 3c551413a177d65479ad24228a744a62, type: 3}
+  - {fileID: 21300000, guid: c26efc7e72a2abc44b31056b32177e71, type: 3}
+  - {fileID: 21300000, guid: ce62d63f812fe7e4d97f51cdc7ccb927, type: 3}
   glasses_item_card:
   - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
   - {fileID: 21300000, guid: 0fb600e3ed66a874db5e18b8b96f33c7, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 6cb58bce24b54c3459fc0e10aa31f859, type: 3}
+  - {fileID: 21300000, guid: 98591dcb24ca5e340b99a63181aa561b, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -2330,9 +2330,9 @@ MonoBehaviour:
   - {fileID: 0}
   shoes_item_card:
   - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
-  - {fileID: 21300000, guid: 9fe34e0da8dd36a49b606bae15973f93, type: 3}
   - {fileID: 21300000, guid: 6d049eeaa04434542a8d7eca4572d333, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: cfdfb504bbd858844acbda0e197b7000, type: 3}
+  - {fileID: 21300000, guid: aeef6e43d71a18347b7bb651cf622e0a, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
