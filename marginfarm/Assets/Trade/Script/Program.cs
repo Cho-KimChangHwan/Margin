@@ -10,9 +10,9 @@ namespace BlockchainTest
     {
         List<Block> blockchain = new List<Block>();
         static string savetran = "";
-        //static string genesishash = "";
+        static string genesishash = "";
         static string newblockhash = "";
-
+        
         static void Main(string[] args)
         {
             int k = 5;
