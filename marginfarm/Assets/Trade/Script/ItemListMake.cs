@@ -15,7 +15,7 @@ public class ItemListMake : MonoBehaviour
     public GameObject content;
     public int a = 0;
     public int[] itemdata = new int[5];
-
+    public Button buy_item;
     public int k;
     // Start is called before the first frame update
     void Awake()
@@ -227,6 +227,10 @@ public class ItemListMake : MonoBehaviour
             }
         }
         m_Reference.Child("market").Child("sellList").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
+
+        Button buy_item = GameObject.Find("buy_item").GetComponent<Button>();
+        buy_item.interactable = false;
+        GameManager.instance.market_button_active = false;
     }
 
     public void sendcheck_buy(string message)

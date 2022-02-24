@@ -149,6 +149,7 @@ public class GameManager : MonoBehaviour
     public string[] uId = new string[4];
     public string ranking = "";
 
+    public bool market_button_active = false;
 
     public HorseInfo[] UserHorse = new HorseInfo[]
     {
