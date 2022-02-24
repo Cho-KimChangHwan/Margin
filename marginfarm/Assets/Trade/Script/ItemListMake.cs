@@ -112,10 +112,20 @@ public class ItemListMake : MonoBehaviour
                     GameManager.instance.MarketItems[i].hp = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("hp").Value);
                     GameManager.instance.MarketItems[i].agility = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("agility").Value);
                     GameManager.instance.MarketItems[i].consis = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("consis").Value);
+
+                    if (GameManager.instance.MarketItems[i].genesishash == null)
+                    {
+                        GameManager.instance.MarketItems[i].genesishash = new ArrayList();
+                    }
+                    if (GameManager.instance.MarketItems[i].savetran == null)
+                    {
+                        GameManager.instance.MarketItems[i].savetran = new ArrayList();
+                    }
+
                     for (int j = 0; j < snapshot.Child("item" + (i.ToString())).Child("Block").Child("node").ChildrenCount; j++)
                     {
-                        GameManager.instance.MarketItems[i].genesishash[j] = snapshot.Child("item" + (i.ToString())).Child("Block").Child("node").Child("Hash" + j.ToString()).Value.ToString();
-                        GameManager.instance.MarketItems[i].savetran[j] = snapshot.Child("item" + (i.ToString())).Child("Block").Child("node").Child("Tran" + j.ToString()).Value.ToString();
+                        GameManager.instance.MarketItems[i].genesishash.Add(snapshot.Child("item" + (i.ToString())).Child("Block").Child("node").Child("Hash" + j.ToString()).Value);
+                        GameManager.instance.MarketItems[i].savetran.Add(snapshot.Child("item" + (i.ToString())).Child("Block").Child("node").Child("Tran" + j.ToString()).Value);
                     }
                 }
             });
