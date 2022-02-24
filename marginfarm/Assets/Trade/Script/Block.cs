@@ -41,6 +41,7 @@ namespace Blockchain
 
             return tran.ToString();
         }
+
         public static string ByteArrayToString(byte[] bts)
         {
             StringBuilder strBld = new StringBuilder();
@@ -63,7 +64,7 @@ namespace Blockchain
         private byte[] previousBlockHash;
         private int merkleRootHash;
         private int timestamp = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
-        private static uint difficultyTarget = 5;
+        private static uint difficultyTarget = 2;
         private static int nonce = 0;
 
 

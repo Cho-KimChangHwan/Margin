@@ -200,7 +200,7 @@ public class listupdate : MonoBehaviour
         m_Reference.Child("market").Child("sellList").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);
 
         
-        for (int i = 0; i < GameManager.instance.marketMany-1; i++)
+        for (int i = 0; i < GameManager.instance.marketMany; i++)
         {
             m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("key").SetValueAsync(GameManager.instance.MarketItems[i].key);
             m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("speed").SetValueAsync(GameManager.instance.MarketItems[i].speed);
@@ -214,8 +214,11 @@ public class listupdate : MonoBehaviour
 
             for(int j = 0; j < GameManager.instance.MarketItems[i].genesishash.Count; j++)
             {
-                m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("Block").Child("node").SetValueAsync(GameManager.instance.MarketItems[i].genesishash[j]);
-                m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("Block").Child("owner").SetValueAsync(GameManager.instance.MarketItems[i].savetran[j]);
+                m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("Block").Child("node").Child("Hash" + j.ToString()).SetValueAsync(GameManager.instance.MarketItems[i].genesishash[j]);
+            }
+            for(int j = 0; j < GameManager.instance.MarketItems[i].savetran.Count; j++)
+            {
+                m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("Block").Child("owner").Child("Tran" + j.ToString()).SetValueAsync(GameManager.instance.MarketItems[i].savetran[j]);
             }
         }
       
@@ -298,8 +301,8 @@ public class listupdate : MonoBehaviour
 
             for (int i = 0; i < GameManager.instance.UserItem[k].genesishash.Count; i++)
             {
-                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").SetValueAsync(GameManager.instance.UserItem[k].genesishash[i]);
-                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").SetValueAsync(GameManager.instance.UserItem[k].savetran[i]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("node").Child("Hash" + i.ToString()).SetValueAsync(GameManager.instance.UserItem[k].genesishash[i]);
+                m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (k.ToString())).Child("Block").Child("owner").Child("Tran" + i.ToString()).SetValueAsync(GameManager.instance.UserItem[k].savetran[i]);
             }
             
         }
@@ -313,7 +316,8 @@ public class listupdate : MonoBehaviour
         m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("node").RemoveValueAsync();
         for (int j = 0; j < GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash.Count; j++)
         {
-            m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("node").SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash[j]);
+            Debug.Log(GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash[j]);
+            m_Reference.Child("market").Child("sellList").Child("item" + (GameManager.instance.marketMany.ToString())).Child("Block").Child("node").Child("Hash" + j.ToString()).SetValueAsync(GameManager.instance.MarketItems[GameManager.instance.marketMany].genesishash[j]);
         }
 
 

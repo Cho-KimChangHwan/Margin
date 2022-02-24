@@ -169,8 +169,8 @@ public class ItemListMake : MonoBehaviour
         
         for (int i = 0; i < GameManager.instance.UserItem[m].genesishash.Count; i++)
         {
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("Block").Child("node").SetValueAsync(GameManager.instance.UserItem[m].genesishash[i]);
-            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("Block").Child("owner").SetValueAsync(GameManager.instance.UserItem[m].savetran[i]);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("Block").Child("node").Child("Hash" + i.ToString()).SetValueAsync(GameManager.instance.UserItem[m].genesishash[i]);
+            m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("Block").Child("owner").Child("Tran" + i.ToString()).SetValueAsync(GameManager.instance.UserItem[m].savetran[i]);
         }
     
         for (int i = n; i < GameManager.instance.marketMany; i++)
@@ -217,8 +217,8 @@ public class ItemListMake : MonoBehaviour
 
             for(int j = 0; j < GameManager.instance.MarketItems[i].genesishash.Count; j++)
             {
-                m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("Block").Child("node").SetValueAsync(GameManager.instance.MarketItems[i].genesishash[j]);
-                m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("Block").Child("owner").SetValueAsync(GameManager.instance.MarketItems[i].savetran[j]);
+                m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("Block").Child("node").Child("Hash" + j.ToString()).SetValueAsync(GameManager.instance.MarketItems[i].genesishash[j]);
+                m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("Block").Child("owner").Child("Tran" + j.ToString()).SetValueAsync(GameManager.instance.MarketItems[i].savetran[j]);
             }
         }
         m_Reference.Child("market").Child("sellList").Child("marketMany").SetValueAsync(GameManager.instance.marketMany);

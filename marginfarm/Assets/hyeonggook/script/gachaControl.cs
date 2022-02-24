@@ -638,9 +638,9 @@ public class gachaControl : MonoBehaviour
             for (int n = 1; n < 6; n++)
             {
                 bar = GameObject.Find("i_gauge" + n.ToString()).GetComponent<Image>();
-                bar.fillAmount = item_spec[n - 1] / 100f;
+                bar.fillAmount = item_spec[n - 1] / 10f;
                 gauge = GameObject.Find("i_gauge_t" + n.ToString()).GetComponent<Text>();
-                gauge.text = item_spec[n - 1].ToString() + " / 100";
+                gauge.text = item_spec[n - 1].ToString() + " / 10";
             }
 
             CardFlip_obj();
@@ -698,9 +698,9 @@ public class gachaControl : MonoBehaviour
             for (int n = 1; n < 6; n++)
             {
                 bar = GameObject.Find("i_gauge" + n.ToString()).GetComponent<Image>();
-                bar.fillAmount = item_spec[n - 1] / 100f;
+                bar.fillAmount = item_spec[n - 1] / 10f;
                 gauge = GameObject.Find("i_gauge_t" + n.ToString()).GetComponent<Text>();
-                gauge.text = item_spec[n - 1].ToString() + " / 100";
+                gauge.text = item_spec[n - 1].ToString() + " / 10";
             }
 
             CardFlip_obj();
@@ -757,9 +757,9 @@ public class gachaControl : MonoBehaviour
             for (int n = 1; n < 6; n++)
             {
                 bar = GameObject.Find("i_gauge" + n.ToString()).GetComponent<Image>();
-                bar.fillAmount = item_spec[n - 1] / 100f;
+                bar.fillAmount = item_spec[n - 1] / 10f;
                 gauge = GameObject.Find("i_gauge_t" + n.ToString()).GetComponent<Text>();
-                gauge.text = item_spec[n - 1].ToString() + " / 100";
+                gauge.text = item_spec[n - 1].ToString() + " / 10";
             }
 
             CardFlip_obj();
