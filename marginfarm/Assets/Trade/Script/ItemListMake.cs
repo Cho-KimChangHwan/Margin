@@ -112,6 +112,11 @@ public class ItemListMake : MonoBehaviour
                     GameManager.instance.MarketItems[i].hp = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("hp").Value);
                     GameManager.instance.MarketItems[i].agility = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("agility").Value);
                     GameManager.instance.MarketItems[i].consis = Convert.ToInt32(snapshot.Child("item" + i.ToString()).Child("consis").Value);
+                    for (int j = 0; j < snapshot.Child("item" + (i.ToString())).Child("Block").Child("node").ChildrenCount; j++)
+                    {
+                        GameManager.instance.MarketItems[i].genesishash[j] = snapshot.Child("item" + (i.ToString())).Child("Block").Child("node").Child("Hash" + j.ToString()).Value.ToString();
+                        GameManager.instance.MarketItems[i].savetran[j] = snapshot.Child("item" + (i.ToString())).Child("Block").Child("node").Child("Tran" + j.ToString()).Value.ToString();
+                    }
                 }
             });
         FirebaseDatabase.DefaultInstance.GetReference("users").Child(GameManager.instance.Id)
