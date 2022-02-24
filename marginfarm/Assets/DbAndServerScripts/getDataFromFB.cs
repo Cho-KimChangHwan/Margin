@@ -59,9 +59,9 @@ public class getDataFromFB : MonoBehaviour
 
                     for (int a = 0; a < snapshot.Child("items").Child("item" + (i.ToString())).Child("Block").Child("node").ChildrenCount; a++)
                     {
-                        GameManager.instance.UserItem[i].genesishash[a] = snapshot.Child("items").Child("item" + (i.ToString())).Child("Block").Child("node").Child("Hash" + a.ToString()).Value.ToString();
-                        GameManager.instance.UserItem[i].savetran[a] = snapshot.Child("items").Child("item" + (i.ToString())).Child("Block").Child("node").Child("Tran" + a.ToString()).Value.ToString();
-                    }
+                        GameManager.instance.UserItem[i].genesishash.Add(snapshot.Child("items").Child("item" + i.ToString()).Child("Block").Child("node").Child("Hash" + a.ToString()).Value);
+                        GameManager.instance.UserItem[i].savetran.Add(snapshot.Child("items").Child("item" + i.ToString()).Child("Block").Child("owner").Child("Tran" + a.ToString()).Value);
+                    }       
                 }
                 for (int i = 0; i < 24; i++)
                 {
@@ -73,8 +73,8 @@ public class getDataFromFB : MonoBehaviour
                     GameManager.instance.WearingItem[i].speed = Convert.ToInt32(snapshot.Child("WearingItem").Child(i.ToString()).Child("speed").Value);
                     for (int a = 0; a < snapshot.Child("WearingItem").Child(i.ToString()).Child("Block").Child("node").ChildrenCount; a++)
                     {
-                        GameManager.instance.WearingItem[i].genesishash[a] = snapshot.Child("WearingItem").Child(i.ToString()).Child("Block").Child("node").Child("Hash" + a.ToString()).Value.ToString();
-                        GameManager.instance.WearingItem[i].savetran[a] = snapshot.Child("WearingItem").Child(i.ToString()).Child("Block").Child("node").Child("Tran" + a.ToString()).Value.ToString();
+                        GameManager.instance.WearingItem[i].genesishash.Add(snapshot.Child("WearingItem").Child(i.ToString()).Child("Block").Child("node").Child("Hash" + a.ToString()).Value);
+                        GameManager.instance.WearingItem[i].savetran.Add(snapshot.Child("WearingItem").Child(i.ToString()).Child("Block").Child("owner").Child("Tran" + a.ToString()).Value);
                     }
                 }
                 GameManager.instance.money = Convert.ToInt32(snapshot.Child("money").Value);
