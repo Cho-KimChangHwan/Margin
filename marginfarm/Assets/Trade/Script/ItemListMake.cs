@@ -21,11 +21,11 @@ public class ItemListMake : MonoBehaviour
     void Awake()
     {
         m_Reference = FirebaseDatabase.DefaultInstance.RootReference;
-        GetMarketFb();
+        update_button();
     }
     void Start()
     {
-        button_make();
+        
     }
 
     // Update is called once per frame
@@ -179,8 +179,6 @@ public class ItemListMake : MonoBehaviour
             GameManager.instance.UserItem[m].savetran.Add(GameManager.instance.MarketItems[n].savetran[i]);
         }
 
-       
-
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("key").SetValueAsync(GameManager.instance.UserItem[m].key);
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("speed").SetValueAsync(GameManager.instance.UserItem[m].speed);
         m_Reference.Child("users").Child(GameManager.instance.Id).Child("items").Child("item" + (m.ToString())).Child("accel").SetValueAsync(GameManager.instance.UserItem[m].accel);
@@ -251,6 +249,10 @@ public class ItemListMake : MonoBehaviour
         Button buy_item = GameObject.Find("buy_item").GetComponent<Button>();
         buy_item.interactable = false;
         GameManager.instance.market_button_active = false;
+        GameManager.instance.money -= 1000;
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("money").SetValueAsync(GameManager.instance.money.ToString());
+
+        update_button();
     }
 
     public void sendcheck_buy(string message)

@@ -221,8 +221,10 @@ public class listupdate : MonoBehaviour
                 m_Reference.Child("market").Child("sellList").Child("item" + (i.ToString())).Child("Block").Child("owner").Child("Tran" + j.ToString()).SetValueAsync(GameManager.instance.MarketItems[i].savetran[j]);
             }
         }
-      
-        
+
+        GameManager.instance.money += 1000;
+
+        m_Reference.Child("users").Child(GameManager.instance.Id).Child("money").SetValueAsync(GameManager.instance.money.ToString());
         GameObject.Find("SellList").transform.Find("select_x").gameObject.SetActive(true);
         spec_open_check = true;
         inven_itemlist_make();
